@@ -91,8 +91,9 @@ backend/
 - [X] MQTT Publisher
 - [X] MQTT Subscriber
 - [X] MQTT Communication Test
-- [ ] Temperature Sensor
-- [ ] Pressure Sensor
+- [X] Base sensor
+- [X] Temperature Sensor
+- [X] Pressure Sensor
 - [ ] PLC Controller
 - [ ] SCADA Dashboard
 - [ ] Factory Simulator

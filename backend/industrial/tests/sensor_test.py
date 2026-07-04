@@ -6,6 +6,7 @@ Purpose:
 """
 
 import threading
+import time
 
 from backend.industrial.sensors.temperature_sensor import TemperatureSensor
 from backend.industrial.sensors.pressure_sensor import PressureSensor
@@ -33,7 +34,7 @@ def main():
 
     try:
         while True:
-            pass
+            time.sleep(1)
 
     except KeyboardInterrupt:
         print("\nStopping sensors...")
