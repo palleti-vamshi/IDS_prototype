@@ -88,9 +88,9 @@ backend/
 - [x] Mosquitto Installed
 - [x] MQTT Configuration Module
 - [x] Logging Module
-- [ ] MQTT Publisher
-- [ ] MQTT Subscriber
-- [ ] MQTT Communication Test
+- [X] MQTT Publisher
+- [X] MQTT Subscriber
+- [X] MQTT Communication Test
 - [ ] Temperature Sensor
 - [ ] Pressure Sensor
 - [ ] PLC Controller
