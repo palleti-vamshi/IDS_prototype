@@ -94,9 +94,9 @@ backend/
 - [X] Base sensor
 - [X] Temperature Sensor
 - [X] Pressure Sensor
-- [ ] PLC Controller
+- [X] PLC Controller
 - [ ] SCADA Dashboard
-- [ ] Factory Simulator
+- [X] Factory Simulator
 
 ---
 
