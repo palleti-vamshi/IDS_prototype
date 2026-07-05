@@ -1,34 +1,137 @@
-# IoT Intrusion Detection System (IoT IDS)
+# LightX-IDS
 
-## Overview
-This project is a Machine Learning-based IoT Intrusion Detection System designed to detect malicious network traffic in IoT environments.
+## Intelligent Intrusion Detection System for Industrial IoT (IIoT)
 
-It is a lightweight Explainable Real-time intrusion detection system for industrial iot_networks
+LightX-IDS is a modular Industrial Internet of Things (IIoT) Intrusion Detection System developed as an educational and research project. The project simulates a smart factory environment, generates both normal and malicious industrial traffic, and later applies Machine Learning techniques to detect cyber attacks in real time.
 
-## Objectives
-- Detect network attacks in IoT devices
-- Perform real-time intrusion detection
-- Provide a web dashboard for monitoring
-- Build a scalable backend API
+The project is being developed phase by phase following a production-style software engineering approach.
 
-## Tech Stack
+---
+
+# Project Goals
+
+- Simulate an Industrial IoT factory
+- Implement MQTT communication
+- Simulate industrial sensors
+- Develop PLC control logic
+- Generate realistic cyber attacks
+- Create labeled datasets
+- Train Machine Learning models
+- Detect attacks in real time
+- Visualize the factory through a dashboard
+
+---
+
+# Current Project Status
+
+| Phase | Status |
+|--------|--------|
+| Phase 0 – Planning | ✅ Completed |
+| Phase 1 – Industrial Environment | ✅ Completed |
+| Phase 2 – Cyber Attack Framework | ✅ Completed |
+| Phase 3 – Dataset Generation | ⏳ Upcoming |
+| Phase 4 – Machine Learning IDS | ⏳ Upcoming |
+| Phase 5 – Dashboard | ⏳ Upcoming |
+| Phase 6 – Backend API | ⏳ Upcoming |
+| Phase 7 – Frontend | ⏳ Upcoming |
+| Phase 8 – Deployment | ⏳ Upcoming |
+
+---
+
+# Technologies Used
+
 - Python
-- FastAPI
-- Scikit-learn
+- MQTT
+- Mosquitto Broker
+- Paho MQTT
+- JSON
+- Object-Oriented Programming (OOP)
+
+Future Phases
+
 - Pandas
 - NumPy
-- Matplotlib
+- Scikit-learn
+- FastAPI
+- React
+- Docker
 
-## Project Structure
+---
 
-backend/
-frontend/
-data/
-docs/
-models/
-notebooks/
-scripts/
+# High-Level Architecture
 
-## Status
+Industrial Sensors
+        │
+        ▼
+ MQTT Publisher
+        │
+        ▼
+ MQTT Broker
+        │
+        ▼
+ MQTT Subscriber
+        │
+        ▼
+ PLC Controller
+        │
+        ▼
+ Dataset Generator
+        │
+        ▼
+ Machine Learning IDS
+        │
+        ▼
+ Dashboard
 
-🚧 Phase 1 - Project Setup (Completed)
+---
+
+# Repository Structure
+ 
+ backend/
+ docs/
+ venv/
+
+---
+
+# Development Methodology
+
+The project follows a structured engineering workflow.
+
+Design
+
+↓
+
+Architecture Review
+
+↓
+
+Implementation
+
+↓
+
+Testing
+
+↓
+
+Documentation
+
+↓
+
+Git Commit
+
+↓
+
+Freeze Phase
+
+Only after a phase is completely tested and documented does development move to the next phase.
+
+---
+
+# Author
+
+Vamshi
+Srinidhi
+
+Computer Science Engineering (AIML) Students
+
+Project: LightX-IDS
