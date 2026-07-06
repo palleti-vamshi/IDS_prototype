@@ -1,7 +1,7 @@
 """
 Dynamic Attack Runner
 
-Runs randomized attack scenarios until the target dataset size is reached.
+Runs all attacks in random order until the target dataset size is reached.
 """
 
 import random
@@ -21,16 +21,14 @@ from backend.preprocessing.generation_config import (
     MAX_ATTACK_DURATION,
     MIN_COOLDOWN,
     MAX_COOLDOWN,
-    ATTACK_WEIGHTS,
 )
 
-
-ATTACKS = {
-    "DoS": DoSAttack,
-    "Replay": ReplayAttack,
-    "Injection": InjectionAttack,
-    "Spoofing": SpoofingAttack,
-}
+ATTACKS = [
+    DoSAttack,
+    ReplayAttack,
+    InjectionAttack,
+    SpoofingAttack,
+]
 
 
 class AttackRunner:
@@ -45,11 +43,9 @@ class AttackRunner:
 
         while self.dataset_manager.writer.record_count() < TARGET_RECORDS:
 
-            current = self.dataset_manager.writer.record_count()
-
-            print(f"\n📊 Progress: {current:,}/{TARGET_RECORDS:,} records")
-
-            # Normal traffic
+            # -----------------------------
+            # Normal Traffic
+            # -----------------------------
             normal_time = random.randint(
                 MIN_NORMAL_DURATION,
                 MAX_NORMAL_DURATION,
@@ -58,39 +54,49 @@ class AttackRunner:
             print(f"\n🟢 Normal Traffic ({normal_time}s)")
             time.sleep(normal_time)
 
-            # Random attack
-            attack_name = random.choices(
-                population=list(ATTACKS.keys()),
-                weights=list(ATTACK_WEIGHTS.values()),
-                k=1,
-            )[0]
+            # -----------------------------
+            # Randomize attack order
+            # -----------------------------
+            attacks = ATTACKS.copy()
+            random.shuffle(attacks)
 
-            print(f"\n🔍 DEBUG: Selected Attack = {attack_name}")   # <-- Added
+            for attack_cls in attacks:
 
-            attack = ATTACKS[attack_name]()
+                # Stop immediately if dataset is complete
+                if (
+                    self.dataset_manager.writer.record_count()
+                    >= TARGET_RECORDS
+                ):
+                    return
 
-            attack.duration = random.randint(
-                MIN_ATTACK_DURATION,
-                MAX_ATTACK_DURATION,
-            )
+                attack = attack_cls()
 
-            print(f"\n🚨 {attack.attack_name} ({attack.duration}s)")
+                attack.duration = random.randint(
+                    MIN_ATTACK_DURATION,
+                    MAX_ATTACK_DURATION,
+                )
 
-            manager = AttackManager()
+                print(
+                    f"\n🚨 {attack.attack_name} "
+                    f"({attack.duration}s)"
+                )
 
-            manager.register_attack(attack)
+                manager = AttackManager()
+                manager.register_attack(attack)
+                manager.start()
 
-            manager.start()
+                while any(
+                    thread.is_alive()
+                    for thread in manager.threads
+                ):
+                    time.sleep(1)
 
-            while any(thread.is_alive() for thread in manager.threads):
-                time.sleep(1)
+                cooldown = random.randint(
+                    MIN_COOLDOWN,
+                    MAX_COOLDOWN,
+                )
 
-            cooldown = random.randint(
-                MIN_COOLDOWN,
-                MAX_COOLDOWN,
-            )
-
-            print(f"\n⏳ Cooldown ({cooldown}s)")
-            time.sleep(cooldown)
+                print(f"\n⏳ Cooldown ({cooldown}s)")
+                time.sleep(cooldown)
 
         print("\n🎉 Target Dataset Size Reached!")
