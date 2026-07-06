@@ -47,13 +47,9 @@ class AttackRunner:
 
             current = self.dataset_manager.writer.record_count()
 
-            print(
-                f"\n📊 Progress: {current:,}/{TARGET_RECORDS:,} records"
-            )
+            print(f"\n📊 Progress: {current:,}/{TARGET_RECORDS:,} records")
 
-            # -----------------------------
-            # Random normal traffic
-            # -----------------------------
+            # Normal traffic
             normal_time = random.randint(
                 MIN_NORMAL_DURATION,
                 MAX_NORMAL_DURATION,
@@ -62,14 +58,14 @@ class AttackRunner:
             print(f"\n🟢 Normal Traffic ({normal_time}s)")
             time.sleep(normal_time)
 
-            # -----------------------------
             # Random attack
-            # -----------------------------
             attack_name = random.choices(
                 population=list(ATTACKS.keys()),
                 weights=list(ATTACK_WEIGHTS.values()),
                 k=1,
             )[0]
+
+            print(f"\n🔍 DEBUG: Selected Attack = {attack_name}")   # <-- Added
 
             attack = ATTACKS[attack_name]()
 
@@ -78,21 +74,17 @@ class AttackRunner:
                 MAX_ATTACK_DURATION,
             )
 
-            print(
-                f"\n🚨 {attack.attack_name} "
-                f"({attack.duration}s)"
-            )
+            print(f"\n🚨 {attack.attack_name} ({attack.duration}s)")
 
             manager = AttackManager()
+
             manager.register_attack(attack)
+
             manager.start()
 
             while any(thread.is_alive() for thread in manager.threads):
                 time.sleep(1)
 
-            # -----------------------------
-            # Random cooldown
-            # -----------------------------
             cooldown = random.randint(
                 MIN_COOLDOWN,
                 MAX_COOLDOWN,

@@ -1,5 +1,5 @@
 """
-Labels parsed sensor records for dataset generation.
+Labels parsed sensor records.
 """
 
 from backend.preprocessing.schemas import (
@@ -9,7 +9,6 @@ from backend.preprocessing.schemas import (
 
 
 class Labeler:
-    """Assigns labels to parsed records."""
 
     def __init__(self):
         self.sequence_number = 0

@@ -1,8 +1,5 @@
 """
 Base Attack Module
-
-Purpose:
-    Provides the common functionality for all cyber attacks.
 """
 
 import time
@@ -14,7 +11,6 @@ from backend.attacks.event_publisher import AttackEventPublisher
 
 
 class BaseAttack(ABC):
-    """Base class for all attack modules."""
 
     def __init__(
         self,
@@ -30,49 +26,53 @@ class BaseAttack(ABC):
         self.logger = setup_logger(attack_name)
 
         self.publisher = MQTTPublisher(client_id)
-
-        # NEW
         self.event_publisher = AttackEventPublisher()
 
         self.running = False
 
     @abstractmethod
     def execute(self):
-        """Execute one attack iteration."""
         pass
 
     def start(self):
-        """Start the attack."""
 
         self.running = True
 
-        # Publish attack start event
-        self.event_publisher.publish_start(self.attack_name)
+        self.event_publisher.publish_start(
+            self.attack_name
+        )
 
-        self.logger.info(f"{self.attack_name} started.")
+        self.logger.info(
+            f"{self.attack_name} started."
+        )
 
         start_time = time.time()
 
         while self.running:
 
-            elapsed = time.time() - start_time
-
-            if elapsed >= self.duration:
+            if time.time() - start_time >= self.duration:
                 break
 
             self.execute()
+
             time.sleep(self.interval)
 
         self.stop()
 
     def stop(self):
-        """Stop the attack."""
+
+        if not self.running:
+            return
 
         self.running = False
 
-        # Publish attack stop event
-        self.event_publisher.publish_stop(self.attack_name)
+        self.event_publisher.publish_stop(
+            self.attack_name
+        )
 
         self.publisher.disconnect()
+        self.event_publisher.disconnect()
 
-        self.logger.info(f"{self.attack_name} stopped.")
+        self.logger.info(
+            f"{self.attack_name} stopped."
+        )

@@ -5,16 +5,16 @@ Purpose:
     Injects malicious sensor values into the MQTT network.
 """
 
-import json
+import random
 from datetime import datetime
 
 from backend.attacks.attack_config import (
-    TEMPERATURE_TOPIC,
     INJECTION_ATTACK_CLIENT,
     INJECTION_PACKET_INTERVAL,
     INJECTION_ATTACK_DURATION,
 )
 
+from backend.attacks.attack_utils import choose_real_sensor
 from backend.attacks.base_attack import BaseAttack
 
 
@@ -36,22 +36,46 @@ class InjectionAttack(BaseAttack):
 
         self.packet_count += 1
 
+        sensor = choose_real_sensor()
+
+        # Generate abnormal values based on sensor type
+        if sensor["sensor_type"] == "temperature":
+            value = round(
+                random.choice([
+                    random.uniform(-40.0, -5.0),
+                    random.uniform(80.0, 120.0),
+                    random.uniform(120.0, 250.0),
+                ]),
+                2,
+            )
+        else:
+            value = round(
+                random.choice([
+                    random.uniform(50.0, 80.0),
+                    random.uniform(130.0, 180.0),
+                    random.uniform(180.0, 250.0),
+                ]),
+                2,
+            )
+
         payload = {
-            "device_id": "temperature_sensor_01",
+            "device_id": sensor["device_id"],
             "timestamp": datetime.now().isoformat(),
-            "sensor_type": "temperature",
-            "value": 150.0,
-            "unit": "°C",
-            "status": "INJECTION",
+            "sensor_type": sensor["sensor_type"],
+            "value": value,
+            "unit": sensor["unit"],
+            "status": "NORMAL",
         }
 
         self.publisher.publish(
-            TEMPERATURE_TOPIC,
+            sensor["topic"],
             payload,
         )
 
         self.logger.info(
-            f"Injection Packet #{self.packet_count} → {TEMPERATURE_TOPIC}"
+            f"Injection Packet #{self.packet_count} | "
+            f"{sensor['sensor_type']}={value} {sensor['unit']} "
+            f"→ {sensor['topic']}"
         )
 
 

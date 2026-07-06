@@ -2,7 +2,6 @@
 Publishes attack state events over MQTT.
 """
 
-import json
 from datetime import datetime
 
 from backend.industrial.mqtt.publisher import MQTTPublisher
@@ -16,8 +15,6 @@ class AttackEventPublisher:
         self.publisher = MQTTPublisher("attack_event_publisher")
 
     def publish_start(self, attack_name: str) -> None:
-        """Publish attack start event."""
-
         payload = {
             "event": "start",
             "attack": attack_name,
@@ -26,12 +23,10 @@ class AttackEventPublisher:
 
         self.publisher.publish(
             ATTACK_STATE_TOPIC,
-            json.dumps(payload),
+            payload,
         )
 
     def publish_stop(self, attack_name: str) -> None:
-        """Publish attack stop event."""
-
         payload = {
             "event": "stop",
             "attack": attack_name,
@@ -42,3 +37,6 @@ class AttackEventPublisher:
             ATTACK_STATE_TOPIC,
             payload,
         )
+
+    def disconnect(self):
+        self.publisher.disconnect()

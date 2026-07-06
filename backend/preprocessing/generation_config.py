@@ -6,24 +6,39 @@ Dataset Generation Configuration
 OUTPUT_DATASET = "dataset/lightx_ids_dataset.csv"
 
 # Target number of records
-TARGET_RECORDS = 100000
+TARGET_RECORDS = 1000
 
-# Random normal traffic duration
-MIN_NORMAL_DURATION = 5
-MAX_NORMAL_DURATION = 20
+# -------------------------------------------------
+# Normal Traffic
+# -------------------------------------------------
 
-# Random attack duration
-MIN_ATTACK_DURATION = 10
-MAX_ATTACK_DURATION = 30
+# Longer normal periods
+MIN_NORMAL_DURATION = 15
+MAX_NORMAL_DURATION = 40
 
-# Random cooldown
-MIN_COOLDOWN = 5
-MAX_COOLDOWN = 15
+# -------------------------------------------------
+# Attack Duration
+# -------------------------------------------------
 
-# Attack probabilities
+# Shorter attacks
+MIN_ATTACK_DURATION = 5
+MAX_ATTACK_DURATION = 12
+
+# -------------------------------------------------
+# Cooldown
+# -------------------------------------------------
+
+# Longer cooldown after attacks
+MIN_COOLDOWN = 10
+MAX_COOLDOWN = 25
+
+# -------------------------------------------------
+# Attack Selection Probability
+# -------------------------------------------------
+
 ATTACK_WEIGHTS = {
-    "DoS": 0.30,
+    "DoS": 0.25,
     "Replay": 0.25,
-    "Injection": 0.20,
+    "Injection": 0.25,
     "Spoofing": 0.25,
 }

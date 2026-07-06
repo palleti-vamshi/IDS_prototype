@@ -2,19 +2,19 @@
 Replay Attack
 
 Purpose:
-    Replays a previously captured MQTT packet.
+    Replays previously observed legitimate MQTT packets.
 """
 
-import json
+import random
 from datetime import datetime
 
 from backend.attacks.attack_config import (
-    TEMPERATURE_TOPIC,
     REPLAY_ATTACK_CLIENT,
     REPLAY_PACKET_INTERVAL,
     REPLAY_ATTACK_DURATION,
 )
 
+from backend.attacks.attack_utils import choose_real_sensor
 from backend.attacks.base_attack import BaseAttack
 
 
@@ -31,30 +31,47 @@ class ReplayAttack(BaseAttack):
 
         self.packet_count = 0
 
-        self.captured_packet = {
-            "device_id": "temperature_sensor_01",
-            "timestamp": datetime.now().isoformat(),
-            "sensor_type": "temperature",
-            "value": 28.6,
-            "unit": "°C",
-            "status": "NORMAL",
-        }
+        # Previously captured legitimate values
+        self.temperature_packets = [
+            27.4, 27.8, 28.2, 28.6, 29.0,
+            29.4, 29.8, 30.2
+        ]
+
+        self.pressure_packets = [
+            100.5, 100.8, 101.1, 101.4,
+            101.7, 102.0, 102.3
+        ]
 
     def execute(self):
-        """Replay the captured packet."""
+        """Replay a previously captured packet."""
 
         self.packet_count += 1
 
-        # Update timestamp for each replay
-        self.captured_packet["timestamp"] = datetime.now().isoformat()
+        sensor = choose_real_sensor()
+
+        if sensor["sensor_type"] == "temperature":
+            value = random.choice(self.temperature_packets)
+        else:
+            value = random.choice(self.pressure_packets)
+
+        payload = {
+            "device_id": sensor["device_id"],
+            "timestamp": datetime.now().isoformat(),
+            "sensor_type": sensor["sensor_type"],
+            "value": value,
+            "unit": sensor["unit"],
+            "status": "NORMAL",
+        }
 
         self.publisher.publish(
-            TEMPERATURE_TOPIC,
-            self.captured_packet,
+            sensor["topic"],
+            payload,
         )
 
         self.logger.info(
-            f"Replay Packet #{self.packet_count} → {TEMPERATURE_TOPIC}"
+            f"Replay Packet #{self.packet_count} | "
+            f"{sensor['sensor_type']}={value} {sensor['unit']} "
+            f"→ {sensor['topic']}"
         )
 
 
