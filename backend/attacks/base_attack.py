@@ -5,12 +5,12 @@ Purpose:
     Provides the common functionality for all cyber attacks.
 """
 
-import threading
 import time
 from abc import ABC, abstractmethod
 
 from backend.core.logger import setup_logger
 from backend.industrial.mqtt.publisher import MQTTPublisher
+from backend.attacks.event_publisher import AttackEventPublisher
 
 
 class BaseAttack(ABC):
@@ -21,7 +21,7 @@ class BaseAttack(ABC):
         attack_name: str,
         client_id: str,
         interval: float = 1.0,
-        duration: int =30,
+        duration: int = 30,
     ):
         self.attack_name = attack_name
         self.interval = interval
@@ -31,19 +31,23 @@ class BaseAttack(ABC):
 
         self.publisher = MQTTPublisher(client_id)
 
+        # NEW
+        self.event_publisher = AttackEventPublisher()
+
         self.running = False
 
     @abstractmethod
     def execute(self):
-        """
-        Execute one attack iteration.
-        """
+        """Execute one attack iteration."""
         pass
 
     def start(self):
         """Start the attack."""
 
         self.running = True
+
+        # Publish attack start event
+        self.event_publisher.publish_start(self.attack_name)
 
         self.logger.info(f"{self.attack_name} started.")
 
@@ -65,6 +69,9 @@ class BaseAttack(ABC):
         """Stop the attack."""
 
         self.running = False
+
+        # Publish attack stop event
+        self.event_publisher.publish_stop(self.attack_name)
 
         self.publisher.disconnect()
 

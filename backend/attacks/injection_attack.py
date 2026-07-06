@@ -5,6 +5,9 @@ Purpose:
     Injects malicious sensor values into the MQTT network.
 """
 
+import json
+from datetime import datetime
+
 from backend.attacks.attack_config import (
     TEMPERATURE_TOPIC,
     INJECTION_ATTACK_CLIENT,
@@ -35,6 +38,7 @@ class InjectionAttack(BaseAttack):
 
         payload = {
             "device_id": "temperature_sensor_01",
+            "timestamp": datetime.now().isoformat(),
             "sensor_type": "temperature",
             "value": 150.0,
             "unit": "°C",

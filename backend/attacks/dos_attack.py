@@ -6,6 +6,7 @@ Purpose:
 """
 
 import json
+from datetime import datetime
 
 from backend.attacks.attack_config import (
     TEMPERATURE_TOPIC,
@@ -26,26 +27,27 @@ class DoSAttack(BaseAttack):
             client_id=DOS_ATTACK_CLIENT,
             interval=DOS_PACKET_INTERVAL,
             duration=DOS_ATTACK_DURATION,
-            
         )
-        self.packet_count = 0
 
+        self.packet_count = 0
 
     def execute(self):
         """Publish one malicious MQTT packet."""
 
         self.packet_count += 1
+
         payload = {
             "device_id": "fake_temperature_sensor",
+            "timestamp": datetime.now().isoformat(),
             "sensor_type": "temperature",
             "value": 999.9,
             "unit": "°C",
-            "status": "DOS"
+            "status": "DOS",
         }
 
         self.publisher.publish(
             TEMPERATURE_TOPIC,
-            json.dumps(payload),
+            payload,
         )
 
         self.logger.info(

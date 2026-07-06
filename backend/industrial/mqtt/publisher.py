@@ -33,18 +33,26 @@ class MQTTPublisher:
                 MQTT_PORT,
                 MQTT_KEEPALIVE,
             )
-            self.client.loop_start()   # Maintain a persistent MQTT connection
+
+            # Maintain a persistent MQTT connection
+            self.client.loop_start()
             self.connected = True
 
             logger.info("Connected to MQTT Broker.")
 
         except Exception as error:
-            logger.exception(f"Failed to connect to MQTT Broker: {error}")
+            logger.exception(
+                f"Failed to connect to MQTT Broker: {error}"
+            )
             raise
 
-    def publish(self, topic: str, message: dict[str, Any]) -> bool:
+    def publish(self, topic: str, message: Any) -> bool:
         """
-        Publish a JSON message to the specified MQTT topic.
+        Publish a message to an MQTT topic.
+
+        Accepts either:
+        - Python dictionary
+        - JSON string
         """
 
         if not self.connected:
@@ -52,7 +60,14 @@ class MQTTPublisher:
             return False
 
         try:
-            payload = json.dumps(message)
+
+            # If already JSON string, send directly.
+            if isinstance(message, str):
+                payload = message
+
+            # Otherwise serialize dictionary/object.
+            else:
+                payload = json.dumps(message)
 
             result = self.client.publish(topic, payload)
 
@@ -60,11 +75,15 @@ class MQTTPublisher:
                 logger.info(f"Published message to '{topic}'")
                 return True
 
-            logger.error(f"Publish failed with code: {result.rc}")
+            logger.error(
+                f"Publish failed with code: {result.rc}"
+            )
             return False
 
         except Exception as error:
-            logger.exception(f"Publishing failed: {error}")
+            logger.exception(
+                f"Publishing failed: {error}"
+            )
             return False
 
     def disconnect(self) -> None:
@@ -73,6 +92,7 @@ class MQTTPublisher:
         if self.connected:
             self.client.loop_stop()
             self.client.disconnect()
+
             self.connected = False
 
             logger.info("Disconnected from MQTT Broker.")

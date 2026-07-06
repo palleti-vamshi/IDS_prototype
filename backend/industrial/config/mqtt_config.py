@@ -13,12 +13,16 @@ PRESSURE_TOPIC = "factory/line1/pressure"
 PLC_TOPIC = "factory/line1/plc"
 ALERT_TOPIC = "factory/alerts"
 
+# NEW
+ATTACK_STATE_TOPIC = "factory/attacks/state"
+
 # All topics used by preprocessing
 MQTT_TOPICS = [
     TEMPERATURE_TOPIC,
     PRESSURE_TOPIC,
     PLC_TOPIC,
     ALERT_TOPIC,
+    ATTACK_STATE_TOPIC,
 ]
 
 # MQTT Client IDs

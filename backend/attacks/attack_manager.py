@@ -18,6 +18,9 @@ class AttackManager:
         self.attacks = []
         self.threads = []
 
+        self.current_attack = None
+        self.attack_active = False
+
     def register_attack(self, attack):
         """Register an attack module."""
         self.attacks.append(attack)
@@ -25,6 +28,22 @@ class AttackManager:
         self.logger.info(
             f"Registered attack: {attack.attack_name}"
         )
+
+    def set_active_attack(self, attack_name: str):
+        """Set the currently active attack."""
+        self.current_attack = attack_name
+        self.attack_active = True
+
+
+    def clear_active_attack(self):
+        """Clear the active attack."""
+        self.current_attack = None
+        self.attack_active = False
+
+
+    def get_attack_state(self):
+        """Return current attack state."""
+        return self.attack_active, self.current_attack
 
     def start(self):
         """Start all registered attacks."""

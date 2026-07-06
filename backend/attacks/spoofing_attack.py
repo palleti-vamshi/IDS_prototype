@@ -5,6 +5,9 @@ Purpose:
     Simulates a fake sensor impersonating a legitimate device.
 """
 
+import json
+from datetime import datetime
+
 from backend.attacks.attack_config import (
     TEMPERATURE_TOPIC,
     SPOOFING_ATTACK_CLIENT,
@@ -35,6 +38,7 @@ class SpoofingAttack(BaseAttack):
 
         payload = {
             "device_id": "temperature_sensor_01",
+            "timestamp": datetime.now().isoformat(),
             "sensor_type": "temperature",
             "value": 85.0,
             "unit": "°C",

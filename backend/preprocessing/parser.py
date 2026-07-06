@@ -17,13 +17,20 @@ class MessageParser:
     """Parses MQTT messages into structured records."""
 
     @staticmethod
-    def parse(message: RawMQTTMessage) -> ParsedSensorRecord:
+    def parse(message: RawMQTTMessage) -> ParsedSensorRecord | None:
         """
         Convert RawMQTTMessage to ParsedSensorRecord.
         """
 
         try:
             payload = json.loads(message.payload)
+
+            # Ensure payload is a JSON object
+            if not isinstance(payload, dict):
+                logger.warning(
+                    f"Ignoring non-dictionary payload: {payload}"
+                )
+                return None
 
             return ParsedSensorRecord(
                 timestamp=payload.get("timestamp"),
@@ -35,6 +42,6 @@ class MessageParser:
                 status=payload.get("status"),
             )
 
-        except (json.JSONDecodeError, KeyError, ValueError) as e:
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
             logger.error(f"Failed to parse message: {e}")
-            raise
+            return None

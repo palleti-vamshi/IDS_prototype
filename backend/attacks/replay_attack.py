@@ -5,6 +5,9 @@ Purpose:
     Replays a previously captured MQTT packet.
 """
 
+import json
+from datetime import datetime
+
 from backend.attacks.attack_config import (
     TEMPERATURE_TOPIC,
     REPLAY_ATTACK_CLIENT,
@@ -28,9 +31,9 @@ class ReplayAttack(BaseAttack):
 
         self.packet_count = 0
 
-        # Simulated captured packet
         self.captured_packet = {
             "device_id": "temperature_sensor_01",
+            "timestamp": datetime.now().isoformat(),
             "sensor_type": "temperature",
             "value": 28.6,
             "unit": "°C",
@@ -41,6 +44,9 @@ class ReplayAttack(BaseAttack):
         """Replay the captured packet."""
 
         self.packet_count += 1
+
+        # Update timestamp for each replay
+        self.captured_packet["timestamp"] = datetime.now().isoformat()
 
         self.publisher.publish(
             TEMPERATURE_TOPIC,
