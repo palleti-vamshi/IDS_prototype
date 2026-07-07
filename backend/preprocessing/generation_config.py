@@ -6,7 +6,7 @@ Dataset Generation Configuration
 OUTPUT_DATASET = "dataset/lightx_ids_dataset.csv"
 
 # Target number of records
-TARGET_RECORDS = 10000
+TARGET_RECORDS = 100000
 
 # -------------------------------------------------
 # Normal Traffic

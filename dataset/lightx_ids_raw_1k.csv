@@ -1,0 +1,1072 @@
+timestamp,topic,device_id,sensor_type,value,unit,status,attack_type,label,source,sequence_number
+2026-07-07T16:09:53.921032,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,1
+2026-07-07T16:09:53.920702,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,,0,simulator,2
+2026-07-07T16:09:55.926489,factory/line1/temperature,temperature_sensor_01,temperature,27.7,°C,NORMAL,,0,simulator,3
+2026-07-07T16:09:55.926785,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,,0,simulator,4
+2026-07-07T16:09:57.932432,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,5
+2026-07-07T16:09:57.932927,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,6
+2026-07-07T16:09:59.933681,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,,0,simulator,7
+2026-07-07T16:09:59.938300,factory/line1/temperature,temperature_sensor_01,temperature,29.3,°C,NORMAL,,0,simulator,8
+2026-07-07T16:10:01.936561,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,9
+2026-07-07T16:10:01.943550,factory/line1/temperature,temperature_sensor_01,temperature,27.3,°C,NORMAL,,0,simulator,10
+2026-07-07T16:10:03.942174,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,11
+2026-07-07T16:10:03.947867,factory/line1/temperature,temperature_sensor_01,temperature,27.3,°C,NORMAL,,0,simulator,12
+2026-07-07T16:10:05.945977,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,,0,simulator,13
+2026-07-07T16:10:05.952917,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,,0,simulator,14
+2026-07-07T16:10:07.951715,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,,0,simulator,15
+2026-07-07T16:10:07.954948,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,,0,simulator,16
+2026-07-07T16:10:09.952440,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,17
+2026-07-07T16:10:09.960306,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,,0,simulator,18
+2026-07-07T16:10:11.954966,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,,0,simulator,19
+2026-07-07T16:10:11.962084,factory/line1/temperature,temperature_sensor_01,temperature,30.0,°C,NORMAL,,0,simulator,20
+2026-07-07T16:10:13.955722,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,21
+2026-07-07T16:10:13.963886,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,,0,simulator,22
+2026-07-07T16:10:15.961219,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,,0,simulator,23
+2026-07-07T16:10:15.968523,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,,0,simulator,24
+2026-07-07T16:10:17.964604,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,25
+2026-07-07T16:10:17.970516,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,,0,simulator,26
+2026-07-07T16:10:19.970326,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,27
+2026-07-07T16:10:19.971044,factory/line1/temperature,temperature_sensor_01,temperature,28.8,°C,NORMAL,,0,simulator,28
+2026-07-07T16:10:21.929195,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,Replay Attack,1,simulator,29
+2026-07-07T16:10:21.972592,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,30
+2026-07-07T16:10:21.973873,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,Replay Attack,1,simulator,31
+2026-07-07T16:10:22.033824,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Replay Attack,1,simulator,32
+2026-07-07T16:10:22.135415,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,33
+2026-07-07T16:10:22.241177,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,34
+2026-07-07T16:10:22.344925,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,35
+2026-07-07T16:10:22.450553,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,36
+2026-07-07T16:10:22.551548,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,37
+2026-07-07T16:10:22.657213,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,38
+2026-07-07T16:10:22.760785,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,39
+2026-07-07T16:10:22.866415,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,40
+2026-07-07T16:10:22.972044,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,41
+2026-07-07T16:10:23.076876,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,42
+2026-07-07T16:10:23.182201,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,43
+2026-07-07T16:10:23.287483,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,44
+2026-07-07T16:10:23.391750,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,45
+2026-07-07T16:10:23.493054,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,46
+2026-07-07T16:10:23.598801,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,Replay Attack,1,simulator,47
+2026-07-07T16:10:23.701953,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,48
+2026-07-07T16:10:23.804000,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Replay Attack,1,simulator,49
+2026-07-07T16:10:23.907872,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,50
+2026-07-07T16:10:23.978148,factory/line1/temperature,temperature_sensor_01,temperature,27.0,°C,NORMAL,Replay Attack,1,simulator,51
+2026-07-07T16:10:23.979383,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,52
+2026-07-07T16:10:24.013499,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,53
+2026-07-07T16:10:24.119079,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,54
+2026-07-07T16:10:24.220946,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,Replay Attack,1,simulator,55
+2026-07-07T16:10:24.326537,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,56
+2026-07-07T16:10:24.430270,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,57
+2026-07-07T16:10:24.535921,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,58
+2026-07-07T16:10:24.637729,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Replay Attack,1,simulator,59
+2026-07-07T16:10:24.743367,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,60
+2026-07-07T16:10:24.848944,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,61
+2026-07-07T16:10:24.954482,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,62
+2026-07-07T16:10:25.060050,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Replay Attack,1,simulator,63
+2026-07-07T16:10:25.165684,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,64
+2026-07-07T16:10:25.271312,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,65
+2026-07-07T16:10:25.375808,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,Replay Attack,1,simulator,66
+2026-07-07T16:10:25.481457,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,67
+2026-07-07T16:10:25.585205,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,68
+2026-07-07T16:10:25.690834,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,69
+2026-07-07T16:10:25.794107,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,70
+2026-07-07T16:10:25.895945,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,71
+2026-07-07T16:10:25.983217,factory/line1/temperature,temperature_sensor_01,temperature,27.0,°C,NORMAL,Replay Attack,1,simulator,72
+2026-07-07T16:10:25.984662,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,Replay Attack,1,simulator,73
+2026-07-07T16:10:26.001628,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,74
+2026-07-07T16:10:26.107119,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,75
+2026-07-07T16:10:26.210811,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,76
+2026-07-07T16:10:26.316509,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,77
+2026-07-07T16:10:26.421826,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,Replay Attack,1,simulator,78
+2026-07-07T16:10:26.523878,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,79
+2026-07-07T16:10:26.627444,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,80
+2026-07-07T16:10:26.728520,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Replay Attack,1,simulator,81
+2026-07-07T16:10:26.830289,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,Replay Attack,1,simulator,82
+2026-07-07T16:10:26.935943,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,83
+2026-07-07T16:10:27.039728,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,84
+2026-07-07T16:10:27.145127,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Replay Attack,1,simulator,85
+2026-07-07T16:10:27.249210,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,86
+2026-07-07T16:10:27.354854,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,Replay Attack,1,simulator,87
+2026-07-07T16:10:27.459714,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,88
+2026-07-07T16:10:27.565380,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,89
+2026-07-07T16:10:27.668429,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,90
+2026-07-07T16:10:27.771879,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,Replay Attack,1,simulator,91
+2026-07-07T16:10:27.877449,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,92
+2026-07-07T16:10:27.985665,factory/line1/temperature,temperature_sensor_01,temperature,30.0,°C,NORMAL,,0,simulator,93
+2026-07-07T16:10:27.989967,factory/line1/pressure,pressure_sensor_01,pressure,102.1,kPa,NORMAL,,0,simulator,94
+2026-07-07T16:10:29.990510,factory/line1/temperature,temperature_sensor_01,temperature,29.5,°C,NORMAL,,0,simulator,95
+2026-07-07T16:10:29.992729,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,96
+2026-07-07T16:10:31.995835,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,97
+2026-07-07T16:10:31.998077,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,98
+2026-07-07T16:10:34.001373,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,,0,simulator,99
+2026-07-07T16:10:34.001737,factory/line1/pressure,pressure_sensor_01,pressure,100.9,kPa,NORMAL,,0,simulator,100
+2026-07-07T16:10:36.007413,factory/line1/temperature,temperature_sensor_01,temperature,28.3,°C,NORMAL,,0,simulator,101
+2026-07-07T16:10:36.007899,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,102
+2026-07-07T16:10:38.012901,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,103
+2026-07-07T16:10:38.013634,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,,0,simulator,104
+2026-07-07T16:10:40.019031,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,105
+2026-07-07T16:10:40.018500,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,106
+2026-07-07T16:10:42.021067,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,107
+2026-07-07T16:10:42.021367,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,108
+2026-07-07T16:10:44.022639,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,109
+2026-07-07T16:10:44.026282,factory/line1/temperature,temperature_sensor_01,temperature,27.7,°C,NORMAL,,0,simulator,110
+2026-07-07T16:10:46.026283,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,,0,simulator,111
+2026-07-07T16:10:46.031567,factory/line1/temperature,temperature_sensor_01,temperature,29.3,°C,NORMAL,,0,simulator,112
+2026-07-07T16:10:48.027907,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,,0,simulator,113
+2026-07-07T16:10:48.032997,factory/line1/temperature,temperature_sensor_01,temperature,28.8,°C,NORMAL,,0,simulator,114
+2026-07-07T16:10:50.033477,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,115
+2026-07-07T16:10:50.038333,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,,0,simulator,116
+2026-07-07T16:10:52.039103,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,,0,simulator,117
+2026-07-07T16:10:52.039775,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,,0,simulator,118
+2026-07-07T16:10:54.040546,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,119
+2026-07-07T16:10:54.045354,factory/line1/temperature,temperature_sensor_01,temperature,29.2,°C,NORMAL,,0,simulator,120
+2026-07-07T16:10:54.969407,factory/line1/temperature,fake_temperature_sensor,temperature,28.37,°C,NORMAL,Spoofing Attack,1,simulator,121
+2026-07-07T16:10:55.073320,factory/line1/temperature,fake_temperature_sensor,temperature,27.42,°C,NORMAL,Spoofing Attack,1,simulator,122
+2026-07-07T16:10:55.179039,factory/line1/temperature,fake_temperature_sensor,temperature,27.28,°C,NORMAL,Spoofing Attack,1,simulator,123
+2026-07-07T16:10:55.284634,factory/line1/pressure,fake_pressure_sensor,pressure,101.19,kPa,NORMAL,Spoofing Attack,1,simulator,124
+2026-07-07T16:10:55.387965,factory/line1/pressure,fake_pressure_sensor,pressure,101.41,kPa,NORMAL,Spoofing Attack,1,simulator,125
+2026-07-07T16:10:55.489532,factory/line1/temperature,fake_temperature_sensor,temperature,28.17,°C,NORMAL,Spoofing Attack,1,simulator,126
+2026-07-07T16:10:55.595172,factory/line1/temperature,fake_temperature_sensor,temperature,29.69,°C,NORMAL,Spoofing Attack,1,simulator,127
+2026-07-07T16:10:55.700707,factory/line1/temperature,fake_temperature_sensor,temperature,28.73,°C,NORMAL,Spoofing Attack,1,simulator,128
+2026-07-07T16:10:55.803961,factory/line1/pressure,fake_pressure_sensor,pressure,100.75,kPa,NORMAL,Spoofing Attack,1,simulator,129
+2026-07-07T16:10:55.907956,factory/line1/temperature,fake_temperature_sensor,temperature,27.87,°C,NORMAL,Spoofing Attack,1,simulator,130
+2026-07-07T16:10:56.013643,factory/line1/pressure,fake_pressure_sensor,pressure,101.44,kPa,NORMAL,Spoofing Attack,1,simulator,131
+2026-07-07T16:10:56.044454,factory/line1/pressure,pressure_sensor_01,pressure,101.2,kPa,NORMAL,Spoofing Attack,1,simulator,132
+2026-07-07T16:10:56.050631,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Spoofing Attack,1,simulator,133
+2026-07-07T16:10:56.119284,factory/line1/pressure,fake_pressure_sensor,pressure,100.63,kPa,NORMAL,Spoofing Attack,1,simulator,134
+2026-07-07T16:10:56.223682,factory/line1/pressure,fake_pressure_sensor,pressure,102.03,kPa,NORMAL,Spoofing Attack,1,simulator,135
+2026-07-07T16:10:56.329311,factory/line1/pressure,fake_pressure_sensor,pressure,101.25,kPa,NORMAL,Spoofing Attack,1,simulator,136
+2026-07-07T16:10:56.431079,factory/line1/temperature,fake_temperature_sensor,temperature,29.28,°C,NORMAL,Spoofing Attack,1,simulator,137
+2026-07-07T16:10:56.536736,factory/line1/temperature,fake_temperature_sensor,temperature,27.0,°C,NORMAL,Spoofing Attack,1,simulator,138
+2026-07-07T16:10:56.638204,factory/line1/temperature,fake_temperature_sensor,temperature,29.37,°C,NORMAL,Spoofing Attack,1,simulator,139
+2026-07-07T16:10:56.742620,factory/line1/pressure,fake_pressure_sensor,pressure,101.1,kPa,NORMAL,Spoofing Attack,1,simulator,140
+2026-07-07T16:10:56.844020,factory/line1/temperature,fake_temperature_sensor,temperature,29.04,°C,NORMAL,Spoofing Attack,1,simulator,141
+2026-07-07T16:10:56.947351,factory/line1/pressure,fake_pressure_sensor,pressure,101.72,kPa,NORMAL,Spoofing Attack,1,simulator,142
+2026-07-07T16:10:57.051609,factory/line1/temperature,fake_temperature_sensor,temperature,27.25,°C,NORMAL,Spoofing Attack,1,simulator,143
+2026-07-07T16:10:57.153930,factory/line1/temperature,fake_temperature_sensor,temperature,27.43,°C,NORMAL,Spoofing Attack,1,simulator,144
+2026-07-07T16:10:57.257673,factory/line1/temperature,fake_temperature_sensor,temperature,29.12,°C,NORMAL,Spoofing Attack,1,simulator,145
+2026-07-07T16:10:57.359478,factory/line1/pressure,fake_pressure_sensor,pressure,101.17,kPa,NORMAL,Spoofing Attack,1,simulator,146
+2026-07-07T16:10:57.464007,factory/line1/temperature,fake_temperature_sensor,temperature,29.72,°C,NORMAL,Spoofing Attack,1,simulator,147
+2026-07-07T16:10:57.569655,factory/line1/temperature,fake_temperature_sensor,temperature,27.61,°C,NORMAL,Spoofing Attack,1,simulator,148
+2026-07-07T16:10:57.671561,factory/line1/temperature,fake_temperature_sensor,temperature,28.9,°C,NORMAL,Spoofing Attack,1,simulator,149
+2026-07-07T16:10:57.777285,factory/line1/pressure,fake_pressure_sensor,pressure,101.83,kPa,NORMAL,Spoofing Attack,1,simulator,150
+2026-07-07T16:10:57.880241,factory/line1/pressure,fake_pressure_sensor,pressure,101.25,kPa,NORMAL,Spoofing Attack,1,simulator,151
+2026-07-07T16:10:57.985886,factory/line1/pressure,fake_pressure_sensor,pressure,101.05,kPa,NORMAL,Spoofing Attack,1,simulator,152
+2026-07-07T16:10:58.045575,factory/line1/pressure,pressure_sensor_01,pressure,101.5,kPa,NORMAL,Spoofing Attack,1,simulator,153
+2026-07-07T16:10:58.052952,factory/line1/temperature,temperature_sensor_01,temperature,27.0,°C,NORMAL,Spoofing Attack,1,simulator,154
+2026-07-07T16:10:58.086590,factory/line1/pressure,fake_pressure_sensor,pressure,102.2,kPa,NORMAL,Spoofing Attack,1,simulator,155
+2026-07-07T16:10:58.191826,factory/line1/temperature,fake_temperature_sensor,temperature,29.27,°C,NORMAL,Spoofing Attack,1,simulator,156
+2026-07-07T16:10:58.297112,factory/line1/temperature,fake_temperature_sensor,temperature,27.42,°C,NORMAL,Spoofing Attack,1,simulator,157
+2026-07-07T16:10:58.399004,factory/line1/pressure,fake_pressure_sensor,pressure,102.25,kPa,NORMAL,Spoofing Attack,1,simulator,158
+2026-07-07T16:10:58.504793,factory/line1/temperature,fake_temperature_sensor,temperature,27.41,°C,NORMAL,Spoofing Attack,1,simulator,159
+2026-07-07T16:10:58.609694,factory/line1/temperature,fake_temperature_sensor,temperature,29.79,°C,NORMAL,Spoofing Attack,1,simulator,160
+2026-07-07T16:10:58.711530,factory/line1/pressure,fake_pressure_sensor,pressure,101.64,kPa,NORMAL,Spoofing Attack,1,simulator,161
+2026-07-07T16:10:58.817188,factory/line1/pressure,fake_pressure_sensor,pressure,102.45,kPa,NORMAL,Spoofing Attack,1,simulator,162
+2026-07-07T16:10:58.918993,factory/line1/pressure,fake_pressure_sensor,pressure,101.63,kPa,NORMAL,Spoofing Attack,1,simulator,163
+2026-07-07T16:10:59.023842,factory/line1/temperature,fake_temperature_sensor,temperature,29.22,°C,NORMAL,Spoofing Attack,1,simulator,164
+2026-07-07T16:10:59.129530,factory/line1/pressure,fake_pressure_sensor,pressure,102.47,kPa,NORMAL,Spoofing Attack,1,simulator,165
+2026-07-07T16:10:59.234638,factory/line1/temperature,fake_temperature_sensor,temperature,28.7,°C,NORMAL,Spoofing Attack,1,simulator,166
+2026-07-07T16:10:59.336353,factory/line1/pressure,fake_pressure_sensor,pressure,101.4,kPa,NORMAL,Spoofing Attack,1,simulator,167
+2026-07-07T16:10:59.441290,factory/line1/pressure,fake_pressure_sensor,pressure,101.92,kPa,NORMAL,Spoofing Attack,1,simulator,168
+2026-07-07T16:10:59.543040,factory/line1/pressure,fake_pressure_sensor,pressure,101.03,kPa,NORMAL,Spoofing Attack,1,simulator,169
+2026-07-07T16:10:59.646597,factory/line1/pressure,fake_pressure_sensor,pressure,101.4,kPa,NORMAL,Spoofing Attack,1,simulator,170
+2026-07-07T16:10:59.750728,factory/line1/pressure,fake_pressure_sensor,pressure,101.62,kPa,NORMAL,Spoofing Attack,1,simulator,171
+2026-07-07T16:10:59.852537,factory/line1/temperature,fake_temperature_sensor,temperature,27.85,°C,NORMAL,Spoofing Attack,1,simulator,172
+2026-07-07T16:10:59.953341,factory/line1/temperature,fake_temperature_sensor,temperature,29.31,°C,NORMAL,Spoofing Attack,1,simulator,173
+2026-07-07T16:11:00.050863,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,Spoofing Attack,1,simulator,174
+2026-07-07T16:11:00.058138,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,Spoofing Attack,1,simulator,175
+2026-07-07T16:11:00.059042,factory/line1/temperature,fake_temperature_sensor,temperature,27.24,°C,NORMAL,Spoofing Attack,1,simulator,176
+2026-07-07T16:11:00.159635,factory/line1/pressure,fake_pressure_sensor,pressure,101.14,kPa,NORMAL,Spoofing Attack,1,simulator,177
+2026-07-07T16:11:00.261601,factory/line1/pressure,fake_pressure_sensor,pressure,100.81,kPa,NORMAL,Spoofing Attack,1,simulator,178
+2026-07-07T16:11:00.362862,factory/line1/temperature,fake_temperature_sensor,temperature,29.25,°C,NORMAL,Spoofing Attack,1,simulator,179
+2026-07-07T16:11:00.467955,factory/line1/pressure,fake_pressure_sensor,pressure,101.01,kPa,NORMAL,Spoofing Attack,1,simulator,180
+2026-07-07T16:11:00.573610,factory/line1/pressure,fake_pressure_sensor,pressure,100.91,kPa,NORMAL,Spoofing Attack,1,simulator,181
+2026-07-07T16:11:00.676287,factory/line1/temperature,fake_temperature_sensor,temperature,28.58,°C,NORMAL,Spoofing Attack,1,simulator,182
+2026-07-07T16:11:00.778090,factory/line1/temperature,fake_temperature_sensor,temperature,27.13,°C,NORMAL,Spoofing Attack,1,simulator,183
+2026-07-07T16:11:00.881294,factory/line1/temperature,fake_temperature_sensor,temperature,29.96,°C,NORMAL,Spoofing Attack,1,simulator,184
+2026-07-07T16:11:00.983056,factory/line1/pressure,fake_pressure_sensor,pressure,100.81,kPa,NORMAL,Spoofing Attack,1,simulator,185
+2026-07-07T16:11:01.087751,factory/line1/pressure,fake_pressure_sensor,pressure,101.16,kPa,NORMAL,Spoofing Attack,1,simulator,186
+2026-07-07T16:11:01.193381,factory/line1/pressure,fake_pressure_sensor,pressure,101.64,kPa,NORMAL,Spoofing Attack,1,simulator,187
+2026-07-07T16:11:01.297270,factory/line1/pressure,fake_pressure_sensor,pressure,101.71,kPa,NORMAL,Spoofing Attack,1,simulator,188
+2026-07-07T16:11:01.402768,factory/line1/pressure,fake_pressure_sensor,pressure,100.51,kPa,NORMAL,Spoofing Attack,1,simulator,189
+2026-07-07T16:11:01.507684,factory/line1/pressure,fake_pressure_sensor,pressure,100.79,kPa,NORMAL,Spoofing Attack,1,simulator,190
+2026-07-07T16:11:01.609526,factory/line1/pressure,fake_pressure_sensor,pressure,102.34,kPa,NORMAL,Spoofing Attack,1,simulator,191
+2026-07-07T16:11:01.712922,factory/line1/temperature,fake_temperature_sensor,temperature,27.19,°C,NORMAL,Spoofing Attack,1,simulator,192
+2026-07-07T16:11:01.814823,factory/line1/temperature,fake_temperature_sensor,temperature,28.37,°C,NORMAL,Spoofing Attack,1,simulator,193
+2026-07-07T16:11:01.916650,factory/line1/temperature,fake_temperature_sensor,temperature,28.18,°C,NORMAL,Spoofing Attack,1,simulator,194
+2026-07-07T16:11:02.021031,factory/line1/pressure,fake_pressure_sensor,pressure,101.98,kPa,NORMAL,Spoofing Attack,1,simulator,195
+2026-07-07T16:11:02.056518,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,Spoofing Attack,1,simulator,196
+2026-07-07T16:11:02.059618,factory/line1/temperature,temperature_sensor_01,temperature,27.9,°C,NORMAL,Spoofing Attack,1,simulator,197
+2026-07-07T16:11:02.126684,factory/line1/temperature,fake_temperature_sensor,temperature,29.31,°C,NORMAL,Spoofing Attack,1,simulator,198
+2026-07-07T16:11:02.228509,factory/line1/pressure,fake_pressure_sensor,pressure,102.07,kPa,NORMAL,Spoofing Attack,1,simulator,199
+2026-07-07T16:11:02.330344,factory/line1/temperature,fake_temperature_sensor,temperature,28.41,°C,NORMAL,Spoofing Attack,1,simulator,200
+2026-07-07T16:11:02.434649,factory/line1/pressure,fake_pressure_sensor,pressure,100.7,kPa,NORMAL,Spoofing Attack,1,simulator,201
+2026-07-07T16:11:02.540344,factory/line1/pressure,fake_pressure_sensor,pressure,100.56,kPa,NORMAL,Spoofing Attack,1,simulator,202
+2026-07-07T16:11:02.643220,factory/line1/temperature,fake_temperature_sensor,temperature,29.91,°C,NORMAL,Spoofing Attack,1,simulator,203
+2026-07-07T16:11:02.747406,factory/line1/pressure,fake_pressure_sensor,pressure,100.74,kPa,NORMAL,Spoofing Attack,1,simulator,204
+2026-07-07T16:11:02.851290,factory/line1/pressure,fake_pressure_sensor,pressure,101.46,kPa,NORMAL,Spoofing Attack,1,simulator,205
+2026-07-07T16:11:02.953097,factory/line1/temperature,fake_temperature_sensor,temperature,28.97,°C,NORMAL,Spoofing Attack,1,simulator,206
+2026-07-07T16:11:04.059941,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,207
+2026-07-07T16:11:04.064129,factory/line1/temperature,temperature_sensor_01,temperature,28.4,°C,NORMAL,,0,simulator,208
+2026-07-07T16:11:06.065653,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,,0,simulator,209
+2026-07-07T16:11:06.069659,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,,0,simulator,210
+2026-07-07T16:11:08.070773,factory/line1/pressure,pressure_sensor_01,pressure,102.1,kPa,NORMAL,,0,simulator,211
+2026-07-07T16:11:08.073985,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,,0,simulator,212
+2026-07-07T16:11:10.076201,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,213
+2026-07-07T16:11:10.079089,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,,0,simulator,214
+2026-07-07T16:11:12.078361,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,,0,simulator,215
+2026-07-07T16:11:12.081239,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,,0,simulator,216
+2026-07-07T16:11:14.080317,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,217
+2026-07-07T16:11:14.086434,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,218
+2026-07-07T16:11:16.085904,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,219
+2026-07-07T16:11:16.091268,factory/line1/temperature,temperature_sensor_01,temperature,28.8,°C,NORMAL,,0,simulator,220
+2026-07-07T16:11:18.090227,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,221
+2026-07-07T16:11:18.096758,factory/line1/temperature,temperature_sensor_01,temperature,29.5,°C,NORMAL,,0,simulator,222
+2026-07-07T16:11:20.095659,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,223
+2026-07-07T16:11:20.101888,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,,0,simulator,224
+2026-07-07T16:11:22.097665,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,,0,simulator,225
+2026-07-07T16:11:22.102831,factory/line1/temperature,temperature_sensor_01,temperature,27.6,°C,NORMAL,,0,simulator,226
+2026-07-07T16:11:24.103432,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,227
+2026-07-07T16:11:24.108189,factory/line1/temperature,temperature_sensor_01,temperature,27.9,°C,NORMAL,,0,simulator,228
+2026-07-07T16:11:25.013291,factory/line1/temperature,temperature_sensor_01,temperature,99.17,°C,NORMAL,Injection Attack,1,simulator,229
+2026-07-07T16:11:25.117879,factory/line1/pressure,pressure_sensor_01,pressure,228.27,kPa,NORMAL,Injection Attack,1,simulator,230
+2026-07-07T16:11:25.221910,factory/line1/temperature,temperature_sensor_01,temperature,167.13,°C,NORMAL,Injection Attack,1,simulator,231
+2026-07-07T16:11:25.324029,factory/line1/temperature,temperature_sensor_01,temperature,162.07,°C,NORMAL,Injection Attack,1,simulator,232
+2026-07-07T16:11:25.425358,factory/line1/pressure,pressure_sensor_01,pressure,64.4,kPa,NORMAL,Injection Attack,1,simulator,233
+2026-07-07T16:11:25.531018,factory/line1/pressure,pressure_sensor_01,pressure,142.97,kPa,NORMAL,Injection Attack,1,simulator,234
+2026-07-07T16:11:25.636691,factory/line1/temperature,temperature_sensor_01,temperature,-9.14,°C,NORMAL,Injection Attack,1,simulator,235
+2026-07-07T16:11:25.742363,factory/line1/pressure,pressure_sensor_01,pressure,74.79,kPa,NORMAL,Injection Attack,1,simulator,236
+2026-07-07T16:11:25.847889,factory/line1/temperature,temperature_sensor_01,temperature,110.21,°C,NORMAL,Injection Attack,1,simulator,237
+2026-07-07T16:11:25.949836,factory/line1/temperature,temperature_sensor_01,temperature,-14.6,°C,NORMAL,Injection Attack,1,simulator,238
+2026-07-07T16:11:26.054665,factory/line1/temperature,temperature_sensor_01,temperature,-32.25,°C,NORMAL,Injection Attack,1,simulator,239
+2026-07-07T16:11:26.109111,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Injection Attack,1,simulator,240
+2026-07-07T16:11:26.113550,factory/line1/temperature,temperature_sensor_01,temperature,27.7,°C,NORMAL,Injection Attack,1,simulator,241
+2026-07-07T16:11:26.159605,factory/line1/pressure,pressure_sensor_01,pressure,132.46,kPa,NORMAL,Injection Attack,1,simulator,242
+2026-07-07T16:11:26.264045,factory/line1/pressure,pressure_sensor_01,pressure,170.72,kPa,NORMAL,Injection Attack,1,simulator,243
+2026-07-07T16:11:26.369312,factory/line1/temperature,temperature_sensor_01,temperature,80.07,°C,NORMAL,Injection Attack,1,simulator,244
+2026-07-07T16:11:26.471239,factory/line1/pressure,pressure_sensor_01,pressure,187.3,kPa,NORMAL,Injection Attack,1,simulator,245
+2026-07-07T16:11:26.576932,factory/line1/temperature,temperature_sensor_01,temperature,-18.67,°C,NORMAL,Injection Attack,1,simulator,246
+2026-07-07T16:11:26.678742,factory/line1/temperature,temperature_sensor_01,temperature,117.55,°C,NORMAL,Injection Attack,1,simulator,247
+2026-07-07T16:11:26.784007,factory/line1/temperature,temperature_sensor_01,temperature,92.37,°C,NORMAL,Injection Attack,1,simulator,248
+2026-07-07T16:11:26.886685,factory/line1/pressure,pressure_sensor_01,pressure,146.6,kPa,NORMAL,Injection Attack,1,simulator,249
+2026-07-07T16:11:26.988488,factory/line1/pressure,pressure_sensor_01,pressure,241.64,kPa,NORMAL,Injection Attack,1,simulator,250
+2026-07-07T16:11:27.092892,factory/line1/temperature,temperature_sensor_01,temperature,84.42,°C,NORMAL,Injection Attack,1,simulator,251
+2026-07-07T16:11:27.195886,factory/line1/pressure,pressure_sensor_01,pressure,71.65,kPa,NORMAL,Injection Attack,1,simulator,252
+2026-07-07T16:11:27.300990,factory/line1/pressure,pressure_sensor_01,pressure,227.44,kPa,NORMAL,Injection Attack,1,simulator,253
+2026-07-07T16:11:27.402815,factory/line1/temperature,temperature_sensor_01,temperature,128.06,°C,NORMAL,Injection Attack,1,simulator,254
+2026-07-07T16:11:27.508460,factory/line1/pressure,pressure_sensor_01,pressure,133.52,kPa,NORMAL,Injection Attack,1,simulator,255
+2026-07-07T16:11:27.609548,factory/line1/pressure,pressure_sensor_01,pressure,58.44,kPa,NORMAL,Injection Attack,1,simulator,256
+2026-07-07T16:11:27.713788,factory/line1/temperature,temperature_sensor_01,temperature,114.8,°C,NORMAL,Injection Attack,1,simulator,257
+2026-07-07T16:11:27.819473,factory/line1/pressure,pressure_sensor_01,pressure,64.25,kPa,NORMAL,Injection Attack,1,simulator,258
+2026-07-07T16:11:27.925114,factory/line1/pressure,pressure_sensor_01,pressure,171.01,kPa,NORMAL,Injection Attack,1,simulator,259
+2026-07-07T16:11:28.029785,factory/line1/temperature,temperature_sensor_01,temperature,-23.76,°C,NORMAL,Injection Attack,1,simulator,260
+2026-07-07T16:11:28.114613,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,Injection Attack,1,simulator,261
+2026-07-07T16:11:28.118930,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Injection Attack,1,simulator,262
+2026-07-07T16:11:28.135228,factory/line1/pressure,pressure_sensor_01,pressure,196.75,kPa,NORMAL,Injection Attack,1,simulator,263
+2026-07-07T16:11:28.240377,factory/line1/temperature,temperature_sensor_01,temperature,238.54,°C,NORMAL,Injection Attack,1,simulator,264
+2026-07-07T16:11:28.342906,factory/line1/temperature,temperature_sensor_01,temperature,126.05,°C,NORMAL,Injection Attack,1,simulator,265
+2026-07-07T16:11:28.448583,factory/line1/pressure,pressure_sensor_01,pressure,189.88,kPa,NORMAL,Injection Attack,1,simulator,266
+2026-07-07T16:11:28.552916,factory/line1/pressure,pressure_sensor_01,pressure,191.64,kPa,NORMAL,Injection Attack,1,simulator,267
+2026-07-07T16:11:28.658702,factory/line1/temperature,temperature_sensor_01,temperature,239.35,°C,NORMAL,Injection Attack,1,simulator,268
+2026-07-07T16:11:28.764267,factory/line1/pressure,pressure_sensor_01,pressure,135.06,kPa,NORMAL,Injection Attack,1,simulator,269
+2026-07-07T16:11:28.866064,factory/line1/pressure,pressure_sensor_01,pressure,136.2,kPa,NORMAL,Injection Attack,1,simulator,270
+2026-07-07T16:11:28.971726,factory/line1/temperature,temperature_sensor_01,temperature,-22.61,°C,NORMAL,Injection Attack,1,simulator,271
+2026-07-07T16:11:29.074102,factory/line1/temperature,temperature_sensor_01,temperature,100.12,°C,NORMAL,Injection Attack,1,simulator,272
+2026-07-07T16:11:29.179729,factory/line1/temperature,temperature_sensor_01,temperature,104.75,°C,NORMAL,Injection Attack,1,simulator,273
+2026-07-07T16:11:29.284547,factory/line1/temperature,temperature_sensor_01,temperature,-11.04,°C,NORMAL,Injection Attack,1,simulator,274
+2026-07-07T16:11:29.390170,factory/line1/pressure,pressure_sensor_01,pressure,239.19,kPa,NORMAL,Injection Attack,1,simulator,275
+2026-07-07T16:11:29.495774,factory/line1/pressure,pressure_sensor_01,pressure,131.58,kPa,NORMAL,Injection Attack,1,simulator,276
+2026-07-07T16:11:29.601395,factory/line1/temperature,temperature_sensor_01,temperature,168.28,°C,NORMAL,Injection Attack,1,simulator,277
+2026-07-07T16:11:29.706659,factory/line1/pressure,pressure_sensor_01,pressure,130.06,kPa,NORMAL,Injection Attack,1,simulator,278
+2026-07-07T16:11:29.810278,factory/line1/temperature,temperature_sensor_01,temperature,109.62,°C,NORMAL,Injection Attack,1,simulator,279
+2026-07-07T16:11:29.915917,factory/line1/temperature,temperature_sensor_01,temperature,86.1,°C,NORMAL,Injection Attack,1,simulator,280
+2026-07-07T16:11:30.021628,factory/line1/temperature,temperature_sensor_01,temperature,233.13,°C,NORMAL,Injection Attack,1,simulator,281
+2026-07-07T16:11:30.119941,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,Injection Attack,1,simulator,282
+2026-07-07T16:11:30.120215,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,Injection Attack,1,simulator,283
+2026-07-07T16:11:30.125114,factory/line1/temperature,temperature_sensor_01,temperature,177.53,°C,NORMAL,Injection Attack,1,simulator,284
+2026-07-07T16:11:30.230481,factory/line1/temperature,temperature_sensor_01,temperature,93.91,°C,NORMAL,Injection Attack,1,simulator,285
+2026-07-07T16:11:30.336004,factory/line1/pressure,pressure_sensor_01,pressure,157.4,kPa,NORMAL,Injection Attack,1,simulator,286
+2026-07-07T16:11:30.441748,factory/line1/pressure,pressure_sensor_01,pressure,163.09,kPa,NORMAL,Injection Attack,1,simulator,287
+2026-07-07T16:11:30.547398,factory/line1/pressure,pressure_sensor_01,pressure,166.61,kPa,NORMAL,Injection Attack,1,simulator,288
+2026-07-07T16:11:30.653067,factory/line1/temperature,temperature_sensor_01,temperature,-28.18,°C,NORMAL,Injection Attack,1,simulator,289
+2026-07-07T16:11:30.758689,factory/line1/pressure,pressure_sensor_01,pressure,60.41,kPa,NORMAL,Injection Attack,1,simulator,290
+2026-07-07T16:11:30.860573,factory/line1/temperature,temperature_sensor_01,temperature,135.61,°C,NORMAL,Injection Attack,1,simulator,291
+2026-07-07T16:11:30.964257,factory/line1/pressure,pressure_sensor_01,pressure,212.32,kPa,NORMAL,Injection Attack,1,simulator,292
+2026-07-07T16:11:32.125210,factory/line1/pressure,pressure_sensor_01,pressure,101.2,kPa,NORMAL,,0,simulator,293
+2026-07-07T16:11:32.125456,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,,0,simulator,294
+2026-07-07T16:11:34.126292,factory/line1/temperature,temperature_sensor_01,temperature,27.5,°C,NORMAL,,0,simulator,295
+2026-07-07T16:11:34.130223,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,,0,simulator,296
+2026-07-07T16:11:36.131882,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,,0,simulator,297
+2026-07-07T16:11:36.132693,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,298
+2026-07-07T16:11:38.132717,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,299
+2026-07-07T16:11:38.138202,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,,0,simulator,300
+2026-07-07T16:11:40.138112,factory/line1/temperature,temperature_sensor_01,temperature,27.6,°C,NORMAL,,0,simulator,301
+2026-07-07T16:11:40.143344,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,302
+2026-07-07T16:11:42.142951,factory/line1/temperature,temperature_sensor_01,temperature,27.0,°C,NORMAL,,0,simulator,303
+2026-07-07T16:11:42.144914,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,304
+2026-07-07T16:11:44.057102,factory/line1/pressure,pressure_sensor_01,pressure,100.88,kPa,NORMAL,DoS Attack,1,simulator,305
+2026-07-07T16:11:44.109553,factory/line1/temperature,temperature_sensor_01,temperature,33.51,°C,NORMAL,DoS Attack,1,simulator,306
+2026-07-07T16:11:44.148437,factory/line1/temperature,temperature_sensor_01,temperature,29.3,°C,NORMAL,DoS Attack,1,simulator,307
+2026-07-07T16:11:44.149727,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,DoS Attack,1,simulator,308
+2026-07-07T16:11:44.165127,factory/line1/temperature,temperature_sensor_01,temperature,27.96,°C,NORMAL,DoS Attack,1,simulator,309
+2026-07-07T16:11:44.220636,factory/line1/pressure,pressure_sensor_01,pressure,101.35,kPa,NORMAL,DoS Attack,1,simulator,310
+2026-07-07T16:11:44.276240,factory/line1/pressure,pressure_sensor_01,pressure,102.61,kPa,NORMAL,DoS Attack,1,simulator,311
+2026-07-07T16:11:44.331877,factory/line1/pressure,pressure_sensor_01,pressure,102.79,kPa,NORMAL,DoS Attack,1,simulator,312
+2026-07-07T16:11:44.384502,factory/line1/pressure,pressure_sensor_01,pressure,100.78,kPa,NORMAL,DoS Attack,1,simulator,313
+2026-07-07T16:11:44.440336,factory/line1/pressure,pressure_sensor_01,pressure,100.57,kPa,NORMAL,DoS Attack,1,simulator,314
+2026-07-07T16:11:44.495948,factory/line1/pressure,pressure_sensor_01,pressure,102.29,kPa,NORMAL,DoS Attack,1,simulator,315
+2026-07-07T16:11:44.551647,factory/line1/pressure,pressure_sensor_01,pressure,102.66,kPa,NORMAL,DoS Attack,1,simulator,316
+2026-07-07T16:11:44.604061,factory/line1/pressure,pressure_sensor_01,pressure,101.59,kPa,NORMAL,DoS Attack,1,simulator,317
+2026-07-07T16:11:44.659501,factory/line1/pressure,pressure_sensor_01,pressure,101.12,kPa,NORMAL,DoS Attack,1,simulator,318
+2026-07-07T16:11:44.715145,factory/line1/pressure,pressure_sensor_01,pressure,100.99,kPa,NORMAL,DoS Attack,1,simulator,319
+2026-07-07T16:11:44.770730,factory/line1/pressure,pressure_sensor_01,pressure,102.91,kPa,NORMAL,DoS Attack,1,simulator,320
+2026-07-07T16:11:44.824989,factory/line1/temperature,temperature_sensor_01,temperature,30.58,°C,NORMAL,DoS Attack,1,simulator,321
+2026-07-07T16:11:44.880608,factory/line1/temperature,temperature_sensor_01,temperature,26.09,°C,NORMAL,DoS Attack,1,simulator,322
+2026-07-07T16:11:44.934830,factory/line1/temperature,temperature_sensor_01,temperature,28.85,°C,NORMAL,DoS Attack,1,simulator,323
+2026-07-07T16:11:44.988762,factory/line1/temperature,temperature_sensor_01,temperature,26.4,°C,NORMAL,DoS Attack,1,simulator,324
+2026-07-07T16:11:45.044390,factory/line1/pressure,pressure_sensor_01,pressure,102.21,kPa,NORMAL,DoS Attack,1,simulator,325
+2026-07-07T16:11:45.100029,factory/line1/temperature,temperature_sensor_01,temperature,30.36,°C,NORMAL,DoS Attack,1,simulator,326
+2026-07-07T16:11:45.155231,factory/line1/temperature,temperature_sensor_01,temperature,29.74,°C,NORMAL,DoS Attack,1,simulator,327
+2026-07-07T16:11:45.205764,factory/line1/temperature,temperature_sensor_01,temperature,29.57,°C,NORMAL,DoS Attack,1,simulator,328
+2026-07-07T16:11:45.261059,factory/line1/pressure,pressure_sensor_01,pressure,102.59,kPa,NORMAL,DoS Attack,1,simulator,329
+2026-07-07T16:11:45.316702,factory/line1/temperature,temperature_sensor_01,temperature,33.32,°C,NORMAL,DoS Attack,1,simulator,330
+2026-07-07T16:11:45.372402,factory/line1/pressure,pressure_sensor_01,pressure,100.93,kPa,NORMAL,DoS Attack,1,simulator,331
+2026-07-07T16:11:45.428216,factory/line1/temperature,temperature_sensor_01,temperature,30.13,°C,NORMAL,DoS Attack,1,simulator,332
+2026-07-07T16:11:45.483871,factory/line1/temperature,temperature_sensor_01,temperature,30.65,°C,NORMAL,DoS Attack,1,simulator,333
+2026-07-07T16:11:45.539469,factory/line1/pressure,pressure_sensor_01,pressure,101.99,kPa,NORMAL,DoS Attack,1,simulator,334
+2026-07-07T16:11:45.591962,factory/line1/temperature,temperature_sensor_01,temperature,28.74,°C,NORMAL,DoS Attack,1,simulator,335
+2026-07-07T16:11:45.647708,factory/line1/pressure,pressure_sensor_01,pressure,101.97,kPa,NORMAL,DoS Attack,1,simulator,336
+2026-07-07T16:11:45.703338,factory/line1/pressure,pressure_sensor_01,pressure,102.56,kPa,NORMAL,DoS Attack,1,simulator,337
+2026-07-07T16:11:45.758996,factory/line1/temperature,temperature_sensor_01,temperature,29.78,°C,NORMAL,DoS Attack,1,simulator,338
+2026-07-07T16:11:45.814655,factory/line1/temperature,temperature_sensor_01,temperature,32.92,°C,NORMAL,DoS Attack,1,simulator,339
+2026-07-07T16:11:45.870362,factory/line1/temperature,temperature_sensor_01,temperature,32.55,°C,NORMAL,DoS Attack,1,simulator,340
+2026-07-07T16:11:45.922632,factory/line1/pressure,pressure_sensor_01,pressure,101.91,kPa,NORMAL,DoS Attack,1,simulator,341
+2026-07-07T16:11:45.978179,factory/line1/temperature,temperature_sensor_01,temperature,25.8,°C,NORMAL,DoS Attack,1,simulator,342
+2026-07-07T16:11:46.033381,factory/line1/temperature,temperature_sensor_01,temperature,26.21,°C,NORMAL,DoS Attack,1,simulator,343
+2026-07-07T16:11:46.089017,factory/line1/pressure,pressure_sensor_01,pressure,101.12,kPa,NORMAL,DoS Attack,1,simulator,344
+2026-07-07T16:11:46.143689,factory/line1/temperature,temperature_sensor_01,temperature,27.68,°C,NORMAL,DoS Attack,1,simulator,345
+2026-07-07T16:11:46.152252,factory/line1/pressure,pressure_sensor_01,pressure,101.5,kPa,NORMAL,DoS Attack,1,simulator,346
+2026-07-07T16:11:46.153998,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,DoS Attack,1,simulator,347
+2026-07-07T16:11:46.194718,factory/line1/pressure,pressure_sensor_01,pressure,102.09,kPa,NORMAL,DoS Attack,1,simulator,348
+2026-07-07T16:11:46.250310,factory/line1/pressure,pressure_sensor_01,pressure,101.72,kPa,NORMAL,DoS Attack,1,simulator,349
+2026-07-07T16:11:46.305895,factory/line1/pressure,pressure_sensor_01,pressure,102.14,kPa,NORMAL,DoS Attack,1,simulator,350
+2026-07-07T16:11:46.360475,factory/line1/pressure,pressure_sensor_01,pressure,102.13,kPa,NORMAL,DoS Attack,1,simulator,351
+2026-07-07T16:11:46.416162,factory/line1/pressure,pressure_sensor_01,pressure,101.68,kPa,NORMAL,DoS Attack,1,simulator,352
+2026-07-07T16:11:46.470715,factory/line1/temperature,temperature_sensor_01,temperature,25.12,°C,NORMAL,DoS Attack,1,simulator,353
+2026-07-07T16:11:46.523875,factory/line1/pressure,pressure_sensor_01,pressure,102.05,kPa,NORMAL,DoS Attack,1,simulator,354
+2026-07-07T16:11:46.579529,factory/line1/temperature,temperature_sensor_01,temperature,32.59,°C,NORMAL,DoS Attack,1,simulator,355
+2026-07-07T16:11:46.635133,factory/line1/pressure,pressure_sensor_01,pressure,100.13,kPa,NORMAL,DoS Attack,1,simulator,356
+2026-07-07T16:11:46.690236,factory/line1/pressure,pressure_sensor_01,pressure,101.23,kPa,NORMAL,DoS Attack,1,simulator,357
+2026-07-07T16:11:46.742813,factory/line1/temperature,temperature_sensor_01,temperature,28.29,°C,NORMAL,DoS Attack,1,simulator,358
+2026-07-07T16:11:46.798364,factory/line1/temperature,temperature_sensor_01,temperature,31.95,°C,NORMAL,DoS Attack,1,simulator,359
+2026-07-07T16:11:46.853973,factory/line1/temperature,temperature_sensor_01,temperature,31.1,°C,NORMAL,DoS Attack,1,simulator,360
+2026-07-07T16:11:46.909648,factory/line1/pressure,pressure_sensor_01,pressure,102.42,kPa,NORMAL,DoS Attack,1,simulator,361
+2026-07-07T16:11:46.961383,factory/line1/pressure,pressure_sensor_01,pressure,102.15,kPa,NORMAL,DoS Attack,1,simulator,362
+2026-07-07T16:11:47.014717,factory/line1/temperature,temperature_sensor_01,temperature,29.47,°C,NORMAL,DoS Attack,1,simulator,363
+2026-07-07T16:11:47.068046,factory/line1/temperature,temperature_sensor_01,temperature,29.22,°C,NORMAL,DoS Attack,1,simulator,364
+2026-07-07T16:11:47.123697,factory/line1/temperature,temperature_sensor_01,temperature,33.01,°C,NORMAL,DoS Attack,1,simulator,365
+2026-07-07T16:11:47.179359,factory/line1/pressure,pressure_sensor_01,pressure,100.16,kPa,NORMAL,DoS Attack,1,simulator,366
+2026-07-07T16:11:47.231693,factory/line1/temperature,temperature_sensor_01,temperature,31.72,°C,NORMAL,DoS Attack,1,simulator,367
+2026-07-07T16:11:47.284188,factory/line1/temperature,temperature_sensor_01,temperature,27.63,°C,NORMAL,DoS Attack,1,simulator,368
+2026-07-07T16:11:47.336625,factory/line1/temperature,temperature_sensor_01,temperature,33.54,°C,NORMAL,DoS Attack,1,simulator,369
+2026-07-07T16:11:47.391349,factory/line1/temperature,temperature_sensor_01,temperature,32.29,°C,NORMAL,DoS Attack,1,simulator,370
+2026-07-07T16:11:47.442923,factory/line1/temperature,temperature_sensor_01,temperature,31.44,°C,NORMAL,DoS Attack,1,simulator,371
+2026-07-07T16:11:47.498567,factory/line1/pressure,pressure_sensor_01,pressure,101.88,kPa,NORMAL,DoS Attack,1,simulator,372
+2026-07-07T16:11:47.551684,factory/line1/temperature,temperature_sensor_01,temperature,27.94,°C,NORMAL,DoS Attack,1,simulator,373
+2026-07-07T16:11:47.604768,factory/line1/temperature,temperature_sensor_01,temperature,34.63,°C,NORMAL,DoS Attack,1,simulator,374
+2026-07-07T16:11:47.657469,factory/line1/pressure,pressure_sensor_01,pressure,101.29,kPa,NORMAL,DoS Attack,1,simulator,375
+2026-07-07T16:11:47.713082,factory/line1/temperature,temperature_sensor_01,temperature,30.39,°C,NORMAL,DoS Attack,1,simulator,376
+2026-07-07T16:11:47.768674,factory/line1/temperature,temperature_sensor_01,temperature,31.95,°C,NORMAL,DoS Attack,1,simulator,377
+2026-07-07T16:11:47.824306,factory/line1/pressure,pressure_sensor_01,pressure,100.64,kPa,NORMAL,DoS Attack,1,simulator,378
+2026-07-07T16:11:47.876234,factory/line1/temperature,temperature_sensor_01,temperature,26.3,°C,NORMAL,DoS Attack,1,simulator,379
+2026-07-07T16:11:47.931896,factory/line1/temperature,temperature_sensor_01,temperature,30.21,°C,NORMAL,DoS Attack,1,simulator,380
+2026-07-07T16:11:47.987505,factory/line1/temperature,temperature_sensor_01,temperature,33.03,°C,NORMAL,DoS Attack,1,simulator,381
+2026-07-07T16:11:48.042262,factory/line1/pressure,pressure_sensor_01,pressure,100.24,kPa,NORMAL,DoS Attack,1,simulator,382
+2026-07-07T16:11:48.093256,factory/line1/pressure,pressure_sensor_01,pressure,101.73,kPa,NORMAL,DoS Attack,1,simulator,383
+2026-07-07T16:11:48.148578,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,DoS Attack,1,simulator,384
+2026-07-07T16:11:48.152738,factory/line1/pressure,pressure_sensor_01,pressure,101.2,kPa,NORMAL,DoS Attack,1,simulator,385
+2026-07-07T16:11:48.159315,factory/line1/temperature,temperature_sensor_01,temperature,28.6,°C,NORMAL,DoS Attack,1,simulator,386
+2026-07-07T16:11:48.203753,factory/line1/pressure,pressure_sensor_01,pressure,102.23,kPa,NORMAL,DoS Attack,1,simulator,387
+2026-07-07T16:11:48.255691,factory/line1/temperature,temperature_sensor_01,temperature,34.76,°C,NORMAL,DoS Attack,1,simulator,388
+2026-07-07T16:11:48.311550,factory/line1/pressure,pressure_sensor_01,pressure,101.44,kPa,NORMAL,DoS Attack,1,simulator,389
+2026-07-07T16:11:48.364695,factory/line1/temperature,temperature_sensor_01,temperature,30.62,°C,NORMAL,DoS Attack,1,simulator,390
+2026-07-07T16:11:48.420354,factory/line1/pressure,pressure_sensor_01,pressure,101.63,kPa,NORMAL,DoS Attack,1,simulator,391
+2026-07-07T16:11:48.475852,factory/line1/temperature,temperature_sensor_01,temperature,33.16,°C,NORMAL,DoS Attack,1,simulator,392
+2026-07-07T16:11:48.529404,factory/line1/pressure,pressure_sensor_01,pressure,102.86,kPa,NORMAL,DoS Attack,1,simulator,393
+2026-07-07T16:11:48.584465,factory/line1/pressure,pressure_sensor_01,pressure,100.53,kPa,NORMAL,DoS Attack,1,simulator,394
+2026-07-07T16:11:48.639670,factory/line1/temperature,temperature_sensor_01,temperature,29.56,°C,NORMAL,DoS Attack,1,simulator,395
+2026-07-07T16:11:48.695290,factory/line1/pressure,pressure_sensor_01,pressure,102.83,kPa,NORMAL,DoS Attack,1,simulator,396
+2026-07-07T16:11:48.747526,factory/line1/pressure,pressure_sensor_01,pressure,101.79,kPa,NORMAL,DoS Attack,1,simulator,397
+2026-07-07T16:11:48.799950,factory/line1/temperature,temperature_sensor_01,temperature,29.71,°C,NORMAL,DoS Attack,1,simulator,398
+2026-07-07T16:11:48.855570,factory/line1/pressure,pressure_sensor_01,pressure,101.21,kPa,NORMAL,DoS Attack,1,simulator,399
+2026-07-07T16:11:48.906339,factory/line1/temperature,temperature_sensor_01,temperature,31.44,°C,NORMAL,DoS Attack,1,simulator,400
+2026-07-07T16:11:48.959539,factory/line1/temperature,temperature_sensor_01,temperature,33.43,°C,NORMAL,DoS Attack,1,simulator,401
+2026-07-07T16:11:49.015102,factory/line1/temperature,temperature_sensor_01,temperature,34.06,°C,NORMAL,DoS Attack,1,simulator,402
+2026-07-07T16:11:49.067814,factory/line1/temperature,temperature_sensor_01,temperature,31.84,°C,NORMAL,DoS Attack,1,simulator,403
+2026-07-07T16:11:49.123455,factory/line1/temperature,temperature_sensor_01,temperature,30.05,°C,NORMAL,DoS Attack,1,simulator,404
+2026-07-07T16:11:49.179126,factory/line1/temperature,temperature_sensor_01,temperature,33.46,°C,NORMAL,DoS Attack,1,simulator,405
+2026-07-07T16:11:49.233387,factory/line1/temperature,temperature_sensor_01,temperature,34.33,°C,NORMAL,DoS Attack,1,simulator,406
+2026-07-07T16:11:49.285058,factory/line1/pressure,pressure_sensor_01,pressure,101.07,kPa,NORMAL,DoS Attack,1,simulator,407
+2026-07-07T16:11:49.340789,factory/line1/pressure,pressure_sensor_01,pressure,100.72,kPa,NORMAL,DoS Attack,1,simulator,408
+2026-07-07T16:11:49.396517,factory/line1/temperature,temperature_sensor_01,temperature,28.28,°C,NORMAL,DoS Attack,1,simulator,409
+2026-07-07T16:11:49.449136,factory/line1/pressure,pressure_sensor_01,pressure,101.76,kPa,NORMAL,DoS Attack,1,simulator,410
+2026-07-07T16:11:49.504834,factory/line1/temperature,temperature_sensor_01,temperature,31.83,°C,NORMAL,DoS Attack,1,simulator,411
+2026-07-07T16:11:49.560400,factory/line1/temperature,temperature_sensor_01,temperature,33.9,°C,NORMAL,DoS Attack,1,simulator,412
+2026-07-07T16:11:49.615978,factory/line1/pressure,pressure_sensor_01,pressure,102.93,kPa,NORMAL,DoS Attack,1,simulator,413
+2026-07-07T16:11:49.670722,factory/line1/pressure,pressure_sensor_01,pressure,101.47,kPa,NORMAL,DoS Attack,1,simulator,414
+2026-07-07T16:11:49.726146,factory/line1/temperature,temperature_sensor_01,temperature,33.09,°C,NORMAL,DoS Attack,1,simulator,415
+2026-07-07T16:11:49.781784,factory/line1/temperature,temperature_sensor_01,temperature,27.59,°C,NORMAL,DoS Attack,1,simulator,416
+2026-07-07T16:11:49.836745,factory/line1/temperature,temperature_sensor_01,temperature,32.47,°C,NORMAL,DoS Attack,1,simulator,417
+2026-07-07T16:11:49.888662,factory/line1/pressure,pressure_sensor_01,pressure,101.98,kPa,NORMAL,DoS Attack,1,simulator,418
+2026-07-07T16:11:49.944347,factory/line1/pressure,pressure_sensor_01,pressure,102.87,kPa,NORMAL,DoS Attack,1,simulator,419
+2026-07-07T16:11:49.999932,factory/line1/temperature,temperature_sensor_01,temperature,27.86,°C,NORMAL,DoS Attack,1,simulator,420
+2026-07-07T16:11:50.055215,factory/line1/pressure,pressure_sensor_01,pressure,102.15,kPa,NORMAL,DoS Attack,1,simulator,421
+2026-07-07T16:11:50.109533,factory/line1/temperature,temperature_sensor_01,temperature,30.27,°C,NORMAL,DoS Attack,1,simulator,422
+2026-07-07T16:11:50.157873,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,DoS Attack,1,simulator,423
+2026-07-07T16:11:50.164239,factory/line1/pressure,pressure_sensor_01,pressure,101.95,kPa,NORMAL,DoS Attack,1,simulator,424
+2026-07-07T16:11:50.164431,factory/line1/temperature,temperature_sensor_01,temperature,30.0,°C,NORMAL,DoS Attack,1,simulator,425
+2026-07-07T16:11:50.219674,factory/line1/temperature,temperature_sensor_01,temperature,25.21,°C,NORMAL,DoS Attack,1,simulator,426
+2026-07-07T16:11:50.275240,factory/line1/temperature,temperature_sensor_01,temperature,32.26,°C,NORMAL,DoS Attack,1,simulator,427
+2026-07-07T16:11:50.326146,factory/line1/temperature,temperature_sensor_01,temperature,25.36,°C,NORMAL,DoS Attack,1,simulator,428
+2026-07-07T16:11:50.379066,factory/line1/temperature,temperature_sensor_01,temperature,27.71,°C,NORMAL,DoS Attack,1,simulator,429
+2026-07-07T16:11:50.434677,factory/line1/temperature,temperature_sensor_01,temperature,26.19,°C,NORMAL,DoS Attack,1,simulator,430
+2026-07-07T16:11:50.490264,factory/line1/pressure,pressure_sensor_01,pressure,102.25,kPa,NORMAL,DoS Attack,1,simulator,431
+2026-07-07T16:11:50.545387,factory/line1/temperature,temperature_sensor_01,temperature,30.55,°C,NORMAL,DoS Attack,1,simulator,432
+2026-07-07T16:11:50.601015,factory/line1/temperature,temperature_sensor_01,temperature,26.08,°C,NORMAL,DoS Attack,1,simulator,433
+2026-07-07T16:11:50.655892,factory/line1/temperature,temperature_sensor_01,temperature,25.39,°C,NORMAL,DoS Attack,1,simulator,434
+2026-07-07T16:11:50.711598,factory/line1/temperature,temperature_sensor_01,temperature,32.38,°C,NORMAL,DoS Attack,1,simulator,435
+2026-07-07T16:11:50.765783,factory/line1/pressure,pressure_sensor_01,pressure,101.91,kPa,NORMAL,DoS Attack,1,simulator,436
+2026-07-07T16:11:50.817818,factory/line1/pressure,pressure_sensor_01,pressure,101.84,kPa,NORMAL,DoS Attack,1,simulator,437
+2026-07-07T16:11:50.868670,factory/line1/temperature,temperature_sensor_01,temperature,30.14,°C,NORMAL,DoS Attack,1,simulator,438
+2026-07-07T16:11:50.921891,factory/line1/temperature,temperature_sensor_01,temperature,28.95,°C,NORMAL,DoS Attack,1,simulator,439
+2026-07-07T16:11:50.974857,factory/line1/temperature,temperature_sensor_01,temperature,25.91,°C,NORMAL,DoS Attack,1,simulator,440
+2026-07-07T16:11:51.026143,factory/line1/pressure,pressure_sensor_01,pressure,100.34,kPa,NORMAL,DoS Attack,1,simulator,441
+2026-07-07T16:11:51.081781,factory/line1/pressure,pressure_sensor_01,pressure,101.74,kPa,NORMAL,DoS Attack,1,simulator,442
+2026-07-07T16:11:51.135605,factory/line1/pressure,pressure_sensor_01,pressure,100.03,kPa,NORMAL,DoS Attack,1,simulator,443
+2026-07-07T16:11:51.191279,factory/line1/temperature,temperature_sensor_01,temperature,26.55,°C,NORMAL,DoS Attack,1,simulator,444
+2026-07-07T16:11:51.244566,factory/line1/temperature,temperature_sensor_01,temperature,28.67,°C,NORMAL,DoS Attack,1,simulator,445
+2026-07-07T16:11:51.300161,factory/line1/pressure,pressure_sensor_01,pressure,101.63,kPa,NORMAL,DoS Attack,1,simulator,446
+2026-07-07T16:11:51.355182,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,DoS Attack,1,simulator,447
+2026-07-07T16:11:51.409472,factory/line1/pressure,pressure_sensor_01,pressure,102.31,kPa,NORMAL,DoS Attack,1,simulator,448
+2026-07-07T16:11:51.465115,factory/line1/pressure,pressure_sensor_01,pressure,101.31,kPa,NORMAL,DoS Attack,1,simulator,449
+2026-07-07T16:11:51.519677,factory/line1/temperature,temperature_sensor_01,temperature,31.96,°C,NORMAL,DoS Attack,1,simulator,450
+2026-07-07T16:11:51.574133,factory/line1/pressure,pressure_sensor_01,pressure,101.35,kPa,NORMAL,DoS Attack,1,simulator,451
+2026-07-07T16:11:51.629008,factory/line1/temperature,temperature_sensor_01,temperature,30.82,°C,NORMAL,DoS Attack,1,simulator,452
+2026-07-07T16:11:51.680247,factory/line1/pressure,pressure_sensor_01,pressure,102.78,kPa,NORMAL,DoS Attack,1,simulator,453
+2026-07-07T16:11:51.734473,factory/line1/temperature,temperature_sensor_01,temperature,27.68,°C,NORMAL,DoS Attack,1,simulator,454
+2026-07-07T16:11:51.789347,factory/line1/temperature,temperature_sensor_01,temperature,33.71,°C,NORMAL,DoS Attack,1,simulator,455
+2026-07-07T16:11:51.844306,factory/line1/pressure,pressure_sensor_01,pressure,100.89,kPa,NORMAL,DoS Attack,1,simulator,456
+2026-07-07T16:11:51.899900,factory/line1/temperature,temperature_sensor_01,temperature,31.71,°C,NORMAL,DoS Attack,1,simulator,457
+2026-07-07T16:11:51.951448,factory/line1/temperature,temperature_sensor_01,temperature,27.08,°C,NORMAL,DoS Attack,1,simulator,458
+2026-07-07T16:11:52.007021,factory/line1/pressure,pressure_sensor_01,pressure,100.78,kPa,NORMAL,DoS Attack,1,simulator,459
+2026-07-07T16:11:52.061970,factory/line1/temperature,temperature_sensor_01,temperature,30.02,°C,NORMAL,DoS Attack,1,simulator,460
+2026-07-07T16:11:52.113711,factory/line1/pressure,pressure_sensor_01,pressure,102.92,kPa,NORMAL,DoS Attack,1,simulator,461
+2026-07-07T16:11:52.159376,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,DoS Attack,1,simulator,462
+2026-07-07T16:11:52.166887,factory/line1/pressure,pressure_sensor_01,pressure,101.73,kPa,NORMAL,DoS Attack,1,simulator,463
+2026-07-07T16:11:52.167005,factory/line1/temperature,temperature_sensor_01,temperature,29.1,°C,NORMAL,DoS Attack,1,simulator,464
+2026-07-07T16:11:52.223622,factory/line1/temperature,temperature_sensor_01,temperature,31.14,°C,NORMAL,DoS Attack,1,simulator,465
+2026-07-07T16:11:52.279215,factory/line1/temperature,temperature_sensor_01,temperature,31.99,°C,NORMAL,DoS Attack,1,simulator,466
+2026-07-07T16:11:52.334468,factory/line1/pressure,pressure_sensor_01,pressure,102.58,kPa,NORMAL,DoS Attack,1,simulator,467
+2026-07-07T16:11:52.390056,factory/line1/pressure,pressure_sensor_01,pressure,101.97,kPa,NORMAL,DoS Attack,1,simulator,468
+2026-07-07T16:11:52.445616,factory/line1/pressure,pressure_sensor_01,pressure,101.93,kPa,NORMAL,DoS Attack,1,simulator,469
+2026-07-07T16:11:52.501303,factory/line1/temperature,temperature_sensor_01,temperature,31.66,°C,NORMAL,DoS Attack,1,simulator,470
+2026-07-07T16:11:52.556954,factory/line1/temperature,temperature_sensor_01,temperature,29.94,°C,NORMAL,DoS Attack,1,simulator,471
+2026-07-07T16:11:52.607677,factory/line1/temperature,temperature_sensor_01,temperature,26.15,°C,NORMAL,DoS Attack,1,simulator,472
+2026-07-07T16:11:52.663273,factory/line1/temperature,temperature_sensor_01,temperature,30.7,°C,NORMAL,DoS Attack,1,simulator,473
+2026-07-07T16:11:52.718798,factory/line1/pressure,pressure_sensor_01,pressure,102.41,kPa,NORMAL,DoS Attack,1,simulator,474
+2026-07-07T16:11:52.771704,factory/line1/temperature,temperature_sensor_01,temperature,25.55,°C,NORMAL,DoS Attack,1,simulator,475
+2026-07-07T16:11:52.827355,factory/line1/temperature,temperature_sensor_01,temperature,30.72,°C,NORMAL,DoS Attack,1,simulator,476
+2026-07-07T16:11:52.881387,factory/line1/temperature,temperature_sensor_01,temperature,29.81,°C,NORMAL,DoS Attack,1,simulator,477
+2026-07-07T16:11:52.935787,factory/line1/pressure,pressure_sensor_01,pressure,102.41,kPa,NORMAL,DoS Attack,1,simulator,478
+2026-07-07T16:11:52.987595,factory/line1/pressure,pressure_sensor_01,pressure,100.47,kPa,NORMAL,DoS Attack,1,simulator,479
+2026-07-07T16:11:53.043382,factory/line1/pressure,pressure_sensor_01,pressure,102.17,kPa,NORMAL,DoS Attack,1,simulator,480
+2026-07-07T16:11:53.094709,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,DoS Attack,1,simulator,481
+2026-07-07T16:11:53.149972,factory/line1/temperature,temperature_sensor_01,temperature,33.48,°C,NORMAL,DoS Attack,1,simulator,482
+2026-07-07T16:11:53.205145,factory/line1/pressure,pressure_sensor_01,pressure,101.95,kPa,NORMAL,DoS Attack,1,simulator,483
+2026-07-07T16:11:53.259461,factory/line1/pressure,pressure_sensor_01,pressure,101.29,kPa,NORMAL,DoS Attack,1,simulator,484
+2026-07-07T16:11:53.315022,factory/line1/pressure,pressure_sensor_01,pressure,101.41,kPa,NORMAL,DoS Attack,1,simulator,485
+2026-07-07T16:11:53.370571,factory/line1/temperature,temperature_sensor_01,temperature,34.26,°C,NORMAL,DoS Attack,1,simulator,486
+2026-07-07T16:11:53.422343,factory/line1/pressure,pressure_sensor_01,pressure,101.5,kPa,NORMAL,DoS Attack,1,simulator,487
+2026-07-07T16:11:53.478094,factory/line1/pressure,pressure_sensor_01,pressure,102.68,kPa,NORMAL,DoS Attack,1,simulator,488
+2026-07-07T16:11:53.533837,factory/line1/temperature,temperature_sensor_01,temperature,34.0,°C,NORMAL,DoS Attack,1,simulator,489
+2026-07-07T16:11:53.585377,factory/line1/pressure,pressure_sensor_01,pressure,101.69,kPa,NORMAL,DoS Attack,1,simulator,490
+2026-07-07T16:11:53.638042,factory/line1/pressure,pressure_sensor_01,pressure,102.32,kPa,NORMAL,DoS Attack,1,simulator,491
+2026-07-07T16:11:53.693727,factory/line1/temperature,temperature_sensor_01,temperature,32.52,°C,NORMAL,DoS Attack,1,simulator,492
+2026-07-07T16:11:53.749344,factory/line1/temperature,temperature_sensor_01,temperature,29.68,°C,NORMAL,DoS Attack,1,simulator,493
+2026-07-07T16:11:53.804642,factory/line1/pressure,pressure_sensor_01,pressure,102.98,kPa,NORMAL,DoS Attack,1,simulator,494
+2026-07-07T16:11:53.857360,factory/line1/pressure,pressure_sensor_01,pressure,100.49,kPa,NORMAL,DoS Attack,1,simulator,495
+2026-07-07T16:11:53.913040,factory/line1/pressure,pressure_sensor_01,pressure,102.41,kPa,NORMAL,DoS Attack,1,simulator,496
+2026-07-07T16:11:53.967789,factory/line1/temperature,temperature_sensor_01,temperature,32.63,°C,NORMAL,DoS Attack,1,simulator,497
+2026-07-07T16:11:54.022733,factory/line1/temperature,temperature_sensor_01,temperature,29.12,°C,NORMAL,DoS Attack,1,simulator,498
+2026-07-07T16:11:54.078406,factory/line1/pressure,pressure_sensor_01,pressure,102.35,kPa,NORMAL,DoS Attack,1,simulator,499
+2026-07-07T16:11:54.129400,factory/line1/pressure,pressure_sensor_01,pressure,102.24,kPa,NORMAL,DoS Attack,1,simulator,500
+2026-07-07T16:11:54.162461,factory/line1/pressure,pressure_sensor_01,pressure,102.1,kPa,NORMAL,DoS Attack,1,simulator,501
+2026-07-07T16:11:54.168478,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,DoS Attack,1,simulator,502
+2026-07-07T16:11:54.184445,factory/line1/pressure,pressure_sensor_01,pressure,101.84,kPa,NORMAL,DoS Attack,1,simulator,503
+2026-07-07T16:11:54.236699,factory/line1/temperature,temperature_sensor_01,temperature,34.08,°C,NORMAL,DoS Attack,1,simulator,504
+2026-07-07T16:11:54.292380,factory/line1/pressure,pressure_sensor_01,pressure,100.24,kPa,NORMAL,DoS Attack,1,simulator,505
+2026-07-07T16:11:54.348021,factory/line1/temperature,temperature_sensor_01,temperature,26.8,°C,NORMAL,DoS Attack,1,simulator,506
+2026-07-07T16:11:54.403623,factory/line1/pressure,pressure_sensor_01,pressure,101.58,kPa,NORMAL,DoS Attack,1,simulator,507
+2026-07-07T16:11:54.459286,factory/line1/pressure,pressure_sensor_01,pressure,100.31,kPa,NORMAL,DoS Attack,1,simulator,508
+2026-07-07T16:11:54.513392,factory/line1/pressure,pressure_sensor_01,pressure,101.87,kPa,NORMAL,DoS Attack,1,simulator,509
+2026-07-07T16:11:54.566736,factory/line1/pressure,pressure_sensor_01,pressure,102.46,kPa,NORMAL,DoS Attack,1,simulator,510
+2026-07-07T16:11:54.622333,factory/line1/temperature,temperature_sensor_01,temperature,25.61,°C,NORMAL,DoS Attack,1,simulator,511
+2026-07-07T16:11:54.677855,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,DoS Attack,1,simulator,512
+2026-07-07T16:11:54.733448,factory/line1/pressure,pressure_sensor_01,pressure,102.9,kPa,NORMAL,DoS Attack,1,simulator,513
+2026-07-07T16:11:54.789024,factory/line1/pressure,pressure_sensor_01,pressure,102.58,kPa,NORMAL,DoS Attack,1,simulator,514
+2026-07-07T16:11:54.842859,factory/line1/pressure,pressure_sensor_01,pressure,101.06,kPa,NORMAL,DoS Attack,1,simulator,515
+2026-07-07T16:11:54.894793,factory/line1/temperature,temperature_sensor_01,temperature,27.21,°C,NORMAL,DoS Attack,1,simulator,516
+2026-07-07T16:11:54.950409,factory/line1/pressure,pressure_sensor_01,pressure,101.29,kPa,NORMAL,DoS Attack,1,simulator,517
+2026-07-07T16:11:55.005996,factory/line1/temperature,temperature_sensor_01,temperature,28.03,°C,NORMAL,DoS Attack,1,simulator,518
+2026-07-07T16:11:56.167759,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,,0,simulator,519
+2026-07-07T16:11:56.172045,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,520
+2026-07-07T16:11:58.173450,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,521
+2026-07-07T16:11:58.177555,factory/line1/temperature,temperature_sensor_01,temperature,29.9,°C,NORMAL,,0,simulator,522
+2026-07-07T16:12:00.178755,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,523
+2026-07-07T16:12:00.179036,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,,0,simulator,524
+2026-07-07T16:12:02.185200,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,,0,simulator,525
+2026-07-07T16:12:02.184910,factory/line1/temperature,temperature_sensor_01,temperature,29.1,°C,NORMAL,,0,simulator,526
+2026-07-07T16:12:04.190921,factory/line1/temperature,temperature_sensor_01,temperature,27.6,°C,NORMAL,,0,simulator,527
+2026-07-07T16:12:04.191405,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,,0,simulator,528
+2026-07-07T16:12:06.197267,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,,0,simulator,529
+2026-07-07T16:12:06.197864,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,530
+2026-07-07T16:12:08.201628,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,,0,simulator,531
+2026-07-07T16:12:08.203039,factory/line1/temperature,temperature_sensor_01,temperature,29.9,°C,NORMAL,,0,simulator,532
+2026-07-07T16:12:10.207213,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,533
+2026-07-07T16:12:10.207518,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,534
+2026-07-07T16:12:12.209884,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,,0,simulator,535
+2026-07-07T16:12:12.213756,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,536
+2026-07-07T16:12:14.215628,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,,0,simulator,537
+2026-07-07T16:12:14.219245,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,,0,simulator,538
+2026-07-07T16:12:16.221313,factory/line1/temperature,temperature_sensor_01,temperature,28.4,°C,NORMAL,,0,simulator,539
+2026-07-07T16:12:16.224614,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,,0,simulator,540
+2026-07-07T16:12:18.227000,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,,0,simulator,541
+2026-07-07T16:12:18.229990,factory/line1/pressure,pressure_sensor_01,pressure,101.5,kPa,NORMAL,,0,simulator,542
+2026-07-07T16:12:20.231335,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,,0,simulator,543
+2026-07-07T16:12:20.234051,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,544
+2026-07-07T16:12:22.234342,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,,0,simulator,545
+2026-07-07T16:12:22.238760,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,546
+2026-07-07T16:12:24.240112,factory/line1/temperature,temperature_sensor_01,temperature,27.2,°C,NORMAL,,0,simulator,547
+2026-07-07T16:12:24.244149,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,548
+2026-07-07T16:12:26.245780,factory/line1/temperature,temperature_sensor_01,temperature,27.3,°C,NORMAL,,0,simulator,549
+2026-07-07T16:12:26.247197,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,,0,simulator,550
+2026-07-07T16:12:28.249127,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,551
+2026-07-07T16:12:28.249479,factory/line1/temperature,temperature_sensor_01,temperature,27.5,°C,NORMAL,,0,simulator,552
+2026-07-07T16:12:30.255273,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,,0,simulator,553
+2026-07-07T16:12:30.254895,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,554
+2026-07-07T16:12:32.259312,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,,0,simulator,555
+2026-07-07T16:12:32.261258,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,556
+2026-07-07T16:12:34.265071,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,,0,simulator,557
+2026-07-07T16:12:34.266488,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,558
+2026-07-07T16:12:36.269001,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,559
+2026-07-07T16:12:36.269293,factory/line1/temperature,temperature_sensor_01,temperature,27.5,°C,NORMAL,,0,simulator,560
+2026-07-07T16:12:38.273676,factory/line1/temperature,temperature_sensor_01,temperature,29.3,°C,NORMAL,,0,simulator,561
+2026-07-07T16:12:38.275082,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,562
+2026-07-07T16:12:40.276040,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,563
+2026-07-07T16:12:40.279377,factory/line1/temperature,temperature_sensor_01,temperature,27.2,°C,NORMAL,,0,simulator,564
+2026-07-07T16:12:42.280694,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,,0,simulator,565
+2026-07-07T16:12:42.284767,factory/line1/temperature,temperature_sensor_01,temperature,30.0,°C,NORMAL,,0,simulator,566
+2026-07-07T16:12:43.121260,factory/line1/temperature,temperature_sensor_01,temperature,34.65,°C,NORMAL,DoS Attack,1,simulator,567
+2026-07-07T16:12:43.176417,factory/line1/pressure,pressure_sensor_01,pressure,101.77,kPa,NORMAL,DoS Attack,1,simulator,568
+2026-07-07T16:12:43.231589,factory/line1/temperature,temperature_sensor_01,temperature,30.61,°C,NORMAL,DoS Attack,1,simulator,569
+2026-07-07T16:12:43.286965,factory/line1/pressure,pressure_sensor_01,pressure,102.66,kPa,NORMAL,DoS Attack,1,simulator,570
+2026-07-07T16:12:43.341660,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,DoS Attack,1,simulator,571
+2026-07-07T16:12:43.392706,factory/line1/pressure,pressure_sensor_01,pressure,100.82,kPa,NORMAL,DoS Attack,1,simulator,572
+2026-07-07T16:12:43.444734,factory/line1/temperature,temperature_sensor_01,temperature,28.56,°C,NORMAL,DoS Attack,1,simulator,573
+2026-07-07T16:12:43.500385,factory/line1/temperature,temperature_sensor_01,temperature,30.76,°C,NORMAL,DoS Attack,1,simulator,574
+2026-07-07T16:12:43.552238,factory/line1/temperature,temperature_sensor_01,temperature,27.02,°C,NORMAL,DoS Attack,1,simulator,575
+2026-07-07T16:12:43.607891,factory/line1/pressure,pressure_sensor_01,pressure,102.13,kPa,NORMAL,DoS Attack,1,simulator,576
+2026-07-07T16:12:43.663518,factory/line1/temperature,temperature_sensor_01,temperature,25.03,°C,NORMAL,DoS Attack,1,simulator,577
+2026-07-07T16:12:43.718821,factory/line1/temperature,temperature_sensor_01,temperature,32.13,°C,NORMAL,DoS Attack,1,simulator,578
+2026-07-07T16:12:43.774381,factory/line1/temperature,temperature_sensor_01,temperature,31.5,°C,NORMAL,DoS Attack,1,simulator,579
+2026-07-07T16:12:43.830010,factory/line1/temperature,temperature_sensor_01,temperature,30.79,°C,NORMAL,DoS Attack,1,simulator,580
+2026-07-07T16:12:43.885554,factory/line1/temperature,temperature_sensor_01,temperature,31.31,°C,NORMAL,DoS Attack,1,simulator,581
+2026-07-07T16:12:43.937893,factory/line1/pressure,pressure_sensor_01,pressure,100.15,kPa,NORMAL,DoS Attack,1,simulator,582
+2026-07-07T16:12:43.988645,factory/line1/temperature,temperature_sensor_01,temperature,30.93,°C,NORMAL,DoS Attack,1,simulator,583
+2026-07-07T16:12:44.042711,factory/line1/pressure,pressure_sensor_01,pressure,100.06,kPa,NORMAL,DoS Attack,1,simulator,584
+2026-07-07T16:12:44.098255,factory/line1/temperature,temperature_sensor_01,temperature,29.45,°C,NORMAL,DoS Attack,1,simulator,585
+2026-07-07T16:12:44.153806,factory/line1/pressure,pressure_sensor_01,pressure,100.22,kPa,NORMAL,DoS Attack,1,simulator,586
+2026-07-07T16:12:44.209460,factory/line1/pressure,pressure_sensor_01,pressure,102.04,kPa,NORMAL,DoS Attack,1,simulator,587
+2026-07-07T16:12:44.260874,factory/line1/temperature,temperature_sensor_01,temperature,29.86,°C,NORMAL,DoS Attack,1,simulator,588
+2026-07-07T16:12:44.286269,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,DoS Attack,1,simulator,589
+2026-07-07T16:12:44.290127,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,DoS Attack,1,simulator,590
+2026-07-07T16:12:44.316532,factory/line1/temperature,temperature_sensor_01,temperature,32.61,°C,NORMAL,DoS Attack,1,simulator,591
+2026-07-07T16:12:44.372079,factory/line1/temperature,temperature_sensor_01,temperature,25.58,°C,NORMAL,DoS Attack,1,simulator,592
+2026-07-07T16:12:44.424095,factory/line1/pressure,pressure_sensor_01,pressure,100.26,kPa,NORMAL,DoS Attack,1,simulator,593
+2026-07-07T16:12:44.476056,factory/line1/pressure,pressure_sensor_01,pressure,100.99,kPa,NORMAL,DoS Attack,1,simulator,594
+2026-07-07T16:12:44.531736,factory/line1/pressure,pressure_sensor_01,pressure,100.17,kPa,NORMAL,DoS Attack,1,simulator,595
+2026-07-07T16:12:44.587412,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,DoS Attack,1,simulator,596
+2026-07-07T16:12:44.639396,factory/line1/temperature,temperature_sensor_01,temperature,32.12,°C,NORMAL,DoS Attack,1,simulator,597
+2026-07-07T16:12:44.694641,factory/line1/temperature,temperature_sensor_01,temperature,33.73,°C,NORMAL,DoS Attack,1,simulator,598
+2026-07-07T16:12:44.747650,factory/line1/temperature,temperature_sensor_01,temperature,25.83,°C,NORMAL,DoS Attack,1,simulator,599
+2026-07-07T16:12:44.803315,factory/line1/pressure,pressure_sensor_01,pressure,100.68,kPa,NORMAL,DoS Attack,1,simulator,600
+2026-07-07T16:12:44.855336,factory/line1/pressure,pressure_sensor_01,pressure,100.51,kPa,NORMAL,DoS Attack,1,simulator,601
+2026-07-07T16:12:44.911121,factory/line1/temperature,temperature_sensor_01,temperature,25.6,°C,NORMAL,DoS Attack,1,simulator,602
+2026-07-07T16:12:44.964671,factory/line1/pressure,pressure_sensor_01,pressure,102.21,kPa,NORMAL,DoS Attack,1,simulator,603
+2026-07-07T16:12:45.020248,factory/line1/temperature,temperature_sensor_01,temperature,27.89,°C,NORMAL,DoS Attack,1,simulator,604
+2026-07-07T16:12:45.075871,factory/line1/temperature,temperature_sensor_01,temperature,30.92,°C,NORMAL,DoS Attack,1,simulator,605
+2026-07-07T16:12:45.131433,factory/line1/temperature,temperature_sensor_01,temperature,32.13,°C,NORMAL,DoS Attack,1,simulator,606
+2026-07-07T16:12:45.186967,factory/line1/temperature,temperature_sensor_01,temperature,28.53,°C,NORMAL,DoS Attack,1,simulator,607
+2026-07-07T16:12:45.242501,factory/line1/pressure,pressure_sensor_01,pressure,101.74,kPa,NORMAL,DoS Attack,1,simulator,608
+2026-07-07T16:12:45.296096,factory/line1/temperature,temperature_sensor_01,temperature,27.87,°C,NORMAL,DoS Attack,1,simulator,609
+2026-07-07T16:12:45.350836,factory/line1/temperature,temperature_sensor_01,temperature,32.47,°C,NORMAL,DoS Attack,1,simulator,610
+2026-07-07T16:12:45.404138,factory/line1/pressure,pressure_sensor_01,pressure,102.18,kPa,NORMAL,DoS Attack,1,simulator,611
+2026-07-07T16:12:45.459302,factory/line1/pressure,pressure_sensor_01,pressure,102.62,kPa,NORMAL,DoS Attack,1,simulator,612
+2026-07-07T16:12:45.514808,factory/line1/temperature,temperature_sensor_01,temperature,26.35,°C,NORMAL,DoS Attack,1,simulator,613
+2026-07-07T16:12:45.570489,factory/line1/temperature,temperature_sensor_01,temperature,28.68,°C,NORMAL,DoS Attack,1,simulator,614
+2026-07-07T16:12:45.626348,factory/line1/pressure,pressure_sensor_01,pressure,102.92,kPa,NORMAL,DoS Attack,1,simulator,615
+2026-07-07T16:12:45.676958,factory/line1/pressure,pressure_sensor_01,pressure,101.61,kPa,NORMAL,DoS Attack,1,simulator,616
+2026-07-07T16:12:45.732522,factory/line1/temperature,temperature_sensor_01,temperature,34.56,°C,NORMAL,DoS Attack,1,simulator,617
+2026-07-07T16:12:45.788092,factory/line1/temperature,temperature_sensor_01,temperature,28.62,°C,NORMAL,DoS Attack,1,simulator,618
+2026-07-07T16:12:45.843645,factory/line1/pressure,pressure_sensor_01,pressure,100.77,kPa,NORMAL,DoS Attack,1,simulator,619
+2026-07-07T16:12:45.894865,factory/line1/temperature,temperature_sensor_01,temperature,33.85,°C,NORMAL,DoS Attack,1,simulator,620
+2026-07-07T16:12:45.948172,factory/line1/temperature,temperature_sensor_01,temperature,25.48,°C,NORMAL,DoS Attack,1,simulator,621
+2026-07-07T16:12:46.003873,factory/line1/pressure,pressure_sensor_01,pressure,100.79,kPa,NORMAL,DoS Attack,1,simulator,622
+2026-07-07T16:12:46.055791,factory/line1/pressure,pressure_sensor_01,pressure,100.88,kPa,NORMAL,DoS Attack,1,simulator,623
+2026-07-07T16:12:46.111649,factory/line1/pressure,pressure_sensor_01,pressure,100.11,kPa,NORMAL,DoS Attack,1,simulator,624
+2026-07-07T16:12:46.164870,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,DoS Attack,1,simulator,625
+2026-07-07T16:12:46.217646,factory/line1/temperature,temperature_sensor_01,temperature,25.29,°C,NORMAL,DoS Attack,1,simulator,626
+2026-07-07T16:12:46.273322,factory/line1/temperature,temperature_sensor_01,temperature,26.0,°C,NORMAL,DoS Attack,1,simulator,627
+2026-07-07T16:12:46.289454,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,DoS Attack,1,simulator,628
+2026-07-07T16:12:46.295300,factory/line1/temperature,temperature_sensor_01,temperature,29.1,°C,NORMAL,DoS Attack,1,simulator,629
+2026-07-07T16:12:46.324179,factory/line1/pressure,pressure_sensor_01,pressure,101.77,kPa,NORMAL,DoS Attack,1,simulator,630
+2026-07-07T16:12:46.379808,factory/line1/temperature,temperature_sensor_01,temperature,32.17,°C,NORMAL,DoS Attack,1,simulator,631
+2026-07-07T16:12:46.435416,factory/line1/pressure,pressure_sensor_01,pressure,100.75,kPa,NORMAL,DoS Attack,1,simulator,632
+2026-07-07T16:12:46.489040,factory/line1/temperature,temperature_sensor_01,temperature,30.46,°C,NORMAL,DoS Attack,1,simulator,633
+2026-07-07T16:12:46.539923,factory/line1/pressure,pressure_sensor_01,pressure,100.39,kPa,NORMAL,DoS Attack,1,simulator,634
+2026-07-07T16:12:46.592228,factory/line1/pressure,pressure_sensor_01,pressure,100.0,kPa,NORMAL,DoS Attack,1,simulator,635
+2026-07-07T16:12:46.646529,factory/line1/temperature,temperature_sensor_01,temperature,25.29,°C,NORMAL,DoS Attack,1,simulator,636
+2026-07-07T16:12:46.699701,factory/line1/temperature,temperature_sensor_01,temperature,30.57,°C,NORMAL,DoS Attack,1,simulator,637
+2026-07-07T16:12:46.754818,factory/line1/pressure,pressure_sensor_01,pressure,101.04,kPa,NORMAL,DoS Attack,1,simulator,638
+2026-07-07T16:12:46.805750,factory/line1/pressure,pressure_sensor_01,pressure,100.45,kPa,NORMAL,DoS Attack,1,simulator,639
+2026-07-07T16:12:46.861174,factory/line1/pressure,pressure_sensor_01,pressure,100.24,kPa,NORMAL,DoS Attack,1,simulator,640
+2026-07-07T16:12:46.916644,factory/line1/temperature,temperature_sensor_01,temperature,29.16,°C,NORMAL,DoS Attack,1,simulator,641
+2026-07-07T16:12:46.970344,factory/line1/pressure,pressure_sensor_01,pressure,102.14,kPa,NORMAL,DoS Attack,1,simulator,642
+2026-07-07T16:12:47.026007,factory/line1/pressure,pressure_sensor_01,pressure,102.87,kPa,NORMAL,DoS Attack,1,simulator,643
+2026-07-07T16:12:47.081543,factory/line1/temperature,temperature_sensor_01,temperature,26.85,°C,NORMAL,DoS Attack,1,simulator,644
+2026-07-07T16:12:47.134316,factory/line1/temperature,temperature_sensor_01,temperature,29.63,°C,NORMAL,DoS Attack,1,simulator,645
+2026-07-07T16:12:47.190002,factory/line1/pressure,pressure_sensor_01,pressure,102.68,kPa,NORMAL,DoS Attack,1,simulator,646
+2026-07-07T16:12:47.245622,factory/line1/temperature,temperature_sensor_01,temperature,25.01,°C,NORMAL,DoS Attack,1,simulator,647
+2026-07-07T16:12:47.300959,factory/line1/pressure,pressure_sensor_01,pressure,102.6,kPa,NORMAL,DoS Attack,1,simulator,648
+2026-07-07T16:12:47.356581,factory/line1/pressure,pressure_sensor_01,pressure,102.98,kPa,NORMAL,DoS Attack,1,simulator,649
+2026-07-07T16:12:47.409512,factory/line1/pressure,pressure_sensor_01,pressure,100.11,kPa,NORMAL,DoS Attack,1,simulator,650
+2026-07-07T16:12:47.463066,factory/line1/temperature,temperature_sensor_01,temperature,30.21,°C,NORMAL,DoS Attack,1,simulator,651
+2026-07-07T16:12:47.518682,factory/line1/pressure,pressure_sensor_01,pressure,100.69,kPa,NORMAL,DoS Attack,1,simulator,652
+2026-07-07T16:12:47.574302,factory/line1/pressure,pressure_sensor_01,pressure,100.09,kPa,NORMAL,DoS Attack,1,simulator,653
+2026-07-07T16:12:47.629949,factory/line1/temperature,temperature_sensor_01,temperature,27.11,°C,NORMAL,DoS Attack,1,simulator,654
+2026-07-07T16:12:47.685582,factory/line1/pressure,pressure_sensor_01,pressure,100.52,kPa,NORMAL,DoS Attack,1,simulator,655
+2026-07-07T16:12:47.740164,factory/line1/pressure,pressure_sensor_01,pressure,100.76,kPa,NORMAL,DoS Attack,1,simulator,656
+2026-07-07T16:12:47.792656,factory/line1/temperature,temperature_sensor_01,temperature,33.09,°C,NORMAL,DoS Attack,1,simulator,657
+2026-07-07T16:12:47.848312,factory/line1/pressure,pressure_sensor_01,pressure,101.35,kPa,NORMAL,DoS Attack,1,simulator,658
+2026-07-07T16:12:47.900796,factory/line1/temperature,temperature_sensor_01,temperature,25.62,°C,NORMAL,DoS Attack,1,simulator,659
+2026-07-07T16:12:47.952190,factory/line1/pressure,pressure_sensor_01,pressure,101.61,kPa,NORMAL,DoS Attack,1,simulator,660
+2026-07-07T16:12:48.004556,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,DoS Attack,1,simulator,661
+2026-07-07T16:12:48.060211,factory/line1/pressure,pressure_sensor_01,pressure,100.81,kPa,NORMAL,DoS Attack,1,simulator,662
+2026-07-07T16:12:48.115429,factory/line1/pressure,pressure_sensor_01,pressure,102.42,kPa,NORMAL,DoS Attack,1,simulator,663
+2026-07-07T16:12:48.170680,factory/line1/temperature,temperature_sensor_01,temperature,33.1,°C,NORMAL,DoS Attack,1,simulator,664
+2026-07-07T16:12:48.225869,factory/line1/temperature,temperature_sensor_01,temperature,30.53,°C,NORMAL,DoS Attack,1,simulator,665
+2026-07-07T16:12:48.281322,factory/line1/temperature,temperature_sensor_01,temperature,30.41,°C,NORMAL,DoS Attack,1,simulator,666
+2026-07-07T16:12:48.294596,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,DoS Attack,1,simulator,667
+2026-07-07T16:12:48.299766,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,DoS Attack,1,simulator,668
+2026-07-07T16:12:48.336883,factory/line1/temperature,temperature_sensor_01,temperature,26.94,°C,NORMAL,DoS Attack,1,simulator,669
+2026-07-07T16:12:48.392434,factory/line1/temperature,temperature_sensor_01,temperature,32.34,°C,NORMAL,DoS Attack,1,simulator,670
+2026-07-07T16:12:48.448028,factory/line1/pressure,pressure_sensor_01,pressure,102.31,kPa,NORMAL,DoS Attack,1,simulator,671
+2026-07-07T16:12:48.503614,factory/line1/temperature,temperature_sensor_01,temperature,29.21,°C,NORMAL,DoS Attack,1,simulator,672
+2026-07-07T16:12:48.559240,factory/line1/pressure,pressure_sensor_01,pressure,100.45,kPa,NORMAL,DoS Attack,1,simulator,673
+2026-07-07T16:12:48.614838,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,DoS Attack,1,simulator,674
+2026-07-07T16:12:48.670503,factory/line1/pressure,pressure_sensor_01,pressure,102.42,kPa,NORMAL,DoS Attack,1,simulator,675
+2026-07-07T16:12:48.725961,factory/line1/temperature,temperature_sensor_01,temperature,26.56,°C,NORMAL,DoS Attack,1,simulator,676
+2026-07-07T16:12:48.781474,factory/line1/temperature,temperature_sensor_01,temperature,33.5,°C,NORMAL,DoS Attack,1,simulator,677
+2026-07-07T16:12:48.837080,factory/line1/pressure,pressure_sensor_01,pressure,100.11,kPa,NORMAL,DoS Attack,1,simulator,678
+2026-07-07T16:12:48.887879,factory/line1/temperature,temperature_sensor_01,temperature,26.65,°C,NORMAL,DoS Attack,1,simulator,679
+2026-07-07T16:12:48.943606,factory/line1/temperature,temperature_sensor_01,temperature,31.72,°C,NORMAL,DoS Attack,1,simulator,680
+2026-07-07T16:12:48.998844,factory/line1/temperature,temperature_sensor_01,temperature,33.18,°C,NORMAL,DoS Attack,1,simulator,681
+2026-07-07T16:12:49.054499,factory/line1/pressure,pressure_sensor_01,pressure,100.41,kPa,NORMAL,DoS Attack,1,simulator,682
+2026-07-07T16:12:49.109373,factory/line1/temperature,temperature_sensor_01,temperature,34.7,°C,NORMAL,DoS Attack,1,simulator,683
+2026-07-07T16:12:49.164796,factory/line1/temperature,temperature_sensor_01,temperature,31.73,°C,NORMAL,DoS Attack,1,simulator,684
+2026-07-07T16:12:49.217636,factory/line1/pressure,pressure_sensor_01,pressure,102.27,kPa,NORMAL,DoS Attack,1,simulator,685
+2026-07-07T16:12:49.273307,factory/line1/temperature,temperature_sensor_01,temperature,25.94,°C,NORMAL,DoS Attack,1,simulator,686
+2026-07-07T16:12:49.325855,factory/line1/temperature,temperature_sensor_01,temperature,30.99,°C,NORMAL,DoS Attack,1,simulator,687
+2026-07-07T16:12:49.381466,factory/line1/pressure,pressure_sensor_01,pressure,102.79,kPa,NORMAL,DoS Attack,1,simulator,688
+2026-07-07T16:12:49.436181,factory/line1/temperature,temperature_sensor_01,temperature,28.37,°C,NORMAL,DoS Attack,1,simulator,689
+2026-07-07T16:12:49.491780,factory/line1/temperature,temperature_sensor_01,temperature,33.49,°C,NORMAL,DoS Attack,1,simulator,690
+2026-07-07T16:12:49.547375,factory/line1/temperature,temperature_sensor_01,temperature,28.75,°C,NORMAL,DoS Attack,1,simulator,691
+2026-07-07T16:12:49.602962,factory/line1/pressure,pressure_sensor_01,pressure,102.82,kPa,NORMAL,DoS Attack,1,simulator,692
+2026-07-07T16:12:49.658619,factory/line1/pressure,pressure_sensor_01,pressure,102.81,kPa,NORMAL,DoS Attack,1,simulator,693
+2026-07-07T16:12:49.713632,factory/line1/pressure,pressure_sensor_01,pressure,101.56,kPa,NORMAL,DoS Attack,1,simulator,694
+2026-07-07T16:12:49.766843,factory/line1/temperature,temperature_sensor_01,temperature,33.39,°C,NORMAL,DoS Attack,1,simulator,695
+2026-07-07T16:12:49.822438,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,DoS Attack,1,simulator,696
+2026-07-07T16:12:49.876039,factory/line1/pressure,pressure_sensor_01,pressure,102.9,kPa,NORMAL,DoS Attack,1,simulator,697
+2026-07-07T16:12:49.930649,factory/line1/pressure,pressure_sensor_01,pressure,101.28,kPa,NORMAL,DoS Attack,1,simulator,698
+2026-07-07T16:12:49.986281,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,DoS Attack,1,simulator,699
+2026-07-07T16:12:50.041864,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,DoS Attack,1,simulator,700
+2026-07-07T16:12:50.094650,factory/line1/temperature,temperature_sensor_01,temperature,28.83,°C,NORMAL,DoS Attack,1,simulator,701
+2026-07-07T16:12:50.150277,factory/line1/temperature,temperature_sensor_01,temperature,31.83,°C,NORMAL,DoS Attack,1,simulator,702
+2026-07-07T16:12:50.201532,factory/line1/pressure,pressure_sensor_01,pressure,102.41,kPa,NORMAL,DoS Attack,1,simulator,703
+2026-07-07T16:12:50.255543,factory/line1/temperature,temperature_sensor_01,temperature,34.44,°C,NORMAL,DoS Attack,1,simulator,704
+2026-07-07T16:12:50.295815,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,DoS Attack,1,simulator,705
+2026-07-07T16:12:50.305195,factory/line1/temperature,temperature_sensor_01,temperature,27.9,°C,NORMAL,DoS Attack,1,simulator,706
+2026-07-07T16:12:50.311163,factory/line1/temperature,temperature_sensor_01,temperature,30.23,°C,NORMAL,DoS Attack,1,simulator,707
+2026-07-07T16:12:50.364197,factory/line1/temperature,temperature_sensor_01,temperature,33.66,°C,NORMAL,DoS Attack,1,simulator,708
+2026-07-07T16:12:50.417627,factory/line1/temperature,temperature_sensor_01,temperature,32.44,°C,NORMAL,DoS Attack,1,simulator,709
+2026-07-07T16:12:50.470844,factory/line1/temperature,temperature_sensor_01,temperature,31.23,°C,NORMAL,DoS Attack,1,simulator,710
+2026-07-07T16:12:50.525964,factory/line1/pressure,pressure_sensor_01,pressure,100.18,kPa,NORMAL,DoS Attack,1,simulator,711
+2026-07-07T16:12:50.581569,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,DoS Attack,1,simulator,712
+2026-07-07T16:12:50.632890,factory/line1/temperature,temperature_sensor_01,temperature,26.97,°C,NORMAL,DoS Attack,1,simulator,713
+2026-07-07T16:12:50.684616,factory/line1/pressure,pressure_sensor_01,pressure,102.68,kPa,NORMAL,DoS Attack,1,simulator,714
+2026-07-07T16:12:50.737537,factory/line1/pressure,pressure_sensor_01,pressure,102.54,kPa,NORMAL,DoS Attack,1,simulator,715
+2026-07-07T16:12:50.793202,factory/line1/pressure,pressure_sensor_01,pressure,101.75,kPa,NORMAL,DoS Attack,1,simulator,716
+2026-07-07T16:12:50.847557,factory/line1/pressure,pressure_sensor_01,pressure,102.62,kPa,NORMAL,DoS Attack,1,simulator,717
+2026-07-07T16:12:50.901362,factory/line1/pressure,pressure_sensor_01,pressure,101.72,kPa,NORMAL,DoS Attack,1,simulator,718
+2026-07-07T16:12:50.956566,factory/line1/pressure,pressure_sensor_01,pressure,102.76,kPa,NORMAL,DoS Attack,1,simulator,719
+2026-07-07T16:12:51.012169,factory/line1/pressure,pressure_sensor_01,pressure,101.88,kPa,NORMAL,DoS Attack,1,simulator,720
+2026-07-07T16:12:51.067746,factory/line1/temperature,temperature_sensor_01,temperature,30.7,°C,NORMAL,DoS Attack,1,simulator,721
+2026-07-07T16:12:51.123311,factory/line1/temperature,temperature_sensor_01,temperature,27.64,°C,NORMAL,DoS Attack,1,simulator,722
+2026-07-07T16:12:51.174840,factory/line1/pressure,pressure_sensor_01,pressure,102.67,kPa,NORMAL,DoS Attack,1,simulator,723
+2026-07-07T16:12:51.230423,factory/line1/temperature,temperature_sensor_01,temperature,34.72,°C,NORMAL,DoS Attack,1,simulator,724
+2026-07-07T16:12:51.285966,factory/line1/temperature,temperature_sensor_01,temperature,28.15,°C,NORMAL,DoS Attack,1,simulator,725
+2026-07-07T16:12:51.341519,factory/line1/temperature,temperature_sensor_01,temperature,31.99,°C,NORMAL,DoS Attack,1,simulator,726
+2026-07-07T16:12:51.397065,factory/line1/temperature,temperature_sensor_01,temperature,30.7,°C,NORMAL,DoS Attack,1,simulator,727
+2026-07-07T16:12:51.452628,factory/line1/temperature,temperature_sensor_01,temperature,30.29,°C,NORMAL,DoS Attack,1,simulator,728
+2026-07-07T16:12:51.508164,factory/line1/pressure,pressure_sensor_01,pressure,102.76,kPa,NORMAL,DoS Attack,1,simulator,729
+2026-07-07T16:12:51.559334,factory/line1/temperature,temperature_sensor_01,temperature,34.88,°C,NORMAL,DoS Attack,1,simulator,730
+2026-07-07T16:12:51.610007,factory/line1/temperature,temperature_sensor_01,temperature,26.32,°C,NORMAL,DoS Attack,1,simulator,731
+2026-07-07T16:12:51.661143,factory/line1/pressure,pressure_sensor_01,pressure,101.5,kPa,NORMAL,DoS Attack,1,simulator,732
+2026-07-07T16:12:51.716688,factory/line1/pressure,pressure_sensor_01,pressure,100.73,kPa,NORMAL,DoS Attack,1,simulator,733
+2026-07-07T16:12:51.771581,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,DoS Attack,1,simulator,734
+2026-07-07T16:12:51.824373,factory/line1/pressure,pressure_sensor_01,pressure,100.4,kPa,NORMAL,DoS Attack,1,simulator,735
+2026-07-07T16:12:51.879882,factory/line1/pressure,pressure_sensor_01,pressure,102.89,kPa,NORMAL,DoS Attack,1,simulator,736
+2026-07-07T16:12:51.935504,factory/line1/temperature,temperature_sensor_01,temperature,34.92,°C,NORMAL,DoS Attack,1,simulator,737
+2026-07-07T16:12:51.989566,factory/line1/pressure,pressure_sensor_01,pressure,100.99,kPa,NORMAL,DoS Attack,1,simulator,738
+2026-07-07T16:12:52.042697,factory/line1/temperature,temperature_sensor_01,temperature,26.27,°C,NORMAL,DoS Attack,1,simulator,739
+2026-07-07T16:12:52.098322,factory/line1/temperature,temperature_sensor_01,temperature,34.21,°C,NORMAL,DoS Attack,1,simulator,740
+2026-07-07T16:12:52.153957,factory/line1/temperature,temperature_sensor_01,temperature,25.86,°C,NORMAL,DoS Attack,1,simulator,741
+2026-07-07T16:12:52.209296,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,DoS Attack,1,simulator,742
+2026-07-07T16:12:52.264945,factory/line1/pressure,pressure_sensor_01,pressure,101.72,kPa,NORMAL,DoS Attack,1,simulator,743
+2026-07-07T16:12:52.300892,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,DoS Attack,1,simulator,744
+2026-07-07T16:12:52.309683,factory/line1/temperature,temperature_sensor_01,temperature,29.2,°C,NORMAL,DoS Attack,1,simulator,745
+2026-07-07T16:12:52.319222,factory/line1/temperature,temperature_sensor_01,temperature,26.33,°C,NORMAL,DoS Attack,1,simulator,746
+2026-07-07T16:12:52.369508,factory/line1/pressure,pressure_sensor_01,pressure,102.38,kPa,NORMAL,DoS Attack,1,simulator,747
+2026-07-07T16:12:52.424723,factory/line1/pressure,pressure_sensor_01,pressure,102.71,kPa,NORMAL,DoS Attack,1,simulator,748
+2026-07-07T16:12:52.479908,factory/line1/pressure,pressure_sensor_01,pressure,101.27,kPa,NORMAL,DoS Attack,1,simulator,749
+2026-07-07T16:12:52.534312,factory/line1/pressure,pressure_sensor_01,pressure,100.46,kPa,NORMAL,DoS Attack,1,simulator,750
+2026-07-07T16:12:52.585555,factory/line1/temperature,temperature_sensor_01,temperature,27.91,°C,NORMAL,DoS Attack,1,simulator,751
+2026-07-07T16:12:52.640745,factory/line1/temperature,temperature_sensor_01,temperature,30.98,°C,NORMAL,DoS Attack,1,simulator,752
+2026-07-07T16:12:52.695852,factory/line1/temperature,temperature_sensor_01,temperature,33.49,°C,NORMAL,DoS Attack,1,simulator,753
+2026-07-07T16:12:52.751575,factory/line1/pressure,pressure_sensor_01,pressure,101.46,kPa,NORMAL,DoS Attack,1,simulator,754
+2026-07-07T16:12:52.802341,factory/line1/temperature,temperature_sensor_01,temperature,25.3,°C,NORMAL,DoS Attack,1,simulator,755
+2026-07-07T16:12:52.855127,factory/line1/temperature,temperature_sensor_01,temperature,34.45,°C,NORMAL,DoS Attack,1,simulator,756
+2026-07-07T16:12:52.911049,factory/line1/pressure,pressure_sensor_01,pressure,101.42,kPa,NORMAL,DoS Attack,1,simulator,757
+2026-07-07T16:12:52.964264,factory/line1/temperature,temperature_sensor_01,temperature,34.12,°C,NORMAL,DoS Attack,1,simulator,758
+2026-07-07T16:12:53.019911,factory/line1/temperature,temperature_sensor_01,temperature,34.19,°C,NORMAL,DoS Attack,1,simulator,759
+2026-07-07T16:12:53.073294,factory/line1/temperature,temperature_sensor_01,temperature,32.62,°C,NORMAL,DoS Attack,1,simulator,760
+2026-07-07T16:12:54.302219,factory/line1/pressure,pressure_sensor_01,pressure,102.1,kPa,NORMAL,,0,simulator,761
+2026-07-07T16:12:54.314937,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,762
+2026-07-07T16:12:56.305497,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,,0,simulator,763
+2026-07-07T16:12:56.320368,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,,0,simulator,764
+2026-07-07T16:12:58.309090,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,765
+2026-07-07T16:12:58.321476,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,,0,simulator,766
+2026-07-07T16:13:00.314889,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,,0,simulator,767
+2026-07-07T16:13:00.323559,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,,0,simulator,768
+2026-07-07T16:13:02.318163,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,769
+2026-07-07T16:13:02.329307,factory/line1/temperature,temperature_sensor_01,temperature,27.7,°C,NORMAL,,0,simulator,770
+2026-07-07T16:13:04.323892,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,771
+2026-07-07T16:13:04.334812,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,,0,simulator,772
+2026-07-07T16:13:06.325878,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,NORMAL,,0,simulator,773
+2026-07-07T16:13:06.337470,factory/line1/temperature,temperature_sensor_01,temperature,28.7,°C,NORMAL,,0,simulator,774
+2026-07-07T16:13:08.330201,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,775
+2026-07-07T16:13:08.343024,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,,0,simulator,776
+2026-07-07T16:13:10.332179,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,,0,simulator,777
+2026-07-07T16:13:10.348460,factory/line1/temperature,temperature_sensor_01,temperature,29.5,°C,NORMAL,,0,simulator,778
+2026-07-07T16:13:12.336043,factory/line1/pressure,pressure_sensor_01,pressure,101.2,kPa,NORMAL,,0,simulator,779
+2026-07-07T16:13:12.352747,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,,0,simulator,780
+2026-07-07T16:13:14.173971,factory/line1/temperature,fake_temperature_sensor,temperature,29.3,°C,NORMAL,Spoofing Attack,1,simulator,781
+2026-07-07T16:13:14.278909,factory/line1/pressure,fake_pressure_sensor,pressure,100.95,kPa,NORMAL,Spoofing Attack,1,simulator,782
+2026-07-07T16:13:14.341767,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Spoofing Attack,1,simulator,783
+2026-07-07T16:13:14.358285,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,Spoofing Attack,1,simulator,784
+2026-07-07T16:13:14.380768,factory/line1/pressure,fake_pressure_sensor,pressure,100.97,kPa,NORMAL,Spoofing Attack,1,simulator,785
+2026-07-07T16:13:14.484815,factory/line1/pressure,fake_pressure_sensor,pressure,101.35,kPa,NORMAL,Spoofing Attack,1,simulator,786
+2026-07-07T16:13:14.588602,factory/line1/pressure,fake_pressure_sensor,pressure,101.57,kPa,NORMAL,Spoofing Attack,1,simulator,787
+2026-07-07T16:13:14.694234,factory/line1/temperature,fake_temperature_sensor,temperature,29.75,°C,NORMAL,Spoofing Attack,1,simulator,788
+2026-07-07T16:13:14.799833,factory/line1/pressure,fake_pressure_sensor,pressure,100.88,kPa,NORMAL,Spoofing Attack,1,simulator,789
+2026-07-07T16:13:14.900890,factory/line1/temperature,fake_temperature_sensor,temperature,27.2,°C,NORMAL,Spoofing Attack,1,simulator,790
+2026-07-07T16:13:15.004232,factory/line1/temperature,fake_temperature_sensor,temperature,29.65,°C,NORMAL,Spoofing Attack,1,simulator,791
+2026-07-07T16:13:15.109309,factory/line1/temperature,fake_temperature_sensor,temperature,28.36,°C,NORMAL,Spoofing Attack,1,simulator,792
+2026-07-07T16:13:15.213583,factory/line1/temperature,fake_temperature_sensor,temperature,29.4,°C,NORMAL,Spoofing Attack,1,simulator,793
+2026-07-07T16:13:15.319256,factory/line1/pressure,fake_pressure_sensor,pressure,101.27,kPa,NORMAL,Spoofing Attack,1,simulator,794
+2026-07-07T16:13:15.424904,factory/line1/pressure,fake_pressure_sensor,pressure,100.7,kPa,NORMAL,Spoofing Attack,1,simulator,795
+2026-07-07T16:13:15.528820,factory/line1/pressure,fake_pressure_sensor,pressure,102.43,kPa,NORMAL,Spoofing Attack,1,simulator,796
+2026-07-07T16:13:15.634536,factory/line1/pressure,fake_pressure_sensor,pressure,101.44,kPa,NORMAL,Spoofing Attack,1,simulator,797
+2026-07-07T16:13:15.740241,factory/line1/temperature,fake_temperature_sensor,temperature,27.45,°C,NORMAL,Spoofing Attack,1,simulator,798
+2026-07-07T16:13:15.845934,factory/line1/temperature,fake_temperature_sensor,temperature,28.12,°C,NORMAL,Spoofing Attack,1,simulator,799
+2026-07-07T16:13:15.947866,factory/line1/pressure,fake_pressure_sensor,pressure,101.86,kPa,NORMAL,Spoofing Attack,1,simulator,800
+2026-07-07T16:13:16.053535,factory/line1/pressure,fake_pressure_sensor,pressure,101.43,kPa,NORMAL,Spoofing Attack,1,simulator,801
+2026-07-07T16:13:16.159228,factory/line1/pressure,fake_pressure_sensor,pressure,101.97,kPa,NORMAL,Spoofing Attack,1,simulator,802
+2026-07-07T16:13:16.261091,factory/line1/temperature,fake_temperature_sensor,temperature,27.76,°C,NORMAL,Spoofing Attack,1,simulator,803
+2026-07-07T16:13:16.347460,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,Spoofing Attack,1,simulator,804
+2026-07-07T16:13:16.359233,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Spoofing Attack,1,simulator,805
+2026-07-07T16:13:16.364149,factory/line1/temperature,fake_temperature_sensor,temperature,28.83,°C,NORMAL,Spoofing Attack,1,simulator,806
+2026-07-07T16:13:16.467552,factory/line1/pressure,fake_pressure_sensor,pressure,101.06,kPa,NORMAL,Spoofing Attack,1,simulator,807
+2026-07-07T16:13:16.569410,factory/line1/pressure,fake_pressure_sensor,pressure,102.18,kPa,NORMAL,Spoofing Attack,1,simulator,808
+2026-07-07T16:13:16.673773,factory/line1/pressure,fake_pressure_sensor,pressure,101.6,kPa,NORMAL,Spoofing Attack,1,simulator,809
+2026-07-07T16:13:16.774914,factory/line1/pressure,fake_pressure_sensor,pressure,100.5,kPa,NORMAL,Spoofing Attack,1,simulator,810
+2026-07-07T16:13:16.880765,factory/line1/temperature,fake_temperature_sensor,temperature,28.77,°C,NORMAL,Spoofing Attack,1,simulator,811
+2026-07-07T16:13:16.985040,factory/line1/pressure,fake_pressure_sensor,pressure,102.06,kPa,NORMAL,Spoofing Attack,1,simulator,812
+2026-07-07T16:13:17.087526,factory/line1/pressure,fake_pressure_sensor,pressure,101.81,kPa,NORMAL,Spoofing Attack,1,simulator,813
+2026-07-07T16:13:17.191119,factory/line1/pressure,fake_pressure_sensor,pressure,102.01,kPa,NORMAL,Spoofing Attack,1,simulator,814
+2026-07-07T16:13:17.296760,factory/line1/temperature,fake_temperature_sensor,temperature,28.84,°C,NORMAL,Spoofing Attack,1,simulator,815
+2026-07-07T16:13:17.401966,factory/line1/temperature,fake_temperature_sensor,temperature,27.6,°C,NORMAL,Spoofing Attack,1,simulator,816
+2026-07-07T16:13:17.507664,factory/line1/temperature,fake_temperature_sensor,temperature,28.54,°C,NORMAL,Spoofing Attack,1,simulator,817
+2026-07-07T16:13:17.609509,factory/line1/pressure,fake_pressure_sensor,pressure,101.29,kPa,NORMAL,Spoofing Attack,1,simulator,818
+2026-07-07T16:13:17.711321,factory/line1/temperature,fake_temperature_sensor,temperature,27.79,°C,NORMAL,Spoofing Attack,1,simulator,819
+2026-07-07T16:13:17.813580,factory/line1/temperature,fake_temperature_sensor,temperature,28.91,°C,NORMAL,Spoofing Attack,1,simulator,820
+2026-07-07T16:13:17.915410,factory/line1/temperature,fake_temperature_sensor,temperature,27.8,°C,NORMAL,Spoofing Attack,1,simulator,821
+2026-07-07T16:13:18.019072,factory/line1/temperature,fake_temperature_sensor,temperature,29.17,°C,NORMAL,Spoofing Attack,1,simulator,822
+2026-07-07T16:13:18.122403,factory/line1/temperature,fake_temperature_sensor,temperature,28.12,°C,NORMAL,Spoofing Attack,1,simulator,823
+2026-07-07T16:13:18.227777,factory/line1/pressure,fake_pressure_sensor,pressure,101.64,kPa,NORMAL,Spoofing Attack,1,simulator,824
+2026-07-07T16:13:18.332247,factory/line1/pressure,fake_pressure_sensor,pressure,101.39,kPa,NORMAL,Spoofing Attack,1,simulator,825
+2026-07-07T16:13:18.353156,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Spoofing Attack,1,simulator,826
+2026-07-07T16:13:18.364579,factory/line1/temperature,temperature_sensor_01,temperature,29.2,°C,NORMAL,Spoofing Attack,1,simulator,827
+2026-07-07T16:13:18.437917,factory/line1/pressure,fake_pressure_sensor,pressure,102.07,kPa,NORMAL,Spoofing Attack,1,simulator,828
+2026-07-07T16:13:18.542550,factory/line1/temperature,fake_temperature_sensor,temperature,29.15,°C,NORMAL,Spoofing Attack,1,simulator,829
+2026-07-07T16:13:18.644395,factory/line1/pressure,fake_pressure_sensor,pressure,102.13,kPa,NORMAL,Spoofing Attack,1,simulator,830
+2026-07-07T16:13:18.748233,factory/line1/temperature,fake_temperature_sensor,temperature,27.73,°C,NORMAL,Spoofing Attack,1,simulator,831
+2026-07-07T16:13:18.851735,factory/line1/pressure,fake_pressure_sensor,pressure,101.36,kPa,NORMAL,Spoofing Attack,1,simulator,832
+2026-07-07T16:13:18.957398,factory/line1/temperature,fake_temperature_sensor,temperature,29.71,°C,NORMAL,Spoofing Attack,1,simulator,833
+2026-07-07T16:13:19.060814,factory/line1/temperature,fake_temperature_sensor,temperature,29.08,°C,NORMAL,Spoofing Attack,1,simulator,834
+2026-07-07T16:13:19.166499,factory/line1/temperature,fake_temperature_sensor,temperature,29.4,°C,NORMAL,Spoofing Attack,1,simulator,835
+2026-07-07T16:13:19.268309,factory/line1/pressure,fake_pressure_sensor,pressure,102.28,kPa,NORMAL,Spoofing Attack,1,simulator,836
+2026-07-07T16:13:19.370221,factory/line1/pressure,fake_pressure_sensor,pressure,101.53,kPa,NORMAL,Spoofing Attack,1,simulator,837
+2026-07-07T16:13:19.471987,factory/line1/temperature,fake_temperature_sensor,temperature,28.09,°C,NORMAL,Spoofing Attack,1,simulator,838
+2026-07-07T16:13:19.573779,factory/line1/temperature,fake_temperature_sensor,temperature,27.77,°C,NORMAL,Spoofing Attack,1,simulator,839
+2026-07-07T16:13:19.675955,factory/line1/temperature,fake_temperature_sensor,temperature,27.27,°C,NORMAL,Spoofing Attack,1,simulator,840
+2026-07-07T16:13:19.781600,factory/line1/pressure,fake_pressure_sensor,pressure,101.53,kPa,NORMAL,Spoofing Attack,1,simulator,841
+2026-07-07T16:13:19.882976,factory/line1/pressure,fake_pressure_sensor,pressure,101.9,kPa,NORMAL,Spoofing Attack,1,simulator,842
+2026-07-07T16:13:19.988651,factory/line1/temperature,fake_temperature_sensor,temperature,28.36,°C,NORMAL,Spoofing Attack,1,simulator,843
+2026-07-07T16:13:20.094256,factory/line1/pressure,fake_pressure_sensor,pressure,102.35,kPa,NORMAL,Spoofing Attack,1,simulator,844
+2026-07-07T16:13:20.358690,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,845
+2026-07-07T16:13:20.368563,factory/line1/temperature,temperature_sensor_01,temperature,28.1,°C,NORMAL,,0,simulator,846
+2026-07-07T16:13:22.364383,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,847
+2026-07-07T16:13:22.374113,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,,0,simulator,848
+2026-07-07T16:13:24.368067,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,,0,simulator,849
+2026-07-07T16:13:24.379716,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,,0,simulator,850
+2026-07-07T16:13:26.371571,factory/line1/pressure,pressure_sensor_01,pressure,102.5,kPa,NORMAL,,0,simulator,851
+2026-07-07T16:13:26.384132,factory/line1/temperature,temperature_sensor_01,temperature,28.4,°C,NORMAL,,0,simulator,852
+2026-07-07T16:13:28.375811,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,,0,simulator,853
+2026-07-07T16:13:28.389591,factory/line1/temperature,temperature_sensor_01,temperature,28.8,°C,NORMAL,,0,simulator,854
+2026-07-07T16:13:30.380788,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,855
+2026-07-07T16:13:30.392448,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,NORMAL,,0,simulator,856
+2026-07-07T16:13:32.383388,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,,0,simulator,857
+2026-07-07T16:13:32.394993,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,,0,simulator,858
+2026-07-07T16:13:33.209679,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,859
+2026-07-07T16:13:33.314988,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,860
+2026-07-07T16:13:33.417487,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,861
+2026-07-07T16:13:33.519697,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,862
+2026-07-07T16:13:33.625413,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,863
+2026-07-07T16:13:33.730989,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,864
+2026-07-07T16:13:33.836619,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,865
+2026-07-07T16:13:33.937742,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,866
+2026-07-07T16:13:34.043402,factory/line1/temperature,temperature_sensor_01,temperature,29.8,°C,NORMAL,Replay Attack,1,simulator,867
+2026-07-07T16:13:34.149043,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,868
+2026-07-07T16:13:34.251008,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,869
+2026-07-07T16:13:34.352986,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,870
+2026-07-07T16:13:34.389107,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,Replay Attack,1,simulator,871
+2026-07-07T16:13:34.396023,factory/line1/temperature,temperature_sensor_01,temperature,29.1,°C,NORMAL,Replay Attack,1,simulator,872
+2026-07-07T16:13:34.458611,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,873
+2026-07-07T16:13:34.564097,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,874
+2026-07-07T16:13:34.669168,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,875
+2026-07-07T16:13:34.774782,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,876
+2026-07-07T16:13:34.879491,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,877
+2026-07-07T16:13:34.981292,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,878
+2026-07-07T16:13:35.086980,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,879
+2026-07-07T16:13:35.188099,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,880
+2026-07-07T16:13:35.293587,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,Replay Attack,1,simulator,881
+2026-07-07T16:13:35.396117,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,882
+2026-07-07T16:13:35.501752,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,883
+2026-07-07T16:13:35.607302,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,884
+2026-07-07T16:13:35.709249,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,885
+2026-07-07T16:13:35.814887,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,Replay Attack,1,simulator,886
+2026-07-07T16:13:35.918064,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Replay Attack,1,simulator,887
+2026-07-07T16:13:36.019881,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,888
+2026-07-07T16:13:36.124706,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Replay Attack,1,simulator,889
+2026-07-07T16:13:36.225803,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,890
+2026-07-07T16:13:36.327599,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Replay Attack,1,simulator,891
+2026-07-07T16:13:36.394794,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,892
+2026-07-07T16:13:36.401407,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,Replay Attack,1,simulator,893
+2026-07-07T16:13:36.432823,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,Replay Attack,1,simulator,894
+2026-07-07T16:13:36.535164,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,Replay Attack,1,simulator,895
+2026-07-07T16:13:36.636977,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,Replay Attack,1,simulator,896
+2026-07-07T16:13:36.738706,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,897
+2026-07-07T16:13:36.840540,factory/line1/temperature,temperature_sensor_01,temperature,27.8,°C,NORMAL,Replay Attack,1,simulator,898
+2026-07-07T16:13:36.946167,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,Replay Attack,1,simulator,899
+2026-07-07T16:13:37.047951,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,900
+2026-07-07T16:13:37.153582,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,Replay Attack,1,simulator,901
+2026-07-07T16:13:37.257183,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,902
+2026-07-07T16:13:37.359086,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,903
+2026-07-07T16:13:37.464708,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,Replay Attack,1,simulator,904
+2026-07-07T16:13:37.568078,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,905
+2026-07-07T16:13:37.672087,factory/line1/temperature,temperature_sensor_01,temperature,30.2,°C,NORMAL,Replay Attack,1,simulator,906
+2026-07-07T16:13:37.777600,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,Replay Attack,1,simulator,907
+2026-07-07T16:13:37.883298,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,Replay Attack,1,simulator,908
+2026-07-07T16:13:37.988833,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,NORMAL,Replay Attack,1,simulator,909
+2026-07-07T16:13:38.089527,factory/line1/pressure,pressure_sensor_01,pressure,100.5,kPa,NORMAL,Replay Attack,1,simulator,910
+2026-07-07T16:13:38.194997,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,Replay Attack,1,simulator,911
+2026-07-07T16:13:38.396287,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,,0,simulator,912
+2026-07-07T16:13:38.405856,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,,0,simulator,913
+2026-07-07T16:13:40.397996,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,,0,simulator,914
+2026-07-07T16:13:40.411460,factory/line1/temperature,temperature_sensor_01,temperature,27.0,°C,NORMAL,,0,simulator,915
+2026-07-07T16:13:42.403864,factory/line1/pressure,pressure_sensor_01,pressure,100.9,kPa,NORMAL,,0,simulator,916
+2026-07-07T16:13:42.416800,factory/line1/temperature,temperature_sensor_01,temperature,30.0,°C,NORMAL,,0,simulator,917
+2026-07-07T16:13:44.409246,factory/line1/pressure,pressure_sensor_01,pressure,101.4,kPa,NORMAL,,0,simulator,918
+2026-07-07T16:13:44.422321,factory/line1/temperature,temperature_sensor_01,temperature,27.2,°C,NORMAL,,0,simulator,919
+2026-07-07T16:13:46.414981,factory/line1/pressure,pressure_sensor_01,pressure,100.8,kPa,NORMAL,,0,simulator,920
+2026-07-07T16:13:46.427882,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,,0,simulator,921
+2026-07-07T16:13:48.420728,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,,0,simulator,922
+2026-07-07T16:13:48.433370,factory/line1/temperature,temperature_sensor_01,temperature,29.3,°C,NORMAL,,0,simulator,923
+2026-07-07T16:13:50.425744,factory/line1/pressure,pressure_sensor_01,pressure,102.4,kPa,NORMAL,,0,simulator,924
+2026-07-07T16:13:50.438872,factory/line1/temperature,temperature_sensor_01,temperature,27.2,°C,NORMAL,,0,simulator,925
+2026-07-07T16:13:52.427144,factory/line1/pressure,pressure_sensor_01,pressure,101.8,kPa,NORMAL,,0,simulator,926
+2026-07-07T16:13:52.444332,factory/line1/temperature,temperature_sensor_01,temperature,29.7,°C,NORMAL,,0,simulator,927
+2026-07-07T16:13:54.432871,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,928
+2026-07-07T16:13:54.447667,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,929
+2026-07-07T16:13:56.438605,factory/line1/pressure,pressure_sensor_01,pressure,101.0,kPa,NORMAL,,0,simulator,930
+2026-07-07T16:13:56.448815,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,,0,simulator,931
+2026-07-07T16:13:58.443446,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,932
+2026-07-07T16:13:58.451285,factory/line1/temperature,temperature_sensor_01,temperature,27.5,°C,NORMAL,,0,simulator,933
+2026-07-07T16:13:59.237070,factory/line1/pressure,pressure_sensor_01,pressure,177.95,kPa,NORMAL,Injection Attack,1,simulator,934
+2026-07-07T16:13:59.342490,factory/line1/temperature,temperature_sensor_01,temperature,223.9,°C,NORMAL,Injection Attack,1,simulator,935
+2026-07-07T16:13:59.447057,factory/line1/pressure,pressure_sensor_01,pressure,68.14,kPa,NORMAL,Injection Attack,1,simulator,936
+2026-07-07T16:13:59.552775,factory/line1/temperature,temperature_sensor_01,temperature,110.14,°C,NORMAL,Injection Attack,1,simulator,937
+2026-07-07T16:13:59.658426,factory/line1/pressure,pressure_sensor_01,pressure,210.76,kPa,NORMAL,Injection Attack,1,simulator,938
+2026-07-07T16:13:59.760252,factory/line1/pressure,pressure_sensor_01,pressure,56.21,kPa,NORMAL,Injection Attack,1,simulator,939
+2026-07-07T16:13:59.865909,factory/line1/pressure,pressure_sensor_01,pressure,75.91,kPa,NORMAL,Injection Attack,1,simulator,940
+2026-07-07T16:13:59.971668,factory/line1/pressure,pressure_sensor_01,pressure,192.79,kPa,NORMAL,Injection Attack,1,simulator,941
+2026-07-07T16:14:00.073697,factory/line1/temperature,temperature_sensor_01,temperature,119.53,°C,NORMAL,Injection Attack,1,simulator,942
+2026-07-07T16:14:00.179329,factory/line1/temperature,temperature_sensor_01,temperature,-15.24,°C,NORMAL,Injection Attack,1,simulator,943
+2026-07-07T16:14:00.284913,factory/line1/temperature,temperature_sensor_01,temperature,153.88,°C,NORMAL,Injection Attack,1,simulator,944
+2026-07-07T16:14:00.388887,factory/line1/temperature,temperature_sensor_01,temperature,171.51,°C,NORMAL,Injection Attack,1,simulator,945
+2026-07-07T16:14:00.444852,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,Injection Attack,1,simulator,946
+2026-07-07T16:14:00.455972,factory/line1/temperature,temperature_sensor_01,temperature,28.3,°C,NORMAL,Injection Attack,1,simulator,947
+2026-07-07T16:14:00.494488,factory/line1/pressure,pressure_sensor_01,pressure,75.42,kPa,NORMAL,Injection Attack,1,simulator,948
+2026-07-07T16:14:00.600145,factory/line1/pressure,pressure_sensor_01,pressure,65.35,kPa,NORMAL,Injection Attack,1,simulator,949
+2026-07-07T16:14:00.705790,factory/line1/temperature,temperature_sensor_01,temperature,110.95,°C,NORMAL,Injection Attack,1,simulator,950
+2026-07-07T16:14:00.809098,factory/line1/pressure,pressure_sensor_01,pressure,149.78,kPa,NORMAL,Injection Attack,1,simulator,951
+2026-07-07T16:14:00.913515,factory/line1/temperature,temperature_sensor_01,temperature,-33.73,°C,NORMAL,Injection Attack,1,simulator,952
+2026-07-07T16:14:01.017422,factory/line1/pressure,pressure_sensor_01,pressure,66.51,kPa,NORMAL,Injection Attack,1,simulator,953
+2026-07-07T16:14:01.120599,factory/line1/temperature,temperature_sensor_01,temperature,-26.73,°C,NORMAL,Injection Attack,1,simulator,954
+2026-07-07T16:14:01.225998,factory/line1/pressure,pressure_sensor_01,pressure,208.23,kPa,NORMAL,Injection Attack,1,simulator,955
+2026-07-07T16:14:01.327858,factory/line1/temperature,temperature_sensor_01,temperature,82.77,°C,NORMAL,Injection Attack,1,simulator,956
+2026-07-07T16:14:01.432842,factory/line1/temperature,temperature_sensor_01,temperature,218.83,°C,NORMAL,Injection Attack,1,simulator,957
+2026-07-07T16:14:01.535738,factory/line1/pressure,pressure_sensor_01,pressure,223.62,kPa,NORMAL,Injection Attack,1,simulator,958
+2026-07-07T16:14:01.641427,factory/line1/temperature,temperature_sensor_01,temperature,95.3,°C,NORMAL,Injection Attack,1,simulator,959
+2026-07-07T16:14:01.743298,factory/line1/temperature,temperature_sensor_01,temperature,194.66,°C,NORMAL,Injection Attack,1,simulator,960
+2026-07-07T16:14:01.845190,factory/line1/temperature,temperature_sensor_01,temperature,106.64,°C,NORMAL,Injection Attack,1,simulator,961
+2026-07-07T16:14:01.948539,factory/line1/pressure,pressure_sensor_01,pressure,207.06,kPa,NORMAL,Injection Attack,1,simulator,962
+2026-07-07T16:14:02.052398,factory/line1/temperature,temperature_sensor_01,temperature,103.2,°C,NORMAL,Injection Attack,1,simulator,963
+2026-07-07T16:14:02.155057,factory/line1/temperature,temperature_sensor_01,temperature,210.86,°C,NORMAL,Injection Attack,1,simulator,964
+2026-07-07T16:14:02.259712,factory/line1/pressure,pressure_sensor_01,pressure,153.81,kPa,NORMAL,Injection Attack,1,simulator,965
+2026-07-07T16:14:02.363833,factory/line1/temperature,temperature_sensor_01,temperature,-15.93,°C,NORMAL,Injection Attack,1,simulator,966
+2026-07-07T16:14:02.449611,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Injection Attack,1,simulator,967
+2026-07-07T16:14:02.461617,factory/line1/temperature,temperature_sensor_01,temperature,29.5,°C,NORMAL,Injection Attack,1,simulator,968
+2026-07-07T16:14:02.468626,factory/line1/temperature,temperature_sensor_01,temperature,90.25,°C,NORMAL,Injection Attack,1,simulator,969
+2026-07-07T16:14:02.574080,factory/line1/pressure,pressure_sensor_01,pressure,179.86,kPa,NORMAL,Injection Attack,1,simulator,970
+2026-07-07T16:14:02.675839,factory/line1/pressure,pressure_sensor_01,pressure,71.83,kPa,NORMAL,Injection Attack,1,simulator,971
+2026-07-07T16:14:02.777579,factory/line1/pressure,pressure_sensor_01,pressure,65.66,kPa,NORMAL,Injection Attack,1,simulator,972
+2026-07-07T16:14:02.881353,factory/line1/temperature,temperature_sensor_01,temperature,102.54,°C,NORMAL,Injection Attack,1,simulator,973
+2026-07-07T16:14:02.986857,factory/line1/temperature,temperature_sensor_01,temperature,161.43,°C,NORMAL,Injection Attack,1,simulator,974
+2026-07-07T16:14:03.091114,factory/line1/temperature,temperature_sensor_01,temperature,128.09,°C,NORMAL,Injection Attack,1,simulator,975
+2026-07-07T16:14:03.196488,factory/line1/pressure,pressure_sensor_01,pressure,239.07,kPa,NORMAL,Injection Attack,1,simulator,976
+2026-07-07T16:14:03.301769,factory/line1/temperature,temperature_sensor_01,temperature,221.81,°C,NORMAL,Injection Attack,1,simulator,977
+2026-07-07T16:14:03.403651,factory/line1/temperature,temperature_sensor_01,temperature,-38.61,°C,NORMAL,Injection Attack,1,simulator,978
+2026-07-07T16:14:03.509372,factory/line1/pressure,pressure_sensor_01,pressure,77.45,kPa,NORMAL,Injection Attack,1,simulator,979
+2026-07-07T16:14:03.614942,factory/line1/pressure,pressure_sensor_01,pressure,67.94,kPa,NORMAL,Injection Attack,1,simulator,980
+2026-07-07T16:14:03.716732,factory/line1/pressure,pressure_sensor_01,pressure,62.9,kPa,NORMAL,Injection Attack,1,simulator,981
+2026-07-07T16:14:03.822431,factory/line1/temperature,temperature_sensor_01,temperature,95.7,°C,NORMAL,Injection Attack,1,simulator,982
+2026-07-07T16:14:03.924305,factory/line1/pressure,pressure_sensor_01,pressure,175.11,kPa,NORMAL,Injection Attack,1,simulator,983
+2026-07-07T16:14:04.028329,factory/line1/temperature,temperature_sensor_01,temperature,233.74,°C,NORMAL,Injection Attack,1,simulator,984
+2026-07-07T16:14:04.133789,factory/line1/temperature,temperature_sensor_01,temperature,135.95,°C,NORMAL,Injection Attack,1,simulator,985
+2026-07-07T16:14:04.239733,factory/line1/pressure,pressure_sensor_01,pressure,174.34,kPa,NORMAL,Injection Attack,1,simulator,986
+2026-07-07T16:14:04.341533,factory/line1/pressure,pressure_sensor_01,pressure,144.26,kPa,NORMAL,Injection Attack,1,simulator,987
+2026-07-07T16:14:04.443385,factory/line1/temperature,temperature_sensor_01,temperature,102.58,°C,NORMAL,Injection Attack,1,simulator,988
+2026-07-07T16:14:04.454961,factory/line1/pressure,pressure_sensor_01,pressure,101.6,kPa,NORMAL,Injection Attack,1,simulator,989
+2026-07-07T16:14:04.467153,factory/line1/temperature,temperature_sensor_01,temperature,27.4,°C,NORMAL,Injection Attack,1,simulator,990
+2026-07-07T16:14:04.549109,factory/line1/pressure,pressure_sensor_01,pressure,170.56,kPa,NORMAL,Injection Attack,1,simulator,991
+2026-07-07T16:14:04.654522,factory/line1/pressure,pressure_sensor_01,pressure,51.11,kPa,NORMAL,Injection Attack,1,simulator,992
+2026-07-07T16:14:04.760385,factory/line1/temperature,temperature_sensor_01,temperature,97.82,°C,NORMAL,Injection Attack,1,simulator,993
+2026-07-07T16:14:04.865257,factory/line1/pressure,pressure_sensor_01,pressure,151.64,kPa,NORMAL,Injection Attack,1,simulator,994
+2026-07-07T16:14:04.967929,factory/line1/pressure,pressure_sensor_01,pressure,246.09,kPa,NORMAL,Injection Attack,1,simulator,995
+2026-07-07T16:14:05.071787,factory/line1/temperature,temperature_sensor_01,temperature,150.79,°C,NORMAL,Injection Attack,1,simulator,996
+2026-07-07T16:14:05.173619,factory/line1/pressure,pressure_sensor_01,pressure,179.0,kPa,NORMAL,Injection Attack,1,simulator,997
+2026-07-07T16:14:05.276517,factory/line1/temperature,temperature_sensor_01,temperature,-12.11,°C,NORMAL,Injection Attack,1,simulator,998
+2026-07-07T16:14:05.378907,factory/line1/temperature,temperature_sensor_01,temperature,182.03,°C,NORMAL,Injection Attack,1,simulator,999
+2026-07-07T16:14:05.480795,factory/line1/temperature,temperature_sensor_01,temperature,-6.43,°C,NORMAL,Injection Attack,1,simulator,1000
+2026-07-07T16:14:05.586548,factory/line1/temperature,temperature_sensor_01,temperature,89.05,°C,NORMAL,Injection Attack,1,simulator,1001
+2026-07-07T16:14:05.689903,factory/line1/temperature,temperature_sensor_01,temperature,-18.24,°C,NORMAL,Injection Attack,1,simulator,1002
+2026-07-07T16:14:05.795594,factory/line1/temperature,temperature_sensor_01,temperature,-27.9,°C,NORMAL,Injection Attack,1,simulator,1003
+2026-07-07T16:14:05.900742,factory/line1/pressure,pressure_sensor_01,pressure,61.17,kPa,NORMAL,Injection Attack,1,simulator,1004
+2026-07-07T16:14:06.004543,factory/line1/pressure,pressure_sensor_01,pressure,175.87,kPa,NORMAL,Injection Attack,1,simulator,1005
+2026-07-07T16:14:06.110190,factory/line1/pressure,pressure_sensor_01,pressure,137.57,kPa,NORMAL,Injection Attack,1,simulator,1006
+2026-07-07T16:14:06.215799,factory/line1/temperature,temperature_sensor_01,temperature,218.4,°C,NORMAL,Injection Attack,1,simulator,1007
+2026-07-07T16:14:06.321425,factory/line1/temperature,temperature_sensor_01,temperature,-39.36,°C,NORMAL,Injection Attack,1,simulator,1008
+2026-07-07T16:14:06.427436,factory/line1/temperature,temperature_sensor_01,temperature,133.85,°C,NORMAL,Injection Attack,1,simulator,1009
+2026-07-07T16:14:06.460271,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,Injection Attack,1,simulator,1010
+2026-07-07T16:14:06.468386,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,Injection Attack,1,simulator,1011
+2026-07-07T16:14:06.532539,factory/line1/temperature,temperature_sensor_01,temperature,93.38,°C,NORMAL,Injection Attack,1,simulator,1012
+2026-07-07T16:14:06.634336,factory/line1/temperature,temperature_sensor_01,temperature,201.76,°C,NORMAL,Injection Attack,1,simulator,1013
+2026-07-07T16:14:06.737671,factory/line1/temperature,temperature_sensor_01,temperature,-34.23,°C,NORMAL,Injection Attack,1,simulator,1014
+2026-07-07T16:14:06.842493,factory/line1/pressure,pressure_sensor_01,pressure,70.19,kPa,NORMAL,Injection Attack,1,simulator,1015
+2026-07-07T16:14:06.943383,factory/line1/temperature,temperature_sensor_01,temperature,84.73,°C,NORMAL,Injection Attack,1,simulator,1016
+2026-07-07T16:14:07.045198,factory/line1/temperature,temperature_sensor_01,temperature,87.8,°C,NORMAL,Injection Attack,1,simulator,1017
+2026-07-07T16:14:07.150740,factory/line1/pressure,pressure_sensor_01,pressure,191.52,kPa,NORMAL,Injection Attack,1,simulator,1018
+2026-07-07T16:14:07.256416,factory/line1/temperature,temperature_sensor_01,temperature,187.95,°C,NORMAL,Injection Attack,1,simulator,1019
+2026-07-07T16:14:07.362259,factory/line1/temperature,temperature_sensor_01,temperature,240.3,°C,NORMAL,Injection Attack,1,simulator,1020
+2026-07-07T16:14:07.464080,factory/line1/temperature,temperature_sensor_01,temperature,225.33,°C,NORMAL,Injection Attack,1,simulator,1021
+2026-07-07T16:14:07.569673,factory/line1/temperature,temperature_sensor_01,temperature,121.25,°C,NORMAL,Injection Attack,1,simulator,1022
+2026-07-07T16:14:07.675342,factory/line1/temperature,temperature_sensor_01,temperature,184.01,°C,NORMAL,Injection Attack,1,simulator,1023
+2026-07-07T16:14:07.778075,factory/line1/temperature,temperature_sensor_01,temperature,114.29,°C,NORMAL,Injection Attack,1,simulator,1024
+2026-07-07T16:14:07.883742,factory/line1/pressure,pressure_sensor_01,pressure,212.73,kPa,NORMAL,Injection Attack,1,simulator,1025
+2026-07-07T16:14:07.985599,factory/line1/temperature,temperature_sensor_01,temperature,109.75,°C,NORMAL,Injection Attack,1,simulator,1026
+2026-07-07T16:14:08.087386,factory/line1/temperature,temperature_sensor_01,temperature,87.84,°C,NORMAL,Injection Attack,1,simulator,1027
+2026-07-07T16:14:08.192788,factory/line1/temperature,temperature_sensor_01,temperature,-6.29,°C,NORMAL,Injection Attack,1,simulator,1028
+2026-07-07T16:14:08.298125,factory/line1/temperature,temperature_sensor_01,temperature,89.87,°C,NORMAL,Injection Attack,1,simulator,1029
+2026-07-07T16:14:08.401679,factory/line1/temperature,temperature_sensor_01,temperature,-35.69,°C,NORMAL,Injection Attack,1,simulator,1030
+2026-07-07T16:14:08.465622,factory/line1/pressure,pressure_sensor_01,pressure,102.1,kPa,NORMAL,Injection Attack,1,simulator,1031
+2026-07-07T16:14:08.471547,factory/line1/temperature,temperature_sensor_01,temperature,27.5,°C,NORMAL,Injection Attack,1,simulator,1032
+2026-07-07T16:14:08.502391,factory/line1/pressure,pressure_sensor_01,pressure,222.65,kPa,NORMAL,Injection Attack,1,simulator,1033
+2026-07-07T16:14:08.604251,factory/line1/temperature,temperature_sensor_01,temperature,225.66,°C,NORMAL,Injection Attack,1,simulator,1034
+2026-07-07T16:14:08.706347,factory/line1/temperature,temperature_sensor_01,temperature,83.78,°C,NORMAL,Injection Attack,1,simulator,1035
+2026-07-07T16:14:08.812018,factory/line1/temperature,temperature_sensor_01,temperature,157.52,°C,NORMAL,Injection Attack,1,simulator,1036
+2026-07-07T16:14:08.913665,factory/line1/temperature,temperature_sensor_01,temperature,95.84,°C,NORMAL,Injection Attack,1,simulator,1037
+2026-07-07T16:14:09.015481,factory/line1/temperature,temperature_sensor_01,temperature,109.29,°C,NORMAL,Injection Attack,1,simulator,1038
+2026-07-07T16:14:09.121155,factory/line1/pressure,pressure_sensor_01,pressure,59.12,kPa,NORMAL,Injection Attack,1,simulator,1039
+2026-07-07T16:14:09.223435,factory/line1/pressure,pressure_sensor_01,pressure,79.69,kPa,NORMAL,Injection Attack,1,simulator,1040
+2026-07-07T16:14:09.329104,factory/line1/pressure,pressure_sensor_01,pressure,153.28,kPa,NORMAL,Injection Attack,1,simulator,1041
+2026-07-07T16:14:09.434876,factory/line1/temperature,temperature_sensor_01,temperature,133.36,°C,NORMAL,Injection Attack,1,simulator,1042
+2026-07-07T16:14:09.540539,factory/line1/temperature,temperature_sensor_01,temperature,-8.84,°C,NORMAL,Injection Attack,1,simulator,1043
+2026-07-07T16:14:09.644909,factory/line1/pressure,pressure_sensor_01,pressure,158.27,kPa,NORMAL,Injection Attack,1,simulator,1044
+2026-07-07T16:14:09.747522,factory/line1/temperature,temperature_sensor_01,temperature,109.22,°C,NORMAL,Injection Attack,1,simulator,1045
+2026-07-07T16:14:09.852346,factory/line1/pressure,pressure_sensor_01,pressure,173.37,kPa,NORMAL,Injection Attack,1,simulator,1046
+2026-07-07T16:14:09.954276,factory/line1/pressure,pressure_sensor_01,pressure,140.45,kPa,NORMAL,Injection Attack,1,simulator,1047
+2026-07-07T16:14:10.059067,factory/line1/temperature,temperature_sensor_01,temperature,153.69,°C,NORMAL,Injection Attack,1,simulator,1048
+2026-07-07T16:14:10.164113,factory/line1/temperature,temperature_sensor_01,temperature,153.78,°C,NORMAL,Injection Attack,1,simulator,1049
+2026-07-07T16:14:10.471249,factory/line1/pressure,pressure_sensor_01,pressure,101.7,kPa,NORMAL,,0,simulator,1050
+2026-07-07T16:14:10.472849,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,,0,simulator,1051
+2026-07-07T16:14:12.473642,factory/line1/pressure,pressure_sensor_01,pressure,101.1,kPa,NORMAL,,0,simulator,1052
+2026-07-07T16:14:12.478150,factory/line1/temperature,temperature_sensor_01,temperature,28.9,°C,NORMAL,,0,simulator,1053
+2026-07-07T16:14:14.475760,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,,0,simulator,1054
+2026-07-07T16:14:14.481660,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,NORMAL,,0,simulator,1055
+2026-07-07T16:14:16.481465,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,,0,simulator,1056
+2026-07-07T16:14:16.482338,factory/line1/temperature,temperature_sensor_01,temperature,29.4,°C,NORMAL,,0,simulator,1057
+2026-07-07T16:14:18.487294,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,,0,simulator,1058
+2026-07-07T16:14:18.487881,factory/line1/temperature,temperature_sensor_01,temperature,27.9,°C,NORMAL,,0,simulator,1059
+2026-07-07T16:14:20.489076,factory/line1/pressure,pressure_sensor_01,pressure,101.9,kPa,NORMAL,,0,simulator,1060
+2026-07-07T16:14:20.494741,factory/line1/temperature,temperature_sensor_01,temperature,28.0,°C,NORMAL,,0,simulator,1061
+2026-07-07T16:14:22.492328,factory/line1/pressure,pressure_sensor_01,pressure,100.7,kPa,NORMAL,,0,simulator,1062
+2026-07-07T16:14:22.500149,factory/line1/temperature,temperature_sensor_01,temperature,29.5,°C,NORMAL,,0,simulator,1063
+2026-07-07T16:14:24.497636,factory/line1/pressure,pressure_sensor_01,pressure,102.0,kPa,NORMAL,,0,simulator,1064
+2026-07-07T16:14:24.504938,factory/line1/temperature,temperature_sensor_01,temperature,29.6,°C,NORMAL,,0,simulator,1065
+2026-07-07T16:14:26.498284,factory/line1/pressure,pressure_sensor_01,pressure,100.9,kPa,NORMAL,,0,simulator,1066
+2026-07-07T16:14:26.508039,factory/line1/temperature,temperature_sensor_01,temperature,29.0,°C,NORMAL,,0,simulator,1067
+2026-07-07T16:14:28.500636,factory/line1/pressure,pressure_sensor_01,pressure,100.6,kPa,NORMAL,,0,simulator,1068
+2026-07-07T16:14:28.513443,factory/line1/temperature,temperature_sensor_01,temperature,27.1,°C,NORMAL,,0,simulator,1069
+2026-07-07T16:14:30.503020,factory/line1/pressure,pressure_sensor_01,pressure,102.2,kPa,NORMAL,,0,simulator,1070
+2026-07-07T16:14:30.517275,factory/line1/temperature,temperature_sensor_01,temperature,27.2,°C,NORMAL,,0,simulator,1071
