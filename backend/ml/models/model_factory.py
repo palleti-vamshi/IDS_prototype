@@ -39,7 +39,7 @@ class ModelFactory:
 
             "logistic_regression": LogisticRegression(
                 random_state=RANDOM_STATE,
-                max_iter=1000,
+                max_iter=2000,
                 class_weight="balanced",
                 solver="lbfgs",
             ),
@@ -47,31 +47,54 @@ class ModelFactory:
             "decision_tree": DecisionTreeClassifier(
                 random_state=RANDOM_STATE,
                 class_weight="balanced",
-                max_depth=12,
-                min_samples_split=4,
+                max_depth=20,
+                min_samples_split=5,
                 min_samples_leaf=2,
             ),
 
             "random_forest": RandomForestClassifier(
-                n_estimators=200,
+                n_estimators=250,
                 random_state=RANDOM_STATE,
                 class_weight="balanced",
-                n_jobs=-1,
                 max_depth=15,
-                min_samples_split=4,
+                min_samples_split=5,
+                min_samples_leaf=2,
+                max_features="sqrt",
+                bootstrap=True,
+                n_jobs=-1,
             ),
         }
 
         if XGBOOST_AVAILABLE:
 
             self.models["xgboost"] = XGBClassifier(
+
+                # Reproducibility
                 random_state=RANDOM_STATE,
+
+                # Binary Classification
+                objective="binary:logistic",
                 eval_metric="logloss",
-                n_estimators=200,
-                max_depth=6,
-                learning_rate=0.1,
+
+                # Boosting
+                n_estimators=500,
+                learning_rate=0.05,
+
+                # Tree Complexity
+                max_depth=8,
+                min_child_weight=3,
+
+                # Randomization
                 subsample=0.8,
                 colsample_bytree=0.8,
+
+                # Regularization
+                gamma=0.1,
+                reg_alpha=0.1,
+                reg_lambda=1.0,
+
+                # Performance
+                tree_method="hist",
                 n_jobs=-1,
             )
 
@@ -89,7 +112,8 @@ class ModelFactory:
             )
 
         logger.info(
-            f"Creating model: {model_name}"
+            "Creating model: %s",
+            model_name,
         )
 
         return self.models[model_name]

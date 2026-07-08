@@ -26,6 +26,7 @@ from backend.ml.preprocessing.pipeline import MLPipeline
 from backend.ml.preprocessing.splitter import DatasetSplitter
 from backend.ml.training.model_manager import ModelManager
 from backend.ml.training.trainer import ModelTrainer
+from backend.ml.config import REQUIRED_COLUMNS
 
 logging.basicConfig(
     level=logging.WARNING,
@@ -44,7 +45,11 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
     # ---------------------------------------------------------
 
     loader = DatasetLoader()
-    df = loader.load(dataset_path)
+
+    df = loader.load(
+        dataset_path,
+        REQUIRED_COLUMNS,
+    )
 
     # ---------------------------------------------------------
     # Feature Engineering

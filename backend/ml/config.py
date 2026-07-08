@@ -110,3 +110,9 @@ LIGHTWEIGHT_MODEL_PRIORITY = [
     "random_forest",
     "xgboost",
 ]
+
+TON_IOT_DIR = (
+    PROJECT_ROOT
+    / "dataset_engineering"
+    / "datasets"
+)

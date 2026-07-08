@@ -1,6 +1,7 @@
 """
-Dataset Loader
-Loads and validates datasets for LightX-IDS.
+Universal Dataset Loader
+
+Loads and validates datasets for LightX-IDS and TON-IoT.
 """
 
 from pathlib import Path
@@ -12,98 +13,101 @@ logger = logging.getLogger(__name__)
 
 
 class DatasetLoader:
-    """Loads CSV datasets."""
+    """Universal CSV dataset loader."""
 
-    REQUIRED_COLUMNS = [
-        "timestamp",
-        "topic",
-        "device_id",
-        "sensor_type",
-        "value",
-        "unit",
-        "status",
-        "attack_type",
-        "label",
-        "source",
-        "sequence_number",
-    ]
-
-    def load(self, dataset_path: Path) -> pd.DataFrame:
+    def load(
+        self,
+        dataset_path: Path,
+        required_columns: list[str] | None = None,
+    ) -> pd.DataFrame:
         """
         Load a CSV dataset.
 
-        Args:
-            dataset_path: Path to dataset
+        Parameters
+        ----------
+        dataset_path : Path
+            Dataset path.
 
-        Returns:
-            Pandas DataFrame
+        required_columns : list[str], optional
+            Required columns to validate.
         """
 
-        logger.info(f"Loading dataset: {dataset_path}")
+        logger.info(
+            "Loading dataset: %s",
+            dataset_path,
+        )
 
         if not dataset_path.exists():
             raise FileNotFoundError(
                 f"Dataset not found: {dataset_path}"
             )
 
-        df = pd.read_csv(dataset_path)
+        df = pd.read_csv(
+            dataset_path,
+            low_memory=False,
+        )
 
         logger.info(
             f"Loaded {len(df):,} records."
         )
 
-        self.validate(df)
+        if required_columns is not None:
+            self.validate(
+                df,
+                required_columns,
+            )
 
         return df
 
-    def validate(self, df: pd.DataFrame) -> None:
+    def validate(
+        self,
+        df: pd.DataFrame,
+        required_columns: list[str],
+    ) -> None:
         """
         Validate dataset columns.
         """
 
-        missing = []
-
-        for column in self.REQUIRED_COLUMNS:
-
-            if column not in df.columns:
-                missing.append(column)
+        missing = [
+            column
+            for column in required_columns
+            if column not in df.columns
+        ]
 
         if missing:
-
             raise ValueError(
                 f"Missing columns: {missing}"
             )
 
-        logger.info("Dataset validation passed.")
+        logger.info(
+            "Dataset validation passed."
+        )
 
-    def summary(self, df: pd.DataFrame) -> None:
+    def summary(
+        self,
+        df: pd.DataFrame,
+        target_column: str = "label",
+    ) -> None:
         """
         Print dataset summary.
         """
 
-        print("\n==============================")
+        print("\n================================")
         print("DATASET SUMMARY")
-        print("==============================")
+        print("================================")
 
-        print(f"Records : {len(df):,}")
+        print(f"Rows    : {len(df):,}")
         print(f"Columns : {len(df.columns)}")
 
-        print("\nColumns:")
+        print("\nMissing Values")
 
-        for column in df.columns:
-            print(f" - {column}")
-
-        print("\nMissing Values:")
         print(df.isnull().sum())
 
-        print("\nAttack Distribution:")
-        print(
-            df["attack_type"]
-            .fillna("Normal")
-            .value_counts()
-        )
+        if target_column in df.columns:
 
-        print("\nLabel Distribution:")
-        print(
-            df["label"].value_counts()
-        )
+            print("\nTarget Distribution")
+
+            print(
+                df[target_column]
+                .value_counts()
+            )
