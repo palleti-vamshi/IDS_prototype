@@ -10,7 +10,11 @@ from pathlib import Path
 
 from backend.ml.config import (
     LIGHTX_1K,
+    LIGHTX_10K,
+    LIGHTX_100K,
     BENCHMARK_1K,
+    BENCHMARK_10K,
+    BENCHMARK_100K,
 )
 from backend.ml.evaluation.evaluator import ModelEvaluator
 from backend.ml.experiments.results import ResultManager
@@ -227,8 +231,8 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
 def main():
 
     run_benchmark(
-        LIGHTX_1K,
-        BENCHMARK_1K,
+        LIGHTX_100K,
+        BENCHMARK_100K,
     )
 
 
