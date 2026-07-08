@@ -1,2 +1,0 @@
-timestamp,topic,device_id,sensor_type,value,unit,status,attack_type,label,source,sequence_number
-2026-07-06T17:43:22,factory/line1/temperature,temperature_sensor_01,temperature,28.3,°C,NORMAL,,0,simulator,1
