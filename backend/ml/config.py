@@ -1,13 +1,14 @@
 """
-Machine Learning Configuration
-LightX-IDS Phase 4
+LightX-IDS Machine Learning Configuration
+
+Central configuration file for all ML modules.
 """
 
 from pathlib import Path
 
-# =====================================================
-# Project Paths
-# =====================================================
+# ==========================================================
+# PROJECT PATHS
+# ==========================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -23,13 +24,27 @@ TON_IOT_DIR = (
     / "datasets"
 )
 
-MODEL_DIR = PROJECT_ROOT / "backend" / "ml" / "saved_models"
+MODEL_DIR = (
+    PROJECT_ROOT
+    / "backend"
+    / "ml"
+    / "saved_models"
+)
 
-REPORT_DIR = PROJECT_ROOT / "backend" / "ml" / "reports"
+REPORT_DIR = (
+    PROJECT_ROOT
+    / "backend"
+    / "ml"
+    / "reports"
+)
 
-# =====================================================
-# Dataset Configuration
-# =====================================================
+# Create directories automatically
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+REPORT_DIR.mkdir(parents=True, exist_ok=True)
+
+# ==========================================================
+# DATASET CONFIGURATION
+# ==========================================================
 
 TARGET_COLUMN = "label"
 
@@ -41,6 +56,11 @@ DROP_COLUMNS = [
 
 NUMERIC_COLUMNS = [
     "value",
+    "value_change",
+    "device_message_count",
+    "sensor_message_count",
+    "time_delta",
+    "is_duplicate_value",
 ]
 
 CATEGORICAL_COLUMNS = [
@@ -52,12 +72,41 @@ CATEGORICAL_COLUMNS = [
     "source",
 ]
 
-# =====================================================
-# ML Configuration
-# =====================================================
-
-RANDOM_STATE = 42
+# ==========================================================
+# DATA SPLITTING
+# ==========================================================
 
 TEST_SIZE = 0.20
-
 VALIDATION_SIZE = 0.10
+RANDOM_STATE = 42
+
+# ==========================================================
+# MODEL CONFIGURATION
+# ==========================================================
+
+SUPPORTED_MODELS = [
+    "logistic_regression",
+    "decision_tree",
+    "random_forest",
+    "xgboost",
+]
+
+# ==========================================================
+# REPORT FILES
+# ==========================================================
+
+BENCHMARK_1K = "benchmark_1k"
+BENCHMARK_10K = "benchmark_10k"
+BENCHMARK_100K = "benchmark_100k"
+BENCHMARK_TON_IOT = "benchmark_ton_iot"
+
+# ==========================================================
+# DEPLOYMENT TARGET
+# ==========================================================
+
+LIGHTWEIGHT_MODEL_PRIORITY = [
+    "decision_tree",
+    "logistic_regression",
+    "random_forest",
+    "xgboost",
+]

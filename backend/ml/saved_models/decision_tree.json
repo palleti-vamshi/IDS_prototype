@@ -1,0 +1,10 @@
+{
+    "model": "decision_tree",
+    "accuracy": 0.9629629629629629,
+    "precision": 1.0,
+    "recall": 0.9534883720930233,
+    "f1_score": 0.9761904761904762,
+    "roc_auc": 0.9857293868921776,
+    "training_time": 0.004930333991069347,
+    "prediction_time": 0.0013160000089555979
+}

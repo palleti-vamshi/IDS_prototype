@@ -1,16 +1,19 @@
 """
-Model Factory
+LightX-IDS Model Factory
 
-Creates machine learning models for LightX-IDS.
+Creates and manages all supported machine learning models.
 """
 
 import logging
 
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
 
-from backend.ml.config import RANDOM_STATE
+from backend.ml.config import (
+    RANDOM_STATE,
+    SUPPORTED_MODELS,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -25,58 +28,84 @@ except ImportError:
 
 
 class ModelFactory:
-    """Creates ML models."""
+    """
+    Factory class responsible for creating
+    machine learning models.
+    """
 
-    def get(self, model_name: str):
+    def __init__(self):
 
-        model_name = model_name.lower()
+        self.models = {
 
-        if model_name == "logistic_regression":
-
-            return LogisticRegression(
+            "logistic_regression": LogisticRegression(
                 random_state=RANDOM_STATE,
                 max_iter=1000,
-            )
+                class_weight="balanced",
+                solver="lbfgs",
+            ),
 
-        if model_name == "decision_tree":
-
-            return DecisionTreeClassifier(
+            "decision_tree": DecisionTreeClassifier(
                 random_state=RANDOM_STATE,
-            )
+                class_weight="balanced",
+                max_depth=12,
+                min_samples_split=4,
+                min_samples_leaf=2,
+            ),
 
-        if model_name == "random_forest":
-
-            return RandomForestClassifier(
+            "random_forest": RandomForestClassifier(
                 n_estimators=200,
                 random_state=RANDOM_STATE,
+                class_weight="balanced",
+                n_jobs=-1,
+                max_depth=15,
+                min_samples_split=4,
+            ),
+        }
+
+        if XGBOOST_AVAILABLE:
+
+            self.models["xgboost"] = XGBClassifier(
+                random_state=RANDOM_STATE,
+                eval_metric="logloss",
+                n_estimators=200,
+                max_depth=6,
+                learning_rate=0.1,
+                subsample=0.8,
+                colsample_bytree=0.8,
                 n_jobs=-1,
             )
 
-        if model_name == "xgboost":
+    def get(self, model_name: str):
+        """
+        Return a machine learning model.
+        """
 
-            if not XGBOOST_AVAILABLE:
-                raise ImportError(
-                    "XGBoost is not installed."
-                )
+        model_name = model_name.lower()
 
-            return XGBClassifier(
-                random_state=RANDOM_STATE,
-                eval_metric="logloss",
+        if model_name not in self.models:
+
+            raise ValueError(
+                f"Unsupported model: {model_name}"
             )
 
-        raise ValueError(
-            f"Unsupported model: {model_name}"
+        logger.info(
+            f"Creating model: {model_name}"
         )
 
+        return self.models[model_name]
+
     def available_models(self):
+        """
+        Return all available models.
+        """
 
-        models = [
-            "logistic_regression",
-            "decision_tree",
-            "random_forest",
-        ]
+        models = []
 
-        if XGBOOST_AVAILABLE:
-            models.append("xgboost")
+        for model in SUPPORTED_MODELS:
+
+            if model == "xgboost" and not XGBOOST_AVAILABLE:
+                continue
+
+            models.append(model)
 
         return models
