@@ -32,6 +32,7 @@ class ModelEvaluator:
         pipeline: Any,
         X_test: Any,
         y_test: Any,
+        threshold: float = 0.50,
     ) -> dict:
         """
         Evaluate a trained pipeline.
@@ -47,24 +48,62 @@ class ModelEvaluator:
         y_test
             Test labels.
 
+        threshold : float
+            Classification threshold.
+            Default = 0.50
+
         Returns
         -------
         dict
             Dictionary containing benchmark metrics.
         """
 
-        logger.info("Evaluating model...")
+        logger.info(
+            "Evaluating model (threshold=%.2f)...",
+            threshold,
+        )
 
         start_time = time.perf_counter()
 
-        predictions = pipeline.predict(X_test)
+        # -------------------------------------------------
+        # Predictions
+        # -------------------------------------------------
+
+        if (
+            hasattr(
+                pipeline,
+                "predict_proba",
+            )
+            and threshold != 0.50
+        ):
+
+            probabilities = (
+                pipeline.predict_proba(
+                    X_test,
+                )[:, 1]
+            )
+
+            predictions = (
+                probabilities >= threshold
+            ).astype(int)
+
+        else:
+
+            predictions = pipeline.predict(
+                X_test,
+            )
 
         prediction_time = (
             time.perf_counter()
             - start_time
         )
 
+        # -------------------------------------------------
+        # Metrics
+        # -------------------------------------------------
+
         results = {
+
             "accuracy": accuracy_score(
                 y_test,
                 predictions,
@@ -103,9 +142,9 @@ class ModelEvaluator:
             ),
         }
 
-        # -----------------------------------------
+        # -------------------------------------------------
         # ROC-AUC
-        # -----------------------------------------
+        # -------------------------------------------------
 
         try:
 
@@ -115,8 +154,10 @@ class ModelEvaluator:
             ):
 
                 probabilities = (
-                    pipeline.predict_proba(X_test)
-                )[:, 1]
+                    pipeline.predict_proba(
+                        X_test,
+                    )[:, 1]
+                )
 
                 results["roc_auc"] = (
                     roc_auc_score(
@@ -130,8 +171,10 @@ class ModelEvaluator:
                 "decision_function",
             ):
 
-                scores = pipeline.decision_function(
-                    X_test
+                scores = (
+                    pipeline.decision_function(
+                        X_test,
+                    )
                 )
 
                 results["roc_auc"] = (
