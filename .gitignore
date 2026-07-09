@@ -7,6 +7,5 @@ venv/
 
 # Trained Models
 backend/ml/saved_models/
-
-# Generated Reports
-backend/ml/reports/
+*.pkl
+*.joblib
