@@ -73,6 +73,7 @@ NUMERIC_COLUMNS = [
     "rolling_min",
     "percentage_change",
     "z_score",
+    "device_mean_deviation",
 ]
 
 CATEGORICAL_COLUMNS = [

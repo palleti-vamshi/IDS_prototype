@@ -189,6 +189,14 @@ class FeatureGenerator:
             .transform("mean")
         )
 
+        # -----------------------------------------
+        # Device Mean Deviation
+        # -----------------------------------------
+
+        df["device_mean_deviation"] = (
+            df["value"] - device_mean
+        )
+
         device_std = (
             df.groupby("device_id")["value"]
             .transform("std")

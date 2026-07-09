@@ -167,12 +167,13 @@ def run_benchmark(
         )
 
         evaluation = evaluation_manager.evaluate(
-            pipeline,
-            X_test,
-            y_test,
+            pipeline=pipeline,
+            X_val=X_val,
+            y_val=y_val,
+            X_test=X_test,
+            y_test=y_test,
             model_name=model_name,
         )
-
 
         metadata = {
 
@@ -192,6 +193,10 @@ def run_benchmark(
 
             "prediction_time": evaluation[
                 "prediction_time"
+            ],
+
+            "best_threshold": evaluation[
+                "best_threshold"
             ],
         }
 

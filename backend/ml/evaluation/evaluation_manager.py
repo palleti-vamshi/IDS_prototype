@@ -16,6 +16,9 @@ from backend.ml.evaluation.error_analysis import (
 from backend.ml.evaluation.feature_importance import (
     FeatureImportanceAnalyzer,
 )
+from backend.ml.optimization.threshold_optimizer import (
+    ThresholdOptimizer,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -35,13 +38,20 @@ class EvaluationManager:
             FeatureImportanceAnalyzer()
         )
 
+        self.threshold_optimizer = (
+            ThresholdOptimizer()
+        )
+
     def evaluate(
         self,
         pipeline,
+        X_val,
+        y_val,
         X_test,
         y_test,
         model_name: str,
     ):
+        
         """
         Execute complete evaluation pipeline.
         """
@@ -52,6 +62,37 @@ class EvaluationManager:
         )
 
         # -----------------------------------------
+        # Threshold Optimization
+        # -----------------------------------------
+
+        best_threshold = 0.50
+
+        try:
+
+            threshold_results = (
+                self.threshold_optimizer.optimize(
+                    pipeline=pipeline,
+                    X_val=X_val,
+                    y_val=y_val,
+                    model_name=model_name,
+                )
+            )
+
+            if threshold_results is not None:
+
+                best_threshold = (
+                    threshold_results["best_threshold"]
+                )
+
+        except Exception as error:
+
+            logger.warning(
+                "Threshold optimization failed for %s: %s",
+                model_name,
+                error,
+            )
+
+        # -----------------------------------------
         # Metrics
         # -----------------------------------------
 
@@ -59,6 +100,11 @@ class EvaluationManager:
             pipeline,
             X_test,
             y_test,
+            threshold=best_threshold,
+        )
+
+        metrics["best_threshold"] = (
+            best_threshold
         )
 
         # -----------------------------------------

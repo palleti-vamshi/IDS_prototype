@@ -89,9 +89,28 @@ class ModelEvaluator:
 
         else:
 
-            predictions = pipeline.predict(
-                X_test,
-            )
+            # -----------------------------------------
+            # Prediction
+            # -----------------------------------------
+
+            if hasattr(
+                pipeline,
+                "predict_proba",
+            ):
+
+                probabilities = (
+                    pipeline.predict_proba(X_test)
+                )[:, 1]
+
+                predictions = (
+                    probabilities >= threshold
+                ).astype(int)
+
+            else:
+
+                predictions = pipeline.predict(
+                    X_test
+                )
 
         prediction_time = (
             time.perf_counter()
