@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Trained Models
+backend/ml/saved_models/
+
+# Generated Reports
+backend/ml/reports/
