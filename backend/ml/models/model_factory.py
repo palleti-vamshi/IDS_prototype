@@ -37,63 +37,76 @@ class ModelFactory:
 
         self.models = {
 
+            # --------------------------------------------------
+            # Logistic Regression
+            # --------------------------------------------------
+
             "logistic_regression": LogisticRegression(
                 random_state=RANDOM_STATE,
-                max_iter=2000,
-                class_weight="balanced",
+                max_iter=3000,
                 solver="lbfgs",
+                class_weight="balanced",
+                C=50,
             ),
+
+            # --------------------------------------------------
+            # Decision Tree
+            # --------------------------------------------------
 
             "decision_tree": DecisionTreeClassifier(
                 random_state=RANDOM_STATE,
+                criterion="entropy",
                 class_weight="balanced",
-                max_depth=20,
-                min_samples_split=5,
-                min_samples_leaf=2,
+                max_depth=10,
+                min_samples_split=10,
+                min_samples_leaf=1,
+                max_features=None,
             ),
 
+            # --------------------------------------------------
+            # Random Forest
+            # --------------------------------------------------
+
             "random_forest": RandomForestClassifier(
-                n_estimators=250,
+                n_estimators=200,
                 random_state=RANDOM_STATE,
+                criterion="entropy",
                 class_weight="balanced",
-                max_depth=15,
-                min_samples_split=5,
+                max_depth=None,
+                min_samples_split=8,
                 min_samples_leaf=2,
                 max_features="sqrt",
-                bootstrap=True,
+                bootstrap=False,
                 n_jobs=-1,
             ),
         }
+
+        # ------------------------------------------------------
+        # XGBoost
+        # ------------------------------------------------------
 
         if XGBOOST_AVAILABLE:
 
             self.models["xgboost"] = XGBClassifier(
 
-                # Reproducibility
                 random_state=RANDOM_STATE,
 
-                # Binary Classification
                 objective="binary:logistic",
                 eval_metric="logloss",
 
-                # Boosting
-                n_estimators=500,
+                n_estimators=300,
                 learning_rate=0.05,
 
-                # Tree Complexity
                 max_depth=8,
                 min_child_weight=3,
 
-                # Randomization
-                subsample=0.8,
-                colsample_bytree=0.8,
+                subsample=0.90,
+                colsample_bytree=0.90,
 
-                # Regularization
-                gamma=0.1,
-                reg_alpha=0.1,
-                reg_lambda=1.0,
+                gamma=0,
+                reg_alpha=0.10,
+                reg_lambda=3,
 
-                # Performance
                 tree_method="hist",
                 n_jobs=-1,
             )
@@ -127,7 +140,10 @@ class ModelFactory:
 
         for model in SUPPORTED_MODELS:
 
-            if model == "xgboost" and not XGBOOST_AVAILABLE:
+            if (
+                model == "xgboost"
+                and not XGBOOST_AVAILABLE
+            ):
                 continue
 
             models.append(model)

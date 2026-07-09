@@ -6,7 +6,6 @@ tree-based machine learning models.
 """
 
 import logging
-from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,17 +17,25 @@ logger = logging.getLogger(__name__)
 
 class FeatureImportanceAnalyzer:
     """
-    Generates feature importance CSV and chart.
+    Generates feature importance reports
+    for tree-based models.
     """
 
     def analyze(
         self,
         pipeline,
-        feature_names,
-        model_name: str,
+        feature_names=None,
+        model_name: str = "model",
     ):
+        """
+        Generate feature importance report.
+        """
 
         classifier = pipeline.named_steps["classifier"]
+
+        # -------------------------------------------------
+        # Check Model Support
+        # -------------------------------------------------
 
         if not hasattr(
             classifier,
@@ -42,14 +49,47 @@ class FeatureImportanceAnalyzer:
 
             return None
 
+        # -------------------------------------------------
+        # Get Feature Names
+        # -------------------------------------------------
+
+        if feature_names is None:
+
+            try:
+
+                preprocessor = pipeline.named_steps[
+                    "preprocessor"
+                ]
+
+                feature_names = (
+                    preprocessor.get_feature_names_out()
+                )
+
+            except Exception:
+
+                logger.warning(
+                    "Unable to obtain transformed feature names."
+                )
+
+                feature_names = [
+                    f"Feature_{i}"
+                    for i in range(
+                        len(
+                            classifier.feature_importances_
+                        )
+                    )
+                ]
+
         importance = classifier.feature_importances_
 
-        # Safety check
+        # -------------------------------------------------
+        # Safety Check
+        # -------------------------------------------------
+
         if len(feature_names) != len(importance):
 
             logger.warning(
-                "Feature count mismatch "
-                "(%d != %d).",
+                "Feature mismatch (%d != %d)",
                 len(feature_names),
                 len(importance),
             )
@@ -61,6 +101,10 @@ class FeatureImportanceAnalyzer:
 
             feature_names = feature_names[:minimum]
             importance = importance[:minimum]
+
+        # -------------------------------------------------
+        # Create DataFrame
+        # -------------------------------------------------
 
         df = pd.DataFrame(
             {
@@ -74,6 +118,10 @@ class FeatureImportanceAnalyzer:
             ascending=False,
             inplace=True,
         )
+
+        # -------------------------------------------------
+        # Save Reports
+        # -------------------------------------------------
 
         REPORT_DIR.mkdir(
             parents=True,
@@ -95,39 +143,57 @@ class FeatureImportanceAnalyzer:
             index=False,
         )
 
-        plt.figure(
+        # -------------------------------------------------
+        # Plot Top 20 Features
+        # -------------------------------------------------
+
+        fig, ax = plt.subplots(
             figsize=(12, 8),
         )
 
         top = df.head(20)
 
-        plt.barh(
+        ax.barh(
             top["Feature"],
             top["Importance"],
         )
 
-        plt.gca().invert_yaxis()
+        ax.invert_yaxis()
 
-        plt.title(
+        ax.set_title(
             f"{model_name} Feature Importance"
         )
 
-        plt.xlabel(
+        ax.set_xlabel(
             "Importance Score"
         )
 
-        plt.tight_layout()
+        fig.tight_layout()
 
-        plt.savefig(
+        fig.savefig(
             image_path,
             dpi=300,
         )
 
-        plt.close()
+        plt.close(fig)
+
+        # -------------------------------------------------
+        # Logging
+        # -------------------------------------------------
 
         logger.info(
-            "Feature importance exported: %s",
+            "Feature importance generated for %s",
             model_name,
+        )
+
+        logger.info(
+            "CSV : %s",
+            csv_path.name,
+        )
+
+        logger.info(
+            "PNG : %s",
+            image_path.name,
         )
 
         return df

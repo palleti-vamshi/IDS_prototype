@@ -16,17 +16,44 @@ from backend.ml.config import (
     BENCHMARK_10K,
     BENCHMARK_100K,
 )
-from backend.ml.evaluation.evaluator import ModelEvaluator
+
+from backend.ml.evaluation import evaluator
+from backend.ml.evaluation.evaluation_manager import (
+    EvaluationManager,
+)
 from backend.ml.experiments.results import ResultManager
-from backend.ml.feature_engineering.feature_generator import FeatureGenerator
-from backend.ml.feature_engineering.feature_selector import FeatureSelector
-from backend.ml.models.model_factory import ModelFactory
-from backend.ml.preprocessing.loader import DatasetLoader
-from backend.ml.preprocessing.pipeline import MLPipeline
-from backend.ml.preprocessing.splitter import DatasetSplitter
-from backend.ml.training.model_manager import ModelManager
-from backend.ml.training.trainer import ModelTrainer
-from backend.ml.config import REQUIRED_COLUMNS
+
+from backend.ml.feature_engineering.feature_generator import (
+    FeatureGenerator,
+)
+
+from backend.ml.feature_engineering.feature_selector import (
+    FeatureSelector,
+)
+
+from backend.ml.models.model_factory import (
+    ModelFactory,
+)
+
+from backend.ml.preprocessing.loader import (
+    DatasetLoader,
+)
+
+from backend.ml.preprocessing.pipeline import (
+    MLPipeline,
+)
+
+from backend.ml.preprocessing.splitter import (
+    DatasetSplitter,
+)
+
+from backend.ml.training.model_manager import (
+    ModelManager,
+)
+
+from backend.ml.training.trainer import (
+    ModelTrainer,
+)
 
 logging.basicConfig(
     level=logging.WARNING,
@@ -34,10 +61,15 @@ logging.basicConfig(
 )
 
 
-def run_benchmark(dataset_path: Path, benchmark_name: str):
+def run_benchmark(
+    dataset_path: Path,
+    benchmark_name: str,
+):
 
     print("\n" + "=" * 110)
-    print(f"LIGHTX-IDS BENCHMARK : {benchmark_name.upper()}")
+    print(
+        f"LIGHTX-IDS BENCHMARK : {benchmark_name.upper()}"
+    )
     print("=" * 110)
 
     # ---------------------------------------------------------
@@ -48,23 +80,26 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
 
     df = loader.load(
         dataset_path,
-        REQUIRED_COLUMNS,
     )
 
     # ---------------------------------------------------------
     # Feature Engineering
     # ---------------------------------------------------------
 
-    df = FeatureGenerator().transform(df)
+    df = FeatureGenerator().transform(
+        df,
+    )
 
     # ---------------------------------------------------------
     # Feature Selection
     # ---------------------------------------------------------
 
-    X, y = FeatureSelector().split(df)
+    X, y = FeatureSelector().split(
+        df,
+    )
 
     # ---------------------------------------------------------
-    # Train / Validation / Test Split
+    # Dataset Split
     # ---------------------------------------------------------
 
     (
@@ -74,12 +109,20 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
         y_train,
         y_val,
         y_test,
-    ) = DatasetSplitter().split(X, y)
+    ) = DatasetSplitter().split(
+        X,
+        y,
+    )
 
     trainer = ModelTrainer()
-    evaluator = ModelEvaluator()
+
+    evaluation_manager = EvaluationManager()
+
+
     factory = ModelFactory()
+
     manager = ModelManager()
+
     results = ResultManager()
 
     leaderboard = []
@@ -98,6 +141,7 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
     )
 
     print(header)
+
     print("-" * len(header))
 
     # ---------------------------------------------------------
@@ -106,9 +150,13 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
 
     for model_name in factory.available_models():
 
-        model = factory.get(model_name)
+        model = factory.get(
+            model_name,
+        )
 
-        pipeline = MLPipeline().build(model)
+        pipeline = MLPipeline().build(
+            model,
+        )
 
         pipeline, training_time = trainer.train(
             pipeline,
@@ -117,11 +165,13 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
             model_name=model_name,
         )
 
-        evaluation = evaluator.evaluate(
+        evaluation = evaluation_manager.evaluate(
             pipeline,
             X_test,
             y_test,
+            model_name=model_name,
         )
+
 
         metadata = {
 
@@ -139,7 +189,9 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
 
             "training_time": training_time,
 
-            "prediction_time": evaluation["prediction_time"],
+            "prediction_time": evaluation[
+                "prediction_time"
+            ],
         }
 
         manager.save(
@@ -148,13 +200,21 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
             metadata,
         )
 
-        metadata["model_size_mb"] = manager.size_mb(
-            model_name
+        metadata[
+            "model_size_mb"
+        ] = manager.size_mb(
+            model_name,
         )
 
-        leaderboard.append(metadata)
+        leaderboard.append(
+            metadata,
+        )
 
-        results.add(metadata)
+        results.add(
+            metadata,
+        )
+
+    # ===== CONTINUE WITH PART 2 =====
 
     # ---------------------------------------------------------
     # Ranking
@@ -176,12 +236,16 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
             f"{row['accuracy']*100:<11.2f}%"
             f"{row['precision']*100:<11.2f}%"
             f"{row['recall']*100:<11.2f}%"
-            f"{row['f1_score']*100:<11.2f}%"
+            f"{row['f1_score']*100:<11.2f}"
             f"{row['training_time']:<12.4f}"
             f"{row['model_size_mb']:<10.3f}"
         )
 
     print("-" * len(header))
+
+    # ---------------------------------------------------------
+    # Summary
+    # ---------------------------------------------------------
 
     best = max(
         leaderboard,
@@ -218,6 +282,10 @@ def run_benchmark(dataset_path: Path, benchmark_name: str):
         f"{smallest['model']} "
         f"({smallest['model_size_mb']:.3f} MB)"
     )
+
+    # ---------------------------------------------------------
+    # Save Reports
+    # ---------------------------------------------------------
 
     csv_file, json_file = results.save(
         benchmark_name,

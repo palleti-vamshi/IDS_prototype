@@ -10,8 +10,10 @@ import logging
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import (
+    OneHotEncoder,
+    StandardScaler,
+)
 
 from backend.ml.config import (
     NUMERIC_COLUMNS,
@@ -22,32 +24,38 @@ logger = logging.getLogger(__name__)
 
 
 class DatasetTransformer:
-    """Builds preprocessing transformer."""
+    """
+    Builds preprocessing transformer.
+    """
 
     def __init__(self):
+
         self.numeric_features = NUMERIC_COLUMNS
-        self.categorical_features = CATEGORICAL_COLUMNS
+
+        self.categorical_features = (
+            CATEGORICAL_COLUMNS
+        )
 
     def build(self) -> ColumnTransformer:
         """
         Build preprocessing transformer.
-
-        Returns
-        -------
-        ColumnTransformer
-            Reusable preprocessing transformer.
         """
 
-        logger.info("Building preprocessing transformer...")
+        logger.info(
+            "Building preprocessing transformer..."
+        )
 
-        # -----------------------------
+        # -------------------------------------------------
         # Numeric Pipeline
-        # -----------------------------
+        # -------------------------------------------------
+
         numeric_pipeline = Pipeline(
             steps=[
                 (
                     "imputer",
-                    SimpleImputer(strategy="median"),
+                    SimpleImputer(
+                        strategy="median",
+                    ),
                 ),
                 (
                     "scaler",
@@ -56,9 +64,10 @@ class DatasetTransformer:
             ]
         )
 
-        # -----------------------------
+        # -------------------------------------------------
         # Categorical Pipeline
-        # -----------------------------
+        # -------------------------------------------------
+
         categorical_pipeline = Pipeline(
             steps=[
                 (
@@ -71,14 +80,16 @@ class DatasetTransformer:
                     "encoder",
                     OneHotEncoder(
                         handle_unknown="ignore",
+                        sparse_output=False,
                     ),
                 ),
             ]
         )
 
-        # -----------------------------
-        # Combined Transformer
-        # -----------------------------
+        # -------------------------------------------------
+        # Complete Transformer
+        # -------------------------------------------------
+
         transformer = ColumnTransformer(
             transformers=[
                 (
@@ -93,6 +104,7 @@ class DatasetTransformer:
                 ),
             ],
             remainder="drop",
+            verbose_feature_names_out=False,
         )
 
         logger.info(

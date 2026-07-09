@@ -2,72 +2,95 @@
 Feature Selector
 
 Selects the most informative features using
-Recursive Feature Elimination (RFE).
+SelectFromModel and Random Forest importance.
 """
 
 import logging
 
-from sklearn.feature_selection import RFE
-from sklearn.tree import DecisionTreeClassifier
+import pandas as pd
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectFromModel
 
 logger = logging.getLogger(__name__)
 
 
 class FeatureSelectorOptimizer:
     """
-    Performs feature selection.
+    Performs automatic feature selection.
     """
 
     def select(
         self,
-        X,
+        X: pd.DataFrame,
         y,
-        features_to_keep=None,
+        threshold: str = "median",
     ):
         """
-        Select best features.
+        Select important features.
+
+        Parameters
+        ----------
+        X : DataFrame
+
+        y : Labels
+
+        threshold : str
+            median / mean
 
         Returns
         -------
-        selected_dataframe
+        selected_dataframe,
         selected_features
         """
 
         logger.info(
-            "Selecting important features..."
+            "Running feature selection..."
         )
 
-        if features_to_keep is None:
-
-            features_to_keep = max(
-                5,
-                len(X.columns) // 2,
-            )
-
-        estimator = DecisionTreeClassifier(
+        estimator = RandomForestClassifier(
+            n_estimators=200,
             random_state=42,
+            n_jobs=-1,
         )
 
-        selector = RFE(
-            estimator=estimator,
-            n_features_to_select=features_to_keep,
-        )
-
-        selector.fit(
+        estimator.fit(
             X,
             y,
         )
 
-        selected = X.columns[
-            selector.support_
+        selector = SelectFromModel(
+            estimator,
+            threshold=threshold,
+            prefit=True,
+        )
+
+        selected_columns = X.columns[
+            selector.get_support()
         ]
 
         logger.info(
-            "Selected %d features.",
-            len(selected),
+            "Selected %d of %d features.",
+            len(selected_columns),
+            len(X.columns),
         )
 
+        logger.info(
+            "Selected Features:"
+        )
+
+        for feature in selected_columns:
+
+            logger.info(
+                "  %s",
+                feature,
+            )
+
+        X_selected = X[
+            selected_columns
+        ].copy()
+
         return (
-            X[selected],
-            list(selected),
+            X_selected,
+            list(selected_columns),
         )

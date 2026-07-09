@@ -55,12 +55,24 @@ DROP_COLUMNS = [
 ]
 
 NUMERIC_COLUMNS = [
+
+    # Original Feature
     "value",
+
+    # Existing Engineered Features
     "value_change",
     "device_message_count",
     "sensor_message_count",
     "time_delta",
     "is_duplicate_value",
+
+    # New Engineered Features
+    "rolling_mean",
+    "rolling_std",
+    "rolling_max",
+    "rolling_min",
+    "percentage_change",
+    "z_score",
 ]
 
 CATEGORICAL_COLUMNS = [

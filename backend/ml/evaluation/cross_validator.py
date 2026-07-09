@@ -11,7 +11,7 @@ import numpy as np
 
 from sklearn.model_selection import (
     StratifiedKFold,
-    cross_val_score,
+    cross_validate,
 )
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 class CrossValidator:
     """
-    Performs cross validation for ML pipelines.
+    Performs Stratified K-Fold Cross Validation.
     """
 
     def evaluate(
@@ -32,10 +32,19 @@ class CrossValidator:
         """
         Run Stratified K-Fold Cross Validation.
 
+        Parameters
+        ----------
+        pipeline : sklearn Pipeline
+
+        X : pandas.DataFrame
+
+        y : pandas.Series
+
+        folds : int
+
         Returns
         -------
         dict
-            Cross-validation statistics.
         """
 
         logger.info(
@@ -49,27 +58,69 @@ class CrossValidator:
             random_state=42,
         )
 
-        scores = cross_val_score(
+        scores = cross_validate(
             pipeline,
             X,
             y,
             cv=cv,
-            scoring="accuracy",
+            scoring={
+                "accuracy": "accuracy",
+                "precision": "precision",
+                "recall": "recall",
+                "f1": "f1",
+            },
             n_jobs=-1,
         )
 
         results = {
 
-            "scores": scores,
+            "accuracy": scores["test_accuracy"],
 
-            "mean_accuracy": np.mean(scores),
+            "precision": scores["test_precision"],
 
-            "std_accuracy": np.std(scores),
+            "recall": scores["test_recall"],
 
-            "min_accuracy": np.min(scores),
+            "f1": scores["test_f1"],
 
-            "max_accuracy": np.max(scores),
+            "mean_accuracy": np.mean(
+                scores["test_accuracy"]
+            ),
 
+            "mean_precision": np.mean(
+                scores["test_precision"]
+            ),
+
+            "mean_recall": np.mean(
+                scores["test_recall"]
+            ),
+
+            "mean_f1": np.mean(
+                scores["test_f1"]
+            ),
+
+            "std_accuracy": np.std(
+                scores["test_accuracy"]
+            ),
+
+            "std_precision": np.std(
+                scores["test_precision"]
+            ),
+
+            "std_recall": np.std(
+                scores["test_recall"]
+            ),
+
+            "std_f1": np.std(
+                scores["test_f1"]
+            ),
+
+            "best_accuracy": np.max(
+                scores["test_accuracy"]
+            ),
+
+            "worst_accuracy": np.min(
+                scores["test_accuracy"]
+            ),
         }
 
         logger.info(
@@ -88,41 +139,76 @@ class CrossValidator:
         results: dict,
     ):
 
-        print("\n")
-        print("=" * 60)
-        print("CROSS VALIDATION RESULTS")
-        print("=" * 60)
+        print()
 
-        for index, score in enumerate(
-            results["scores"],
-            start=1,
+        print("=" * 65)
+        print("5-FOLD STRATIFIED CROSS VALIDATION")
+        print("=" * 65)
+
+        print(
+            f"{'Fold':<10}"
+            f"{'Accuracy':<12}"
+            f"{'Precision':<12}"
+            f"{'Recall':<12}"
+            f"{'F1 Score':<12}"
+        )
+
+        print("-" * 65)
+
+        for index in range(
+            len(results["accuracy"])
         ):
 
             print(
-                f"Fold {index:<2}: "
-                f"{score*100:.2f}%"
+                f"{index+1:<10}"
+                f"{results['accuracy'][index]*100:<11.2f}%"
+                f"{results['precision'][index]*100:<11.2f}%"
+                f"{results['recall'][index]*100:<11.2f}%"
+                f"{results['f1'][index]*100:<11.2f}%"
             )
 
-        print("-" * 60)
+        print("-" * 65)
 
         print(
-            f"Mean Accuracy : "
-            f"{results['mean_accuracy']*100:.2f}%"
+            f"{'Mean':<10}"
+            f"{results['mean_accuracy']*100:<11.2f}%"
+            f"{results['mean_precision']*100:<11.2f}%"
+            f"{results['mean_recall']*100:<11.2f}%"
+            f"{results['mean_f1']*100:<11.2f}%"
         )
 
+        print()
+
         print(
-            f"Std Deviation : "
+            f"Accuracy Std Dev : "
             f"{results['std_accuracy']*100:.2f}%"
         )
 
         print(
-            f"Best Fold     : "
-            f"{results['max_accuracy']*100:.2f}%"
+            f"Precision Std Dev : "
+            f"{results['std_precision']*100:.2f}%"
         )
 
         print(
-            f"Worst Fold    : "
-            f"{results['min_accuracy']*100:.2f}%"
+            f"Recall Std Dev : "
+            f"{results['std_recall']*100:.2f}%"
         )
 
-        print("=" * 60)
+        print(
+            f"F1 Std Dev : "
+            f"{results['std_f1']*100:.2f}%"
+        )
+
+        print()
+
+        print(
+            f"Best Accuracy  : "
+            f"{results['best_accuracy']*100:.2f}%"
+        )
+
+        print(
+            f"Worst Accuracy : "
+            f"{results['worst_accuracy']*100:.2f}%"
+        )
+
+        print("=" * 65)
