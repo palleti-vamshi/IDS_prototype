@@ -20,12 +20,9 @@ class BaseMachine(ABC):
     """
     Base class for all industrial machines.
 
-    Provides:
-    - Lifecycle management
-    - Runtime tracking
-    - Health monitoring
-    - Sensor attachment
-    - Telemetry interface
+    Every machine owns its operational state and telemetry.
+    Sensors observe the machine rather than generating
+    independent values.
     """
 
     def __init__(
@@ -95,20 +92,29 @@ class BaseMachine(ABC):
 
         self.state = OperationalState.MAINTENANCE
 
-        logger.info("%s under maintenance.", self.name)
+        logger.info(
+            "%s under maintenance.",
+            self.name,
+        )
 
     def fault(self) -> None:
         """Switch machine to fault state."""
 
         self.state = OperationalState.FAULT
 
-        logger.warning("%s entered FAULT state.", self.name)
+        logger.warning(
+            "%s entered FAULT state.",
+            self.name,
+        )
 
     # ==================================================
     # Runtime
     # ==================================================
 
-    def update_runtime(self, hours: float) -> None:
+    def update_runtime(
+        self,
+        hours: float,
+    ) -> None:
         """Update runtime."""
 
         if hours < 0:
@@ -141,22 +147,64 @@ class BaseMachine(ABC):
         self,
         sensor: Any,
     ) -> None:
-        """Attach a sensor."""
+        """
+        Attach a sensor to this machine.
+        """
+
+        sensor.attach_machine(self)
 
         self.sensors[sensor.sensor_code] = sensor
+
+        logger.info(
+            "%s attached to %s.",
+            sensor.sensor_code,
+            self.machine_code,
+        )
 
     def remove_sensor(
         self,
         sensor_code: str,
     ) -> None:
-        """Remove attached sensor."""
+        """
+        Remove attached sensor.
+        """
 
-        self.sensors.pop(sensor_code, None)
+        sensor = self.sensors.pop(
+            sensor_code,
+            None,
+        )
+
+        if sensor is not None:
+            sensor.detach_machine()
+
+    def get_sensor(
+        self,
+        sensor_code: str,
+    ) -> Any | None:
+        """
+        Return one attached sensor.
+        """
+
+        return self.sensors.get(sensor_code)
 
     def get_sensors(self) -> list[Any]:
-        """Return all attached sensors."""
+        """
+        Return all attached sensors.
+        """
 
         return list(self.sensors.values())
+
+    def read_all_sensors(self) -> dict:
+        """
+        Read all attached sensors.
+        """
+
+        readings = {}
+
+        for sensor in self.sensors.values():
+            readings[sensor.sensor_code] = sensor.read()
+
+        return readings
 
     # ==================================================
     # Telemetry
@@ -166,7 +214,9 @@ class BaseMachine(ABC):
         self,
         **kwargs,
     ) -> None:
-        """Update telemetry dynamically."""
+        """
+        Update machine telemetry.
+        """
 
         for key, value in kwargs.items():
 
@@ -174,7 +224,9 @@ class BaseMachine(ABC):
                 setattr(self, key, value)
 
     def get_telemetry(self) -> dict:
-        """Return telemetry only."""
+        """
+        Return telemetry only.
+        """
 
         excluded = {
             "uuid",
@@ -202,7 +254,9 @@ class BaseMachine(ABC):
     # ==================================================
 
     def get_status(self) -> dict:
-        """Return complete machine status."""
+        """
+        Return complete machine status.
+        """
 
         return {
             "uuid": self.uuid,

@@ -2,97 +2,336 @@
 Base Sensor Module
 
 Purpose:
-    Provides a reusable base class for all virtual industrial sensors.
+    Base class for all Industrial IoT sensors in LightX-IDS.
 """
 
-import time
+from __future__ import annotations
+
+import random
 from abc import ABC, abstractmethod
 from datetime import datetime
+from typing import Any
+from uuid import uuid4
 
 from backend.core.logger import setup_logger
+from backend.industrial.common import OperationalState
 from backend.industrial.mqtt.publisher import MQTTPublisher
 
 
 class BaseSensor(ABC):
     """
-    Abstract base class for all virtual sensors.
+    Base class for every Industrial IoT sensor.
+
+    Sensors DO NOT own the simulation loop.
+    They simply measure machine telemetry and create MQTT packets.
     """
 
     def __init__(
         self,
+        sensor_code: str,
         device_id: str,
         sensor_type: str,
         unit: str,
         topic: str,
         client_id: str,
         interval: int = 2,
-    ):
+    ) -> None:
+
+        # ==================================================
+        # Identity
+        # ==================================================
+
+        self.uuid = str(uuid4())
+
+        self.sensor_code = sensor_code
         self.device_id = device_id
+
         self.sensor_type = sensor_type
         self.unit = unit
+
+        # ==================================================
+        # MQTT
+        # ==================================================
+
         self.topic = topic
+        self.publisher = MQTTPublisher(
+            client_id=f"{client_id}_{sensor_code}"
+        )
+
+        # ==================================================
+        # Sampling
+        # ==================================================
+
         self.interval = interval
+        self.last_timestamp: datetime | None = None
+
+        # ==================================================
+        # Operational State
+        # ==================================================
+
+        self.state = OperationalState.STOPPED
+
+        # ==================================================
+        # Sensor Health
+        # ==================================================
+
+        self.health = 100.0
+
+        # ==================================================
+        # Simulation Parameters
+        # ==================================================
+
+        self.noise_level = 0.0
+        self.drift = 0.0
+        self.calibration_offset = 0.0
+
+        # ==================================================
+        # Runtime
+        # ==================================================
+
+        self.current_value: float | None = None
+
+        # ==================================================
+        # Relationships
+        # ==================================================
+
+        self.attached_machine: Any = None
+
+        # ==================================================
+        # Logger
+        # ==================================================
 
         self.logger = setup_logger(device_id)
-        self.publisher = MQTTPublisher(client_id)
 
-        self.running = False
+        self.logger.info(
+            "%s (%s) initialized.",
+            self.sensor_type,
+            self.sensor_code,
+        )
+
+    # ==================================================
+    # Abstract Reading
+    # ==================================================
 
     @abstractmethod
     def generate_value(self) -> float:
         """
-        Generate the current sensor value.
+        Read the current machine value.
         """
-        pass
+        raise NotImplementedError
+
+    # ==================================================
+    # Machine Association
+    # ==================================================
+
+    def attach_machine(
+        self,
+        machine: Any,
+    ) -> None:
+
+        self.attached_machine = machine
+
+    def detach_machine(self) -> None:
+
+        self.attached_machine = None
+
+    # ==================================================
+    # Configuration
+    # ==================================================
+
+    def calibrate(
+        self,
+        offset: float,
+    ) -> None:
+
+        self.calibration_offset = offset
+
+    def set_noise(
+        self,
+        noise: float,
+    ) -> None:
+
+        self.noise_level = max(0.0, noise)
+
+    def set_drift(
+        self,
+        drift: float,
+    ) -> None:
+
+        self.drift = drift
+
+    def update_health(
+        self,
+        health: float,
+    ) -> None:
+
+        self.health = max(
+            0.0,
+            min(100.0, health),
+        )
+
+    # ==================================================
+    # Reading
+    # ==================================================
+
+    def read(self) -> float:
+        """
+        Measure the current machine value.
+        """
+
+        value = self.generate_value()
+
+        value += self.calibration_offset
+        value += self.drift
+
+        if self.noise_level > 0:
+
+            value += random.uniform(
+                -self.noise_level,
+                self.noise_level,
+            )
+
+        self.current_value = round(
+            value,
+            2,
+        )
+
+        self.last_timestamp = datetime.now()
+
+        return self.current_value
+
+    # ==================================================
+    # MQTT Packet
+    # ==================================================
 
     def create_packet(self) -> dict:
         """
-        Create a standardized MQTT packet.
+        Create standardized MQTT packet.
         """
 
         return {
+
+            "sensor_code": self.sensor_code,
+
             "device_id": self.device_id,
-            "timestamp": datetime.now().isoformat(),
+
+            "timestamp": (
+                self.last_timestamp.isoformat()
+                if self.last_timestamp
+                else datetime.now().isoformat()
+            ),
+
             "sensor_type": self.sensor_type,
-            "value": self.generate_value(),
+
+            "value": self.current_value,
+
             "unit": self.unit,
-            "status": "NORMAL",
+
+            "status": self.state.value,
+
+            "health": round(
+                self.health,
+                2,
+            ),
         }
 
-    def start(self):
+    # ==================================================
+    # MQTT Publishing
+    # ==================================================
+
+    def publish(self) -> bool:
         """
-        Start publishing sensor data.
+        Publish the latest sensor packet.
         """
 
-        self.running = True
+        packet = self.create_packet()
 
-        self.logger.info("Sensor started.")
+        success = self.publisher.publish(
+            self.topic,
+            packet,
+        )
 
-        while self.running:
-
-            packet = self.create_packet()
+        if success:
 
             self.logger.info(
-                f"Generated {packet['value']} {self.unit} → Publishing to {self.topic}"
+                "%s -> %.2f %s",
+                self.sensor_code,
+                packet["value"],
+                self.unit,
             )
 
-            success = self.publisher.publish(
-                self.topic,
-                packet,
-            )
+        return success
 
-            if not success:
-                self.logger.error("Failed to publish sensor data.")
+    # ==================================================
+    # Lifecycle
+    # ==================================================
 
-            time.sleep(self.interval)
-
-    def stop(self):
+    def start(self) -> None:
         """
-        Stop the sensor.
+        Mark sensor as active.
         """
 
-        self.running = False
+        self.state = OperationalState.RUNNING
+
+        self.logger.info(
+            "%s started.",
+            self.sensor_code,
+        )
+
+    def stop(self) -> None:
+        """
+        Mark sensor as stopped.
+        """
+
+        self.state = OperationalState.STOPPED
 
         self.publisher.disconnect()
 
-        self.logger.info("Sensor stopped.")
+        self.logger.info(
+            "%s stopped.",
+            self.sensor_code,
+        )
+
+    # ==================================================
+    # Status
+    # ==================================================
+
+    def get_status(self) -> dict:
+
+        return {
+
+            "uuid": self.uuid,
+
+            "sensor_code": self.sensor_code,
+
+            "device_id": self.device_id,
+
+            "sensor_type": self.sensor_type,
+
+            "state": self.state.value,
+
+            "health": self.health,
+
+            "current_value": self.current_value,
+
+            "noise_level": self.noise_level,
+
+            "drift": self.drift,
+
+            "calibration_offset": self.calibration_offset,
+
+            "attached_machine": (
+                self.attached_machine.machine_code
+                if self.attached_machine
+                else None
+            ),
+        }
+
+    # ==================================================
+
+    def __str__(self) -> str:
+
+        return (
+            f"{self.sensor_code}"
+            f" ({self.sensor_type})"
+        )

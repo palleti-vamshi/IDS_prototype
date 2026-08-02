@@ -2,26 +2,32 @@
 Temperature Sensor Module
 
 Purpose:
-    Simulates a virtual industrial temperature sensor.
+    Industrial temperature sensor.
 """
 
 import random
 
+from backend.industrial.common import SensorType
 from backend.industrial.config.mqtt_config import (
     TEMPERATURE_TOPIC,
     TEMP_SENSOR_CLIENT,
 )
-
 from backend.industrial.sensors.base_sensor import BaseSensor
 
 
 class TemperatureSensor(BaseSensor):
-    """Virtual Temperature Sensor."""
+    """Industrial Temperature Sensor."""
 
-    def __init__(self):
+    def __init__(
+        self,
+        sensor_code: str = "TMP-001",
+        device_id: str = "temperature_sensor_01",
+    ):
+
         super().__init__(
-            device_id="temperature_sensor_01",
-            sensor_type="temperature",
+            sensor_code=sensor_code,
+            device_id=device_id,
+            sensor_type=SensorType.TEMPERATURE.value,
             unit="°C",
             topic=TEMPERATURE_TOPIC,
             client_id=TEMP_SENSOR_CLIENT,
@@ -30,15 +36,30 @@ class TemperatureSensor(BaseSensor):
 
     def generate_value(self) -> float:
         """
-        Generate a realistic temperature value.
+        Generate temperature reading.
+
+        Prototype Mode:
+            Returns simulated value.
+
+        Digital Twin Mode:
+            Reads machine temperature.
         """
-        return round(random.uniform(27.0, 30.0), 1)
+
+        if (
+            self.attached_machine is not None
+            and hasattr(self.attached_machine, "temperature")
+        ):
+            return self.attached_machine.temperature
+
+        return random.uniform(27.0, 30.0)
 
 
 if __name__ == "__main__":
+
     sensor = TemperatureSensor()
 
     try:
         sensor.start()
+
     except KeyboardInterrupt:
         sensor.stop()

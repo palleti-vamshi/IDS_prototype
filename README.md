@@ -1,270 +1,277 @@
 # 🛡️ LightX-IDS
-### Lightweight Machine Learning-Based Intrusion Detection System for Industrial IoT
+### Lightweight Explainable Real-Time Intrusion Detection System for Industrial IoT Networks
 
 ![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange.svg)
-![XGBoost](https://img.shields.io/badge/XGBoost-Supported-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-success.svg)
+![MQTT](https://img.shields.io/badge/MQTT-Mosquitto-green.svg)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Scikit--Learn-orange.svg)
+![Status](https://img.shields.io/badge/Status-Phase%201%20Completed-success.svg)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-**LightX-IDS** is a lightweight Machine Learning-based Intrusion Detection System (IDS) designed for **Industrial Internet of Things (IIoT)** environments.
+**LightX-IDS** is a modular Industrial Internet of Things (IIoT) Intrusion Detection System designed to provide **lightweight, explainable, and real-time cyberattack detection** for industrial environments.
 
-Unlike conventional IDS solutions that focus solely on maximizing accuracy, LightX-IDS aims to achieve an optimal balance between:
+Instead of depending on expensive industrial hardware, LightX-IDS first builds a complete **Industrial Digital Twin**, capable of simulating industrial machines, sensors, factory behavior, and MQTT communication. This simulated environment is then used for cyberattack simulation, dataset generation, machine learning model training, explainable AI, and real-time intrusion detection.
 
-- ⚡ Lightweight deployment
-- 🎯 High intrusion detection accuracy
-- 🚀 Fast inference
-- 💾 Low memory footprint
-- 🏭 Real-time Industrial IoT monitoring
-
-The project is modular, scalable, and designed for deployment on resource-constrained edge devices.
+The project follows a modular architecture where each phase builds upon the previous one, enabling scalable development and future industrial deployment.
 
 ---
 
-# ✨ Features
+# 🚀 Project Roadmap
 
-- Industrial IoT Intrusion Detection
-- Modular Machine Learning Pipeline
-- Automated Feature Engineering
-- Data Preprocessing Pipeline
-- Hyperparameter Optimization
-- Feature Importance Analysis
-- Cross Validation
-- Error Analysis
-- Benchmark Generation
-- Model Comparison
-- Model Serialization
-- Production-Ready Architecture
-
----
-
-# 🏗️ Project Structure
-
+```text
+Phase 0
+Planning & Research
+        │
+        ▼
+Phase 1 ✅
+Industrial IoT Environment Simulation
+        │
+        ▼
+Phase 2
+Cyber Attack Simulation
+        │
+        ▼
+Phase 3
+Dataset Generation
+        │
+        ▼
+Phase 4
+Machine Learning IDS
+        │
+        ▼
+Phase 5
+False Positive Reduction
+        │
+        ▼
+Phase 6
+Explainable AI (XAI)
+        │
+        ▼
+Phase 7
+Real-Time Intrusion Detection
+        │
+        ▼
+Phase 8
+Professional Dashboard
 ```
+
+---
+
+# ✨ Current Features
+
+## 🏭 Industrial Digital Twin
+
+- Factory Architecture
+- Factory Builder
+- Factory Manager
+- Production Line
+- Continuous Factory Simulator
+- Industrial Behavior Engine
+- Simulation Clock
+
+---
+
+## ⚙️ Industrial Machines
+
+- Motor
+- Pump
+- Tank
+- Conveyor
+- Valve
+- Compressor
+
+---
+
+## 📡 Industrial Sensors
+
+- Temperature
+- Pressure
+- Current
+- Voltage
+- RPM
+- Flow
+- Level
+- Vibration
+- Proximity
+- Humidity
+
+---
+
+## 📨 MQTT Communication
+
+- Mosquitto Broker
+- MQTT Publisher
+- Standardized Sensor Packets
+- Continuous Telemetry Streaming
+
+---
+
+## 🤖 Machine Learning (Implemented)
+
+- Dataset Loader
+- Feature Engineering
+- Feature Selection
+- Model Factory
+- Random Forest
+- Decision Tree
+- Logistic Regression
+- XGBoost
+- Model Evaluation
+- Benchmark Generation
+- Model Serialization
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                    Factory Simulator
+                           │
+                   Simulation Clock
+                           │
+                    Behavior Engine
+                           │
+                 Industrial Machines
+                           │
+                Attached Industrial Sensors
+                           │
+                     MQTT Publisher
+                           │
+                      MQTT Broker
+                           │
+                   Dataset Generation
+                           │
+                   Machine Learning IDS
+                           │
+                    Explainable AI
+                           │
+                 Real-Time Detection
+                           │
+                     Web Dashboard
+```
+
+---
+
+# 📂 Project Structure
+
+```text
 IDS_prototype/
 │
 ├── backend/
-│   └── ml/
-│       ├── preprocessing/
-│       ├── feature_engineering/
-│       ├── models/
-│       ├── training/
-│       ├── evaluation/
-│       ├── experiments/
-│       ├── reports/
-│       ├── config.py
-│       └── ...
+│   ├── core/
+│   ├── industrial/
+│   │   ├── behavior/
+│   │   ├── factory/
+│   │   ├── machines/
+│   │   ├── mqtt/
+│   │   ├── sensors/
+│   │   ├── simulator/
+│   │   └── registry/
+│   │
+│   ├── preprocessing/
+│   ├── ml/
+│   ├── models/
+│   ├── services/
+│   └── utils/
 │
 ├── frontend/
-│
+├── docs/
 ├── dataset/
-│
 ├── README.md
 └── requirements.txt
 ```
 
 ---
 
-# ⚙️ Machine Learning Workflow
+# 📊 Phase 1 Progress
 
-```
-Dataset
-    │
-    ▼
-Dataset Loader
-    │
-    ▼
-Feature Engineering
-    │
-    ▼
-Feature Selection
-    │
-    ▼
-Train / Validation / Test Split
-    │
-    ▼
-Preprocessing Pipeline
-    │
-    ▼
-Model Training
-    │
-    ▼
-Hyperparameter Optimization
-    │
-    ▼
-Evaluation
-    │
-    ▼
-Benchmarking
-    │
-    ▼
-Model Export
-```
+| Milestone | Status |
+|-----------|--------|
+| Factory Architecture | ✅ |
+| Machine Framework | ✅ |
+| Sensor Framework | ✅ |
+| Machine–Sensor Integration | ✅ |
+| Industrial Behavior Engine | ✅ |
+| Factory Simulator V2 | ✅ |
+| Full Phase 1 Integration | ✅ |
+| Documentation & GitHub | 🚧 |
 
 ---
 
-# 🤖 Supported Models
+# ⚙️ Technologies Used
 
-- Logistic Regression
-- Decision Tree
-- Random Forest
+- Python
+- MQTT (Mosquitto)
+- Paho MQTT
+- Scikit-Learn
 - XGBoost
-
----
-
-# 🔬 Feature Engineering
-
-Current engineered features include:
-
-- Value Change
-- Duplicate Detection
-- Device Message Count
-- Sensor Message Count
-- Time Delta
-- Rolling Mean
-- Rolling Standard Deviation
-- Rolling Maximum
-- Rolling Minimum
-- Percentage Change
-- Z-Score
-
----
-
-# 📊 Model Evaluation
-
-Each model is evaluated using:
-
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- ROC-AUC
-- Training Time
-- Prediction Time
-- Model Size
-
-Additional reports generated automatically:
-
-- Classification Report
-- Confusion Matrix
-- ROC Curve
-- Precision-Recall Curve
-- Feature Importance Report
-- Benchmark Reports (CSV & JSON)
-
----
-
-# 📈 Current Benchmark (100K Dataset)
-
-| Model | Accuracy | Model Size |
-|--------|----------|------------|
-| Random Forest | **97.81%** | 66.89 MB |
-| XGBoost | **97.79%** | 2.02 MB |
-| Decision Tree | **97.36%** | **29 KB** |
-| Logistic Regression | **97.22%** | **6 KB** |
-
----
-
-# 🎯 Deployment Recommendation
-
-### 🥇 Highest Accuracy
-
-**Random Forest**
-
-- Accuracy: **97.81%**
-
-Suitable when computational resources are available.
-
----
-
-### ⚡ Lightweight Deployment
-
-**Decision Tree**
-
-- Accuracy: **97.36%**
-- Model Size: **29 KB**
-
-Recommended for deployment on Industrial IoT edge devices where memory and computation are limited.
+- NumPy
+- Pandas
+- FastAPI *(Planned)*
+- React *(Planned)*
 
 ---
 
 # 🚀 Getting Started
 
-Clone the repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/palleti-vamshi/IDS_prototype.git
 ```
 
-Install dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run benchmark
+### Start Mosquitto Broker
 
 ```bash
-python -m backend.ml.experiments.experiment
+brew services start mosquitto
+```
+
+### Run Factory Simulator
+
+```bash
+python -m backend.industrial.simulator.factory_simulator
 ```
 
 ---
 
-# 🛣️ Project Roadmap
+# 📌 Future Development
 
-## ✅ Completed
-
-- Dataset Loader
-- Feature Engineering
-- Feature Selection
-- Dataset Splitter
-- Preprocessing Pipeline
-- ML Pipeline
-- Model Factory
-- Model Training
-- Hyperparameter Optimization
-- Evaluation Manager
-- Error Analysis
-- Feature Importance Analysis
-- Benchmarking Framework
-- Model Management
-
-## 🚧 In Progress
-
-- Threshold Optimization
-
-## 🔜 Planned
-
-- FastAPI Backend
-- REST API Integration
-- Frontend Dashboard
-- Real-time MQTT Intrusion Detection
-- Docker Deployment
+- Cyber Attack Simulation
+- Dataset Generation
+- Machine Learning Optimization
 - Explainable AI (SHAP)
-- Cloud Deployment
+- Real-Time MQTT Detection
+- FastAPI Backend
+- React Dashboard
+- Docker Deployment
 
 ---
 
-# 👨‍💻 Authors
+# 👨‍💻 Team
 
-### **Vamshi Palleti**
+### Vamshi Palleti
 
-- Machine Learning Development
-- Backend Development
 - System Architecture
-- Model Optimization
-- Evaluation Framework
+- Backend Development
+- Industrial Digital Twin
+- Machine Learning
+- Model Evaluation
 
-### **Srinidhi**
+### Srinidhi
 
 - Frontend Development
-- Dashboard UI Development
+- Dashboard UI
+- Dataset Preparation
 - Frontend Integration
-- External Datasets cleaning
 
 ---
 
@@ -272,7 +279,7 @@ python -m backend.ml.experiments.experiment
 
 **LightX-IDS**
 
-Lightweight Machine Learning-Based Intrusion Detection System for Industrial Internet of Things (IIoT)
+Lightweight Explainable Real-Time Intrusion Detection System for Industrial IoT Networks
 
 Developed as a **Final Year B.Tech Project**.
 

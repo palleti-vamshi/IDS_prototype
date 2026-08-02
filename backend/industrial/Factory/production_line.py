@@ -19,10 +19,16 @@ class ProductionLine:
     """
     Represents a production line.
 
-    A production line owns:
-    - One PLC
-    - Multiple Machines
-    - Multiple Sensors
+    Responsibilities:
+    - Owns one PLC
+    - Owns multiple machines
+    - Owns optional production-line sensors
+    - Controls production-line lifecycle
+
+    Note:
+        Machine sensors are owned by the machine itself.
+        The Factory Simulator is responsible for attaching
+        default sensors using the SensorRegistry.
     """
 
     def __init__(
@@ -32,25 +38,30 @@ class ProductionLine:
         description: str = "",
     ) -> None:
 
-        # -----------------------------
+        # ==================================================
         # Identity
-        # -----------------------------
+        # ==================================================
+
         self.uuid = str(uuid4())
         self.line_code = line_code
         self.name = name
         self.description = description
 
-        # -----------------------------
+        # ==================================================
         # Operational State
-        # -----------------------------
+        # ==================================================
+
         self.state = OperationalState.STOPPED
 
-        # -----------------------------
+        # ==================================================
         # Industrial Assets
-        # -----------------------------
+        # ==================================================
+
         self.plc: Optional[Any] = None
 
         self.machines: Dict[str, Any] = {}
+
+        # Optional production-line sensors
         self.sensors: Dict[str, Any] = {}
 
         logger.info(
@@ -59,12 +70,12 @@ class ProductionLine:
             self.line_code,
         )
 
-    # ====================================================
+    # ==================================================
     # Lifecycle
-    # ====================================================
+    # ==================================================
 
     def start(self) -> None:
-        """Start the production line."""
+        """Start production line."""
 
         self.state = OperationalState.RUNNING
 
@@ -73,8 +84,20 @@ class ProductionLine:
             self.name,
         )
 
+        for machine in self.machines.values():
+            machine.start()
+
+        for sensor in self.sensors.values():
+            sensor.start()
+
     def stop(self) -> None:
-        """Stop the production line."""
+        """Stop production line."""
+
+        for sensor in self.sensors.values():
+            sensor.stop()
+
+        for machine in self.machines.values():
+            machine.stop()
 
         self.state = OperationalState.STOPPED
 
@@ -83,56 +106,109 @@ class ProductionLine:
             self.name,
         )
 
-    # ====================================================
+    # ==================================================
     # PLC
-    # ====================================================
+    # ==================================================
 
-    def set_plc(self, plc: Any) -> None:
-        """Assign a PLC to this production line."""
+    def set_plc(
+        self,
+        plc: Any,
+    ) -> None:
+        """Assign a PLC."""
 
         self.plc = plc
 
-    # ====================================================
+    # ==================================================
     # Machine Management
-    # ====================================================
+    # ==================================================
 
-    def add_machine(self, machine: Any) -> None:
-        """Add a machine."""
+    def add_machine(
+        self,
+        machine: Any,
+    ) -> None:
+        """
+        Add a machine to the production line.
+        """
 
         self.machines[machine.machine_code] = machine
 
-    def remove_machine(self, machine_code: str) -> None:
-        """Remove a machine."""
+        logger.info(
+            "Machine '%s' added to production line '%s'.",
+            machine.machine_code,
+            self.name,
+        )
+
+    def remove_machine(
+        self,
+        machine_code: str,
+    ) -> None:
+        """
+        Remove a machine.
+        """
 
         self.machines.pop(machine_code, None)
 
-    def get_machine(self, machine_code: str) -> Optional[Any]:
-        """Return a machine."""
+    def get_machine(
+        self,
+        machine_code: str,
+    ) -> Optional[Any]:
+        """
+        Return a machine.
+        """
 
         return self.machines.get(machine_code)
 
-    # ====================================================
-    # Sensor Management
-    # ====================================================
+    def list_machines(self) -> list[Any]:
+        """
+        Return all machines.
+        """
 
-    def add_sensor(self, sensor: Any) -> None:
-        """Add a production-line sensor."""
+        return list(self.machines.values())
+
+    # ==================================================
+    # Production-Line Sensor Management
+    # ==================================================
+
+    def add_sensor(
+        self,
+        sensor: Any,
+    ) -> None:
+        """
+        Add a production-line sensor.
+        """
 
         self.sensors[sensor.sensor_code] = sensor
 
-    def remove_sensor(self, sensor_code: str) -> None:
-        """Remove a sensor."""
+    def remove_sensor(
+        self,
+        sensor_code: str,
+    ) -> None:
+        """
+        Remove a production-line sensor.
+        """
 
         self.sensors.pop(sensor_code, None)
 
-    def get_sensor(self, sensor_code: str) -> Optional[Any]:
-        """Return a sensor."""
+    def get_sensor(
+        self,
+        sensor_code: str,
+    ) -> Optional[Any]:
+        """
+        Return a production-line sensor.
+        """
 
         return self.sensors.get(sensor_code)
 
-    # ====================================================
+    def list_sensors(self) -> list[Any]:
+        """
+        Return all production-line sensors.
+        """
+
+        return list(self.sensors.values())
+
+    # ==================================================
     # Statistics
-    # ====================================================
+    # ==================================================
 
     @property
     def total_machines(self) -> int:
@@ -140,10 +216,29 @@ class ProductionLine:
 
     @property
     def total_sensors(self) -> int:
-        return len(self.sensors)
+        """
+        Return the total number of sensors
+        attached to the production line.
+
+        Includes:
+        - Line-level sensors
+        - Machine-attached sensors
+        """
+
+        count = len(self.sensors)
+
+        for machine in self.machines.values():
+
+            if hasattr(machine, "get_sensors"):
+
+                count += len(machine.get_sensors())
+
+        return count
 
     def get_status(self) -> dict:
-        """Return production line status."""
+        """
+        Return production-line status.
+        """
 
         return {
             "uuid": self.uuid,
@@ -155,7 +250,7 @@ class ProductionLine:
             "plc_connected": self.plc is not None,
         }
 
-    # ====================================================
+    # ==================================================
 
     def __str__(self) -> str:
         return (

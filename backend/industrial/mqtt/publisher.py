@@ -76,8 +76,12 @@ class MQTTPublisher:
                 return True
 
             logger.error(
-                f"Publish failed with code: {result.rc}"
+                "Publish failed | Topic=%s | Client=%s | RC=%s",
+                topic,
+                self.client._client_id.decode(),
+                result.rc,
             )
+               
             return False
 
         except Exception as error:
