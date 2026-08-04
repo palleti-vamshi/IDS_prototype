@@ -1,73 +1,176 @@
 """
-Attack Manager
+attack_manager.py
 
-Purpose:
-    Starts and manages cyber attack modules.
+Central manager for all industrial cyber attacks.
 """
 
-import threading
+from __future__ import annotations
 
 from backend.core.logger import setup_logger
 
 
 class AttackManager:
-    """Coordinates all attack modules."""
+    """
+    Central controller responsible for
+    managing all cyber attacks.
+    """
 
-    def __init__(self):
-        self.logger = setup_logger("Attack Manager")
-        self.attacks = []
-        self.threads = []
+    def __init__(self) -> None:
 
-        self.current_attack = None
-        self.attack_active = False
-
-    def register_attack(self, attack):
-        """Register an attack module."""
-        self.attacks.append(attack)
-
-        self.logger.info(
-            f"Registered attack: {attack.attack_name}"
+        self.logger = setup_logger(
+            "AttackManager"
         )
 
-    def set_active_attack(self, attack_name: str):
-        """Set the currently active attack."""
-        self.current_attack = attack_name
-        self.attack_active = True
+        self.attacks = {}
 
+    # ==================================================
+    # Registration
+    # ==================================================
 
-    def clear_active_attack(self):
-        """Clear the active attack."""
-        self.current_attack = None
-        self.attack_active = False
+    def register_attack(
+        self,
+        attack,
+    ) -> None:
 
+        self.attacks[
+            attack.attack_id
+        ] = attack
 
-    def get_attack_state(self):
-        """Return current attack state."""
-        return self.attack_active, self.current_attack
+        self.logger.info(
+            "Registered attack: %s",
+            attack.attack_name,
+        )
 
-    def start(self):
-        """Start all registered attacks."""
+    # ==================================================
+    # Remove
+    # ==================================================
 
-        self.logger.info("Starting Attack Manager...")
+    def remove_attack(
+        self,
+        attack_id: str,
+    ) -> None:
 
-        for attack in self.attacks:
+        self.attacks.pop(
+            attack_id,
+            None,
+        )
 
-            thread = threading.Thread(
-                target=attack.start,
-                daemon=True,
-            )
+    # ==================================================
+    # Start
+    # ==================================================
 
-            thread.start()
-            self.threads.append(thread)
+    def start_attack(
+        self,
+        attack_id: str,
+    ) -> None:
 
-        self.logger.info("All attacks started.")
+        attack = self.attacks.get(
+            attack_id
+        )
 
-    def stop(self):
-        """Stop all attacks."""
+        if attack:
 
-        self.logger.info("Stopping Attack Manager...")
+            attack.start()
 
-        for attack in self.attacks:
+    # ==================================================
+    # Stop
+    # ==================================================
+
+    def stop_attack(
+        self,
+        attack_id: str,
+    ) -> None:
+
+        attack = self.attacks.get(
+            attack_id
+        )
+
+        if attack:
+
             attack.stop()
 
-        self.logger.info("All attacks stopped.")
+    # ==================================================
+    # Update
+    # ==================================================
+
+    def update(
+        self,
+        dt: float,
+    ) -> None:
+
+        for attack in self.attacks.values():
+
+            attack.update(dt)
+
+    # ==================================================
+    # Bulk Operations
+    # ==================================================
+
+    def stop_all(self) -> None:
+
+        for attack in self.attacks.values():
+
+            attack.stop()
+
+    def clear(self) -> None:
+
+        self.stop_all()
+
+        self.attacks.clear()
+
+    # ==================================================
+    # Access
+    # ==================================================
+
+    def get_attack(
+        self,
+        attack_id: str,
+    ):
+
+        return self.attacks.get(
+            attack_id
+        )
+
+    @property
+    def total_attacks(self) -> int:
+
+        return len(
+            self.attacks
+        )
+
+    @property
+    def active_attacks(self) -> int:
+
+        return sum(
+            attack.is_running
+            for attack in self.attacks.values()
+        )
+
+    # ==================================================
+    # Information
+    # ==================================================
+
+    def get_status(self) -> dict:
+
+        return {
+
+            "registered_attacks":
+                self.total_attacks,
+
+            "active_attacks":
+                self.active_attacks,
+
+            "attack_ids":
+                list(
+                    self.attacks.keys()
+                ),
+        }
+
+    def __str__(self) -> str:
+
+        return (
+            f"AttackManager("
+            f"{self.active_attacks}/"
+            f"{self.total_attacks}"
+            f" active)"
+        )

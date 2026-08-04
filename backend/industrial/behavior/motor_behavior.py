@@ -8,6 +8,9 @@ from __future__ import annotations
 
 from backend.industrial.behavior.base_behavior import BaseBehavior
 from backend.industrial.behavior.state_models import BehaviorState
+from backend.attacks.process.process_state import (
+    ProcessState,
+)
 
 
 class MotorBehavior(BaseBehavior):
@@ -344,3 +347,23 @@ class MotorBehavior(BaseBehavior):
                 0.05,
                 dt,
             )
+
+        # ==================================================
+        # Process Attacks
+        # ==================================================
+
+        if ProcessState.motor_overload:
+
+            factor = ProcessState.overload_factor
+
+            self.machine.load *= factor
+
+            self.machine.current *= factor
+
+            self.machine.power *= factor
+
+            self.machine.temperature += 10
+
+            self.machine.vibration *= 1.5
+
+            self.machine.rpm *= 1.1

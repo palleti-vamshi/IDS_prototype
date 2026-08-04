@@ -21,18 +21,26 @@ from backend.industrial.simulator.simulation_clock import (
     SimulationClock,
 )
 
+from backend.attacks.attack_manager import (
+    AttackManager,
+)
+
+from backend.attacks.attack_scheduler import (
+    AttackScheduler,
+)
+
+from backend.attacks.scenarios.scenario_manager import (
+    ScenarioManager,
+)
+
+from backend.attacks.attack_initializer import (
+    AttackInitializer,
+)
+
 
 class FactorySimulator:
     """
     Central orchestrator of the Industrial Digital Twin.
-
-    Responsibilities
-    ----------------
-    • Build factory
-    • Register behaviors
-    • Collect sensors
-    • Execute simulation
-    • Publish MQTT
     """
 
     def __init__(self) -> None:
@@ -50,6 +58,17 @@ class FactorySimulator:
         self.builder = FactoryBuilder()
 
         self.behavior_engine = BehaviorEngine()
+
+        self.attack_manager = AttackManager()
+
+        self.attack_scheduler = AttackScheduler()
+
+        self.scenario_manager = ScenarioManager()
+
+        self.attack_initializer = AttackInitializer(
+            self.attack_manager,
+            self.scenario_manager,
+        )
 
         # =====================================
         # Industrial Assets
@@ -74,9 +93,6 @@ class FactorySimulator:
     # ==========================================
 
     def initialize(self) -> None:
-        """
-        Build the complete digital twin.
-        """
 
         self.logger.info(
             "Initializing Factory Simulator..."
@@ -88,18 +104,25 @@ class FactorySimulator:
 
         self.collect_sensors()
 
+        self.attack_initializer.initialize()
+
+        # =====================================
+        # Automatic Attack Campaign
+        # =====================================
+
+        self.attack_scheduler.start_campaign(
+            self.attack_initializer.get_campaign_attacks()
+        )
+
         self.logger.info(
-            "Initialization completed."
+                    "Initialization completed."
         )
 
     # ==========================================
-    # Factory Construction
+    # Factory
     # ==========================================
 
     def build_factory(self) -> None:
-        """
-        Construct the factory hierarchy.
-        """
 
         self.factory = self.builder.assemble()
 
@@ -115,20 +138,11 @@ class FactorySimulator:
             "Factory constructed."
         )
 
-        self.logger.info(
-            "Machines : %d",
-            len(self.machines),
-        )
-
     # ==========================================
-    # Behavior Registration
+    # Behaviors
     # ==========================================
 
     def register_behaviors(self) -> None:
-        """
-        Register every machine with
-        the Behavior Engine.
-        """
 
         for machine in self.machines:
 
@@ -142,13 +156,10 @@ class FactorySimulator:
         )
 
     # ==========================================
-    # Sensor Collection
+    # Sensors
     # ==========================================
 
     def collect_sensors(self) -> None:
-        """
-        Collect all attached sensors.
-        """
 
         self.sensors.clear()
 
@@ -164,66 +175,59 @@ class FactorySimulator:
         )
 
     # ==========================================
-    # Simulation Step
+    # Simulation
     # ==========================================
 
     def simulation_step(self) -> None:
-        """
-        Execute one synchronized simulation cycle.
-        """
 
-        # Advance simulation clock
         self.clock.step()
 
-        # Update machine behaviors
+        self.attack_scheduler.update(
+            self.clock.tick_rate
+        )
+
+        self.attack_scheduler.print_progress()
+
+        self.attack_manager.update(
+            self.clock.tick_rate
+        )
+
         self.behavior_engine.update(
             self.clock.tick_rate
         )
 
-        # Read all sensors
         for sensor in self.sensors:
+
             sensor.read()
 
     # ==========================================
-    # MQTT Publishing
+    # MQTT
     # ==========================================
 
     def publish_cycle(self) -> None:
-        """
-        Publish all sensor packets.
-        """
 
         for sensor in self.sensors:
 
-            success = sensor.publish()
-
-            if not success:
-
-                self.logger.warning(
-                    "Failed to publish sensor %s",
-                    sensor.sensor_code,
-                )
+            sensor.publish()
 
     # ==========================================
-    # Main Simulation Loop
+    # Run
     # ==========================================
 
     def run(self) -> None:
-        """
-        Run the complete factory continuously.
-        """
 
         self.initialize()
+
         self.behavior_engine.start_all()
-        # Start all machines
+
         for machine in self.machines:
+
             machine.start()
 
-        # Start factory hierarchy
         self.factory.start()
 
-        # Activate sensors
         for sensor in self.sensors:
+
             sensor.start()
 
         self.clock.start()
@@ -231,16 +235,7 @@ class FactorySimulator:
         self.running = True
 
         self.logger.info(
-            "========================================"
-        )
-        self.logger.info(
-            "LightX-IDS Factory Simulator Started"
-        )
-        self.logger.info(
-            "Press Ctrl+C to stop."
-        )
-        self.logger.info(
-            "========================================"
+            "LightX-IDS Factory Simulator Started."
         )
 
         try:
@@ -251,18 +246,23 @@ class FactorySimulator:
 
                 self.publish_cycle()
 
-                self.logger.info(
-                    "Tick=%d | Machines=%d | Sensors=%d",
-                    self.clock.tick,
-                    len(self.machines),
-                    len(self.sensors),
-                )
+                if (
+                    self.attack_scheduler.campaign_finished()
+                ):
+
+                    print()
+
+                    print("=" * 70)
+
+                    print(
+                        "🎉 ATTACK CAMPAIGN FINISHED"
+                    )
+
+                    print("=" * 70)
+
+                    self.stop()
 
         except KeyboardInterrupt:
-
-            self.logger.info(
-                "Stopping simulator..."
-            )
 
             self.stop()
 
@@ -271,16 +271,19 @@ class FactorySimulator:
     # ==========================================
 
     def stop(self) -> None:
-        """
-        Stop the complete simulator.
-        """
 
         self.running = False
 
+        self.attack_manager.stop_all()
+
+        self.attack_scheduler.reset()
+
         if self.factory:
+
             self.factory.stop()
 
         for sensor in self.sensors:
+
             sensor.stop()
 
         self.clock.stop()
@@ -288,32 +291,6 @@ class FactorySimulator:
         self.logger.info(
             "Factory Simulator Stopped."
         )
-
-    # ==========================================
-    # Status
-    # ==========================================
-
-    def get_status(self) -> dict:
-        """
-        Return simulator status.
-        """
-
-        return {
-
-            "running": self.running,
-
-            "clock": self.clock.get_status(),
-
-            "machines": len(self.machines),
-
-            "sensors": len(self.sensors),
-
-            "behaviors": (
-                self.behavior_engine.total_behaviors
-            ),
-        }
-
-    # ==========================================
 
     def __str__(self) -> str:
 

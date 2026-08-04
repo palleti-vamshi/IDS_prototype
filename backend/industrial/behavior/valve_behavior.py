@@ -6,6 +6,10 @@ Behavior model for an industrial control valve.
 
 from __future__ import annotations
 
+from backend.attacks.process.process_state import (
+    ProcessState,
+)
+
 from backend.industrial.behavior.base_behavior import BaseBehavior
 from backend.industrial.behavior.state_models import BehaviorState
 
@@ -200,3 +204,16 @@ class ValveBehavior(BaseBehavior):
             )
 
             self.machine.is_open = False
+
+        # ==================================================
+        # Process Attack
+        # ==================================================
+
+        if ProcessState.valve_stuck:
+
+            # Freeze valve at current position
+            self.machine.position = self.machine.position
+
+            self.machine.is_open = (
+                self.machine.position > 5
+            )

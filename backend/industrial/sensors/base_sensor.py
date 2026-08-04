@@ -16,6 +16,12 @@ from uuid import uuid4
 from backend.core.logger import setup_logger
 from backend.industrial.common import OperationalState
 from backend.industrial.mqtt.publisher import MQTTPublisher
+from backend.attacks.sensor.sensor_state import (
+    SensorState,
+)
+from backend.attacks.stealth.stealth_state import (
+    StealthState,
+)
 
 
 class BaseSensor(ABC):
@@ -170,10 +176,6 @@ class BaseSensor(ABC):
             min(100.0, health),
         )
 
-    # ==================================================
-    # Reading
-    # ==================================================
-
     def read(self) -> float:
         """
         Measure the current machine value.
@@ -181,14 +183,82 @@ class BaseSensor(ABC):
 
         value = self.generate_value()
 
+        # ==========================================
+        # Sensor Freeze Attack
+        # ==========================================
+
+        if (
+            SensorState.freeze
+            and self.current_value is not None
+        ):
+
+            value = self.current_value
+
+        # ==========================================
+        # Sensor Spoofing Attack
+        # ==========================================
+
+        elif (
+            SensorState.spoofing
+            and SensorState.spoof_value is not None
+        ):
+
+            value = SensorState.spoof_value
+
+        # ==========================================
+        # False Data Injection Attack
+        # ==========================================
+
+        elif SensorState.false_data:
+
+            value = value * 1.35
+
+        # ==========================================
+        # Normal Sensor Processing
+        # ==========================================
+
         value += self.calibration_offset
+
+        # Physical Sensor Drift
         value += self.drift
 
+        # Cyber Drift Attack
+        value += SensorState.drift
+
+        # ==========================================
+        # Slow Drift Attack
+        # ==========================================
+
+        if StealthState.slow_drift:
+
+            value += StealthState.drift_rate
+
+        # ==========================================
+        # Intermittent Attack
+        # ==========================================
+
+        if (
+            StealthState.intermittent
+            and random.random()
+            < StealthState.attack_probability
+        ):
+
+            value *= 1.25
+
+        # Physical Noise
         if self.noise_level > 0:
 
             value += random.uniform(
                 -self.noise_level,
                 self.noise_level,
+            )
+
+        # Cyber Noise Injection
+        if SensorState.noise > 0:
+
+            value += random.uniform(
+                -SensorState.noise,
+                SensorState.noise,
             )
 
         self.current_value = round(
@@ -199,7 +269,6 @@ class BaseSensor(ABC):
         self.last_timestamp = datetime.now()
 
         return self.current_value
-
     # ==================================================
     # MQTT Packet
     # ==================================================
