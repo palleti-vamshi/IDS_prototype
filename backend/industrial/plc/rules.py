@@ -10,11 +10,11 @@ Purpose:
 class PLCRules:
     """Evaluates industrial sensor readings."""
 
-    MIN_TEMPERATURE = 30.0
-    MAX_TEMPERATURE = 50.0
+    MIN_TEMPERATURE = 27.0
+    MAX_TEMPERATURE = 30.0
 
-    MIN_PRESSURE = 110.0
-    MAX_PRESSURE = 180.0
+    MIN_PRESSURE = 100.5
+    MAX_PRESSURE = 102.5
 
     @classmethod
     def evaluate(
