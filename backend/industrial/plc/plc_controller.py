@@ -12,10 +12,15 @@ from backend.industrial.config.mqtt_config import (
     PLC_CLIENT,
     TEMPERATURE_TOPIC,
     PRESSURE_TOPIC,
+    ALERT_TOPIC,
 )
 
 from backend.industrial.mqtt.subscriber import (
     MQTTSubscriber,
+)
+
+from backend.industrial.mqtt.publisher import (
+    MQTTPublisher,
 )
 
 from backend.industrial.plc.rules import (
@@ -50,6 +55,12 @@ class PLCController:
             client_id=PLC_CLIENT,
             message_handler=self.process_message,
         )
+
+        self.publisher = MQTTPublisher(
+            client_id=f"{PLC_CLIENT}_alerts"
+        )
+
+        self.previous_status = "UNKNOWN"
 
     # ==================================================
     # Process Incoming MQTT
@@ -128,9 +139,71 @@ class PLCController:
             self.state.pressure,
         )
 
+        # ==================================================
+        # Alarm State Transition
+        # ==================================================
+
+        if (
+            self.previous_status != "WARNING"
+            and status == "WARNING"
+        ):
+
+            self.publisher.publish(
+                ALERT_TOPIC,
+                {
+                    "event_type": "ALARM",
+                    "severity": "WARNING",
+                    "status": "ACTIVE",
+                    "message": (
+                        "Industrial operating condition "
+                        "outside safe range"
+                    ),
+                    "temperature": self.state.temperature,
+                    "pressure": self.state.pressure,
+                },
+            )
+
+            self.logger.warning(
+                "SCADA ALARM RAISED | Temperature=%s | Pressure=%s",
+                self.state.temperature,
+                self.state.pressure,
+            )
+
+        elif (
+            self.previous_status == "WARNING"
+            and status == "NORMAL"
+        ):
+
+            self.publisher.publish(
+                ALERT_TOPIC,
+                {
+                    "event_type": "ALARM",
+                    "severity": "INFO",
+                    "status": "CLEARED",
+                    "message": (
+                        "Industrial operating condition "
+                        "returned to normal"
+                    ),
+                    "temperature": self.state.temperature,
+                    "pressure": self.state.pressure,
+                },
+            )
+
+            self.logger.info(
+                "SCADA ALARM CLEARED | Temperature=%s | Pressure=%s",
+                self.state.temperature,
+                self.state.pressure,
+            )
+
+        # ==================================================
+        # Update PLC State
+        # ==================================================
+
         self.state.update_status(
             status
         )
+
+        self.previous_status = status
 
         self.logger.info(
             "Factory State: %s",

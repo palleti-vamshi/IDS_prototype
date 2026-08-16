@@ -14,6 +14,7 @@ from backend.core.logger import setup_logger
 from backend.attacks.attack_state import AttackState
 from backend.attacks.attack_type import AttackType
 from backend.attacks.attack_target import AttackTarget
+from backend.attacks.event_publisher import AttackEventPublisher
 
 
 class BaseAttack(ABC):
@@ -62,6 +63,8 @@ class BaseAttack(ABC):
         self.logger = setup_logger(
             attack_name
         )
+
+        self.event_publisher = AttackEventPublisher()
 
     # ==================================================
     # Target Management
@@ -120,10 +123,20 @@ class BaseAttack(ABC):
             self.attack_name,
         )
 
+        # Publish attack START event to MQTT
+        self.event_publisher.publish_start(
+            self.get_status()
+        )
+
     def stop(self) -> None:
         """
         Stop attack.
         """
+
+        # Ignore repeated stop calls
+        if self.state == AttackState.STOPPED:
+
+            return
 
         self.state = AttackState.STOPPED
 
@@ -132,6 +145,11 @@ class BaseAttack(ABC):
         self.logger.info(
             "%s stopped.",
             self.attack_name,
+        )
+
+        # Publish attack STOP event to MQTT
+        self.event_publisher.publish_stop(
+            self.get_status()
         )
 
     def pause(self) -> None:
@@ -169,15 +187,25 @@ class BaseAttack(ABC):
 
         print("=" * 72)
 
-        print(f"Attack ID      : {self.attack_id}")
+        print(
+            f"Attack ID      : {self.attack_id}"
+        )
 
-        print(f"Attack Name    : {self.attack_name}")
+        print(
+            f"Attack Name    : {self.attack_name}"
+        )
 
-        print(f"Attack Type    : {self.attack_type.value}")
+        print(
+            f"Attack Type    : {self.attack_type.value}"
+        )
 
-        print(f"Target Layer   : {self.attack_target.value}")
+        print(
+            f"Target Layer   : {self.attack_target.value}"
+        )
 
-        print(f"Duration       : {self.duration:.0f} sec")
+        print(
+            f"Duration       : {self.duration:.0f} sec"
+        )
 
         print("=" * 72)
 
@@ -193,11 +221,17 @@ class BaseAttack(ABC):
 
         print("=" * 72)
 
-        print(f"Attack ID      : {self.attack_id}")
+        print(
+            f"Attack ID      : {self.attack_id}"
+        )
 
-        print(f"Attack Name    : {self.attack_name}")
+        print(
+            f"Attack Name    : {self.attack_name}"
+        )
 
-        print(f"Elapsed Time   : {self.elapsed_time:.1f} sec")
+        print(
+            f"Elapsed Time   : {self.elapsed_time:.1f} sec"
+        )
 
         print("=" * 72)
 
@@ -223,7 +257,8 @@ class BaseAttack(ABC):
 
         print(
             f"{self.attack_name}: "
-            f"{self.elapsed_time:.1f}/{self.duration:.1f}"
+            f"{self.elapsed_time:.1f}/"
+            f"{self.duration:.1f}"
         )
 
         self.apply(dt)

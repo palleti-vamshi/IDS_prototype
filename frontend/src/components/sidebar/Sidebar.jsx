@@ -10,7 +10,8 @@ import {
   MdPsychology,
   MdDataset,
   MdDescription,
-  MdSettings
+  MdSettings,
+  MdPrecisionManufacturing
 } from "react-icons/md";
 
 
@@ -31,6 +32,12 @@ icon:<MdDashboard/>
 name:"Sensors",
 path:"/sensors",
 icon:<MdSensors/>
+},
+
+{
+name:"SCADA Monitor",
+path:"/scada",
+icon:<MdPrecisionManufacturing/>
 },
 
 {

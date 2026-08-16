@@ -8,8 +8,17 @@ Industrial Digital Twin.
 from __future__ import annotations
 
 from backend.core.logger import setup_logger
+import json
 
-from backend.industrial.factory.factory_builder import (
+from backend.industrial.mqtt.publisher import (
+    MQTTPublisher,
+)
+
+from backend.industrial.config.mqtt_config import (
+    MACHINE_STATUS_TOPIC,
+)
+
+from backend.industrial.Factory.factory_builder import (
     FactoryBuilder,
 )
 
@@ -69,7 +78,9 @@ class FactorySimulator:
             self.attack_manager,
             self.scenario_manager,
         )
-
+        self.machine_status_publisher = MQTTPublisher(
+            "factory_machine_status"
+        )
         # =====================================
         # Industrial Assets
         # =====================================
@@ -209,11 +220,29 @@ class FactorySimulator:
         for sensor in self.sensors:
 
             sensor.publish()
+        self.publish_machine_status()
 
     # ==========================================
     # Run
     # ==========================================
+    def publish_machine_status(self) -> None:
+        """Publish the current status of all industrial machines."""
 
+        machines = []
+
+        for machine in self.machines:
+            machines.append(
+                machine.get_status()
+            )
+
+        payload = {
+            "machines": machines
+        }
+
+        self.machine_status_publisher.publish(
+            MACHINE_STATUS_TOPIC,
+            payload,
+        )  
     def run(self) -> None:
 
         self.initialize()
@@ -291,7 +320,7 @@ class FactorySimulator:
         self.logger.info(
             "Factory Simulator Stopped."
         )
-
+        self.machine_status_publisher.disconnect()
     def __str__(self) -> str:
 
         return (

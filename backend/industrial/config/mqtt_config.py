@@ -35,6 +35,9 @@ PLC_TOPIC = "factory/line1/plc"
 ALERT_TOPIC = "factory/alerts"
 ATTACK_STATE_TOPIC = "factory/attacks/state"
 
+# Machine status topic
+MACHINE_STATUS_TOPIC = "factory/line1/machines"
+
 
 # ==========================================================
 # Dataset Collection Topics
@@ -54,6 +57,7 @@ MQTT_TOPICS = [
     PLC_TOPIC,
     ALERT_TOPIC,
     ATTACK_STATE_TOPIC,
+    MACHINE_STATUS_TOPIC,
 ]
 
 

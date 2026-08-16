@@ -10,7 +10,7 @@ import logging
 from typing import Dict, Optional
 from uuid import uuid4
 
-from backend.industrial.common import OperationalState
+from backend.industrial.Common import OperationalState
 from .production_line import ProductionLine
 
 logger = logging.getLogger(__name__)

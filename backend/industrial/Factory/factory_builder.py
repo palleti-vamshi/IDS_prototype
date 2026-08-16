@@ -6,9 +6,9 @@ Constructs the complete industrial digital twin.
 
 from __future__ import annotations
 
-from backend.industrial.factory.factory import Factory
-from backend.industrial.factory.production_line import ProductionLine
-from backend.industrial.factory.sensor_registry import SensorRegistry
+from backend.industrial.Factory.factory import Factory
+from backend.industrial.Factory.production_line import ProductionLine
+from backend.industrial.Factory.sensor_registry import SensorRegistry
 
 from backend.industrial.machines import (
     Motor,

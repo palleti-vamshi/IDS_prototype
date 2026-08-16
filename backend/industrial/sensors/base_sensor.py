@@ -14,7 +14,7 @@ from typing import Any
 from uuid import uuid4
 
 from backend.core.logger import setup_logger
-from backend.industrial.common import OperationalState
+from backend.industrial.Common import OperationalState
 from backend.industrial.mqtt.publisher import MQTTPublisher
 from backend.attacks.sensor.sensor_state import (
     SensorState,

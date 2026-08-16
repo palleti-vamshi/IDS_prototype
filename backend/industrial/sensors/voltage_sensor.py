@@ -7,7 +7,7 @@ Purpose:
 
 import random
 
-from backend.industrial.common import SensorType
+from backend.industrial.Common import SensorType
 from backend.industrial.config.mqtt_config import (
     VOLTAGE_TOPIC,
     VOLTAGE_SENSOR_CLIENT,
