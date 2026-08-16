@@ -12,11 +12,23 @@ from backend.attacks.base_attack import BaseAttack
 from backend.attacks.attack_target import AttackTarget
 from backend.attacks.attack_type import AttackType
 
+from backend.attacks.plc.plc_attack_engine import (
+    PLCAttackEngine,
+)
+
 
 class PLCAttack(BaseAttack, ABC):
     """
-    Base class for PLC attacks.
+    Base class for all PLC attacks.
+
+    Every PLC attack shares one attack engine.
     """
+
+    # ==========================================
+    # Shared PLC Engine
+    # ==========================================
+
+    attack_engine = PLCAttackEngine()
 
     def __init__(
         self,
@@ -32,3 +44,26 @@ class PLCAttack(BaseAttack, ABC):
             attack_target=AttackTarget.PLC,
             duration=duration,
         )
+
+        self.engine = PLCAttack.attack_engine
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "plc_engine":
+                    self.engine.get_state(),
+            }
+
+        )
+
+        return status

@@ -1,7 +1,7 @@
 """
 factory_simulator.py
 
-Central orchestrator for the LightX-IDS
+Central orchestrator of the LightX-IDS
 Industrial Digital Twin.
 """
 
@@ -17,9 +17,37 @@ from backend.industrial.behavior.behavior_engine import (
     BehaviorEngine,
 )
 
+from backend.industrial.physics.physics_engine import (
+    PhysicsEngine,
+)
+
+from backend.industrial.dependencies.dependency_engine import (
+    DependencyEngine,
+)
+
 from backend.industrial.simulator.simulation_clock import (
     SimulationClock,
 )
+
+# ==================================================
+# Industrial Events / Alarms
+# ==================================================
+
+from backend.industrial.events.event_logger import (
+    IndustrialEventLogger,
+)
+
+from backend.industrial.alarms.alarm_manager import (
+    AlarmManager,
+)
+
+from backend.industrial.alarms.industrial_alarm_rules import (
+    get_default_alarm_rules,
+)
+
+# ==================================================
+# Cyber Attack Framework
+# ==================================================
 
 from backend.attacks.attack_manager import (
     AttackManager,
@@ -37,6 +65,10 @@ from backend.attacks.attack_initializer import (
     AttackInitializer,
 )
 
+from backend.attacks.sensor.sensor_attack import (
+    SensorAttack,
+)
+
 
 class FactorySimulator:
     """
@@ -49,15 +81,33 @@ class FactorySimulator:
             "FactorySimulator"
         )
 
-        # =====================================
+        # ==========================================
         # Core Components
-        # =====================================
+        # ==========================================
 
         self.clock = SimulationClock()
 
         self.builder = FactoryBuilder()
 
         self.behavior_engine = BehaviorEngine()
+
+        self.physics_engine = PhysicsEngine()
+
+        self.dependency_engine = DependencyEngine()
+
+        # ==========================================
+        # Industrial Event / Alarm System
+        # ==========================================
+
+        self.event_logger = IndustrialEventLogger()
+
+        self.alarm_manager = AlarmManager(
+            event_logger=self.event_logger
+        )
+
+        # ==========================================
+        # Cyber Attack Components
+        # ==========================================
 
         self.attack_manager = AttackManager()
 
@@ -70,9 +120,9 @@ class FactorySimulator:
             self.scenario_manager,
         )
 
-        # =====================================
+        # ==========================================
         # Industrial Assets
-        # =====================================
+        # ==========================================
 
         self.factory = None
 
@@ -82,9 +132,9 @@ class FactorySimulator:
 
         self.sensors = []
 
-        # =====================================
+        # ==========================================
         # Runtime
-        # =====================================
+        # ==========================================
 
         self.running = False
 
@@ -104,18 +154,20 @@ class FactorySimulator:
 
         self.collect_sensors()
 
+        self.initialize_alarm_system()
+
         self.attack_initializer.initialize()
 
-        # =====================================
+        # ==========================================
         # Automatic Attack Campaign
-        # =====================================
+        # ==========================================
 
         self.attack_scheduler.start_campaign(
             self.attack_initializer.get_campaign_attacks()
         )
 
         self.logger.info(
-                    "Initialization completed."
+            "Initialization completed."
         )
 
     # ==========================================
@@ -150,9 +202,46 @@ class FactorySimulator:
                 machine
             )
 
+            self.physics_engine.register_machine(
+                machine
+            )
+
+            self.dependency_engine.register_machine(
+                machine
+            )
+
         self.logger.info(
             "%d behaviors registered.",
             self.behavior_engine.total_behaviors,
+        )
+
+        # ==========================================
+        # Machine Dependencies
+        # ==========================================
+
+        self.dependency_engine.register_dependency(
+            "TANK_001",
+            "PUMP_001",
+        )
+
+        self.dependency_engine.register_dependency(
+            "PUMP_001",
+            "VALVE_001",
+        )
+
+        self.dependency_engine.register_dependency(
+            "VALVE_001",
+            "CONVEYOR_001",
+        )
+
+        self.dependency_engine.register_dependency(
+            "MOTOR_001",
+            "CONVEYOR_001",
+        )
+
+        self.dependency_engine.register_dependency(
+            "COMPRESSOR_001",
+            "VALVE_001",
         )
 
     # ==========================================
@@ -169,10 +258,155 @@ class FactorySimulator:
                 machine.get_sensors()
             )
 
+        # ==========================================
+        # Register Sensors with Shared Attack Engine
+        # ==========================================
+
+        for sensor in self.sensors:
+
+            SensorAttack.attack_engine.register_sensor(
+                sensor.sensor_code
+            )
+
         self.logger.info(
             "%d sensors discovered.",
             len(self.sensors),
         )
+
+        self.logger.info(
+            "%d sensors registered with SensorAttackEngine.",
+            SensorAttack.attack_engine.total_registered,
+        )
+
+    # ==========================================
+    # Alarm System
+    # ==========================================
+
+    def initialize_alarm_system(self) -> None:
+        """
+        Register all default industrial alarm rules.
+        """
+
+        rules = get_default_alarm_rules()
+
+        for rule in rules:
+
+            self.alarm_manager.register_rule(
+                rule
+            )
+
+        self.logger.info(
+            "%d industrial alarm rules registered.",
+            self.alarm_manager.total_rules,
+        )
+
+    # ==========================================
+    # Alarm Source Mapping
+    # ==========================================
+
+    @staticmethod
+    def get_alarm_source(
+        sensor,
+    ) -> str | None:
+        """
+        Convert a machine-specific sensor code into
+        the canonical alarm-rule source.
+
+        Examples:
+
+            MTR-001-TMP -> TMP-001
+            PMP-001-PRS -> PRS-001
+            TNK-001-LVL -> LVL-001
+            CNV-001-RPM -> RPM-001
+        """
+
+        sensor_code = getattr(
+            sensor,
+            "sensor_code",
+            "",
+        )
+
+        if not sensor_code:
+            return None
+
+        # ==========================================
+        # Sensor suffix -> alarm source
+        # ==========================================
+
+        suffix_map = {
+
+            "TMP": "TMP-001",
+
+            "PRS": "PRS-001",
+
+            "FLW": "FLW-001",
+
+            "CUR": "CUR-001",
+
+            "LVL": "LVL-001",
+
+            "RPM": "RPM-001",
+
+            "VIB": "VIB-001",
+
+            "PRX": "PRX-001",
+
+            "VLT": "VLT-001",
+
+            "HUM": "HUM-001",
+        }
+
+        parts = sensor_code.split("-")
+
+        if not parts:
+            return None
+
+        suffix = parts[-1]
+
+        return suffix_map.get(
+            suffix
+        )
+
+    # ==========================================
+    # Alarm Evaluation
+    # ==========================================
+
+    def evaluate_sensor_alarm(
+        self,
+        sensor,
+        value: float,
+    ) -> None:
+        """
+        Evaluate one sensor reading against the
+        industrial alarm rules.
+        """
+
+        source = self.get_alarm_source(
+            sensor
+        )
+
+        if source is None:
+            return
+
+        alarms = self.alarm_manager.evaluate(
+            source,
+            value,
+        )
+
+        # ==========================================
+        # Print newly active alarms
+        # ==========================================
+
+        for alarm in alarms:
+
+            print(
+                f"\n🚨 INDUSTRIAL ALARM | "
+                f"{alarm.severity} | "
+                f"{alarm.alarm_type} | "
+                f"{alarm.source} | "
+                f"{alarm.value} "
+                f"{alarm.unit}\n"
+            )
 
     # ==========================================
     # Simulation
@@ -182,23 +416,55 @@ class FactorySimulator:
 
         self.clock.step()
 
+        # ==========================================
+        # Attack Execution
+        # ==========================================
+
+        self.attack_manager.update(
+            self.clock.tick_rate
+        )
+
+        # ==========================================
+        # Attack Scheduling
+        # ==========================================
+
         self.attack_scheduler.update(
             self.clock.tick_rate
         )
 
         self.attack_scheduler.print_progress()
 
-        self.attack_manager.update(
-            self.clock.tick_rate
-        )
+        # ==========================================
+        # Industrial Simulation
+        # ==========================================
 
         self.behavior_engine.update(
             self.clock.tick_rate
         )
 
+        self.physics_engine.update(
+            self.clock.tick_rate
+        )
+
+        self.dependency_engine.update(
+            self.clock.tick_rate
+        )
+
+        # ==========================================
+        # Sensors + Alarm Evaluation
+        # ==========================================
+
         for sensor in self.sensors:
 
-            sensor.read()
+            value = sensor.read()
+
+            if value is None:
+                continue
+
+            self.evaluate_sensor_alarm(
+                sensor,
+                value,
+            )
 
     # ==========================================
     # MQTT
@@ -278,6 +544,8 @@ class FactorySimulator:
 
         self.attack_scheduler.reset()
 
+        self.alarm_manager.reset()
+
         if self.factory:
 
             self.factory.stop()
@@ -291,6 +559,46 @@ class FactorySimulator:
         self.logger.info(
             "Factory Simulator Stopped."
         )
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(self) -> dict:
+        """
+        Return complete simulator status.
+        """
+
+        return {
+
+            "running":
+                self.running,
+
+            "clock":
+                self.clock.get_status(),
+
+            "machines":
+                len(self.machines),
+
+            "sensors":
+                len(self.sensors),
+
+            "dependencies":
+                self.dependency_engine.get_status(),
+
+            "alarms":
+                self.alarm_manager.get_status(),
+
+            "events":
+                self.event_logger.get_status(),
+
+            "attacks":
+                self.attack_manager.get_status(),
+        }
+
+    # ==========================================
+    # String
+    # ==========================================
 
     def __str__(self) -> str:
 

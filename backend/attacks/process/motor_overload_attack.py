@@ -62,6 +62,18 @@ class MotorOverloadAttack(ProcessAttack):
         dt: float,
     ) -> None:
 
+        # Update shared Process Attack Engine
+        self.engine.update(
+
+            motor_overload=True,
+
+            overload_factor=self.overload_factor,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer (temporary)
         ProcessState.motor_overload = True
 
         ProcessState.overload_factor = (

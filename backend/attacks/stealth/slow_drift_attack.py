@@ -72,11 +72,23 @@ class SlowDriftAttack(StealthAttack):
             1.0,
         )
 
+        drift = progress * self.max_drift
+
+        # Shared Stealth Engine
+        self.engine.update(
+
+            slow_drift=True,
+
+            drift_rate=drift,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer
         StealthState.slow_drift = True
 
-        StealthState.drift_rate = (
-            progress * self.max_drift
-        )
+        StealthState.drift_rate = drift
 
     # ==========================================
     # Stop

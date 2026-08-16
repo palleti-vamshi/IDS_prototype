@@ -1,7 +1,7 @@
 """
 sensor_freeze_attack.py
 
-Sensor Freeze Attack
+Advanced Sensor Freeze Attack
 """
 
 from __future__ import annotations
@@ -17,7 +17,8 @@ from backend.attacks.sensor.sensor_state import (
 
 class SensorFreezeAttack(SensorAttack):
     """
-    Freezes a sensor at its last observed value.
+    Freezes sensor readings at the last observed
+    value while maintaining attack state.
     """
 
     def __init__(
@@ -44,12 +45,17 @@ class SensorFreezeAttack(SensorAttack):
     ) -> float:
 
         if not self.is_running:
+
             return value
 
         if self.frozen_value is None:
+
             self.frozen_value = value
 
-        return self.frozen_value
+        return round(
+            self.frozen_value,
+            2,
+        )
 
     # ==========================================
     # Runtime
@@ -60,16 +66,54 @@ class SensorFreezeAttack(SensorAttack):
         dt: float,
     ) -> None:
 
+        self.update_engines()
+
+        for sensor_code in self.engine.sensor_states:
+
+            self.engine.update_state(
+
+                sensor_code,
+
+                freeze=True,
+
+                attack_name=self.attack_name,
+
+            )
+
+        # Compatibility Layer (temporary)
         SensorState.freeze = True
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "frozen_value":
+                    self.frozen_value,
+            }
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
-
-        SensorState.freeze = False
+    def stop(
+        self,
+    ) -> None:
 
         self.frozen_value = None
+
+        SensorState.freeze = False
 
         super().stop()

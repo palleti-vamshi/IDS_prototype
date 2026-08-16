@@ -100,7 +100,14 @@ class AttackManager:
 
         for attack in self.attacks.values():
 
-            attack.update(dt)
+            if attack.is_running:
+
+                attack.update(dt)
+
+                # Automatically stop completed attacks
+                if attack.is_finished:
+
+                    attack.stop()
 
     # ==================================================
     # Bulk Operations
@@ -110,7 +117,9 @@ class AttackManager:
 
         for attack in self.attacks.values():
 
-            attack.stop()
+            if attack.is_running:
+
+                attack.stop()
 
     def clear(self) -> None:
 

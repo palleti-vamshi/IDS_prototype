@@ -68,6 +68,18 @@ class IntermittentAttack(StealthAttack):
         dt: float,
     ) -> None:
 
+        # Shared Stealth Engine
+        self.engine.update(
+
+            intermittent=True,
+
+            attack_probability=self.attack_probability,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer
         StealthState.intermittent = True
 
         StealthState.attack_probability = (

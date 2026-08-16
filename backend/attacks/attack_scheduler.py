@@ -20,6 +20,7 @@ class AttackScheduler:
         • Timed
         • Random
         • Sequential
+        • Campaign
     """
 
     def __init__(self) -> None:
@@ -68,11 +69,9 @@ class AttackScheduler:
         self,
         attack,
     ) -> None:
-        """
-        Start an attack immediately.
-        """
 
         if not attack.is_running:
+
             attack.start()
 
     # ==================================================
@@ -84,9 +83,6 @@ class AttackScheduler:
         attack,
         start_time: float,
     ) -> None:
-        """
-        Schedule an attack at a simulation time.
-        """
 
         self.scheduled_attacks.append(
             (start_time, attack)
@@ -122,9 +118,8 @@ class AttackScheduler:
 
         self.current_index = 0
 
-
     # ==================================================
-    # Campaign Mode
+    # Campaign
     # ==================================================
 
     def start_campaign(
@@ -134,7 +129,9 @@ class AttackScheduler:
 
         self.attack_queue = attacks.copy()
 
-        self.total_attacks = len(attacks)
+        self.total_attacks = len(
+            self.attack_queue
+        )
 
         self.completed_attacks = 0
 
@@ -151,15 +148,33 @@ class AttackScheduler:
             self.total_attacks,
         )
 
+        print()
+        print("=" * 72)
+        print("🚀 LIGHTX-IDS ATTACK CAMPAIGN STARTED")
+        print("=" * 72)
+        print(
+            f"Total Attacks : {self.total_attacks}"
+        )
+        print(
+            f"Normal Phase  : {self.normal_duration:.1f} sec"
+        )
+        print("=" * 72)
+        print()
+
+    # ==================================================
+    # Campaign Finished
+    # ==================================================
 
     def campaign_finished(
         self,
     ) -> bool:
 
         return (
-            self.completed_attacks
+            self.total_attacks > 0
+            and self.completed_attacks
             >= self.total_attacks
         )
+
     # ==================================================
     # Update
     # ==================================================
@@ -171,9 +186,9 @@ class AttackScheduler:
 
         self.elapsed_time += dt
 
-        # ------------------------------------------
+        # ==================================================
         # Timed Attacks
-        # ------------------------------------------
+        # ==================================================
 
         pending = []
 
@@ -199,10 +214,9 @@ class AttackScheduler:
 
         self.scheduled_attacks = pending
 
-
-        # ------------------------------------------
+        # ==================================================
         # Sequential Attacks
-        # ------------------------------------------
+        # ==================================================
 
         if self.current_index < len(
             self.sequential_attacks
@@ -220,18 +234,17 @@ class AttackScheduler:
 
                 self.current_index += 1
 
-
-        # ------------------------------------------
+        # ==================================================
         # Campaign Mode
-        # ------------------------------------------
+        # ==================================================
 
         if self.campaign_mode:
 
             self.phase_time += dt
 
-            # ==========================
+            # ==================================================
             # NORMAL PHASE
-            # ==========================
+            # ==================================================
 
             if self.phase == "NORMAL":
 
@@ -250,77 +263,175 @@ class AttackScheduler:
                             self.attack_queue.pop(0)
                         )
 
+                        print()
+                        print("=" * 72)
+                        print(
+                            f"🚀 Starting Attack "
+                            f"{self.completed_attacks + 1}/"
+                            f"{self.total_attacks}: "
+                            f"{self.current_attack.attack_name}"
+                        )
+                        print("=" * 72)
+                        print()
+
                         self.current_attack.start()
 
-                        print(
-                            f"\n🚀 Starting Attack "
-                            f"{self.completed_attacks+1}/"
-                            f"{self.total_attacks}: "
-                            f"{self.current_attack.attack_name}\n"
-                        )
+                    else:
 
-            # ==========================
+                        self._finish_campaign()
+
+            # ==================================================
             # ATTACK PHASE
-            # ==========================
+            # ==================================================
 
             elif self.phase == "ATTACK":
 
-                if (
-                    self.current_attack
-                    and self.current_attack.is_finished
-                ):
+                if self.current_attack is not None:
 
-                    self.current_attack.stop()
-
-                    self.completed_attacks += 1
+                    # ------------------------------------------
+                    # Debug State
+                    # ------------------------------------------
 
                     print(
-                        f"✅ Completed "
-                        f"{self.completed_attacks}/"
-                        f"{self.total_attacks}\n"
+                        f"[Campaign Debug] "
+                        f"Attack="
+                        f"{self.current_attack.attack_name} | "
+                        f"State="
+                        f"{self.current_attack.state.value} | "
+                        f"AttackTime="
+                        f"{self.current_attack.elapsed_time:.1f}/"
+                        f"{self.current_attack.duration:.1f}"
                     )
 
-                    self.current_attack = None
+                    # ------------------------------------------
+                    # Detect Finished Attack
+                    # ------------------------------------------
 
-                    self.phase = "NORMAL"
+                    if (
+                        self.current_attack.is_finished
+                        or self.current_attack.state.name
+                        == "STOPPED"
+                    ):
 
-                    self.phase_time = 0.0
-
-                    if self.campaign_finished():
+                        finished_attack = (
+                            self.current_attack
+                        )
 
                         print()
+                        print(
+                            f"✅ Attack completed: "
+                            f"{finished_attack.attack_name}"
+                        )
 
-                        print("=" * 70)
+                        print(
+                            f"   State: "
+                            f"{finished_attack.state.value}"
+                        )
 
-                        print("🎉 ALL ATTACKS COMPLETED")
+                        print(
+                            f"   Duration: "
+                            f"{finished_attack.elapsed_time:.1f}s"
+                        )
 
-                        print("=" * 70)
+                        # ----------------------------------
+                        # Make sure attack is stopped
+                        # ----------------------------------
 
-                        self.campaign_mode = False
+                        if finished_attack.state.name != "STOPPED":
 
-        # ------------------------------------------
-        # Random Attacks
-        # ------------------------------------------
+                            finished_attack.stop()
 
-        if self.random_attacks:
+                        # ----------------------------------
+                        # Campaign Counter
+                        # ----------------------------------
 
-            if random.random() < 0.01:
+                        self.completed_attacks += 1
 
-                attack = random.choice(
-                    self.random_attacks
-                )
+                        print()
+                        print(
+                            f"📊 Campaign Progress: "
+                            f"{self.completed_attacks}/"
+                            f"{self.total_attacks}"
+                        )
+                        print()
 
-                if (
-                    attack.state.name == "READY"
-                ):
+                        self.current_attack = None
 
-                    attack.start()
+                        # ----------------------------------
+                        # Campaign Finished?
+                        # ----------------------------------
+
+                        if self.campaign_finished():
+
+                            self._finish_campaign()
+
+                        else:
+
+                            # ----------------------------------
+                            # Start new NORMAL phase
+                            # ----------------------------------
+
+                            self.phase = "NORMAL"
+
+                            self.phase_time = 0.0
+
+    # ==================================================
+    # Campaign Completion
+    # ==================================================
+
+    def _finish_campaign(
+        self,
+    ) -> None:
+
+        print()
+        print("=" * 72)
+        print("🎉 ALL ATTACKS COMPLETED")
+        print("=" * 72)
+        print(
+            f"Completed: "
+            f"{self.completed_attacks}/"
+            f"{self.total_attacks}"
+        )
+        print("=" * 72)
+        print()
+
+        self.campaign_mode = False
+
+        self.phase = "NORMAL"
+
+        self.phase_time = 0.0
+
+        self.current_attack = None
+
+    # ==================================================
+    # Random Attacks
+    # ==================================================
+
+    def update_random_attacks(
+        self,
+    ) -> None:
+
+        if not self.random_attacks:
+
+            return
+
+        if random.random() < 0.01:
+
+            attack = random.choice(
+                self.random_attacks
+            )
+
+            if attack.state.name == "READY":
+
+                attack.start()
 
     # ==================================================
     # Reset
     # ==================================================
 
-    def reset(self) -> None:
+    def reset(
+        self,
+    ) -> None:
 
         self.elapsed_time = 0.0
 
@@ -342,42 +453,117 @@ class AttackScheduler:
 
         self.scheduled_attacks.clear()
 
-    def print_progress(self) -> None:
+    # ==================================================
+    # Progress
+    # ==================================================
+
+    def print_progress(
+        self,
+    ) -> None:
 
         if not self.campaign_mode:
 
             return
 
+        current = None
+
+        if self.current_attack:
+
+            current = (
+                self.current_attack.attack_name
+            )
+
         print(
             f"[Campaign] "
             f"{self.completed_attacks}/"
-            f"{self.total_attacks} "
-            f"completed | "
-            f"Phase: {self.phase}"
+            f"{self.total_attacks} completed | "
+            f"Phase: {self.phase} | "
+            f"Phase Time: "
+            f"{self.phase_time:.1f}s | "
+            f"Current: {current}"
         )
 
     # ==================================================
     # Status
     # ==================================================
 
-    def get_status(self) -> dict:
+    def get_status(
+        self,
+    ) -> dict:
 
         return {
 
-            "simulation_time": round(
-                self.elapsed_time,
-                2,
-            ),
+            "simulation_time":
+                round(
+                    self.elapsed_time,
+                    2,
+                ),
 
-            "scheduled_attacks": len(
-                self.scheduled_attacks
-            ),
+            "scheduled_attacks":
+                len(
+                    self.scheduled_attacks
+                ),
 
-            "random_attacks": len(
-                self.random_attacks
-            ),
+            "random_attacks":
+                len(
+                    self.random_attacks
+                ),
 
-            "sequential_attacks": len(
-                self.sequential_attacks
-            ),
+            "sequential_attacks":
+                len(
+                    self.sequential_attacks
+                ),
+
+            "campaign_mode":
+                self.campaign_mode,
+
+            "phase":
+                self.phase,
+
+            "phase_time":
+                round(
+                    self.phase_time,
+                    2,
+                ),
+
+            "completed_attacks":
+                self.completed_attacks,
+
+            "total_attacks":
+                self.total_attacks,
+
+            "queued_attacks":
+                len(
+                    self.attack_queue
+                ),
+
+            "current_attack":
+                (
+                    self.current_attack.attack_name
+                    if self.current_attack
+                    else None
+                ),
+
+            "current_attack_state":
+                (
+                    self.current_attack.state.value
+                    if self.current_attack
+                    else None
+                ),
         }
+
+    # ==================================================
+    # String
+    # ==================================================
+
+    def __str__(
+        self,
+    ) -> str:
+
+        return (
+            f"AttackScheduler("
+            f"phase={self.phase}, "
+            f"completed="
+            f"{self.completed_attacks}/"
+            f"{self.total_attacks})"
+        )

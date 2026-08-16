@@ -68,6 +68,22 @@ class UnauthorizedCommandAttack(PLCAttack):
         dt: float,
     ) -> None:
 
+        command = random.choice(
+            self.commands
+        )
+
+        # Update shared PLC Attack Engine
+        self.engine.update(
+
+            unauthorized_command=True,
+
+            unauthorized_value=command,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer (temporary)
         PLCState.unauthorized_command = True
 
     # ==========================================

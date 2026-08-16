@@ -1,19 +1,26 @@
 """
 dos_attack.py
 
-Denial of Service (DoS) Attack
+Advanced Denial of Service (DoS) Attack
 """
 
 from __future__ import annotations
 
-from backend.attacks.network.network_attack import NetworkAttack
-from backend.attacks.network.network_state import NetworkState
+from backend.attacks.network.flood_engine import (
+    FloodEngine,
+)
+from backend.attacks.network.network_attack import (
+    NetworkAttack,
+)
+from backend.attacks.network.network_state import (
+    NetworkState,
+)
 
 
 class DoSAttack(NetworkAttack):
     """
-    Simulates a Denial of Service attack by
-    degrading network communication.
+    Simulates a progressive Denial of Service attack
+    using a network flood engine.
     """
 
     def __init__(
@@ -29,7 +36,22 @@ class DoSAttack(NetworkAttack):
         )
 
         self.max_delay = 2.0
+
         self.max_packet_loss = 60.0
+
+        self.flood_engine = FloodEngine(
+            max_rate=5000,
+        )
+
+    # ==========================================
+    # Lifecycle
+    # ==========================================
+
+    def start(self) -> None:
+
+        self.flood_engine.start()
+
+        super().start()
 
     # ==========================================
     # Runtime
@@ -45,19 +67,47 @@ class DoSAttack(NetworkAttack):
             1.0,
         )
 
-        NetworkState.delay = (
-            progress * self.max_delay
+        self.flood_engine.update(
+            progress,
         )
 
-        NetworkState.packet_loss = (
-            progress * self.max_packet_loss
+        NetworkState.delay = round(
+            progress * self.max_delay,
+            2,
         )
+
+        NetworkState.packet_loss = round(
+            progress * self.max_packet_loss,
+            2,
+        )
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            self.flood_engine.get_status()
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
+
+        self.flood_engine.stop()
 
         NetworkState.reset()
 

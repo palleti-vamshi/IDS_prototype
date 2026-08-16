@@ -58,6 +58,16 @@ class SetpointManipulationAttack(PLCAttack):
         dt: float,
     ) -> None:
 
+        # Update shared PLC Attack Engine
+        self.engine.update(
+
+            setpoint_offset=self.offset,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer (temporary)
         PLCState.manipulated_setpoint = (
             self.offset
         )

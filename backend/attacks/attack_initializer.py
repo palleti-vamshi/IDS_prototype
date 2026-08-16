@@ -53,7 +53,7 @@ from backend.attacks.sensor.sensor_freeze_attack import (
     SensorFreezeAttack,
 )
 
-from backend.attacks.sensor.noise_injection_attack import (
+from backend.attacks.sensor.sensor_noise_injection_attack import (
     SensorNoiseInjectionAttack,
 )
 
@@ -61,7 +61,7 @@ from backend.attacks.sensor.noise_injection_attack import (
 # PLC Attacks
 # ==================================================
 
-from backend.attacks.plc.command_injection_attack import (
+from backend.attacks.plc.plc_command_injection_attack import (
     PLCCommandInjectionAttack,
 )
 

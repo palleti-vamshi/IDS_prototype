@@ -12,11 +12,17 @@ from backend.attacks.base_attack import BaseAttack
 from backend.attacks.attack_target import AttackTarget
 from backend.attacks.attack_type import AttackType
 
+from backend.attacks.stealth.stealth_attack_engine import (
+    StealthAttackEngine,
+)
+
 
 class StealthAttack(BaseAttack, ABC):
     """
     Base class for stealth attacks.
     """
+
+    attack_engine = StealthAttackEngine()
 
     def __init__(
         self,
@@ -32,3 +38,20 @@ class StealthAttack(BaseAttack, ABC):
             attack_target=AttackTarget.PROCESS,
             duration=duration,
         )
+
+        self.engine = StealthAttack.attack_engine
+
+    def get_status(self) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "stealth_engine":
+                    self.engine.get_state(),
+            }
+
+        )
+
+        return status

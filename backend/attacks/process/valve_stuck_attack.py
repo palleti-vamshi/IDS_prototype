@@ -62,6 +62,16 @@ class ValveStuckAttack(ProcessAttack):
         dt: float,
     ) -> None:
 
+        # Update shared Process Attack Engine
+        self.engine.update(
+
+            valve_stuck=True,
+
+            attack_name=self.attack_name,
+
+        )
+
+        # Compatibility Layer (temporary)
         ProcessState.valve_stuck = True
 
     # ==========================================

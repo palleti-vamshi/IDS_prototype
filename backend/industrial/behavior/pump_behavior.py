@@ -115,6 +115,15 @@ class PumpBehavior(BaseBehavior):
 
             self.machine.power = 3.5
 
+            # ==========================================
+            # Machine Health
+            # ==========================================
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.002 * dt),
+            )
+
         # ==========================================
         # HIGH LOAD
         # ==========================================
@@ -153,12 +162,98 @@ class PumpBehavior(BaseBehavior):
 
             self.machine.power = 5.2
 
+            # ==========================================
+            # Accelerated Wear
+            # ==========================================
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.01 * dt),
+            )
+
         # ==========================================
         # FAULT
         # ==========================================
 
         elif self.state == BehaviorState.FAULT:
 
-            self.machine.flow_rate = 0.0
-            self.machine.current = 0.0
-            self.machine.power = 0.0
+            self.machine.flow_rate = self.approach(
+                self.machine.flow_rate,
+                0.0,
+                20,
+                dt,
+            )
+
+            self.machine.current = self.approach(
+                self.machine.current,
+                0.0,
+                5,
+                dt,
+            )
+
+            self.machine.power = self.approach(
+                self.machine.power,
+                0.0,
+                2,
+                dt,
+            )
+
+            self.machine.temperature = self.approach(
+                self.machine.temperature,
+                30,
+                0.5,
+                dt,
+            )
+
+            self.machine.pressure = self.approach(
+                self.machine.pressure,
+                0,
+                5,
+                dt,
+            )
+
+        # ==========================================
+        # Automatic Fault Detection
+        # ==========================================
+
+        if (
+            self.machine.temperature >= 90
+            or self.machine.pressure >= 220
+            or self.machine.health <= 15
+        ):
+
+            self.set_state(
+                BehaviorState.FAULT
+            )
+
+        # ==========================================
+        # Runtime
+        # ==========================================
+
+        self.machine.runtime_hours += (
+            dt / 3600
+        )
+
+        # ==========================================
+        # Safety Limits
+        # ==========================================
+
+        self.machine.flow_rate = min(
+            self.machine.flow_rate,
+            120,
+        )
+
+        self.machine.pressure = min(
+            self.machine.pressure,
+            250,
+        )
+
+        self.machine.current = min(
+            self.machine.current,
+            35,
+        )
+
+        self.machine.temperature = min(
+            self.machine.temperature,
+            120,
+        )

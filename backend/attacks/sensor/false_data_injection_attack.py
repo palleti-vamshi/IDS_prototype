@@ -1,7 +1,7 @@
 """
 false_data_injection_attack.py
 
-False Data Injection Attack
+Advanced False Data Injection Attack
 """
 
 from __future__ import annotations
@@ -19,8 +19,8 @@ from backend.attacks.sensor.sensor_state import (
 
 class FalseDataInjectionAttack(SensorAttack):
     """
-    Injects malicious offsets into legitimate
-    sensor readings.
+    Injects gradually increasing false data into
+    legitimate sensor readings.
     """
 
     def __init__(
@@ -35,7 +35,15 @@ class FalseDataInjectionAttack(SensorAttack):
             duration=duration,
         )
 
-        self.max_offset = 50.0
+        # ==========================================
+        # False Data Parameters
+        # ==========================================
+
+        self.current_offset = 0.0
+
+        self.max_offset = 30.0
+
+        self.random_noise = 0.5
 
     # ==========================================
     # Modify Value
@@ -46,19 +54,27 @@ class FalseDataInjectionAttack(SensorAttack):
         value: float,
     ) -> float:
 
-        if self.is_running:
+        if not self.is_running:
 
-            offset = random.uniform(
-                -self.max_offset,
-                self.max_offset,
+            return value
+
+        modified = (
+
+            value
+
+            + self.current_offset
+
+            + random.uniform(
+                -self.random_noise,
+                self.random_noise,
             )
 
-            return round(
-                value + offset,
-                2,
-            )
+        )
 
-        return value
+        return round(
+            modified,
+            2,
+        )
 
     # ==========================================
     # Runtime
@@ -69,13 +85,70 @@ class FalseDataInjectionAttack(SensorAttack):
         dt: float,
     ) -> None:
 
+        self.update_engines()
+
+        progress = min(
+            self.elapsed_time / self.duration,
+            1.0,
+        )
+
+        self.current_offset = round(
+            progress * self.max_offset,
+            2,
+        )
+
+        # ==========================================
+        # Update Sensor Attack Engine
+        # ==========================================
+
+        for sensor_code in self.engine.sensor_states:
+
+            self.engine.update_state(
+
+                sensor_code,
+
+                false_data=True,
+
+                attack_name=self.attack_name,
+
+            )
+
+        # ==========================================
+        # Compatibility Layer
+        # ==========================================
+
         SensorState.false_data = True
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "current_offset":
+                    self.current_offset,
+            }
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
+
+        self.current_offset = 0.0
 
         SensorState.false_data = False
 

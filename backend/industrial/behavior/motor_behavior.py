@@ -348,7 +348,7 @@ class MotorBehavior(BaseBehavior):
                 dt,
             )
 
-        # ==================================================
+                # ==================================================
         # Process Attacks
         # ==================================================
 
@@ -356,14 +356,126 @@ class MotorBehavior(BaseBehavior):
 
             factor = ProcessState.overload_factor
 
-            self.machine.load *= factor
+            self.machine.load = self.approach(
+                self.machine.load,
+                min(100 * factor, 150),
+                8,
+                dt,
+            )
 
-            self.machine.current *= factor
+            self.machine.current = self.approach(
+                self.machine.current,
+                min(22 * factor, 40),
+                2,
+                dt,
+            )
 
-            self.machine.power *= factor
+            self.machine.power = self.approach(
+                self.machine.power,
+                min(7.5 * factor, 10),
+                0.6,
+                dt,
+            )
 
-            self.machine.temperature += 10
+            self.machine.temperature = self.approach(
+                self.machine.temperature,
+                min(95, 120),
+                0.8,
+                dt,
+            )
 
-            self.machine.vibration *= 1.5
+            self.machine.vibration = self.approach(
+                self.machine.vibration,
+                min(1.5, 5.0),
+                0.05,
+                dt,
+            )
 
-            self.machine.rpm *= 1.1
+            self.machine.rpm = self.approach(
+                self.machine.rpm,
+                min(1800, 2000),
+                50,
+                dt,
+            )
+
+            # ==========================================
+            # Health Degradation
+            # ==========================================
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.05 * factor * dt),
+            )
+
+        # ==========================================
+        # Recovery
+        # ==========================================
+
+        else:
+
+            self.machine.temperature = self.approach(
+                self.machine.temperature,
+                42,
+                0.25,
+                dt,
+            )
+
+            self.machine.vibration = self.approach(
+                self.machine.vibration,
+                0.25,
+                0.02,
+                dt,
+            )
+
+        # ==========================================
+        # Automatic Fault Detection
+        # ==========================================
+
+        if (
+
+            self.machine.temperature >= 95
+
+            or self.machine.health <= 15
+
+        ):
+
+            self.set_state(
+                BehaviorState.FAULT
+            )
+
+        # ==========================================
+        # Safety Limits
+        # ==========================================
+
+        self.machine.load = min(
+            self.machine.load,
+            150,
+        )
+
+        self.machine.current = min(
+            self.machine.current,
+            40,
+        )
+
+        self.machine.temperature = min(
+            self.machine.temperature,
+            120,
+        )
+
+        self.machine.vibration = min(
+            self.machine.vibration,
+            5.0,
+        )
+
+        self.machine.rpm = min(
+            self.machine.rpm,
+            2000,
+        )
+
+        # ==========================================
+        # Runtime
+        # ==========================================
+
+        self.machine.runtime_hours += (
+            dt / 3600
+        )

@@ -1,10 +1,8 @@
 """
 communication_controller.py
 
-Simulates Industrial IIoT communication behaviour.
-
-All network attacks modify this controller instead of
-implementing networking logic themselves.
+Central communication engine for the
+LightX-IDS Industrial IIoT network.
 """
 
 from __future__ import annotations
@@ -12,7 +10,7 @@ from __future__ import annotations
 
 class CommunicationController:
     """
-    Controls the simulated communication channel.
+    Controls the simulated IIoT communication layer.
 
     Features
     --------
@@ -21,41 +19,78 @@ class CommunicationController:
     • Packet duplication
     • Communication freeze
     • Network congestion
+    • Packet buffering
+    • Packet queuing
+    • Traffic statistics
     """
 
     def __init__(self) -> None:
 
-        # Seconds of artificial delay
+        # ==========================================
+        # Network Effects
+        # ==========================================
+
         self.delay = 0.0
 
-        # Packet loss percentage
         self.packet_loss = 0.0
 
-        # Packet duplication percentage
         self.packet_duplicate = 0.0
 
-        # Freeze communication
         self.freeze = False
 
-        # Network congestion level (0-100)
         self.congestion = 0.0
 
-        # Enable / Disable controller
         self.enabled = True
+
+        # ==========================================
+        # Phase 3 Components
+        # ==========================================
+
+        self.packet_buffer = None
+
+        self.packet_queue = None
+
+        self.statistics = None
+
+    # ==================================================
+    # Component Registration
+    # ==================================================
+
+    def set_packet_buffer(
+        self,
+        buffer,
+    ) -> None:
+
+        self.packet_buffer = buffer
+
+    def set_packet_queue(
+        self,
+        queue,
+    ) -> None:
+
+        self.packet_queue = queue
+
+    def set_statistics(
+        self,
+        statistics,
+    ) -> None:
+
+        self.statistics = statistics
 
     # ==================================================
     # Reset
     # ==================================================
 
     def reset(self) -> None:
-        """
-        Restore normal communication.
-        """
 
         self.delay = 0.0
+
         self.packet_loss = 0.0
+
         self.packet_duplicate = 0.0
+
         self.freeze = False
+
         self.congestion = 0.0
 
     # ==================================================
@@ -67,7 +102,10 @@ class CommunicationController:
         seconds: float,
     ) -> None:
 
-        self.delay = max(0.0, seconds)
+        self.delay = max(
+            0.0,
+            seconds,
+        )
 
     # ==================================================
     # Packet Loss
@@ -80,7 +118,10 @@ class CommunicationController:
 
         self.packet_loss = max(
             0.0,
-            min(100.0, percentage),
+            min(
+                100.0,
+                percentage,
+            ),
         )
 
     # ==================================================
@@ -94,7 +135,10 @@ class CommunicationController:
 
         self.packet_duplicate = max(
             0.0,
-            min(100.0, percentage),
+            min(
+                100.0,
+                percentage,
+            ),
         )
 
     # ==================================================
@@ -108,7 +152,10 @@ class CommunicationController:
 
         self.congestion = max(
             0.0,
-            min(100.0, percentage),
+            min(
+                100.0,
+                percentage,
+            ),
         )
 
     # ==================================================
@@ -127,7 +174,9 @@ class CommunicationController:
     # Status
     # ==================================================
 
-    def get_status(self) -> dict:
+    def get_status(
+        self,
+    ) -> dict:
 
         return {
 
@@ -142,9 +191,23 @@ class CommunicationController:
             "freeze": self.freeze,
 
             "congestion": self.congestion,
+
+            "packet_buffer": (
+                self.packet_buffer is not None
+            ),
+
+            "packet_queue": (
+                self.packet_queue is not None
+            ),
+
+            "statistics": (
+                self.statistics is not None
+            ),
         }
 
-    def __str__(self) -> str:
+    def __str__(
+        self,
+    ) -> str:
 
         return (
             "CommunicationController("

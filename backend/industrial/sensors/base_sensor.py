@@ -22,6 +22,9 @@ from backend.attacks.sensor.sensor_state import (
 from backend.attacks.stealth.stealth_state import (
     StealthState,
 )
+from backend.attacks.sensor.sensor_attack import (
+    SensorAttack,
+)
 
 
 class BaseSensor(ABC):
@@ -96,6 +99,14 @@ class BaseSensor(ABC):
         # ==================================================
 
         self.current_value: float | None = None
+
+        # ==================================================
+        # Shared Sensor Attack Engine
+        # ==================================================
+
+        self.attack_engine = (
+            SensorAttack.attack_engine
+        )
 
         # ==================================================
         # Relationships
@@ -184,11 +195,22 @@ class BaseSensor(ABC):
         value = self.generate_value()
 
         # ==========================================
+        # Shared Sensor Attack State
+        # ==========================================
+
+        state = self.attack_engine.get_state(
+            self.sensor_code
+        )
+
+        # ==========================================
         # Sensor Freeze Attack
         # ==========================================
 
         if (
-            SensorState.freeze
+            (
+                SensorState.freeze
+                or state["freeze"]
+            )
             and self.current_value is not None
         ):
 
@@ -200,16 +222,25 @@ class BaseSensor(ABC):
 
         elif (
             SensorState.spoofing
-            and SensorState.spoof_value is not None
+            or state["spoof"]
         ):
 
-            value = SensorState.spoof_value
+            if state["spoof"]:
+
+                value += state["spoof_offset"]
+
+            elif SensorState.spoof_value is not None:
+
+                value = SensorState.spoof_value
 
         # ==========================================
         # False Data Injection Attack
         # ==========================================
 
-        elif SensorState.false_data:
+        elif (
+            SensorState.false_data
+            or state["false_data"]
+        ):
 
             value = value * 1.35
 
@@ -224,6 +255,8 @@ class BaseSensor(ABC):
 
         # Cyber Drift Attack
         value += SensorState.drift
+
+        value += state["drift"]
 
         # ==========================================
         # Slow Drift Attack
@@ -254,16 +287,29 @@ class BaseSensor(ABC):
             )
 
         # Cyber Noise Injection
-        if SensorState.noise > 0:
+        if (
+            SensorState.noise > 0
+            or state["noise"] > 0
+        ):
+
+            noise = max(
+                SensorState.noise,
+                state["noise"],
+            )
 
             value += random.uniform(
-                -SensorState.noise,
-                SensorState.noise,
+                -noise,
+                noise,
             )
 
         self.current_value = round(
             value,
             2,
+        )
+
+        self.attack_engine.set_last_value(
+            self.sensor_code,
+            self.current_value,
         )
 
         self.last_timestamp = datetime.now()

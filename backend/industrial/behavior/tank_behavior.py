@@ -105,10 +105,20 @@ class TankBehavior(BaseBehavior):
                 dt,
             )
 
+            # --------------------------------------------------
+            # Tank level calculation
+            #
+            # Flow rates are L/min.
+            # dt is in seconds.
+            # Convert dt to minutes before calculating volume.
+            # --------------------------------------------------
+
+            dt_minutes = dt / 60.0
+
             self.machine.current_level += (
                 self.machine.inflow_rate
                 - self.machine.outflow_rate
-            ) * dt
+            ) * dt_minutes
 
             self.machine.current_level = max(
                 0,
@@ -161,6 +171,42 @@ class TankBehavior(BaseBehavior):
                 dt,
             )
 
+            # --------------------------------------------------
+            # Tank level calculation
+            #
+            # Flow rates are L/min.
+            # dt is in seconds.
+            # --------------------------------------------------
+
+            dt_minutes = dt / 60.0
+
+            self.machine.current_level += (
+                self.machine.inflow_rate
+                - self.machine.outflow_rate
+            ) * dt_minutes
+
+            self.machine.current_level = max(
+                0,
+                min(
+                    self.machine.capacity,
+                    self.machine.current_level,
+                ),
+            )
+
+            self.machine.level_percentage = round(
+                (
+                    self.machine.current_level
+                    / self.machine.capacity
+                )
+                * 100,
+                2,
+            )
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.01 * dt),
+            )
+
         # ==================================================
         # FAULT
         # ==================================================
@@ -180,3 +226,69 @@ class TankBehavior(BaseBehavior):
                 5,
                 dt,
             )
+
+            self.machine.temperature = self.approach(
+                self.machine.temperature,
+                25,
+                0.3,
+                dt,
+            )
+
+        # ==================================================
+        # Machine Health
+        # ==================================================
+
+        if self.state == BehaviorState.NORMAL:
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.001 * dt),
+            )
+
+        # ==================================================
+        # Automatic Fault Detection
+        # ==================================================
+
+        if (
+            self.machine.temperature >= 80
+            or self.machine.level_percentage >= 98
+            or self.machine.level_percentage <= 2
+            or self.machine.health <= 15
+        ):
+
+            self.set_state(
+                BehaviorState.FAULT
+            )
+
+        # ==================================================
+        # Runtime
+        # ==================================================
+
+        self.machine.runtime_hours += (
+            dt / 3600
+        )
+
+        # ==================================================
+        # Safety Limits
+        # ==================================================
+
+        self.machine.current_level = max(
+            0,
+            min(
+                self.machine.current_level,
+                self.machine.capacity,
+            ),
+        )
+
+        self.machine.level_percentage = max(
+            0,
+            min(
+                self.machine.level_percentage,
+                100,
+            ),
+        )
+
+        self.machine.temperature = min(
+            self.machine.temperature,
+            120,
+        )

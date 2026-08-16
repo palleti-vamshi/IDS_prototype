@@ -1,22 +1,23 @@
 """
 replay_attack.py
 
-Replay Attack
+Advanced Replay Attack
 """
 
 from __future__ import annotations
 
 import random
 
-from backend.attacks.network.network_attack import NetworkAttack
+from backend.attacks.network.network_attack import (
+    NetworkAttack,
+)
 
 
 class ReplayAttack(NetworkAttack):
     """
-    Replays previously captured MQTT packets.
+    Replays previously transmitted MQTT packets
+    captured by the Communication Engine.
     """
-
-    MAX_BUFFER = 100
 
     def __init__(
         self,
@@ -30,30 +31,10 @@ class ReplayAttack(NetworkAttack):
             duration=duration,
         )
 
-        self.packet_buffer = []
+        self.replayed_packets = 0
 
     # ==========================================
-    # Capture Packets
-    # ==========================================
-
-    def capture_packet(
-        self,
-        topic: str,
-        payload,
-    ) -> None:
-
-        self.packet_buffer.append(
-            {
-                "topic": topic,
-                "payload": payload,
-            }
-        )
-
-        if len(self.packet_buffer) > self.MAX_BUFFER:
-            self.packet_buffer.pop(0)
-
-    # ==========================================
-    # Modify Packet
+    # Replay Packet
     # ==========================================
 
     def modify_packet(
@@ -61,25 +42,42 @@ class ReplayAttack(NetworkAttack):
         topic: str,
         payload,
     ):
-        """
-        Return an old packet when replay attack
-        is active.
-        """
 
         if (
-            self.is_running
-            and self.packet_buffer
+            not self.is_running
+            or self.communication is None
+            or self.communication.packet_buffer is None
         ):
-            packet = random.choice(
-                self.packet_buffer
-            )
 
-            return (
-                packet["topic"],
-                packet["payload"],
-            )
+            return topic, payload
 
-        return topic, payload
+        packets = (
+            self.communication
+            .packet_buffer
+            .get_all()
+        )
+
+        if not packets:
+
+            return topic, payload
+
+        packet = random.choice(
+            packets
+        )
+
+        self.replayed_packets += 1
+
+        if (
+            self.communication.statistics
+            is not None
+        ):
+
+            self.communication.statistics.packet_replayed()
+
+        return (
+            packet["topic"],
+            packet["payload"],
+        )
 
     # ==========================================
     # Runtime
@@ -89,15 +87,38 @@ class ReplayAttack(NetworkAttack):
         self,
         dt: float,
     ) -> None:
-        """
-        Replay attack has no continuous effect.
-        """
+
         pass
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "replayed_packets":
+                    self.replayed_packets
+            }
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
+
+        self.replayed_packets = 0
 
         super().stop()

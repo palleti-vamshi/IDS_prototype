@@ -1,12 +1,10 @@
 """
 sensor_spoofing_attack.py
 
-Sensor Spoofing Attack
+Advanced Sensor Spoofing Attack
 """
 
 from __future__ import annotations
-
-import random
 
 from backend.attacks.sensor.sensor_attack import (
     SensorAttack,
@@ -19,8 +17,8 @@ from backend.attacks.sensor.sensor_state import (
 
 class SensorSpoofingAttack(SensorAttack):
     """
-    Replaces genuine sensor values with
-    attacker-generated fake values.
+    Generates realistic spoofed sensor values
+    using the shared SpoofEngine.
     """
 
     def __init__(
@@ -35,9 +33,13 @@ class SensorSpoofingAttack(SensorAttack):
             duration=duration,
         )
 
-        self.min_value = 0.0
+        # ==========================================
+        # Spoof Parameters
+        # ==========================================
 
-        self.max_value = 100.0
+        self.max_offset = 20.0
+
+        self.current_offset = 0.0
 
     # ==========================================
     # Modify Value
@@ -48,17 +50,13 @@ class SensorSpoofingAttack(SensorAttack):
         value: float,
     ) -> float:
 
-        if self.is_running:
+        if not self.is_running:
 
-            return round(
-                random.uniform(
-                    self.min_value,
-                    self.max_value,
-                ),
-                2,
-            )
+            return value
 
-        return value
+        return self.spoof_engine.generate(
+            value
+        )
 
     # ==========================================
     # Runtime
@@ -69,21 +67,77 @@ class SensorSpoofingAttack(SensorAttack):
         dt: float,
     ) -> None:
 
-        SensorState.spoofing = True
+        self.update_engines()
 
-        SensorState.spoof_value = round(
-            random.uniform(
-                self.min_value,
-                self.max_value,
-            ),
+        progress = min(
+            self.elapsed_time / self.duration,
+            1.0,
+        )
+
+        self.current_offset = round(
+            progress * self.max_offset,
             2,
         )
+
+        # ==========================================
+        # Update Sensor Attack Engine
+        # ==========================================
+
+        for sensor_code in self.engine.sensor_states:
+
+            self.engine.update_state(
+
+                sensor_code,
+
+                spoof=True,
+
+                spoof_offset=self.current_offset,
+
+                attack_name=self.attack_name,
+
+            )
+
+        # ==========================================
+        # Compatibility Layer
+        # ==========================================
+
+        SensorState.spoofing = True
+
+        SensorState.spoof_value = self.modify_value(
+            0.0
+        )
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "spoof_offset": self.current_offset,
+            }
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
+
+        self.current_offset = 0.0
+
+        self.spoof_engine.reset()
 
         SensorState.spoofing = False
 

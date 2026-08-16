@@ -1,7 +1,7 @@
 """
 sensor_drift_attack.py
 
-Sensor Drift Attack
+Advanced Sensor Drift Attack
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from backend.attacks.sensor.sensor_state import (
 
 class SensorDriftAttack(SensorAttack):
     """
-    Gradually shifts sensor values over time.
+    Simulates realistic gradual sensor drift.
     """
 
     def __init__(
@@ -32,7 +32,13 @@ class SensorDriftAttack(SensorAttack):
             duration=duration,
         )
 
-        self.max_drift = 20.0
+        # ==========================================
+        # Drift Parameters
+        # ==========================================
+
+        self.max_drift = 15.0
+
+        self.current_drift = 0.0
 
     # ==========================================
     # Modify Value
@@ -43,21 +49,13 @@ class SensorDriftAttack(SensorAttack):
         value: float,
     ) -> float:
 
-        if self.is_running:
+        if not self.is_running:
 
-            progress = min(
-                self.elapsed_time / self.duration,
-                1.0,
-            )
+            return value
 
-            drift = progress * self.max_drift
-
-            return round(
-                value + drift,
-                2,
-            )
-
-        return value
+        return self.drift_engine.generate(
+            value
+        )
 
     # ==========================================
     # Runtime
@@ -68,20 +66,71 @@ class SensorDriftAttack(SensorAttack):
         dt: float,
     ) -> None:
 
+        self.update_engines()
+
         progress = min(
             self.elapsed_time / self.duration,
             1.0,
         )
 
-        SensorState.drift = (
-            progress * self.max_drift
+        self.current_drift = round(
+            progress * self.max_drift,
+            2,
         )
+
+        # ==========================================
+        # Update Sensor Attack Engine
+        # ==========================================
+
+        for sensor_code in self.engine.sensor_states:
+
+            self.engine.update_state(
+
+                sensor_code,
+
+                drift=self.current_drift,
+
+                attack_name=self.attack_name,
+
+            )
+
+        # ==========================================
+        # Compatibility Layer
+        # ==========================================
+
+        SensorState.drift = self.current_drift
+
+    # ==========================================
+    # Status
+    # ==========================================
+
+    def get_status(
+        self,
+    ) -> dict:
+
+        status = super().get_status()
+
+        status.update(
+
+            {
+                "current_drift": self.current_drift,
+            }
+
+        )
+
+        return status
 
     # ==========================================
     # Stop
     # ==========================================
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
+
+        self.current_drift = 0.0
+
+        self.drift_engine.reset()
 
         SensorState.drift = 0.0
 

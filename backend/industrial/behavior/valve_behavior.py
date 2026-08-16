@@ -147,6 +147,15 @@ class ValveBehavior(BaseBehavior):
                 self.machine.position > 5
             )
 
+            # ==========================================
+            # Machine Health
+            # ==========================================
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.0015 * dt),
+            )
+
         # ==================================================
         # HIGH LOAD
         # ==================================================
@@ -183,6 +192,15 @@ class ValveBehavior(BaseBehavior):
 
             self.machine.is_open = True
 
+            # ==========================================
+            # Accelerated Wear
+            # ==========================================
+
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.008 * dt),
+            )
+
         # ==================================================
         # FAULT
         # ==================================================
@@ -211,9 +229,74 @@ class ValveBehavior(BaseBehavior):
 
         if ProcessState.valve_stuck:
 
-            # Freeze valve at current position
+            # Freeze valve position
             self.machine.position = self.machine.position
+
+            # Flow decreases because valve is stuck
+            self.machine.flow_rate *= 0.6
+
+            # Pressure increases upstream
+            self.machine.pressure += 15
+
+            # Temperature rises slightly
+            self.machine.temperature += 2
 
             self.machine.is_open = (
                 self.machine.position > 5
+            )
+
+            # Health degradation
+            self.machine.health = max(
+                0.0,
+                self.machine.health - (0.01 * dt),
+            )
+
+            # ==================================================
+            # Automatic Fault Detection
+            # ==================================================
+
+            if (
+
+                self.machine.pressure >= 220
+
+                or self.machine.temperature >= 90
+
+                or self.machine.health <= 15
+
+            ):
+
+                self.set_state(
+                    BehaviorState.FAULT
+                )
+
+            # ==================================================
+            # Runtime
+            # ==================================================
+
+            self.machine.runtime_hours += (
+                dt / 3600
+            )
+
+            # ==================================================
+            # Safety Limits
+            # ==================================================
+
+            self.machine.position = min(
+                self.machine.position,
+                100,
+            )
+
+            self.machine.flow_rate = min(
+                self.machine.flow_rate,
+                100,
+            )
+
+            self.machine.pressure = min(
+                self.machine.pressure,
+                250,
+            )
+
+            self.machine.temperature = min(
+                self.machine.temperature,
+                120,
             )

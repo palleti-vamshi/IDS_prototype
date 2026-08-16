@@ -5,6 +5,8 @@ Purpose:
     Provides a reusable MQTT publisher for the LightX-IDS platform.
 """
 
+from __future__ import annotations
+
 import json
 import random
 from typing import Any
@@ -15,10 +17,22 @@ from backend.attacks.network.network_state import (
     NetworkState,
 )
 from backend.core.logger import setup_logger
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
+)
+from backend.industrial.communication.packet_buffer import (
+    PacketBuffer,
+)
+from backend.industrial.communication.packet_queue import (
+    PacketQueue,
+)
+from backend.industrial.communication.traffic_statistics import (
+    TrafficStatistics,
+)
 from backend.industrial.config.mqtt_config import (
     MQTT_BROKER,
-    MQTT_PORT,
     MQTT_KEEPALIVE,
+    MQTT_PORT,
 )
 
 logger = setup_logger("MQTT Publisher")
@@ -27,13 +41,59 @@ logger = setup_logger("MQTT Publisher")
 class MQTTPublisher:
     """Reusable MQTT Publisher."""
 
-    def __init__(self, client_id: str):
+    def __init__(
+        self,
+        client_id: str,
+        communication: CommunicationController | None = None,
+    ):
 
         self.client = mqtt.Client(
             client_id=client_id
         )
 
         self.connected = False
+
+        # ==========================================
+        # Shared Communication Engine
+        # ==========================================
+
+        if communication is None:
+
+            self.communication = CommunicationController()
+
+            self.packet_buffer = PacketBuffer()
+
+            self.packet_queue = PacketQueue()
+
+            self.statistics = TrafficStatistics()
+
+            self.communication.set_packet_buffer(
+                self.packet_buffer
+            )
+
+            self.communication.set_packet_queue(
+                self.packet_queue
+            )
+
+            self.communication.set_statistics(
+                self.statistics
+            )
+
+        else:
+
+            self.communication = communication
+
+            self.packet_buffer = (
+                communication.packet_buffer
+            )
+
+            self.packet_queue = (
+                communication.packet_queue
+            )
+
+            self.statistics = (
+                communication.statistics
+            )
 
         try:
 
@@ -68,14 +128,6 @@ class MQTTPublisher:
         topic: str,
         message: Any,
     ) -> bool:
-        """
-        Publish a message to an MQTT topic.
-
-        Supports:
-        - Normal publishing
-        - Packet loss
-        - Simulated network delay (non-blocking)
-        """
 
         if not self.connected:
 
@@ -87,11 +139,10 @@ class MQTTPublisher:
 
         try:
 
-            # ------------------------------------------
-            # Serialize Payload
-            # ------------------------------------------
-
-            if isinstance(message, str):
+            if isinstance(
+                message,
+                str,
+            ):
 
                 payload = message
 
@@ -101,44 +152,66 @@ class MQTTPublisher:
                     message
                 )
 
-            # ------------------------------------------
-            # Simulated Network Delay
-            # (Don't block the simulator)
-            # ------------------------------------------
+            # Store packet
 
-            if NetworkState.delay > 0:
+            self.packet_buffer.add_packet(
+                topic,
+                message,
+            )
 
-                logger.debug(
-                    "Simulated network delay: %.2f sec",
-                    NetworkState.delay,
+            # Queue packet
+
+            self.packet_queue.enqueue(
+                (
+                    topic,
+                    payload,
                 )
+            )
 
-            # ------------------------------------------
-            # Packet Loss
-            # ------------------------------------------
+            packet = self.packet_queue.dequeue()
 
-            if (
-                NetworkState.packet_loss > 0
-                and random.uniform(0, 100)
-                < NetworkState.packet_loss
-            ):
-
-                logger.warning(
-                    "Packet dropped due to active DoS attack."
-                )
+            if packet is None:
 
                 return False
 
-            # ------------------------------------------
-            # Publish
-            # ------------------------------------------
+            topic, payload = packet
+
+            # Delay statistics
+
+            if NetworkState.delay > 0:
+
+                self.statistics.packet_delayed()
+
+            # Packet loss
+
+            if (
+                NetworkState.packet_loss > 0
+                and random.uniform(
+                    0,
+                    100,
+                )
+                < NetworkState.packet_loss
+            ):
+
+                self.statistics.packet_dropped()
+
+                logger.warning(
+                    "Packet dropped."
+                )
+
+                return False
 
             result = self.client.publish(
                 topic,
                 payload,
             )
 
-            if result.rc == mqtt.MQTT_ERR_SUCCESS:
+            if (
+                result.rc
+                == mqtt.MQTT_ERR_SUCCESS
+            ):
+
+                self.statistics.packet_sent()
 
                 logger.info(
                     "Published message to '%s'",
@@ -165,11 +238,22 @@ class MQTTPublisher:
             return False
 
     # ==================================================
+    # Statistics
+    # ==================================================
+
+    def get_statistics(
+        self,
+    ) -> dict:
+
+        return self.statistics.get_status()
+
+    # ==================================================
     # Disconnect
     # ==================================================
 
-    def disconnect(self) -> None:
-        """Disconnect from MQTT broker."""
+    def disconnect(
+        self,
+    ) -> None:
 
         if self.connected:
 

@@ -35,11 +35,34 @@ class LevelSensor(BaseSensor):
         )
 
     def generate_value(self) -> float:
+        """
+        Read the tank's level percentage.
+
+        The sensor observes the machine's
+        level_percentage directly.
+
+        current_level is intentionally not used here
+        because it represents liters, not percentage.
+        """
 
         if (
             self.attached_machine is not None
-            and hasattr(self.attached_machine, "current_level")
+            and hasattr(
+                self.attached_machine,
+                "level_percentage",
+            )
         ):
-            return self.attached_machine.current_level
 
-        return random.uniform(20.0, 90.0)
+            return max(
+                0.0,
+                min(
+                    self.attached_machine.level_percentage,
+                    100.0,
+                ),
+            )
+
+        # Fallback when no compatible machine is attached.
+        return random.uniform(
+            20.0,
+            90.0,
+        )
