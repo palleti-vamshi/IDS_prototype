@@ -1,507 +1,1331 @@
-# LightX-IDS System Architecture
+# LightX-IDS System Architecture 
 
-## Document Information
+ 
 
-| Field | Value |
-|--------|-------|
-| Document | System Architecture |
-| Project | LightX-IDS |
-| Version | 1.0 |
-| Status | Approved |
-| Author | Vamshi |
-| Type | Software Architecture Document |
-| Last Updated | July 2026 |
+## 1. Overview 
 
----
+ 
 
-# 1. Introduction
+LightX-IDS (Lightweight Industrial Intrusion Detection System) is an Industrial IoT cybersecurity system designed to simulate an industrial environment, generate normal and attack traffic, prepare datasets, train machine-learning models, detect anomalous activity, and present the results through a web-based dashboard. 
 
-LightX-IDS (Lightweight Industrial Intrusion Detection System) is a modular Industrial Internet of Things (IIoT) cybersecurity platform designed to simulate a smart factory, generate industrial communication traffic, simulate cyber attacks, create machine learning datasets, and detect malicious activities in real time.
+ 
 
-The project follows a phased engineering approach, where each phase introduces a new capability while maintaining a modular and scalable architecture. Every completed phase is tested, documented, and frozen before development continues to the next stage.
+The system is organized into multiple layers so that industrial simulation, attack generation, dataset engineering, machine learning, backend services, and frontend visualization can be developed and tested independently. 
 
-Rather than building a single monolithic application, LightX-IDS is divided into independent layers such as industrial simulation, communication, attack simulation, dataset generation, machine learning, and visualization. This separation improves maintainability, scalability, and future extensibility.
+ 
 
-The objective of this architecture document is to provide a complete overview of the system, describe the responsibilities of each major layer, explain how components interact, and establish a common architectural reference for all future phases of development.
+The major architectural layers are: 
 
----
+ 
 
-# 2. Problem Statement
+1. Industrial Environment Simulation 
 
-Industrial Internet of Things (IIoT) environments have become an essential part of modern manufacturing systems. Sensors, Programmable Logic Controllers (PLCs), communication protocols, and supervisory systems continuously exchange data to automate industrial processes and improve operational efficiency.
+2. Attack Simulation 
 
-As industrial systems become increasingly interconnected, they are also becoming more exposed to cyber threats. Attacks such as Denial of Service (DoS), Replay, Spoofing, and Data Injection can disrupt normal factory operations, manipulate sensor values, or interfere with control decisions. Such attacks may lead to production downtime, equipment damage, safety risks, and financial losses.
+3. Dataset Engineering 
 
-Traditional Intrusion Detection Systems are primarily designed for conventional IT networks and often fail to consider the unique characteristics of industrial environments, including continuous sensor communication, real-time control requirements, and protocol-specific behavior.
+4. Machine Learning and Intrusion Detection 
 
-Although several research solutions exist, many focus only on machine learning models without providing a complete industrial simulation environment capable of generating realistic normal and malicious traffic.
+5. Backend API 
 
-LightX-IDS addresses this challenge by providing a modular Industrial IoT platform that combines factory simulation, cyber attack generation, dataset creation, machine learning, and real-time intrusion detection into a single extensible architecture.
+6. Frontend Dashboard 
 
-The project serves both as a practical learning platform for Industrial Cybersecurity and as a foundation for experimenting with intrusion detection techniques in simulated smart factory environments.
+7. Deployment 
 
----
+ 
 
-# 3. Vision
-
-The long-term vision of LightX-IDS is to provide a complete, modular, and extensible Industrial Internet of Things (IIoT) Intrusion Detection System capable of simulating industrial operations, generating realistic cyber attack scenarios, collecting labeled datasets, training machine learning models, and detecting malicious activities in real time.
+The overall architecture follows a pipeline: 
 
-The project is designed to replicate the communication flow of a modern smart factory, allowing industrial devices such as sensors and PLCs to exchange data through MQTT while supporting controlled cyber attack simulations. This environment provides a realistic foundation for cybersecurity experimentation without requiring access to physical industrial hardware.
+ 
 
-Rather than focusing on a single technology, LightX-IDS integrates multiple domains including Industrial IoT, network communication, cybersecurity, software engineering, data engineering, and machine learning into one unified platform.
+Industrial Environment 
 
-When all development phases are completed, the system will be capable of:
+        | 
 
-- Simulating an Industrial IoT factory environment.
-- Generating realistic normal operational traffic.
-- Simulating multiple industrial cyber attacks.
-- Automatically collecting and labeling industrial datasets.
-- Training and evaluating Machine Learning based Intrusion Detection Systems.
-- Detecting malicious traffic in real time.
-- Visualizing factory operations, attacks, and alerts through an interactive dashboard.
-- Providing a modular architecture that can be extended with additional sensors, communication protocols, attack types, and detection algorithms.
+        v 
 
-The architecture has been intentionally designed to ensure that each subsystem can evolve independently while remaining fully integrated within the overall LightX-IDS platform.
+Sensor / Device Data 
 
----
+        | 
 
-# 4. Project Objectives
+        v 
 
-The primary objective of LightX-IDS is to design and develop a modular Industrial Internet of Things (IIoT) Intrusion Detection System that accurately simulates industrial environments, generates realistic industrial communication, reproduces cyber attack scenarios, and applies Machine Learning techniques for attack detection.
+Attack Simulation 
 
-The project has been divided into multiple development phases to ensure that each subsystem is independently designed, implemented, tested, documented, and validated before integration into the complete platform.
+        | 
 
-The major objectives of the project are:
+        v 
 
-- Design a modular and scalable software architecture.
-- Simulate an Industrial IoT factory environment.
-- Implement reliable MQTT-based communication between industrial devices.
-- Simulate industrial sensors capable of producing realistic telemetry.
-- Develop a Programmable Logic Controller (PLC) to monitor factory operations.
-- Simulate multiple Industrial IoT cyber attacks.
-- Generate labeled datasets containing both normal and malicious traffic.
-- Train and evaluate Machine Learning based Intrusion Detection models.
-- Detect cyber attacks in real time.
-- Provide an interactive dashboard for monitoring factory status and security events.
-- Maintain a clean, reusable, and extensible software architecture.
+Raw Dataset 
 
-These objectives collectively ensure that LightX-IDS serves both as a cybersecurity research platform and as an educational software engineering project.
+        | 
 
----
+        v 
 
-# 5. High-Level System Architecture
+Dataset Cleaning 
 
-The complete LightX-IDS platform is organized into multiple independent architectural layers. Each layer has a clearly defined responsibility and communicates only with the layers directly connected to it.
+        | 
 
-The overall architecture is illustrated below.
+        v 
 
-```text
-                           User
-                             │
-                             ▼
-                    LightX-IDS Platform
-                             │
-                             ▼
-         ┌───────────────────────────────┐
-         │ Industrial Environment Layer  │
-         └───────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ MQTT Communication Layer    │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ PLC Decision Layer          │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ Cyber Attack Framework      │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ Dataset Generation Layer    │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ Machine Learning Layer      │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ Detection Engine            │
-          └─────────────────────────────┘
-                             │
-                             ▼
-          ┌─────────────────────────────┐
-          │ REST API & Dashboard Layer  │
-          └─────────────────────────────┘
-                             │
-                             ▼
-                          End User
-```
+Dataset Standardization 
 
-The layered architecture allows each subsystem to evolve independently while maintaining a clear separation of responsibilities. This modular approach improves maintainability, simplifies testing, and enables future extensions without affecting existing components.
+        | 
 
----
+        v 
 
-# 6. System Layers
+Combined LightX Dataset 
 
-LightX-IDS is divided into eight logical layers. Each layer performs a specific role within the overall architecture and communicates with adjacent layers through clearly defined interfaces.
+        | 
 
-The following sections describe the responsibility of each architectural layer.
+        v 
 
-## 6.1 Industrial Environment Layer
+Machine Learning / IDS 
 
-### Purpose
+        | 
 
-To simulate a realistic Industrial IoT factory capable of generating normal operational data.
+        v 
 
-### Components
+Backend API 
 
-- Temperature Sensor
-- Pressure Sensor
-- Factory Simulator
+        | 
 
-### Responsibilities
+        v 
 
-- Generate industrial telemetry.
-- Simulate continuous factory operation.
-- Produce realistic sensor values.
-- Supply operational data to the MQTT communication layer.
+Frontend Dashboard 
 
-### Current Status
+ 
 
-✅ Implemented (Phase 1)
+The architecture is designed to support both offline dataset-based analysis and, eventually, real-time intrusion detection. 
 
-### Future Role
+ 
 
-Provide realistic operational data for dataset generation and machine learning.
+--- 
 
----
+ 
 
-## 6.2 MQTT Communication Layer
+## 2. High-Level System Architectur
+ 
 
-### Purpose
++--------------------------------------------------------------+ 
 
-To provide reliable communication between all Industrial IoT devices.
+|                       LightX-IDS                              | 
 
-### Components
++--------------------------------------------------------------+ 
 
-- MQTT Publisher
-- MQTT Subscriber
-- Mosquitto MQTT Broker
+ 
 
-### Responsibilities
+                         Industrial Layer 
 
-- Publish sensor data.
-- Route industrial messages.
-- Deliver messages to subscribed devices.
-- Maintain asynchronous communication.
+                                | 
 
-### Current Status
+                                v 
 
-✅ Implemented (Phase 1)
+                  +--------------------------+ 
 
-### Future Role
+                  | Industrial Environment   | 
 
-Transport both normal industrial traffic and malicious traffic generated during cyber attack simulations.
+                  |      Simulation          | 
 
----
+                  +--------------------------+ 
 
-## 6.3 PLC Decision Layer
+                                | 
 
-### Purpose
+                                v 
 
-To simulate the behavior of an industrial Programmable Logic Controller responsible for monitoring factory operations.
+                  +--------------------------+ 
 
-### Components
+                  | Sensors / IoT Devices    | 
 
-- PLC Controller
-- Factory State
-- Rule Engine
+                  | Temperature / Pressure   | 
 
-### Responsibilities
+                  | Thermostat / Modbus      | 
 
-- Receive sensor updates.
-- Maintain factory state.
-- Evaluate operational rules.
-- Detect abnormal operating conditions.
+                  +--------------------------+ 
 
-### Current Status
+                                | 
 
-✅ Implemented (Phase 1)
+                                v 
 
-### Future Role
+                  +--------------------------+ 
 
-Supply operational context to the Machine Learning detection engine.
+                  | MQTT / Device Traffic    | 
 
----
+                  +--------------------------+ 
 
-## 6.4 Cyber Attack Framework
+                                | 
 
-### Purpose
+                                v 
 
-To simulate realistic Industrial IoT cyber attacks against the virtual factory.
+                  +--------------------------+ 
 
-### Components
+                  | Attack Simulation        | 
 
-- BaseAttack
-- Attack Manager
-- Scheduler
-- DoS Attack
-- Replay Attack
-- Spoofing Attack
-- Data Injection Attack
+                  | Injection / DDoS /       | 
 
-### Responsibilities
+                  | Backdoor / Password /     | 
 
-- Generate malicious industrial traffic.
-- Simulate different attack behaviors.
-- Produce labeled attack data.
-- Support future attack extensions.
+                  | Scanning / XSS / etc.    | 
 
-### Current Status
+                  +--------------------------+ 
 
-✅ Implemented (Phase 2)
+                                | 
 
-### Future Role
+                                v 
 
-Generate malicious datasets required for Machine Learning training.
+                  +--------------------------+ 
 
----
+                  | Dataset Generation       | 
 
-## 6.5 Dataset Generation Layer
+                  +--------------------------+ 
 
-**Current Status:** ⏳ Planned (Phase 3)
+                                | 
 
-This layer will collect industrial communication from both normal operation and cyber attack simulations, automatically label the captured traffic, and export structured datasets suitable for Machine Learning.
+                                v 
 
----
+                  +--------------------------+ 
 
-## 6.6 Machine Learning Layer
+                  | Dataset Engineering      | 
 
-**Current Status:** ⏳ Planned (Phase 4)
+                  | Profiling                 | 
 
-This layer will preprocess industrial datasets, train Machine Learning models, evaluate model performance, and prepare trained models for deployment.
+                  | Cleaning                  | 
 
----
+                  | Standardization           | 
 
-## 6.7 Detection Layer
+                  | Reporting                 | 
 
-**Current Status:** ⏳ Planned
+                  +--------------------------+ 
 
-This layer will receive real-time industrial traffic and classify incoming communication as either normal or malicious using the trained Machine Learning model.
+                                | 
 
----
+                                v 
 
-## 6.8 Dashboard & API Layer
+                  +--------------------------+ 
 
-**Current Status:** ⏳ Planned
+                  | LightX Combined Dataset  | 
 
-This layer will provide visualization, monitoring, alerts, and REST APIs for interacting with the complete LightX-IDS platform.
+                  +--------------------------+ 
 
----
+                                | 
 
-# 7. End-to-End Data Flow
+                                v 
 
-The operation of LightX-IDS follows a layered data flow architecture. Information generated inside the virtual factory travels through multiple processing stages before reaching the end user.
+                  +--------------------------+ 
 
-The following diagram illustrates the complete execution flow of the system.
+                  | Machine Learning / IDS   | 
 
-```text
-Temperature Sensor          Pressure Sensor
-        │                         │
-        └──────────────┬──────────┘
-                       │
-                       ▼
-               MQTT Publisher
-                       │
-                       ▼
-              Mosquitto MQTT Broker
-                       │
-                       ▼
-               MQTT Subscriber
-                       │
-                       ▼
-                PLC Controller
-                       │
-         ┌─────────────┴─────────────┐
-         │                           │
-         ▼                           ▼
- Normal Factory Data          Cyber Attack Modules
-         │                           │
-         └─────────────┬─────────────┘
-                       ▼
-             Dataset Generation Layer
-                       │
-                       ▼
-          Machine Learning Pipeline
-                       │
-                       ▼
-          Intrusion Detection Engine
-                       │
-                       ▼
-              REST API & Dashboard
-                       │
-                       ▼
-                     User
-```
+                  | Training & Detection     | 
 
-## Data Flow Explanation
+                  +--------------------------+ 
 
-The complete system operates in the following sequence:
+                                | 
 
-1. Industrial sensors continuously generate operational values.
-2. Sensor data is converted into MQTT messages.
-3. Messages are published to the MQTT Broker.
-4. The MQTT Broker forwards messages to subscribed components.
-5. The PLC Controller updates the current factory state.
-6. During attack simulations, malicious traffic is injected into the communication flow.
-7. The Dataset Generation Layer captures both normal and malicious traffic.
-8. Machine Learning models are trained using the generated datasets.
-9. During deployment, incoming traffic is classified by the Intrusion Detection Engine.
-10. Detection results are displayed through the REST API and Dashboard.
+                                v 
 
-This layered execution model ensures that every subsystem performs a single responsibility while contributing to the overall operation of the platform.
+                  +--------------------------+ 
 
----
+                  | Backend API              | 
 
-# 8. Core Design Principles
+                  | FastAPI / Services       | 
 
-The architecture of LightX-IDS is based on established software engineering principles to ensure maintainability, scalability, and extensibility.
+                  +--------------------------+ 
 
-## 8.1 Modularity
+                                | 
 
-Each subsystem has a clearly defined responsibility and can be developed, tested, and maintained independently.
+                                v 
 
-Example:
+                  +--------------------------+ 
 
-- MQTT handles communication.
-- Sensors generate data.
-- PLC performs control logic.
-- Attack modules generate malicious traffic.
-- Dataset modules collect data.
-- Machine Learning modules perform prediction.
+                  | React Frontend Dashboard | 
 
----
+                  +--------------------------+ 
 
-## 8.2 Separation of Concerns
+                                | 
 
-Each component focuses on one specific responsibility.
+                                v 
 
-For example:
+                  +--------------------------+ 
 
-- Sensors never communicate directly with the PLC.
-- The Publisher only publishes data.
-- The Subscriber only receives data.
-- The PLC only evaluates factory logic.
+                  | Monitoring & Analytics   | 
 
-This separation reduces complexity and improves code readability.
+                  +--------------------------+ 
+## 3. Architectural Components 
 
----
+### 3.1 Industrial Environment Simulation 
 
-## 8.3 Reusability
+The industrial simulation layer represents the factory environment used for generating Industrial IoT traffic. 
 
-Reusable base classes are used wherever possible.
+The simulator represents devices and sensors that produce measurements such as: 
 
-Examples include:
+Device ID 
 
-- BaseSensor
-- BaseAttack
+Temperature 
 
-This allows new sensors and attack types to be added with minimal code duplication.
+Pressure 
 
----
+Sensor status 
 
-## 8.4 Scalability
+Timestamp 
 
-The architecture supports future expansion without requiring significant modifications.
+Device state 
 
-Examples include:
+Other industrial sensor values 
 
-- Additional sensors
-- Multiple factory production lines
-- New attack types
-- Additional MQTT topics
-- Alternative Machine Learning models
+The simulator is intended to provide a controlled environment in which normal industrial activity can be reproduced consistently. 
 
----
+The simulated environment can communicate using Industrial IoT communication mechanisms such as MQTT. 
 
-## 8.5 Maintainability
+The generated sensor traffic forms the baseline for normal system behavior and provides the input on which attack scenarios can be applied. 
 
-The project is divided into logical folders and modules.
+ 
 
-Each module has a well-defined responsibility, making debugging, testing, and future development easier.
+### 3.2 MQTT Communication Layer 
 
----
+MQTT is used as the communication mechanism for IoT-style sensor messaging in the industrial environment. 
 
-## 8.6 Testability
+The communication flow can be represented as: 
 
-Every major subsystem is designed to support independent testing before integration.
++------------------+ 
 
-Examples:
+| Sensor / Device  | 
 
-- Sensor testing
-- MQTT testing
-- PLC testing
-- Attack testing
-- Integration testing
++------------------+ 
 
-This approach ensures that problems are detected early during development.
+         | 
 
----
+         | MQTT Message 
 
-# 9. Current Implementation Status
+         v 
 
-The development of LightX-IDS follows a phased roadmap.
++------------------+ 
 
-| Phase | Description | Status |
-|--------|-------------|--------|
-| Phase 0 | Project Planning & Architecture | ✅ Completed |
-| Phase 1 | Industrial Environment Simulation | ✅ Completed |
-| Phase 2 | Cyber Attack Framework | ✅ Completed |
-| Phase 3 | Dataset Generation | ⏳ Planned |
-| Phase 4 | Machine Learning IDS | ⏳ Planned |
-| Phase 5 | Dashboard & Visualization | ⏳ Planned |
-| Phase 6 | REST API Backend | ⏳ Planned |
-| Phase 7 | Frontend | ⏳ Planned |
-| Phase 8 | Deployment & Documentation | ⏳ Planned |
+| MQTT Broker      | 
 
-At the time of writing, the industrial simulation and cyber attack framework have been successfully implemented and tested. The next milestone is dataset generation.
++------------------+ 
 
----
+         | 
 
-# 10. Future Expansion
+         v 
 
-The modular architecture of LightX-IDS has been designed to support future enhancements.
++------------------+ 
 
-Potential extensions include:
+| Subscriber /     | 
 
-- Multiple production lines
-- Additional industrial sensors
-- Modbus and OPC-UA protocol support
-- Additional cyber attack techniques
-- Deep Learning based intrusion detection
-- Cloud deployment
-- Docker containerization
-- Real PLC integration
-- Real SCADA integration
-- Multi-user dashboard
-- Real-time alerting system
+| Monitoring Layer | 
 
-The architecture has been intentionally designed to allow these features to be integrated without major changes to the existing system.
++------------------+
 
----
+MQTT messages can contain sensor readings and device-related information. 
 
-# 11. Conclusion
+The communication layer provides a realistic mechanism for producing Industrial IoT traffic before attack simulation and detection are applied. 
 
-LightX-IDS follows a layered and modular architecture that separates industrial simulation, communication, cyber attack generation, dataset creation, machine learning, and visualization into independent but interconnected subsystems.
+ 
 
-This architecture provides a strong foundation for incremental development, simplifies testing and maintenance, and supports future expansion as new features are introduced.
+### 3.3 Attack Simulation 
 
-The System Architecture Document serves as the primary architectural reference for the project and provides the foundation for all subsequent phase documents.
+The attack simulation layer introduces malicious activity into the otherwise normal industrial environment. 
+
+The project datasets contain multiple attack categories depending on the source dataset. 
+
+Observed attack categories include: 
+
+Injection 
+
+Backdoor 
+
+Password attacks 
+
+DDoS 
+
+DoS 
+
+Ransomware 
+
+XSS 
+
+Scanning 
+
+MITM 
+
+Normal traffic is represented using the label: 
+
+0 = Normal 
+
+Attack traffic is represented using: 
+
+1 = Attack 
+
+The attack type is retained separately as a multiclass field. 
+
+Example: 
+
+label = 0 
+
+attack_type = normal 
+
+or: 
+
+label = 1 
+
+attack_type = injection 
+
+This allows LightX-IDS to support both binary intrusion detection and attack-type classification. 
+
+ 
+
+## 4. Dataset Engineering Architecture 
+
+The dataset engineering layer converts raw Industrial IoT and network datasets into a consistent format suitable for machine-learning workflows. 
+
+The current dataset engineering workflow uses the TON-IoT datasets containing: 
+
+Modbus 
+
+Thermostat 
+
+Weather 
+
+Network 
+
+The processing pipeline is: 
+
+Raw TON-IoT Dataset 
+
+        | 
+
+        v 
+
+     Profiling 
+
+        | 
+
+        v 
+
+     Cleaning 
+
+        | 
+
+        v 
+
+  Standardization 
+
+        | 
+
+        v 
+
+ Individual Final Datasets 
+
+        | 
+
+        v 
+
+     Combining 
+
+        | 
+
+        v 
+
+LightX Combined Dataset 
+
+### 4.1 Dataset Profiling 
+
+Profiling is performed before cleaning to understand the structure and quality of each dataset. 
+
+The profiler checks: 
+
+- Dataset shape 
+
+- Data types 
+
+- Null values 
+
+Duplicate rows 
+
+Numeric statistics 
+
+Label distribution 
+
+Attack-type distribution 
+
+The profiling implementation is located at: 
+
+dataset_engineering/src/profiling/profiler.py 
+
+The generated profiling information is stored under: 
+
+dataset_engineering/docs/datasets/profiling/ 
+
+ 
+
+### 4.2 Dataset Cleaning 
+
+The cleaning layer removes exact duplicate records and invalid label/type records. 
+
+The cleaning implementation is located at: 
+
+dataset_engineering/src/cleaning/cleaner.py 
+
+The cleaner also handles TON-IoT placeholder values where applicable. 
+
+In the network dataset, values represented by - in DNS, SSL, HTTP, and related fields indicate that a particular protocol-specific field is not applicable to that connection. 
+
+These placeholders are converted to actual missing values during cleaning. 
+
+The current cleaning process does not attempt to replace such values with artificial sensor measurements. 
+
+ 
+
+### 4.3 Dataset Standardization 
+
+The standardization layer maps dataset-specific column names to the common LightX-IDS schema. 
+
+The standardization implementation is located at: 
+
+dataset_engineering/src/standerdization/standerizer.py 
+
+The common schema uses fields such as: 
+
+sensor_reading_1 
+
+sensor_reading_2 
+
+sensor_reading_3 
+
+sensor_reading_4 
+
+label 
+
+attack_type 
+
+timestamp 
+
+Network-specific fields are represented using: 
+
+source_ip 
+
+destination_ip 
+
+source_port 
+
+destination_port 
+
+protocol 
+
+service 
+
+duration 
+
+src_bytes 
+
+dst_bytes 
+
+label 
+
+attack_type 
+
+The purpose of standardization is to make heterogeneous datasets easier to process using a common downstream workflow. 
+
+ 
+
+## 5. Current Dataset Architecture 
+
+The current dataset engineering repository contains raw, processed, and standardized versions of the datasets. 
+
+dataset_engineering/ 
+
+| 
+
++-- datasets/ 
+
+|   | 
+
+|   +-- raw/ 
+
+|   |   | 
+
+|   |   +-- ton_iot/ 
+
+|   |       +-- Train_Test_IoT_Modbus.csv 
+
+|   |       +-- Train_Test_IoT_Thermostat.csv 
+
+|   |       +-- Train_Test_IoT_Weather.csv 
+
+|   |       +-- train_test_network.csv 
+
+|   | 
+
+|   +-- processed/ 
+
+|   |   +-- modbus_clean.csv 
+
+|   |   +-- thermostat_clean.csv 
+
+|   |   +-- weather_clean.csv 
+
+|   |   +-- network_clean.csv 
+
+|   |   +-- Train_Test_IoT_Modbus_clean.csv 
+
+|   |   +-- Train_Test_IoT_Thermostat_clean.csv 
+
+|   |   +-- Train_Test_IoT_Weather_clean.csv 
+
+|   |   +-- train_test_network_clean.csv 
+
+|   | 
+
+|   +-- standardized/ 
+
+|       +-- modbus_final.csv 
+
+|       +-- thermostat_final.csv 
+
+|       +-- weather_final.csv 
+
+|       +-- network_final.csv 
+
+|       +-- lightx_combined.csv 
+
+| 
+
++-- src/ 
+
+    | 
+
+    +-- profiling/ 
+
+    |   +-- profiler.py 
+
+    | 
+
+    +-- cleaning/ 
+
+    |   +-- cleaner.py 
+
+    | 
+
+    +-- standerdization/ 
+
+    |   +-- standerizer.py 
+
+    | 
+
+    +-- reporting/ 
+
+        +-- combine.py 
+
+ 
+
+##  6. Standardized Dataset Flow 
+
+The four standardized datasets are combined into a single LightX dataset. 
+
++---------------------+ 
+
+|   Modbus Final      | 
+
+|    17,792 rows      | 
+
++---------------------+ 
+
+          | 
+
+          | 
+
++---------------------+ 
+
+| Thermostat Final    | 
+
+|    32,350 rows      | 
+
++---------------------+ 
+
+          | 
+
+          | 
+
++---------------------+ 
+
+| Weather Final       | 
+
+|    39,260 rows      | 
+
++---------------------+ 
+
+          | 
+
+          | 
+
++---------------------+ 
+
+| Network Final       | 
+
+|   190,474 rows      | 
+
++---------------------+ 
+
+          | 
+
+          v 
+
++---------------------+ 
+
+| Combining           | 
+
++---------------------+ 
+
+          | 
+
+          v 
+
++---------------------+ 
+
+| LightX Combined     | 
+
+| Dataset             | 
+
++---------------------+ 
+
+The combined dataset is generated by: 
+
+dataset_engineering/src/reporting/combine.py 
+
+The resulting file is: 
+
+datasets/standardized/lightx_combined.csv 
+
+The combined dataset provides a common data source for subsequent machine-learning and intrusion-detection stages. 
+
+ 
+
+## 7. Machine Learning / IDS Layer 
+
+The machine-learning layer uses the processed and standardized datasets to develop intrusion-detection capabilities. 
+
+The intended workflow is: 
+
+LightX Dataset 
+
+      | 
+
+      v 
+
+Feature Preparation 
+
+      | 
+
+      v 
+
+Train / Test Split 
+
+      | 
+
+      v 
+
+Model Training 
+
+      | 
+
+      v 
+
+Model Evaluation 
+
+      | 
+
+      v 
+
+Attack Prediction 
+
+      | 
+
+      v 
+
+Prediction Result 
+
+The system is intended to support: 
+
+Binary attack detection 
+
+Attack-type classification 
+
+Performance evaluation 
+
+False-positive analysis 
+
+Explainability 
+
+Real-time prediction 
+
+The exact final ML model, feature-selection strategy, model metrics, and trained-model architecture cannot be filled in at this stage unless the completed machine-learning implementation and results are provided. 
+
+ 
+
+## 8. Backend Architecture 
+
+The backend acts as the interface between the machine-learning/detection components and the frontend dashboard. 
+
+The backend is organized into components including: 
+
+backend/ 
+
+| 
+
++-- api/ 
+
++-- attacks/ 
+
++-- core/ 
+
++-- datasets/ 
+
++-- detection/ 
+
++-- industrial/ 
+
++-- models/ 
+
++-- preprocessing/ 
+
++-- services/ 
+
++-- main.py 
+
+The backend is intended to provide API access to system functionality such as: 
+
+Sensor information 
+
+Attack monitoring 
+
+IDS predictions 
+
+Dataset statistics 
+
+System logs 
+
+Configuration/settings 
+
+The exact API endpoints, request/response schemas, authentication implementation, database configuration, and deployment configuration cannot be filled in here without the final backend implementation/API documentation. 
+
+ 
+
+## 9. Frontend Architecture 
+
+The frontend provides the user-facing monitoring and analytics interface. 
+
+The frontend is implemented using: 
+
+React 
+
+Vite 
+
+Tailwind CSS 
+
+React Router 
+
+Axios 
+
+React Icons 
+
+Charting components 
+
+The frontend contains the following major pages: 
+
+Dashboard 
+
+Sensors 
+
+Attack Monitoring 
+
+IDS Prediction 
+
+Dataset Analytics 
+
+System Logs 
+
+Settings 
+
+Login 
+
+The routing structure includes paths corresponding to: 
+
+/ 
+
+ /sensors 
+
+ /attacks 
+
+ /prediction 
+
+ /dataset 
+
+ /logs 
+
+ /settings 
+
+ /login 
+
+The frontend communicates with the backend through API service modules. 
+
+The intended communication architecture is: 
+
++--------------------------+ 
+
+| React Frontend           | 
+
+|                          | 
+
+| Dashboard                | 
+
+| Sensors                  | 
+
+| Attack Monitoring        | 
+
+| IDS Prediction           | 
+
+| Dataset Analytics        | 
+
+| System Logs              | 
+
+| Settings                 | 
+
++------------+-------------+ 
+
+             | 
+
+             | HTTP API 
+
+             v 
+
++--------------------------+ 
+
+| Backend API              | 
+
++------------+-------------+ 
+
+             | 
+
+       +-----+-----+ 
+
+       |           | 
+
+       v           v 
+
++----------+  +-----------+ 
+
+| Detection|  | Datasets  | 
+
+| / Models |  | / Services| 
+
++----------+  +-----------+ 
+
+ 
+
+## 10. Dashboard Architecture 
+
+The dashboard is responsible for presenting the current system state in a human-readable form. 
+
+Dashboard components include statistical cards and sensor visualizations. 
+
+Examples of dashboard components include: 
+
+StatCard 
+
+TemperatureChart 
+
+PressureChart 
+
+The dashboard is designed to provide a centralized view of: 
+
+Industrial sensor activity 
+
+Current system statistics 
+
+Attack activity 
+
+IDS predictions 
+
+Dataset analytics 
+
+System events 
+
+The exact final dashboard metrics depend on the backend API and completed detection implementation. 
+
+ 
+
+## 11. Frontend API Communication 
+
+The frontend contains an API service layer that abstracts communication with the backend. 
+
+The frontend uses an API base URL configured through the Vite environment configuration. 
+
+The development API configuration used during development is: 
+
+http://localhost:8000/api 
+
+This allows the frontend to communicate with the locally running backend while keeping the API address configurable. 
+
+The frontend API layer is intended to provide separate service functions for: 
+
+Sensors 
+
+Attacks 
+
+Predictions 
+
+Dataset statistics 
+
+## 12. Authentication Architecture 
+
+The frontend contains a login page and authentication-related hooks. 
+
+The final authentication mechanism depends on the completed backend authentication implementation. 
+
+The exact authentication provider, token format, persistence mechanism, user roles, and authorization rules cannot be filled in until the final authentication implementation is confirmed. 
+
+ 
+
+## 13. Data Flow 
+
+The complete intended data flow of LightX-IDS is: 
+
+Industrial Simulation 
+
+        | 
+
+        v 
+
+Sensor / IoT Messages 
+
+        | 
+
+        v 
+
+Attack Simulation 
+
+        | 
+
+        v 
+
+Traffic / Event Data 
+
+        | 
+
+        v 
+
+Dataset Generation 
+
+        | 
+
+        v 
+
+Raw Dataset 
+
+        | 
+
+        v 
+
+Profiling 
+
+        | 
+
+        v 
+
+Cleaning 
+
+        | 
+
+        v 
+
+Standardization 
+
+        | 
+
+        v 
+
+LightX Combined Dataset 
+
+        | 
+
+        v 
+
+Feature Preparation 
+
+        | 
+
+        v 
+
+ML Model 
+
+        | 
+
+        v 
+
+IDS Prediction 
+
+        | 
+
+        v 
+
+Backend API 
+
+        | 
+
+        v 
+
+Frontend Dashboard 
+
+        | 
+
+        v 
+
+Human Monitoring / Analysis 
+
+ 
+
+## 14. Separation of Responsibilities 
+
+The architecture separates responsibilities between components. 
+
+Industrial Simulation 
+
+Responsible for: 
+
+Simulating industrial devices 
+
+Generating sensor readings 
+
+Producing IoT communication 
+
+Attack Simulation 
+
+Responsible for: 
+
+Generating malicious scenarios 
+
+Producing attack traffic/events 
+
+Associating events with attack categories 
+
+Dataset Engineering 
+
+Responsible for: 
+
+Profiling datasets 
+
+Cleaning datasets 
+
+Standardizing schemas 
+
+Combining datasets 
+
+Producing reusable datasets for ML 
+
+Machine Learning 
+
+Responsible for: 
+
+Training intrusion-detection models 
+
+Predicting attack activity 
+
+Classifying attack types 
+
+Evaluating model performance 
+
+Supporting explainability 
+
+Backend 
+
+Responsible for: 
+
+Exposing system functionality through APIs 
+
+Connecting detection/model components to the frontend 
+
+Providing sensor, attack, prediction, and dataset information 
+
+Frontend 
+
+Responsible for: 
+
+Visualizing system state 
+
+Displaying sensor information 
+
+Monitoring attacks 
+
+Displaying IDS predictions 
+
+Presenting dataset analytics 
+
+Showing system logs 
+
+Providing configuration interfaces 
+
+ 
+
+## 15. Current Implementation Status 
+
+Based on the currently available project structure and implementation information: 
+
+Implemented / Available 
+
+TON-IoT raw datasets 
+
+Dataset profiling 
+
+Dataset cleaning 
+
+Dataset standardization 
+
+Dataset combination 
+
+Dataset reports 
+
+LightX combined dataset 
+
+React/Vite frontend structure 
+
+Frontend routing 
+
+Dashboard components 
+
+Sensor charts 
+
+Attack monitoring page structure 
+
+IDS prediction page structure 
+
+Dataset analytics page structure 
+
+System logs page structure 
+
+Settings page structure 
+
+Login page structure 
+
+Frontend API service structure 
+
+Production frontend build 
+
+Cannot be filled in currently 
+
+The following architectural details cannot be stated as completed until the relevant implementation/results are confirmed: 
+
+Final ML model architecture 
+
+Final ML accuracy, precision, recall, F1-score, and other evaluation metrics 
+
+Final false-positive reduction method 
+
+Final explainability implementation 
+
+Confirmed real-time detection pipeline 
+
+Complete backend API endpoint specification 
+
+Database architecture, if any 
+
+Production authentication implementation 
+
+Final deployment infrastructure 
+
+Production hosting configuration 
+
+Final CI/CD architecture 
+
+These should be updated in this document once the corresponding implementation is finalized. 
+
+ 
+
+## 16. Design Principles 
+
+LightX-IDS follows the following architectural principles: 
+
+Modularity 
+
+Each major stage is separated so that dataset engineering, machine learning, backend development, and frontend development can evolve independently. 
+
+Reusability 
+
+The dataset-engineering pipeline is designed to process multiple datasets using a common workflow. 
+
+Standardization 
+
+Different source datasets are mapped into a common LightX-IDS representation wherever possible. 
+
+Extensibility 
+
+The architecture allows additional datasets, attack types, ML models, sensors, and dashboard features to be added later. 
+
+Separation of Concerns 
+
+Data processing, detection, API services, and presentation are maintained as separate layers. 
+
+Explainability 
+
+The system is intended to provide understandable intrusion-detection results rather than only producing a binary prediction. 
+
+Real-Time Readiness 
+
+Although the current workflow includes offline dataset processing, the architecture is designed to support eventual real-time sensor and attack monitoring. 
+
+ 
+
+## 17. Summary 
+
+LightX-IDS is structured as a layered Industrial IoT intrusion-detection platform. 
+
+The system begins with an industrial environment and IoT traffic, introduces or captures attack activity, processes the resulting data through a reusable dataset-engineering pipeline, and prepares the data for machine-learning-based intrusion detection. 
+
+The resulting predictions are exposed through a backend API and presented through a React-based dashboard. 
+
+The architecture therefore connects: 
+
+Industrial Environment 
+
+        | 
+
+        v 
+
+IoT Communication 
+
+        | 
+
+        v 
+
+Attack Simulation 
+
+        | 
+
+        v 
+
+Dataset Engineering 
+
+        | 
+
+        v 
+
+Machine Learning 
+
+        | 
+
+        v 
+
+Intrusion Detection 
+
+        | 
+
+        v 
+
+Backend API 
+
+        | 
+
+        v 
+
+Frontend Dashboard 
+
+This layered architecture provides the foundation for developing LightX-IDS as a lightweight, modular, and extensible Industrial IoT intrusion-detection system.

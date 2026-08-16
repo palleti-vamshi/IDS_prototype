@@ -1,353 +1,383 @@
-# Phase 0 – Project Planning
+# Phase 0 — Project Planning
 
-## Document Information
+## 1. Overview
 
-| Field | Value |
-|--------|-------|
-| Document | Phase 0 – Project Planning |
-| Project | LightX-IDS |
-| Version | 1.0 |
-| Status | Completed |
-| Author | Vamshi |
-| Type | Phase Design Document |
-| Last Updated | July 2026 |
+Phase 0 establishes the foundation of the LightX-IDS project, including the project objective, scope, architecture direction, technology choices, development phases, and team responsibilities.
+
+LightX-IDS is designed as a lightweight Industrial Intrusion Detection System (IDS) for Industrial IoT environments. The system simulates industrial sensor traffic, generates cyber-attack scenarios, creates labeled datasets, prepares data for machine learning, detects abnormal activity, and presents system information through a web dashboard.
 
 ---
 
-# 1. Introduction
+## 2. Project Title
 
-Every successful software project begins with careful planning before any code is written. The objective of Phase 0 was to define the vision, scope, architecture, technologies, and development strategy for LightX-IDS.
-
-Instead of immediately implementing features, this phase focused on understanding the problem, identifying project requirements, selecting suitable technologies, designing a modular architecture, and preparing a structured roadmap for future development.
-
-By investing time in planning, the project minimizes unnecessary redesigns during later stages and provides a clear foundation for implementation.
-
-Phase 0 established the engineering principles that guide the development of every subsequent phase.
+**LightX-IDS — Lightweight Industrial Intrusion Detection System**
 
 ---
 
-# 2. Learning Objectives
+## 3. Problem Statement
 
-After reading this document, the reader will understand:
+Industrial IoT environments contain interconnected sensors, controllers, communication systems, and monitoring applications. These interconnected components can be exposed to cyber threats such as Denial of Service, Replay, Injection, and Spoofing attacks.
 
-- Why LightX-IDS was developed.
-- The real-world problem the project addresses.
-- The goals and scope of the project.
-- The reasoning behind the selected technologies.
-- The planned software architecture.
-- The phased development strategy.
-- The engineering decisions made before implementation began.
+Traditional intrusion detection solutions may introduce significant computational and infrastructure overhead. LightX-IDS aims to provide a lightweight and modular approach that can be developed and evaluated using a simulated industrial environment and both generated and external cybersecurity datasets.
 
 ---
 
-# 3. Background
+## 4. Project Objectives
 
-The Industrial Internet of Things (IIoT) has transformed traditional manufacturing by connecting industrial devices such as sensors, Programmable Logic Controllers (PLCs), actuators, and supervisory systems through communication networks. This connectivity enables factories to automate production, monitor equipment in real time, and improve operational efficiency.
+The primary objectives of LightX-IDS are:
 
-While these advancements have increased productivity, they have also introduced new cybersecurity challenges. Industrial devices that were once isolated are now connected to internal networks and, in many cases, the Internet. As a result, industrial environments have become attractive targets for cyber attacks.
-
-Unlike traditional IT systems, industrial systems operate under strict real-time and safety requirements. A successful cyber attack may not only compromise data but can also interrupt production, damage equipment, or create safety hazards.
-
-To understand these challenges and explore possible detection techniques, a realistic simulation platform is required. Building and experimenting on a real industrial environment is expensive, complex, and often impractical for students and researchers.
-
-LightX-IDS addresses this challenge by providing a software-based Industrial IoT simulation platform where industrial communication, cyber attacks, dataset generation, and Machine Learning based intrusion detection can be studied within a controlled environment.
-
----
-
-# 4. Problem Identification
-
-Modern Industrial IoT environments face several cybersecurity challenges:
-
-- Increasing connectivity between industrial devices.
-- Lack of realistic datasets for Industrial IoT intrusion detection.
-- Difficulty in experimenting with cyber attacks on real industrial systems.
-- Limited educational platforms that combine industrial simulation, cyber attack generation, and machine learning within a single project.
-- Need for a modular system that can be extended as new technologies and attack techniques emerge.
-
-These challenges motivated the development of LightX-IDS as both a learning platform and a practical engineering project.
+1. Simulate an Industrial IoT environment containing sensors and industrial communication.
+2. Generate realistic normal sensor traffic.
+3. Simulate multiple cyber-attack scenarios.
+4. Collect MQTT traffic generated by the industrial environment.
+5. Automatically label collected records as normal or attack traffic.
+6. Generate structured datasets suitable for machine learning.
+7. Support preprocessing and standardization of external Industrial IoT datasets.
+8. Train machine learning models for intrusion detection.
+9. Reduce false positives through suitable preprocessing and model evaluation.
+10. Provide explainability for model predictions.
+11. Support real-time intrusion detection.
+12. Provide a web-based dashboard for monitoring sensors, attacks, predictions, datasets, and system logs.
 
 ---
 
-# 5. Project Goals
+## 5. Project Scope
 
-The primary goals established during the planning phase were:
+### Included
 
-- Build a realistic Industrial IoT simulation.
-- Simulate industrial communication using MQTT.
-- Model factory devices such as sensors and PLCs.
-- Develop reusable software components following Object-Oriented Programming principles.
-- Simulate multiple cyber attack scenarios.
-- Generate labeled datasets for Machine Learning.
-- Train an Intrusion Detection System capable of detecting malicious industrial traffic.
-- Visualize factory operation and attack detection through an interactive dashboard.
-- Maintain a modular architecture that supports future expansion.
+- Industrial IoT simulation
+- MQTT-based communication
+- Temperature and pressure sensor simulation
+- Cyber-attack simulation
+- Dataset generation
+- MQTT traffic collection
+- Data parsing and validation
+- Automatic attack labeling
+- CSV dataset export
+- External dataset preprocessing
+- TON-IoT dataset integration
+- Dataset cleaning
+- Dataset profiling
+- Dataset standardization
+- Dataset combination
+- Machine learning integration
+- Real-time detection architecture
+- Web-based monitoring dashboard
 
-These goals served as the foundation for the project's phased development approach.
+### Currently Outside the Implemented Scope
 
----
+- Physical industrial hardware deployment
+- Production-scale distributed deployment
+- Direct integration with real industrial control systems
+- Production authentication and authorization infrastructure
+- Cloud deployment
 
-# 6. Functional Requirements
-
-Functional requirements define the core capabilities that the LightX-IDS platform must provide. These requirements describe the expected behavior of the system from a functional perspective.
-
-| Requirement ID | Functional Requirement | Planned Phase |
-|----------------|------------------------|---------------|
-| FR-01 | The system shall simulate an Industrial IoT factory environment. | Phase 1 |
-| FR-02 | The system shall simulate industrial sensors such as temperature and pressure sensors. | Phase 1 |
-| FR-03 | The system shall support MQTT-based communication between industrial devices. | Phase 1 |
-| FR-04 | The system shall implement a PLC capable of monitoring industrial sensor data. | Phase 1 |
-| FR-05 | The system shall simulate multiple Industrial IoT cyber attacks. | Phase 2 |
-| FR-06 | The system shall generate labeled datasets containing both normal and malicious traffic. | Phase 3 |
-| FR-07 | The system shall preprocess datasets before Machine Learning training. | Phase 4 |
-| FR-08 | The system shall train Machine Learning models for intrusion detection. | Phase 4 |
-| FR-09 | The system shall detect cyber attacks in real time. | Phase 5 |
-| FR-10 | The system shall provide an interactive dashboard for monitoring factory operations and security events. | Phase 5 |
-| FR-11 | The system shall expose REST APIs for communication between backend services and the dashboard. | Phase 6 |
-| FR-12 | The system shall provide a user-friendly frontend interface. | Phase 7 |
-| FR-13 | The system shall support deployment and documentation for future extensions. | Phase 8 |
-
-The phased implementation of these requirements allows each subsystem to be independently developed, tested, documented, and validated before integration into the complete LightX-IDS platform.
+These may be considered as future extensions.
 
 ---
 
-# 7. Non-Functional Requirements
+## 6. Development Phases
 
-Non-functional requirements describe the quality attributes that the system should maintain throughout its development and operation.
+The project is organized into the following phases:
 
-| Requirement ID | Non-Functional Requirement |
-|----------------|---------------------------|
-| NFR-01 | The architecture shall be modular and easy to extend. |
-| NFR-02 | The system shall follow Object-Oriented Programming principles. |
-| NFR-03 | The codebase shall remain maintainable and well documented. |
-| NFR-04 | Each subsystem shall support independent testing. |
-| NFR-05 | The architecture shall minimize code duplication through reusable components. |
-| NFR-06 | The system shall support future expansion without significant redesign. |
-| NFR-07 | Communication between industrial components shall be lightweight and efficient. |
-| NFR-08 | Every completed phase shall be documented and tested before moving to the next phase. |
-| NFR-09 | The project shall follow a consistent folder structure and coding standard. |
-| NFR-10 | Documentation shall clearly explain both implementation details and engineering decisions.
+### Phase 0 — Project Planning
+Defines objectives, scope, architecture, technology stack, responsibilities, and development roadmap.
 
-These quality requirements guided every architectural decision made during the planning phase and continue to influence the development of subsequent phases.
+### Phase 1 — Industrial Environment
+Develops the simulated industrial environment, sensors, MQTT communication, and factory simulation.
+
+### Phase 2 — Attack Framework
+Implements the cyber-attack simulation framework, including DoS, Replay, Injection, and Spoofing attacks.
+
+### Phase 3 — Dataset Generation
+Collects simulated MQTT traffic, labels records, and generates datasets for machine learning.
+
+### Phase 4 — Machine Learning
+Prepares datasets, trains intrusion detection models, evaluates performance, and supports prediction.
+
+### Phase 5 — Dashboard
+Develops the frontend interface for monitoring industrial sensors, attacks, datasets, predictions, and logs.
+
+### Phase 6 — Backend API
+Connects the backend services and detection components with the frontend through APIs.
+
+### Phase 7 — Frontend
+Completes the React-based dashboard and integrates it with backend services.
+
+### Phase 8 — Deployment
+Prepares the complete system for deployment and evaluation.
 
 ---
 
-# 8. Technology Selection
+## 7. Planned Technology Stack
 
-Selecting the appropriate technologies was one of the most important activities during the planning phase. Every technology was chosen based on the project requirements, ease of development, community support, scalability, and future integration with Machine Learning.
+### Backend
 
-The following subsections explain the reasoning behind each major technology choice.
-
----
-
-## 8.1 Programming Language
-
-### Selected Technology
-
-**Python**
-
-### Alternatives Considered
-
-- C++
-- Java
 - Python
-
-### Reason for Selection
-
-Python was selected because it provides an excellent balance between rapid development, readability, extensive library support, and Machine Learning capabilities.
-
-The later phases of LightX-IDS require data preprocessing, dataset generation, machine learning model training, and backend API development. Python provides mature libraries for all of these tasks while allowing the entire project to remain within a single programming ecosystem.
-
-### Benefits
-
-- Simple and readable syntax.
-- Excellent support for Machine Learning.
-- Large open-source ecosystem.
-- Fast development cycle.
-- Cross-platform compatibility.
-
----
-
-## 8.2 Communication Protocol
-
-### Selected Technology
-
-**MQTT (Message Queuing Telemetry Transport)**
-
-### Alternatives Considered
-
-- HTTP
-- WebSockets
 - MQTT
-
-### Reason for Selection
-
-Industrial IoT devices continuously exchange small packets of information. MQTT is specifically designed for lightweight communication between constrained devices and follows a publish-subscribe architecture that naturally fits industrial environments.
-
-Unlike HTTP, MQTT allows sensors to continuously publish data without requiring repeated request-response communication.
-
-### Benefits
-
-- Lightweight protocol.
-- Publish-subscribe communication model.
-- Low network overhead.
-- Widely adopted in Industrial IoT.
-- Easy integration with sensors and PLCs.
-
----
-
-## 8.3 MQTT Broker
-
-### Selected Technology
-
-**Mosquitto MQTT Broker**
-
-### Reason for Selection
-
-Mosquitto is a lightweight, open-source MQTT broker that is easy to configure, highly reliable, and widely used for learning and research projects.
-
-It provides all the required functionality for simulating industrial communication without introducing unnecessary complexity.
-
----
-
-## 8.4 Development Environment
-
-The project is developed using:
-
-- Visual Studio Code
-- Git
-- GitHub
-- Python Virtual Environment (venv)
-
-These tools provide version control, dependency isolation, collaborative development, and a consistent development workflow.
-
----
-
-## 8.5 Future Technologies
-
-Later phases of the project will introduce additional technologies, including:
-
+- Paho MQTT
 - Pandas
 - NumPy
-- Scikit-learn
-- FastAPI
+- Dataclasses
+- Threading
+
+### Machine Learning
+
+The ML layer is planned to support standard machine learning workflows for binary and multi-class intrusion detection.
+
+Potential model and evaluation components include:
+
+- Classification models
+- Feature preprocessing
+- Train/test splitting
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrix
+
+The final model selection is to be documented after the ML implementation is completed.
+
+### Frontend
+
 - React
-- Docker
+- Vite
+- Tailwind CSS
+- React Router
+- Axios
+- React Icons
+- Chart.js / Recharts
 
-These technologies have been planned from the beginning to ensure a smooth progression from industrial simulation to real-time intrusion detection.
+### Data Storage
 
----
-
-# 9. Software Architecture Planning
-
-Before implementation began, the project architecture was divided into independent modules.
-
-Each module was assigned a single primary responsibility.
-
-This modular architecture allows individual components to be developed, tested, documented, and maintained independently.
-
-The planned architecture included:
-
-- Industrial Environment
-- MQTT Communication
-- PLC Layer
-- Cyber Attack Framework
-- Dataset Generation
-- Machine Learning
-- Detection Engine
-- REST API
-- Frontend Dashboard
-
-This layered design ensures that future enhancements can be integrated without requiring major modifications to previously completed components.
+- CSV datasets during the current development and experimentation stage.
 
 ---
 
-# 10. Engineering Decisions
+## 8. Dataset Strategy
 
-During the planning phase, several important architectural decisions were made to ensure that LightX-IDS remains modular, maintainable, scalable, and easy to extend. Rather than making implementation decisions during development, these design choices were established before writing the majority of the code.
+LightX-IDS follows two complementary dataset strategies.
 
-The following table summarizes the key engineering decisions made during Phase 0.
+### 8.1 Generated Dataset
 
-| Decision | Reason | Benefits | Trade-offs |
-|----------|--------|----------|------------|
-| Modular Project Structure | Separate different responsibilities into independent modules. | Better organization, easier maintenance, scalable architecture. | Slightly more folders and files to manage. |
-| Layered Architecture | Divide the project into logical layers such as Industrial Environment, Attack Framework, Dataset Generation, and Machine Learning. | Clear separation of concerns and easier future expansion. | Requires careful planning of communication between layers. |
-| Python as Primary Language | Support Machine Learning, rapid development, and extensive library availability. | Faster development and excellent ecosystem. | Lower raw performance compared to C++. |
-| MQTT Communication | Simulate realistic Industrial IoT communication using a lightweight protocol. | Low overhead and publish-subscribe communication. | Requires an MQTT broker for communication. |
-| Object-Oriented Design | Improve code reuse and maintainability through classes and inheritance. | Cleaner architecture and easier extension. | Slightly higher initial design complexity. |
-| Base Classes (BaseSensor & BaseAttack) | Provide a common implementation for similar components. | Reduces code duplication and standardizes behavior. | Adds an abstraction layer for beginners to understand. |
-| Phase-Based Development | Complete one subsystem before moving to the next. | Easier testing, documentation, and debugging. | Longer planning phase before advanced features. |
-| Independent Testing | Verify every subsystem before integration. | Early bug detection and improved reliability. | Requires additional test modules. |
+The system generates its own labeled dataset using the simulated industrial environment.
 
-These decisions established a strong architectural foundation that continues to guide the development of every subsequent phase.
+The generated pipeline consists of:
 
----
+1. Factory simulation
+2. MQTT message generation
+3. MQTT traffic collection
+4. Message parsing
+5. Attack-state tracking
+6. Automatic labeling
+7. In-memory dataset writing
+8. CSV export
 
-# 11. Development Roadmap
+The current dataset generation configuration targets:
 
-The complete LightX-IDS project is divided into multiple development phases. Each phase introduces a specific capability while building upon the previous phase.
+- Target records: 100,000
+- Normal traffic duration: 15–40 seconds
+- Attack duration: 5–12 seconds
+- Attack cooldown: 10–25 seconds
+- Supported attack types:
+  - DoS
+  - Replay
+  - Injection
+  - Spoofing
 
-| Phase | Objective | Status |
-|--------|-----------|--------|
-| Phase 0 | Project Planning and Architecture | ✅ Completed |
-| Phase 1 | Industrial Environment Simulation | ✅ Completed |
-| Phase 2 | Cyber Attack Framework | ✅ Completed |
-| Phase 3 | Dataset Generation | ⏳ Planned |
-| Phase 4 | Machine Learning Intrusion Detection | ⏳ Planned |
-| Phase 5 | Dashboard & Visualization | ⏳ Planned |
-| Phase 6 | Backend REST API | ⏳ Planned |
-| Phase 7 | Frontend Development | ⏳ Planned |
-| Phase 8 | Deployment, Testing & Final Documentation | ⏳ Planned |
+### 8.2 External Datasets
 
-The phased development strategy ensures that every subsystem is fully implemented, tested, documented, and validated before introducing additional complexity.
+The project also supports external Industrial IoT cybersecurity datasets for broader model evaluation.
 
----
+The current dataset-engineering workflow has been tested with the TON-IoT dataset, including:
 
-# 12. Success Criteria
+- Modbus
+- Thermostat
+- Weather
+- Network
 
-Phase 0 was considered successful when the following objectives were achieved:
+The external dataset workflow consists of:
 
-- A clear project vision was established.
-- The software architecture was designed.
-- The technology stack was finalized.
-- The project folder structure was planned.
-- Development phases were defined.
-- Functional and non-functional requirements were documented.
-- Engineering decisions were recorded.
-- A roadmap for future implementation was prepared.
-
-Meeting these objectives ensured that development could proceed with a clear direction and minimized the likelihood of major architectural changes later in the project.
+**Raw Dataset → Profiling → Cleaning → Standardization → Combination → ML-ready Dataset**
 
 ---
 
-# 13. Phase Outcome
+## 9. Dataset Engineering Plan
 
-The following deliverables were completed during Phase 0.
+The dataset engineering pipeline is designed as a reusable workflow.
 
-| Deliverable | Status |
-|-------------|--------|
-| Project Vision | ✅ |
-| Problem Analysis | ✅ |
-| Functional Requirements | ✅ |
-| Non-Functional Requirements | ✅ |
-| Technology Selection | ✅ |
-| Software Architecture Planning | ✅ |
-| Engineering Decisions | ✅ |
-| Development Roadmap | ✅ |
+### Profiling
 
-Phase 0 established the engineering foundation upon which all remaining phases of LightX-IDS are built.
+The profiling stage records:
+
+- Dataset shape
+- Data types
+- Null counts
+- Duplicate counts
+- Numerical statistics
+- Binary label distribution
+- Attack-type distribution
+
+### Cleaning
+
+The cleaning stage:
+
+- Removes exact duplicate rows.
+- Converts placeholder `-` values to actual missing values where applicable.
+- Removes records with missing or invalid labels.
+- Preserves structurally valid dataset information.
+
+### Standardization
+
+Different source datasets contain different column names and structures. The standardization stage maps relevant fields into a common LightX-IDS representation.
+
+Examples include:
+
+- Temperature → `sensor_reading_1`
+- Pressure → `sensor_reading_2`
+- Humidity → `sensor_reading_3`
+- Modbus function-code fields → `sensor_reading_1` through `sensor_reading_4`
+- Source IP → `source_ip`
+- Destination IP → `destination_ip`
+- Source port → `source_port`
+- Destination port → `destination_port`
+- Protocol → `protocol`
+- Attack type → `attack_type`
+- Binary class → `label`
+
+### Combination
+
+The standardized datasets can be combined into a unified dataset for subsequent machine learning experiments.
 
 ---
 
-# 14. Preparation for Phase 1
+## 10. Attack Types
 
-With the project architecture finalized, the next phase focuses on implementing the Industrial Environment Simulation.
+The implemented LightX-IDS attack framework currently contains:
 
-The objectives of Phase 1 include:
+- DoS Attack
+- Replay Attack
+- Injection Attack
+- Spoofing Attack
 
-- Implementing industrial sensors.
-- Establishing MQTT communication.
-- Developing the PLC controller.
-- Simulating factory operation.
-- Testing communication between all industrial components.
+The external TON-IoT datasets contain additional attack categories. These are retained during dataset engineering where supported by the source dataset.
 
-Successful completion of Phase 1 provides the operational environment required for introducing cyber attack simulations in Phase 2.
+---
+
+## 11. Dataset Labeling Strategy
+
+LightX-IDS uses binary labels for primary intrusion detection:
+
+- `0` — Normal
+- `1` — Attack
+
+The dataset also stores the specific attack category using the `attack_type` field.
+
+For simulated traffic, the dataset manager maintains the current attack state. When an attack-start event is received, subsequent sensor records are labeled as attack records until the corresponding attack-stop event is received.
+
+---
+
+## 12. Initial Dataset Schema
+
+The generated LightX-IDS records contain:
+
+| Field | Description |
+|---|---|
+| timestamp | Time at which the record was generated/received |
+| topic | MQTT topic associated with the message |
+| device_id | Industrial sensor/device identifier |
+| sensor_type | Type of sensor |
+| value | Sensor reading |
+| unit | Measurement unit |
+| status | Sensor status |
+| attack_type | Attack category, if applicable |
+| label | Binary normal/attack label |
+| source | Dataset source |
+| sequence_number | Sequential record identifier |
+
+---
+
+## 13. System Design Principles
+
+The project follows the following principles:
+
+### Modularity
+
+Industrial simulation, attack simulation, preprocessing, dataset generation, machine learning, backend services, and frontend components are separated into independent modules.
+
+### Reusability
+
+Dataset preprocessing components are designed to work with multiple Industrial IoT datasets.
+
+### Lightweight Operation
+
+The architecture aims to minimize unnecessary computational and infrastructure overhead.
+
+### Extensibility
+
+New sensors, attacks, datasets, preprocessing methods, and machine learning models can be added without redesigning the complete system.
+
+### Traceability
+
+Generated records contain timestamps, source information, sequence numbers, and attack labels to support dataset analysis and reproducibility.
+
+---
+
+## 14. Expected Deliverables
+
+The project is expected to produce:
+
+1. Industrial IoT simulator
+2. Attack simulation framework
+3. Automated dataset generation pipeline
+4. Generated LightX-IDS datasets
+5. External dataset preprocessing pipeline
+6. Standardized datasets
+7. Machine learning intrusion detection models
+8. Real-time detection component
+9. Backend API
+10. Web dashboard
+11. System documentation
+12. Evaluation results
+
+---
+
+## 15. Current Project Status
+
+The project has established the core industrial simulation, attack simulation, preprocessing, and dataset-engineering foundations.
+
+The backend currently contains:
+
+- MQTT collector
+- Message parser
+- Dataset manager
+- Dataset writer
+- Labeler
+- CSV exporter
+- Dataset pipeline
+- Simulation runner
+- Attack runner
+- Dataset generation configuration
+
+The dataset-engineering prototype currently supports profiling, cleaning, standardization, and combination of TON-IoT Modbus, Thermostat, Weather, and Network datasets.
+
+The frontend structure has also been established for monitoring and system management.
+
+Machine learning, real-time detection, complete backend API integration, and deployment remain subsequent development stages.
+
+---
+
+## 16. Success Criteria
+
+The project will be considered successful when it can:
+
+- Simulate an industrial IoT environment.
+- Generate normal and attack traffic.
+- Collect MQTT messages reliably.
+- Automatically assign correct binary and attack-type labels.
+- Generate structured datasets.
+- Process external Industrial IoT datasets using a consistent workflow.
+- Train and evaluate intrusion detection models.
+- Detect attacks through the implemented detection pipeline.
+- Display relevant system information through the dashboard.
+- Maintain modularity and reproducibility throughout the complete workflow.

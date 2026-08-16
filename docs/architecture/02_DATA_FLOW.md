@@ -1,0 +1,1608 @@
+# LightX-IDS — Data Flow 
+
+ 
+
+## 1. Overview 
+
+ 
+
+The LightX-IDS data flow describes how data moves through the system from Industrial IoT simulation and dataset sources to cleaned, standardized, combined datasets, and eventually to the machine learning, backend, and frontend layers. 
+
+ 
+
+The system follows a staged data pipeline: 
+
+ 
+
+1. Industrial environment simulation 
+
+2. Attack traffic generation 
+
+3. Raw dataset collection 
+
+4. Dataset profiling 
+
+5. Dataset cleaning 
+
+6. Dataset standardization 
+
+7. Dataset combination 
+
+8. Machine learning processing 
+
+9. Detection and backend API 
+
+10. Frontend dashboard visualization 
+
+ 
+
+The currently implemented and documented dataset-engineering flow is primarily focused on stages 3–7. 
+
+ 
+
+ 
+
+## 2. High-Level Data Flow 
+
+                    | Industrial IoT Environment  | 
+
+                    |        Simulation           | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    | Normal + Attack Traffic     | 
+
+                    | Generation / Collection     | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |        Raw Datasets         | 
+
+ 
+
+                    | TON-IoT Modbus              | 
+
+                    | TON-IoT Thermostat          | 
+
+                    | TON-IoT Weather             | 
+
+                    | TON-IoT Network             | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |       Profiling             | 
+
+ 
+
+                    | Shape                       | 
+
+                    | Data types                  | 
+
+                    | Null values                 | 
+
+                    | Duplicates                  | 
+
+                    | Numeric statistics          | 
+
+                    | Label distribution          | 
+
+                    | Attack-type distribution    | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |        Cleaning             | 
+
+ 
+
+                    | Remove exact duplicates     | 
+
+                    | Handle placeholder nulls   | 
+
+                    | Validate label/type        | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |      Standardization        | 
+
+ 
+
+                    | Dataset-specific fields    | 
+
+                    |        ->                 | 
+
+                    | Common LightX schema        | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |       Combining             | 
+
+ 
+
+                    | Modbus                     | 
+
+                    | Thermostat                 | 
+
+                    | Weather                    | 
+
+                    | Network                    | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |   LightX Combined Dataset   | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    | Machine Learning /          | 
+
+                    | Detection Pipeline          | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |       Backend API           | 
+
+ 
+
+ 
+
+                                  | 
+
+                                  V 
+
+ 
+
+                    |     Frontend Dashboard      | 
+
+ 
+
+ 
+
+ 
+
+ 
+
+## 3. Data Sources 
+
+ 
+
+The dataset-engineering pipeline currently works with four TON-IoT datasets: 
+
+ 
+
+Modbus 
+
+ 
+
+Thermostat 
+
+ 
+
+Weather 
+
+ 
+
+Network 
+
+ 
+
+ 
+
+The raw datasets are stored under: 
+
+ 
+
+Dataset_engineering/ 
+
+└── datasets/ 
+
+    └── raw/ 
+
+        └── ton_iot/ 
+
+            ├── Train_Test_IoT_Modbus.csv 
+
+            ├── Train_Test_IoT_Thermostat.csv 
+
+            ├── Train_Test_IoT_Weather.csv 
+
+            └── train_test_network.csv 
+
+ 
+
+Each dataset contains a binary label field and an attack-type field named type. 
+
+ 
+
+The IoT datasets contain sensor or device-related information, while the Network dataset contains network-flow and protocol-related information. 
+
+ 
+
+ 
+
+ 
+
+## 4. Raw Dataset Flow 
+
+ 
+
+### 4.1 Modbus 
+
+ 
+
+The original Modbus dataset contains: 
+
+ 
+
+31,106 rows 
+
+ 
+
+8 columns 
+
+ 
+
+Date and time information 
+
+ 
+
+Four Modbus function-code fields 
+
+ 
+
+Binary label 
+
+ 
+
+Attack type 
+
+ 
+
+ 
+
+The main fields are: 
+
+ 
+
+Date 
+
+Time 
+
+FC1_Read_Input_Register 
+
+FC2_Read_Discrete_Value 
+
+FC3_Read_Holding_Register 
+
+FC4_Read_Coil 
+
+Label 
+
+Type 
+
+ 
+
+The Modbus data is particularly relevant to the industrial environment because the dataset contains Modbus function-code fields that can be compared with PLC-oriented traffic generated by the simulator. 
+
+ 
+
+ 
+
+ 
+
+### 4.2 Thermostat 
+
+ 
+
+The original Thermostat dataset contains: 
+
+ 
+
+32,774 rows 
+
+ 
+
+6 columns 
+
+ 
+
+Current temperature 
+
+ 
+
+Thermostat status 
+
+ 
+
+Binary label 
+
+ 
+
+Attack type 
+
+ 
+
+ 
+
+The fields are: 
+
+ 
+
+Date 
+
+Time 
+
+Current_temperature 
+
+Thermostat_status 
+
+Label 
+
+Type 
+
+ 
+
+ 
+
+ 
+
+### 4.3 Weather 
+
+ 
+
+The original Weather dataset contains: 
+
+ 
+
+39,260 rows 
+
+ 
+
+7 columns 
+
+ 
+
+Temperature 
+
+ 
+
+Pressure 
+
+ 
+
+Humidity 
+
+ 
+
+Binary label 
+
+ 
+
+Attack type 
+
+ 
+
+ 
+
+The fields are: 
+
+ 
+
+Date 
+
+Time 
+
+Temperature 
+
+Pressure 
+
+Humidity 
+
+Label 
+
+Type 
+
+ 
+
+ 
+
+ 
+
+### 4.4 Network 
+
+ 
+
+The original Network dataset contains: 
+
+ 
+
+211,043 rows 
+
+ 
+
+44 columns 
+
+ 
+
+Source and destination information 
+
+ 
+
+Ports 
+
+ 
+
+Protocol 
+
+ 
+
+Service 
+
+ 
+
+Connection statistics 
+
+ 
+
+DNS information 
+
+ 
+
+SSL information 
+
+ 
+
+HTTP information 
+
+ 
+
+Weird-event information 
+
+ 
+
+Binary label 
+
+ 
+
+Attack type 
+
+ 
+
+ 
+
+The Network dataset contains considerably more fields than the IoT-device datasets. 
+
+ 
+
+Many DNS, SSL, and HTTP fields use – as a placeholder for “not applicable”. These values are therefore treated differently from genuine missing values during cleaning. 
+
+ 
+
+ 
+
+ 
+
+## 5. Profiling Flow 
+
+ 
+
+Before cleaning, each raw dataset is profiled using: 
+
+ 
+
+Dataset_engineering/src/profiling/profiler.py 
+
+ 
+
+The profiler checks: 
+
+ 
+
+Dataset shape 
+
+ 
+
+Data types 
+
+ 
+
+Null values 
+
+ 
+
+Duplicate rows 
+
+ 
+
+Numeric descriptive statistics 
+
+ 
+
+Binary label distribution 
+
+ 
+
+Attack-type distribution 
+
+ 
+
+ 
+
+The profiling results are stored under: 
+
+ 
+
+Dataset_engineering/docs/datasets/profiling/ 
+
+ 
+
+The profiling stage provides the baseline used to determine what cleaning operations are required. 
+
+ 
+
+ 
+
+ 
+
+## 6. Cleaning Flow 
+
+ 
+
+The cleaning stage is implemented in: 
+
+ 
+
+Dataset_engineering/src/cleaning/cleaner.py 
+
+ 
+
+The cleaning process performs the following operations. 
+
+ 
+
+Step 1 — Load the raw CSV 
+
+ 
+
+Each source dataset is loaded using pandas. 
+
+ 
+
+Step 2 — Remove exact duplicates 
+
+ 
+
+Exact duplicate rows are removed using: 
+
+ 
+
+Df.drop_duplicates() 
+
+ 
+
+This is particularly important for the Modbus dataset, where repeated polling produced a large number of duplicate rows. 
+
+ 
+
+Step 3 — Handle placeholder nulls 
+
+ 
+
+For datasets containing placeholder values, the string: 
+
+ 
+
+- 
+
+ 
+
+Is converted into a real NaN value for relevant DNS, SSL, HTTP, and related fields. 
+
+ 
+
+This distinction is important because a – value in these fields can represent a field that is not applicable to a particular network connection rather than corrupted data. 
+
+ 
+
+Step 4 — Validate labels 
+
+ 
+
+Rows with missing label or type values are removed. 
+
+ 
+
+Rows where the attack type is an empty string after trimming are also removed. 
+
+ 
+
+Step 5 — Save processed data 
+
+ 
+
+The cleaned datasets are stored under: 
+
+ 
+
+Dataset_engineering/datasets/processed/ 
+
+ 
+
+ 
+
+ 
+
+## 7. Cleaning Results 
+
+ 
+
+Modbus 
+
+ 
+
+Original rows:       31,106 
+
+Duplicates removed:  13,314 
+
+Final rows:          17,792 
+
+ 
+
+The large number of duplicates is associated with repeated Modbus polling of the same register values. 
+
+ 
+
+ 
+
+ 
+
+Thermostat 
+
+ 
+
+Original rows:       32,774 
+
+Duplicates removed:     424 
+
+Final rows:          32,350 
+
+ 
+
+The Thermostat dataset contains considerably fewer exact duplicates than Modbus. 
+
+ 
+
+ 
+
+ 
+
+Weather 
+
+ 
+
+Original rows:       39,260 
+
+Duplicates removed:       0 
+
+Final rows:          39,260 
+
+ 
+
+No rows were removed during cleaning. 
+
+ 
+
+ 
+
+ 
+
+Network 
+
+ 
+
+Original rows:       211,043 
+
+Duplicates removed:  20,569 
+
+Final rows:          190,474 
+
+ 
+
+The Network dataset contains a significant number of duplicate rows. 
+
+ 
+
+Its DNS, SSL, and HTTP placeholder fields are converted from – to NaN before the dataset is standardized. 
+
+ 
+
+ 
+
+ 
+
+## 8. Standardization Flow 
+
+ 
+
+After cleaning, the datasets are passed through: 
+
+ 
+
+Dataset_engineering/src/standerdization/standerizer.py 
+
+ 
+
+The purpose of standardization is to map dataset-specific field names into a common LightX-IDS schema. 
+
+ 
+
+The standardization process: 
+
+ 
+
+Loads the cleaned dataset. 
+
+ 
+
+ 
+
+Selects the mapping associated with that dataset. 
+
+ 
+
+ 
+
+Renames mapped columns. 
+
+ 
+
+ 
+
+Removes fields that are not part of the standardized schema. 
+
+ 
+
+ 
+
+Writes the resulting dataset to the standardized directory. 
+
+ 
+
+ 
+
+ 
+
+The standardized files are stored under: 
+
+ 
+
+Dataset_engineering/datasets/standardized/ 
+
+ 
+
+ 
+
+ 
+
+## 9. Standardized Data Flow 
+
+ 
+
+Modbus Mapping 
+
+ 
+
+FC1_Read_Input_Register  -> sensor_reading_1 
+
+FC2_Read_Discrete_Value  -> sensor_reading_2 
+
+FC3_Read_Holding_Register -> sensor_reading_3 
+
+FC4_Read_Coil            -> sensor_reading_4 
+
+Label                    -> label 
+
+Type                     -> attack_type 
+
+Date                     -> date_raw 
+
+Time                     -> timestamp 
+
+ 
+
+The resulting file is: 
+
+ 
+
+Datasets/standardized/modbus_final.csv 
+
+ 
+
+It contains 17,792 rows. 
+
+ 
+
+ 
+
+ 
+
+Thermostat Mapping 
+
+ 
+
+Current_temperature -> sensor_reading_1 
+
+Thermostat_status   -> sensor_reading_2 
+
+Label               -> label 
+
+Type                -> attack_type 
+
+Date                -> date_raw 
+
+Time                -> timestamp 
+
+ 
+
+The resulting file is: 
+
+ 
+
+Datasets/standardized/thermostat_final.csv 
+
+ 
+
+It contains 32,350 rows. 
+
+ 
+
+ 
+
+ 
+
+Weather Mapping 
+
+ 
+
+Temperature -> sensor_reading_1 
+
+Pressure    -> sensor_reading_2 
+
+Humidity    -> sensor_reading_3 
+
+Label       -> label 
+
+Type        -> attack_type 
+
+Date        -> date_raw 
+
+Time        -> timestamp 
+
+ 
+
+The resulting file is: 
+
+ 
+
+Datasets/standardized/weather_final.csv 
+
+ 
+
+It contains 39,260 rows. 
+
+ 
+
+ 
+
+ 
+
+Network Mapping 
+
+ 
+
+The Network dataset is mapped to a network-oriented LightX schema: 
+
+ 
+
+Src_ip       -> source_ip 
+
+Dst_ip       -> destination_ip 
+
+Src_port     -> source_port 
+
+Dst_port     -> destination_port 
+
+Proto        -> protocol 
+
+Service      -> service 
+
+Duration     -> duration 
+
+Src_bytes    -> src_bytes 
+
+Dst_bytes    -> dst_bytes 
+
+Label        -> label 
+
+Type         -> attack_type 
+
+ 
+
+The remaining raw DNS, SSL, HTTP, and weird-event fields are not included in the final standardized schema. 
+
+ 
+
+The resulting file is: 
+
+ 
+
+Datasets/standardized/network_final.csv 
+
+ 
+
+It contains 190,474 rows. 
+
+ 
+
+ 
+
+ 
+
+## 10. Combining Flow 
+
+ 
+
+Once the four datasets have been standardized, they are combined using: 
+
+ 
+
+Dataset_engineering/src/reporting/combine.py 
+
+ 
+
+The files combined are: 
+
+ 
+
+Datasets/standardized/modbus_final.csv 
+
+Datasets/standardized/thermostat_final.csv 
+
+Datasets/standardized/weather_final.csv 
+
+Datasets/standardized/network_final.csv 
+
+ 
+
+The combination is performed using pandas concatenation with: 
+
+ 
+
+Pd.concat(dfs, ignore_index=True, sort=False) 
+
+ 
+
+The combined dataset is written to: 
+
+ 
+
+Datasets/standardized/lightx_combined.csv 
+
+ 
+
+Because the Modbus, Thermostat, Weather, and Network datasets do not contain exactly the same standardized fields, the combined dataset uses the union of the available columns. Fields that are not applicable to a particular source dataset remain absent for that source and are represented according to pandas concatenation behavior. 
+
+ 
+
+ 
+
+ 
+
+## 11. Dataset Size Through the Pipeline 
+
+ 
+
+Dataset	Raw Rows	Cleaned Rows	Standardized Rows 
+
+ 
+
+Modbus	31,106	17,792	17,792 
+
+Thermostat	32,774	32,350	32,350 
+
+Weather	39,260	39,260	39,260 
+
+Network	211,043	190,474	190,474 
+
+ 
+
+ 
+
+The four standardized datasets therefore contain a total of: 
+
+ 
+
+279,876 rows 
+
+ 
+
+Before any additional machine-learning preprocessing or sampling. 
+
+ 
+
+ 
+
+ 
+
+## 12. Label and Attack-Type Flow 
+
+ 
+
+The binary label field is preserved throughout the dataset-engineering pipeline. 
+
+ 
+
+The standardized schema uses: 
+
+ 
+
+Label 
+
+ 
+
+For the binary classification target and: 
+
+ 
+
+Attack_type 
+
+ 
+
+For the multi-class attack category. 
+
+ 
+
+The attack types observed across the datasets include: 
+
+ 
+
+Normal 
+
+Injection 
+
+Backdoor 
+
+Password 
+
+Ddos 
+
+Dos 
+
+Ransomware 
+
+Xss 
+
+Scanning 
+
+Mitm 
+
+ 
+
+Not every dataset contains every attack type. 
+
+ 
+
+This variation is retained rather than artificially adding classes that do not occur in a particular source dataset. 
+
+ 
+
+ 
+
+ 
+
+## 13. Data Flow Into Machine Learning 
+
+ 
+
+After dataset generation, cleaning, standardization, and combination, the resulting data is intended to feed the machine-learning stage of LightX-IDS. 
+
+ 
+
+The high-level flow is: 
+
+ 
+
+Raw Dataset 
+
+     | 
+
+     V 
+
+Profiling 
+
+     | 
+
+     V 
+
+Cleaning 
+
+     | 
+
+     V 
+
+Standardization 
+
+     | 
+
+     V 
+
+LightX Combined Dataset 
+
+     | 
+
+     V 
+
+Machine Learning 
+
+     | 
+
+     V 
+
+Attack Prediction 
+
+     | 
+
+     V 
+
+Backend API 
+
+     | 
+
+     V 
+
+Frontend Dashboard 
+
+ 
+
+The exact machine-learning preprocessing, feature-selection, model architecture, training configuration, evaluation metrics, and inference implementation cannot be filled in here from the currently provided dataset-engineering contents. 
+
+ 
+
+ 
+
+ 
+
+## 14. Data Flow Into the Dashboard 
+
+ 
+
+The intended system-level flow continues from detection into the backend and frontend: 
+
+ 
+
+Industrial / Dataset Data 
+
+          | 
+
+          V 
+
+   Detection Pipeline 
+
+          | 
+
+          V 
+
+      Backend API 
+
+          | 
+
+          V 
+
+    Frontend Dashboard 
+
+          | 
+
+ 	
+ 
+
+ 
+
+          V                   v 
+
+   Sensor Monitoring    Attack Monitoring 
+
+ 
+
+          V                   v 
+
+   Dataset Analytics    IDS Prediction 
+
+                              | 
+
+                              V 
+
+                       System Logs / 
+
+                         Settings 
+
+ 
+
+The exact API endpoints, request/response formats, database or persistence mechanism, authentication implementation, and deployment configuration cannot be filled in from the currently provided dataset-engineering information alone. 
+
+ 
+
+ 
+
+ 
+
+## 15. Important Data-Quality Considerations 
+
+ 
+
+Duplicate Records 
+
+ 
+
+Duplicate records are removed during cleaning. 
+
+ 
+
+The largest duplicate reduction occurs in the Modbus dataset, where repeated polling produces repeated register values. 
+
+ 
+
+Placeholder Nulls 
+
+ 
+
+Network-level DNS, SSL, and HTTP fields use placeholder values such as – to represent fields that are not applicable. 
+
+ 
+
+These values should not automatically be interpreted as corrupted records. 
+
+ 
+
+Class Imbalance 
+
+ 
+
+Several attack types occur in much smaller quantities than the dominant classes. 
+
+ 
+
+Examples include: 
+
+ 
+
+Thermostat scanning: 61 rows 
+
+Thermostat xss:      449 rows 
+
+Network mitm:        1,043 rows 
+
+ 
+
+These classes have been flagged as potential concerns for subsequent machine-learning evaluation. 
+
+ 
+
+Distinct Attack Classes 
+
+ 
+
+The Network dataset contains both: 
+
+ 
+
+Dos 
+
+Ddos 
+
+ 
+
+These are retained as separate attack types in the documented dataset pipeline. 
+
+ 
+
+ 
+
+ 
+
+## 16. Current Data Pipeline Status 
+
+ 
+
+The dataset-engineering portion currently documented is: 
+
+ 
+
+Raw datasets 
+
+      | 
+
+      V 
+
+Profiling 
+
+      | 
+
+      V 
+
+Cleaning 
+
+      | 
+
+      V 
+
+Standardization 
+
+      | 
+
+      V 
+
+Combining 
+
+      | 
+
+      V 
+
+Lightx_combined.csv 
+
+ 
+
+The following files demonstrate the outputs of this pipeline: 
+
+ 
+
+Datasets/processed/ 
+
+├── modbus_clean.csv 
+
+├── thermostat_clean.csv 
+
+├── weather_clean.csv 
+
+├── network_clean.csv 
+
+├── Train_Test_IoT_Modbus_clean.csv 
+
+├── Train_Test_IoT_Thermostat_clean.csv 
+
+├── Train_Test_IoT_Weather_clean.csv 
+
+└── train_test_network_clean.csv 
+
+ 
+
+And: 
+
+ 
+
+Datasets/standardized/ 
+
+├── modbus_final.csv 
+
+├── thermostat_final.csv 
+
+├── weather_final.csv 
+
+├── network_final.csv 
+
+└── lightx_combined.csv 
+
+ 
+
+ 
+
+ 
+
+## 17. Traceability 
+
+ 
+
+The data flow is implemented through the following source files: 
+
+ 
+
+Dataset_engineering/ 
+
+├── src/ 
+
+│   ├── profiling/ 
+
+│   │   └── profiler.py 
+
+ 
+
+│   ├── cleaning/ 
+
+│   │   └── cleaner.py 
+
+ 
+
+│   ├── standerdization/ 
+
+│   │   └── standerizer.py 
+
+ 
+
+│   └── reporting/ 
+
+│       └── combine.py 
+
+│ 
+
+├── datasets/ 
+
+│   ├── raw/ 
+
+│   ├── processed/ 
+
+│   └── standardized/ 
+
+│ 
+
+└── docs/ 
+
+    └── datasets/ 
+
+        ├── profiling/ 
+
+        └── modbus_report.md 
+
+        ├── thermostat_report.md 
+
+        ├── weather_report.md 
+
+        ├── network_report.md 
+
+        └── ton_iot.md 
+
+ 
+
+This structure provides traceability from the original source datasets through profiling, cleaning, standardization, and final combination. 
+
+ 
+
+ 
+
+ 
+
+## 18. Summary 
+
+ 
+
+The LightX-IDS data pipeline converts heterogeneous industrial IoT and network-security datasets into a common representation suitable for downstream machine-learning and intrusion-detection workflows. 
+
+ 
+
+The core transformation is: 
+
+ 
+
+Heterogeneous Raw Data 
+
+        | 
+
+        V 
+
+    Profiling 
+
+        | 
+
+        V 
+
+     Cleaning 
+
+        | 
+
+        V 
+
+ Standardization 
+
+        | 
+
+        V 
+
+  Dataset Combination 
+
+        | 
+
+        V 
+
+LightX Combined Dataset 
+
+        | 
+
+        V 
+
+ML / IDS Processing 
+
+        | 
+
+        V 
+
+Backend API 
+
+        | 
+
+        V 
+
+Frontend Dashboard 
+
+ 
+
+The currently verified dataset-engineering pipeline produces four cleaned and standardized datasets and a combined LightX dataset containing 279,876 rows. 
+
+ 

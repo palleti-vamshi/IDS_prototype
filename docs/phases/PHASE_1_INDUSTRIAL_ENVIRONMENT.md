@@ -1,339 +1,196 @@
----
+# Phase 1 — Industrial Environment Simulation
 
-# 10. Engineering Decisions
+## 1. Objective
 
-During the planning phase, several important architectural decisions were made to ensure that LightX-IDS remains modular, maintainable, scalable, and easy to extend. Rather than making implementation decisions during development, these design choices were established before writing the majority of the code.
+The objective of Phase 1 is to create a simulated Industrial IoT environment that generates realistic sensor telemetry and communicates the sensor data through MQTT.
 
-The following table summarizes the key engineering decisions made during Phase 0.
-
-| Decision | Reason | Benefits | Trade-offs |
-|----------|--------|----------|------------|
-| Modular Project Structure | Separate different responsibilities into independent modules. | Better organization, easier maintenance, scalable architecture. | Slightly more folders and files to manage. |
-| Layered Architecture | Divide the project into logical layers such as Industrial Environment, Attack Framework, Dataset Generation, and Machine Learning. | Clear separation of concerns and easier future expansion. | Requires careful planning of communication between layers. |
-| Python as Primary Language | Support Machine Learning, rapid development, and extensive library availability. | Faster development and excellent ecosystem. | Lower raw performance compared to C++. |
-| MQTT Communication | Simulate realistic Industrial IoT communication using a lightweight protocol. | Low overhead and publish-subscribe communication. | Requires an MQTT broker for communication. |
-| Object-Oriented Design | Improve code reuse and maintainability through classes and inheritance. | Cleaner architecture and easier extension. | Slightly higher initial design complexity. |
-| Base Classes (BaseSensor & BaseAttack) | Provide a common implementation for similar components. | Reduces code duplication and standardizes behavior. | Adds an abstraction layer for beginners to understand. |
-| Phase-Based Development | Complete one subsystem before moving to the next. | Easier testing, documentation, and debugging. | Longer planning phase before advanced features. |
-| Independent Testing | Verify every subsystem before integration. | Early bug detection and improved reliability. | Requires additional test modules. |
-
-These decisions established a strong architectural foundation that continues to guide the development of every subsequent phase.
+The simulated environment acts as the data source for the LightX-IDS preprocessing, attack simulation, dataset generation, and later machine-learning stages.
 
 ---
 
-# 11. Development Roadmap
+## 2. Industrial Environment Overview
 
-The complete LightX-IDS project is divided into multiple development phases. Each phase introduces a specific capability while building upon the previous phase.
+The LightX-IDS industrial environment represents a simplified factory setup containing IoT sensors connected through an MQTT-based communication system.
 
-| Phase | Objective | Status |
-|--------|-----------|--------|
-| Phase 0 | Project Planning and Architecture | ✅ Completed |
-| Phase 1 | Industrial Environment Simulation | ✅ Completed |
-| Phase 2 | Cyber Attack Framework | ✅ Completed |
-| Phase 3 | Dataset Generation | ⏳ Planned |
-| Phase 4 | Machine Learning Intrusion Detection | ⏳ Planned |
-| Phase 5 | Dashboard & Visualization | ⏳ Planned |
-| Phase 6 | Backend REST API | ⏳ Planned |
-| Phase 7 | Frontend Development | ⏳ Planned |
-| Phase 8 | Deployment, Testing & Final Documentation | ⏳ Planned |
+The environment consists of:
 
-The phased development strategy ensures that every subsystem is fully implemented, tested, documented, and validated before introducing additional complexity.
+- Temperature sensors
+- Pressure sensors
+- MQTT communication
+- Factory/production line topics
+- A simulated factory controller/environment
+- MQTT broker
+- Dataset collection pipeline
+
+The simulator continuously generates sensor readings and publishes them as MQTT messages.
 
 ---
 
-# 12. Success Criteria
+## 3. Communication Architecture
 
-Phase 0 was considered successful when the following objectives were achieved:
+The simulated industrial environment follows this communication flow:
 
-- A clear project vision was established.
-- The software architecture was designed.
-- The technology stack was finalized.
-- The project folder structure was planned.
-- Development phases were defined.
-- Functional and non-functional requirements were documented.
-- Engineering decisions were recorded.
-- A roadmap for future implementation was prepared.
+Factory Simulator
+→ Sensor Data Generation
+→ MQTT Publisher
+→ MQTT Broker
+→ MQTT Collector
+→ Preprocessing Pipeline
+→ Dataset Manager
 
-Meeting these objectives ensured that development could proceed with a clear direction and minimized the likelihood of major architectural changes later in the project.
-
----
-
-# 13. Phase Outcome
-
-The following deliverables were completed during Phase 0.
-
-| Deliverable | Status |
-|-------------|--------|
-| Project Vision | ✅ |
-| Problem Analysis | ✅ |
-| Functional Requirements | ✅ |
-| Non-Functional Requirements | ✅ |
-| Technology Selection | ✅ |
-| Software Architecture Planning | ✅ |
-| Engineering Decisions | ✅ |
-| Development Roadmap | ✅ |
-
-Phase 0 established the engineering foundation upon which all remaining phases of LightX-IDS are built.
+MQTT is used as the communication protocol between the simulated industrial devices and the data collection layer.
 
 ---
 
-# 14. Preparation for Phase 1
+## 4. Sensor Simulation
 
-With the project architecture finalized, the next phase focuses on implementing the Industrial Environment Simulation.
+The simulator generates telemetry representing industrial sensor measurements.
 
-The objectives of Phase 1 include:
+### Temperature Sensor
 
-- Implementing industrial sensors.
-- Establishing MQTT communication.
-- Developing the PLC controller.
-- Simulating factory operation.
-- Testing communication between all industrial components.
+Temperature readings represent the temperature observed within the simulated industrial environment.
 
-Successful completion of Phase 1 provides the operational environment required for introducing cyber attack simulations in Phase 2.
+Example:
+
+- Device ID: `temperature_sensor_01`
+- Sensor type: `temperature`
+- Unit: `°C`
+- Example value: `28.3`
+
+Example MQTT topic:
+
+`factory/line1/temperature`
+
+### Pressure Sensor
+
+Pressure readings represent pressure measurements generated by the simulated industrial environment.
+
+The sensor data is published through the MQTT communication layer and can subsequently be collected and processed by LightX-IDS.
 
 ---
 
-# 15. Factory State
+## 5. MQTT Communication
 
-## What is Factory State?
+MQTT provides lightweight publish/subscribe communication between the simulated factory devices and the IDS pipeline.
 
-The Factory State represents the current operational condition of the simulated factory. It acts as a centralized storage location where the latest values from all industrial sensors are maintained.
+The simulator publishes sensor messages to configured MQTT topics.
 
-Instead of each module storing its own copy of sensor data, the PLC updates a single shared state. This ensures that every subsystem works with the same information.
+The MQTT Collector subscribes to the configured topics and receives the messages for preprocessing.
 
-### Responsibilities
+The collector records:
 
-- Store the latest temperature reading.
-- Store the latest pressure reading.
-- Maintain the current factory status.
-- Provide a consistent view of the factory for future modules.
+- Timestamp
+- MQTT topic
+- Message payload
+- QoS
+- Retain flag
 
-### Example Factory State
+These values are represented by the `RawMQTTMessage` schema.
 
-```json
+---
+
+## 6. Sensor Message Structure
+
+A typical sensor payload follows a JSON structure similar to:
+
 {
-    "temperature": 29.4,
-    "pressure": 101.8,
+    "device_id": "temperature_sensor_01",
+    "timestamp": "2026-07-06T17:43:22",
+    "sensor_type": "temperature",
+    "value": 28.3,
+    "unit": "°C",
     "status": "NORMAL"
 }
-```
 
-### Why is it important?
-
-The Factory State becomes the source of truth for the entire platform. Later phases such as dataset generation, intrusion detection, and the dashboard will all consume this information.
+The message contains the information required by the preprocessing pipeline to create a structured sensor record.
 
 ---
 
-# 16. Rule Engine
+## 7. Factory Simulation Runner
 
-## What is the Rule Engine?
+The `SimulationRunner` provides a wrapper around the factory simulator.
 
-The Rule Engine contains the logic used by the PLC to determine the operational condition of the factory.
+Its responsibilities are:
 
-Rather than embedding decision logic directly inside the PLC Controller, the rules are separated into their own module. This keeps the controller focused on coordination while the Rule Engine focuses on evaluation.
+- Create the factory simulator
+- Start the simulator in a background thread
+- Stop the simulator when required
 
-### Responsibilities
-
-- Evaluate incoming sensor values.
-- Determine whether the factory is operating normally.
-- Update the operational status.
-- Support future expansion with additional industrial rules.
-
-### Current Status
-
-At this stage, the Rule Engine performs basic operational checks.
-
-Future phases will introduce more advanced rules and machine learning based decision making.
+The simulator is executed using a daemon thread so that it can operate concurrently with the preprocessing and dataset-generation components.
 
 ---
 
-# 17. Factory Simulator
+## 8. Integration with Dataset Generation
 
-## Purpose
+The industrial simulator serves as the source of normal and attack-related telemetry.
 
-The Factory Simulator coordinates the execution of the industrial environment.
+During automatic dataset generation:
 
-Instead of manually starting every sensor and communication component, the simulator initializes and manages the complete factory workflow.
+1. The factory simulator is started.
+2. The preprocessing pipeline connects to the MQTT broker.
+3. Sensor messages are published by the simulator.
+4. The MQTT Collector receives the messages.
+5. Messages are passed to the Dataset Manager.
+6. Records are parsed and labeled.
+7. Records are stored for dataset export.
+8. Attack scenarios can be executed against the simulated environment.
 
-### Responsibilities
-
-- Start industrial sensors.
-- Initialize communication.
-- Coordinate continuous simulation.
-- Provide a single entry point for industrial testing.
-
-### Workflow
-
-```text
-Start Simulation
-        │
-        ▼
-Initialize MQTT
-        │
-        ▼
-Start Temperature Sensor
-        │
-        ▼
-Start Pressure Sensor
-        │
-        ▼
-Publish MQTT Messages
-        │
-        ▼
-PLC Receives Updates
-        │
-        ▼
-Update Factory State
-```
+This allows LightX-IDS to generate a controlled dataset from an internally simulated industrial environment.
 
 ---
 
-# 18. End-to-End Execution Flow
+## 9. Design Characteristics
 
-The complete execution flow of the Industrial Environment is illustrated below.
+The industrial environment was designed with the following characteristics:
 
-```text
-Temperature Sensor          Pressure Sensor
-        │                         │
-        └──────────────┬──────────┘
-                       │
-                       ▼
-                MQTT Publisher
-                       │
-                       ▼
-             Mosquitto MQTT Broker
-                       │
-                       ▼
-               MQTT Subscriber
-                       │
-                       ▼
-                PLC Controller
-                       │
-                       ▼
-                 Factory State
-```
-
-### Step-by-Step Execution
-
-1. The simulator starts all industrial components.
-2. Temperature and Pressure sensors generate values.
-3. Sensor readings are converted into JSON payloads.
-4. The MQTT Publisher sends the payloads to the broker.
-5. The MQTT Broker distributes messages to subscribers.
-6. The MQTT Subscriber receives the data.
-7. The PLC Controller processes the incoming values.
-8. The Factory State is updated with the latest operational information.
-
-This execution cycle repeats continuously throughout the simulation.
+- MQTT-based communication
+- Simulated industrial sensor telemetry
+- Separate sensor/device identities
+- Structured JSON payloads
+- Continuous data generation
+- Compatibility with the preprocessing pipeline
+- Support for attack-simulation experiments
+- Reproducible dataset-generation workflow
 
 ---
 
-# 19. Testing
+## 10. Current Implementation Status
 
-Testing was performed throughout the implementation of Phase 1 to ensure that every subsystem operated correctly before integration.
+The following components are implemented and integrated:
 
-## Unit Testing
+- Factory simulator integration
+- Temperature sensor simulation
+- Pressure sensor simulation
+- MQTT-based sensor communication
+- MQTT Collector
+- Simulation Runner
+- Integration with the preprocessing pipeline
+- Integration with automatic dataset generation
 
-The following components were tested individually:
-
-- MQTT Publisher
-- MQTT Subscriber
-- Temperature Sensor
-- Pressure Sensor
-- PLC Controller
-
-## Integration Testing
-
-After verifying each module independently, integration testing confirmed that all industrial components communicated correctly.
-
-The following scenarios were validated:
-
-- MQTT connection established successfully.
-- Temperature sensor publishes data.
-- Pressure sensor publishes data.
-- Subscriber receives sensor messages.
-- PLC updates Factory State correctly.
-- Continuous simulation executes without interruption.
-
-Successful completion of these tests confirmed that the Industrial Environment was ready for Phase 2.
+The industrial environment therefore provides the telemetry source required for subsequent LightX-IDS phases.
 
 ---
 
-# 20. Engineering Decisions
+## 11. Limitations
 
-Several important design decisions were made during Phase 1.
+The current implementation is a simulation rather than a deployment on physical industrial hardware.
 
-| Decision | Reason | Benefit |
-|----------|--------|----------|
-| MQTT Communication | Simulate real Industrial IoT communication. | Lightweight and scalable messaging. |
-| Reusable Publisher | Avoid duplicated communication code. | Improved maintainability. |
-| BaseSensor | Common sensor behavior. | Easier extension for new sensors. |
-| Centralized Factory State | Single source of truth. | Consistent system state. |
-| Separate Rule Engine | Keep PLC logic modular. | Cleaner architecture. |
-| Modular Folder Structure | Separate responsibilities. | Easier maintenance and testing. |
+The exact physical characteristics of an industrial plant, PLC hardware, actuators, and real-world process dynamics are therefore not represented.
 
-These decisions reduced coupling between components and prepared the project for future expansion.
+Further improvements can include:
 
----
-
-# 21. Lessons Learned
-
-During the implementation of Phase 1, several important software engineering lessons were learned:
-
-- Building modular software simplifies future development.
-- Separating communication from business logic improves maintainability.
-- MQTT is well suited for Industrial IoT simulations.
-- Independent testing helps identify problems before integration.
-- A well-planned architecture reduces redesign effort in later phases.
-
-These lessons influenced the design of all subsequent phases.
+- Additional industrial sensors
+- Actuator simulation
+- PLC/control-loop simulation
+- More complex process dynamics
+- Multiple production lines
+- Additional MQTT topics
+- Real industrial hardware integration
 
 ---
 
-# 22. Phase Outcome
+## 12. Phase 1 Outcome
 
-The following deliverables were successfully completed during Phase 1.
+Phase 1 establishes the simulated Industrial IoT environment required by LightX-IDS.
 
-| Deliverable | Status |
-|-------------|--------|
-| Industrial Environment | ✅ |
-| MQTT Communication | ✅ |
-| MQTT Publisher | ✅ |
-| MQTT Subscriber | ✅ |
-| Temperature Sensor | ✅ |
-| Pressure Sensor | ✅ |
-| PLC Controller | ✅ |
-| Factory State | ✅ |
-| Rule Engine | ✅ |
-| Factory Simulator | ✅ |
-| Integration Testing | ✅ |
-
-Phase 1 successfully established a realistic Industrial IoT simulation environment capable of generating and processing operational factory data.
-
----
-
-# 23. Preparation for Phase 2
-
-With the Industrial Environment fully operational, the next phase introduces cyber attack simulation.
-
-Phase 2 focuses on:
-
-- Designing a reusable attack framework.
-- Implementing multiple Industrial IoT attack types.
-- Integrating attacks into the MQTT communication layer.
-- Producing malicious industrial traffic.
-- Preparing the platform for dataset generation.
-
-The modular architecture established during Phase 1 enables attack modules to reuse the existing MQTT communication infrastructure without modifying the industrial components.
-
----
-
-# 24. Summary
-
-Phase 1 transformed the architectural plans created during Phase 0 into a functioning Industrial IoT simulation.
-
-A modular communication infrastructure was developed using MQTT, reusable industrial sensors were implemented, and a PLC controller was created to monitor factory operation through a centralized Factory State.
-
-The completion of this phase provides the operational foundation required for introducing cyber attack simulation, dataset generation, and machine learning in subsequent phases.
-
-With Phase 1 completed, LightX-IDS now possesses a stable Industrial Environment that serves as the backbone for the remainder of the project.
+The completed environment provides a continuous source of structured sensor telemetry over MQTT and enables the subsequent attack simulation and dataset-generation phases.

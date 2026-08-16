@@ -1,592 +1,282 @@
-# Phase 2 – Cyber Attack Framework
+# Phase 2 — Attack Framework
 
-## Document Information
+## 1. Objective
 
-| Field | Value |
-|--------|-------|
-| Document | Phase 2 – Cyber Attack Framework |
-| Project | LightX-IDS |
-| Version | 1.0 |
-| Status | Completed |
-| Author | Vamshi |
-| Type | Phase Design Document |
-| Last Updated | July 2026 |
+The objective of Phase 2 is to implement a modular cyber-attack simulation framework capable of generating controlled attack traffic within the simulated Industrial IoT environment.
+
+The framework provides the attack scenarios required for dataset generation and later IDS model development.
 
 ---
 
-# 1. Introduction
+## 2. Attack Framework Overview
 
-After establishing a realistic Industrial IoT environment in Phase 1, the next objective was to simulate cyber attacks against the virtual factory.
+The LightX-IDS attack framework is designed as a modular system in which individual attacks are implemented independently and controlled through a common attack-management mechanism.
 
-An Intrusion Detection System cannot be developed using only normal operational traffic. Machine Learning models require both legitimate and malicious communication in order to learn the characteristics of cyber attacks.
+The implemented attack modules are:
 
-Therefore, Phase 2 introduces a reusable Cyber Attack Framework capable of generating multiple Industrial IoT attack scenarios without modifying the underlying industrial infrastructure.
-
-Rather than implementing each attack independently, a common attack framework was designed using Object-Oriented Programming principles. Every attack shares the same lifecycle while implementing its own attack-specific behavior.
-
-This modular approach makes it easy to introduce additional attack types in future phases without affecting the existing implementation.
-
----
-
-# 2. Learning Objectives
-
-After reading this chapter, the reader will understand:
-
-- Why attack simulation is required.
-- The architecture of the Cyber Attack Framework.
-- The role of BaseAttack.
-- How Attack Manager coordinates attacks.
-- How Attack Scheduler controls execution timing.
-- How different attacks reuse the common framework.
-- The engineering decisions behind the attack architecture.
-
----
-
-# 3. Phase Objectives
-
-The objectives of Phase 2 were:
-
-- Design a reusable cyber attack framework.
-- Simulate multiple Industrial IoT attacks.
-- Reuse the MQTT communication layer from Phase 1.
-- Generate malicious industrial traffic.
-- Ensure attacks can be executed independently.
-- Prepare the platform for dataset generation.
-
----
-
-# 4. Folder Structure
-
-backend/
-└── attacks/
-    ├── attack_config.py
-    ├── attack_manager.py
-    ├── base_attack.py
-    ├── dos_attack.py
-    ├── replay_attack.py
-    ├── spoofing_attack.py
-    ├── injection_attack.py
-    ├── scheduler.py
-    ├── logger.py
-    └── tests/
-
-Every module has a single responsibility.
-
-| File | Responsibility |
-|------|----------------|
-| base_attack.py | Common attack lifecycle |
-| attack_manager.py | Coordinates attacks |
-| scheduler.py | Controls execution timing |
-| attack_config.py | Stores configuration values |
-| dos_attack.py | Simulates DoS attack |
-| replay_attack.py | Simulates replay attack |
-| spoofing_attack.py | Simulates spoofing attack |
-| injection_attack.py | Simulates data injection attack |
-| logger.py | Attack logging |
-| attack_test.py | Framework testing |
-
----
-
-# 5. Cyber Attack Framework Architecture
-
-The attack framework was designed using inheritance.
-
-Instead of every attack implementing connection handling, logging, execution control, and cleanup independently, these responsibilities are centralized inside BaseAttack.
-
-```text
-                    BaseAttack
-                         │
-     ┌──────────┬────────┼─────────┬──────────┐
-     │          │        │         │          │
-     ▼          ▼        ▼         ▼
-   DoS      Replay   Spoofing  Injection
-```
-
-This architecture allows every attack to share the same lifecycle while implementing only its own attack logic.
-
----
-
-# 6. BaseAttack
-
-## What is BaseAttack?
-
-BaseAttack is the parent class for every cyber attack implemented within LightX-IDS.
-
-It provides the common execution lifecycle used by all attack modules.
-
-Every attack inherits:
-
-- Logging
-- MQTT Publisher
-- Attack duration
-- Packet interval
-- Start procedure
-- Stop procedure
-
-Each concrete attack implements only one method:
-
-```python
-execute()
-```
-
-which contains the attack-specific logic.
-
----
-
-## Responsibilities
-
-- Initialize attack configuration.
-- Create MQTT Publisher.
-- Start attack execution.
-- Execute attacks at fixed intervals.
-- Stop after configured duration.
-- Disconnect safely.
-- Log execution events.
-
----
-
-## Attack Lifecycle
-
-```text
-Create Attack
-      │
-      ▼
-Initialize Publisher
-      │
-      ▼
-Start Attack
-      │
-      ▼
-Loop
- │
- ├── execute()
- ├── wait(interval)
- └── duration reached?
-      │
-      ▼
-Stop Attack
-      │
-      ▼
-Disconnect MQTT
-```
-
-This lifecycle is shared by every attack in the project.
-
----
-
-## Engineering Decision
-
-Instead of duplicating attack execution code four times, inheritance was used.
-
-Benefits:
-
-- Less code duplication.
-- Consistent behavior.
-- Easier maintenance.
-- Easier extension.
-
----
-
-# 7. Attack Manager
-
-## Purpose
-
-The Attack Manager is responsible for coordinating multiple attack modules.
-
-Instead of starting each attack manually, the Attack Manager registers attack objects and launches them when required.
-
----
-
-## Responsibilities
-
-- Register attacks.
-- Maintain attack collection.
-- Create execution threads.
-- Start attacks.
-- Stop attacks.
-
----
-
-## Workflow
-
-```text
-Register Attack
-
-↓
-
-Attack Manager
-
-↓
-
-Create Thread
-
-↓
-
-Attack.start()
-
-↓
-
-Attack executes independently
-```
-
----
-
-## Why Threads?
-
-Each attack executes independently.
-
-Using Python threads allows multiple attacks to operate simultaneously without blocking one another.
-
-This design also prepares the framework for future scenarios involving concurrent cyber attacks.
-
----
-
-# 8. Attack Scheduler
-
-## Purpose
-
-The Attack Scheduler controls when attacks should begin.
-
-Rather than embedding delays inside every attack, scheduling is centralized in one reusable component.
-
----
-
-## Responsibilities
-
-- Delay attack execution.
-- Log waiting periods.
-- Coordinate attack timing.
-
----
-
-## Engineering Note
-
-Separating scheduling logic from attack logic improves maintainability and keeps attack classes focused solely on attack behavior.
-
----
-
-# 9. Attack Configuration
-
-All configurable values are centralized inside `attack_config.py`.
-
-Examples include:
-
-- MQTT topics.
-- Client IDs.
-- Packet intervals.
-- Attack durations.
-- Fake device identifiers.
-- Attack labels.
-
-### Benefits
-
-- Easy modification.
-- Consistent configuration.
-- Reduced hardcoded values.
-- Easier experimentation.
-
-Current configurable attacks include:
-
-- DoS
-- Replay
-- Spoofing
-- Data Injection
-
----
-
-# 10. Denial of Service (DoS) Attack
-
-## What is a DoS Attack?
-
-A Denial of Service (DoS) attack attempts to overwhelm a target by transmitting an excessive number of packets within a short period. In Industrial IoT environments, such attacks can delay or disrupt communication between sensors, controllers, and monitoring systems.
-
-Within LightX-IDS, the DoS attack rapidly publishes MQTT messages to simulate network congestion.
-
-### Responsibilities
-
-- Generate high-frequency MQTT messages.
-- Simulate communication flooding.
-- Produce malicious traffic for dataset generation.
-- Evaluate IDS performance under heavy network load.
-
-### Workflow
-
-```text
-Generate Payload
-        │
-        ▼
-MQTT Publisher
-        │
-        ▼
-MQTT Broker
-        │
-        ▼
-Subscriber & PLC
-```
-
-### Characteristics
-
-- Very small packet interval.
-- High packet transmission rate.
-- Continuous execution for the configured duration.
-
----
-
-# 11. Replay Attack
-
-## What is a Replay Attack?
-
-A Replay Attack captures previously transmitted legitimate messages and retransmits them later.
-
-Although the data itself appears valid, it is no longer current, potentially causing incorrect decisions within industrial control systems.
-
-### Responsibilities
-
-- Reuse previously valid sensor values.
-- Publish repeated MQTT messages.
-- Simulate delayed communication attacks.
-
-### Example
-
-```text
-Original Sensor Value
-
-29.4 °C
-
-↓
-
-Captured
-
-↓
-
-Replayed Multiple Times
-```
-
-### Purpose
-
-Replay attacks help evaluate whether the Intrusion Detection System can distinguish between genuine real-time communication and duplicated historical traffic.
-
----
-
-# 12. Spoofing Attack
-
-## What is a Spoofing Attack?
-
-A Spoofing Attack impersonates a legitimate industrial device by sending messages using a fake identity.
-
-Instead of compromising a real sensor, the attacker pretends to be a trusted device.
-
-### Responsibilities
-
-- Simulate fake industrial devices.
-- Publish forged MQTT messages.
-- Test authentication and trust assumptions.
-
-### Example
-
-```text
-Fake Sensor
-
-↓
-
-MQTT Publisher
-
-↓
-
-MQTT Broker
-
-↓
-
-PLC believes the message originated from a legitimate device.
-```
-
-### Purpose
-
-Spoofing attacks evaluate how well the IDS can identify unauthorized devices within the industrial network.
-
----
-
-# 13. Data Injection Attack
-
-## What is a Data Injection Attack?
-
-A Data Injection Attack modifies sensor readings before they reach the industrial controller.
-
-Rather than interrupting communication, the attacker manipulates the contents of the transmitted data.
-
-### Responsibilities
-
-- Generate manipulated sensor values.
-- Publish forged industrial measurements.
-- Simulate false operational conditions.
-
-### Example
-
-Normal Temperature
-
-29.4 °C
-
-↓
-
-Injected Temperature
-
-85.0 °C
-
-↓
-
-PLC processes incorrect information.
-
-### Purpose
-
-This attack evaluates whether abnormal sensor values can be detected before affecting industrial decision making.
-
----
-
-# 14. End-to-End Attack Execution Flow
-
-The following diagram illustrates the execution flow of every attack module.
-
-```text
-Create Attack Object
-          │
-          ▼
-Attack Manager Registers Attack
-          │
-          ▼
-Attack Manager Starts Thread
-          │
-          ▼
-BaseAttack.start()
-          │
-          ▼
-execute()
-          │
-          ▼
-MQTT Publisher
-          │
-          ▼
-MQTT Broker
-          │
-          ▼
-Subscriber
-          │
-          ▼
-PLC Controller
-          │
-          ▼
-Factory State Updated
-```
-
-Each attack follows this common lifecycle while implementing its own attack-specific logic.
-
----
-
-# 15. Testing
-
-Testing was performed to verify the correctness and stability of the Attack Framework.
-
-## Individual Attack Testing
-
-Each attack module was executed independently to verify:
-
-- Successful MQTT connection.
-- Correct message publication.
-- Expected execution duration.
-- Proper shutdown behavior.
-
-Validated attacks include:
-
-- DoS Attack
+- Denial of Service (DoS)
 - Replay Attack
+- Injection Attack
 - Spoofing Attack
-- Data Injection Attack
+
+The framework allows attacks to be executed against the simulated MQTT-based industrial environment.
 
 ---
 
-## Framework Testing
+## 3. Implemented Attack Types
 
-The complete framework was tested by:
+### 3.1 Denial of Service (DoS)
 
-- Registering attacks through the Attack Manager.
-- Starting attacks in separate threads.
-- Verifying concurrent execution.
-- Confirming graceful shutdown.
+The DoS attack represents an attempt to disrupt normal industrial communication by generating excessive or disruptive traffic.
 
-These tests demonstrated that the framework behaves reliably under normal operating conditions.
+The attack is implemented as an independent attack module and can be registered with the attack manager for execution.
 
----
+### 3.2 Replay Attack
 
-# 16. Engineering Decisions
+The Replay Attack represents the reuse of previously captured or generated sensor messages.
 
-Several architectural decisions shaped the design of the Attack Framework.
+The attack module is designed to introduce repeated or previously observed telemetry into the communication flow.
 
-| Decision | Reason | Benefit |
-|----------|--------|----------|
-| BaseAttack Abstract Class | Common lifecycle for every attack. | Eliminates duplicated code. |
-| Attack Manager | Centralized coordination. | Easier management of multiple attacks. |
-| Thread-Based Execution | Independent attack execution. | Supports concurrent simulations. |
-| Central Configuration File | Store all configurable values in one place. | Simplifies maintenance and experimentation. |
-| MQTT Reuse | Reuse existing communication layer. | No duplicate networking implementation. |
-| Modular Attack Classes | One class per attack. | Easy extension with future attack types. |
+### 3.3 Injection Attack
 
----
+The Injection Attack represents the insertion of manipulated or unexpected sensor information into the industrial communication channel.
 
-# 17. Lessons Learned
+The attack can be used to generate anomalous records for IDS training and evaluation.
 
-Implementation of the Attack Framework provided several software engineering insights:
+### 3.4 Spoofing Attack
 
-- Reusable base classes simplify development.
-- Centralized configuration improves maintainability.
-- Threading enables concurrent attack execution.
-- Separating attack logic from communication reduces complexity.
-- Building on the existing MQTT infrastructure avoids unnecessary duplication.
+The Spoofing Attack represents the generation of sensor communication that attempts to imitate legitimate industrial-device traffic.
 
-These lessons will guide the implementation of future attack types and detection modules.
+It provides attack traffic that can be used to evaluate the ability of LightX-IDS to distinguish legitimate telemetry from manipulated sources.
 
 ---
 
-# 18. Phase Outcome
+## 4. Attack Manager
 
-The following deliverables were completed during Phase 2.
+The `AttackManager` provides centralized management of attack execution.
 
-| Deliverable | Status |
-|-------------|--------|
-| BaseAttack Framework | ✅ |
-| Attack Configuration | ✅ |
-| Attack Manager | ✅ |
-| Attack Scheduler | ✅ |
-| DoS Attack | ✅ |
-| Replay Attack | ✅ |
-| Spoofing Attack | ✅ |
-| Data Injection Attack | ✅ |
-| Framework Testing | ✅ |
+The attack framework uses the manager to:
 
-Phase 2 successfully introduced malicious industrial traffic generation while preserving the modular architecture established during Phase 1.
+1. Create an attack instance.
+2. Register the attack.
+3. Start the registered attack.
+4. Track the execution thread.
+5. Wait for attack completion.
+
+This approach allows different attack implementations to share a common execution mechanism.
 
 ---
 
-# 19. Preparation for Phase 3
+## 5. Attack Registration
 
-With both normal industrial communication and cyber attack simulation available, the next phase focuses on generating structured datasets.
+Attacks are registered dynamically with the attack manager.
 
-The objectives of Phase 3 include:
+The dataset-generation workflow creates an attack instance and registers it using:
 
-- Capture MQTT communication.
-- Collect normal and malicious traffic.
-- Automatically label captured data.
-- Export datasets in CSV format.
-- Prepare datasets for Machine Learning training.
+`manager.register_attack(attack)`
 
-Successful completion of Phase 3 will provide the data required to build and evaluate the Intrusion Detection System.
+The manager then starts the attack using its common execution mechanism.
+
+This keeps the individual attack implementations independent from the overall dataset-generation workflow.
 
 ---
 
-# 20. Summary
+## 6. Dynamic Attack Runner
 
-Phase 2 extended the Industrial Environment by introducing a reusable Cyber Attack Framework capable of simulating multiple Industrial IoT attacks.
+The `AttackRunner` provides automated attack scheduling for dataset generation.
 
-Through the use of inheritance, centralized configuration, and thread-based execution, the framework remains modular, scalable, and easy to extend.
+The runner maintains a collection containing:
 
-By reusing the MQTT communication infrastructure developed during Phase 1, malicious traffic can be generated without modifying the underlying industrial environment.
+- `DoSAttack`
+- `ReplayAttack`
+- `InjectionAttack`
+- `SpoofingAttack`
 
-The completion of this phase provides the malicious data required for dataset generation and Machine Learning in the subsequent phases.
+Before each attack cycle, the collection is copied and randomly shuffled.
+
+Therefore, the order in which attack types are executed is not fixed.
+
+---
+
+## 7. Attack Timing
+
+Attack execution uses configurable randomized durations.
+
+### Normal Traffic
+
+Normal traffic duration is randomly selected between:
+
+- Minimum: 15 seconds
+- Maximum: 40 seconds
+
+### Attack Traffic
+
+Attack duration is randomly selected between:
+
+- Minimum: 5 seconds
+- Maximum: 12 seconds
+
+### Cooldown
+
+After each attack, a cooldown period is introduced.
+
+Cooldown duration is randomly selected between:
+
+- Minimum: 10 seconds
+- Maximum: 25 seconds
+
+This produces alternating periods of normal activity, attack activity, and recovery/cooldown.
+
+---
+
+## 8. Attack State Communication
+
+The preprocessing pipeline uses an attack-state MQTT topic to identify attack start and stop events.
+
+The `DatasetManager` monitors the configured `ATTACK_STATE_TOPIC`.
+
+When an attack-start event is received:
+
+- `attack_active` is set to `True`.
+- The current `attack_type` is stored.
+
+When an attack-stop event is received:
+
+- `attack_active` is set to `False`.
+- The stored attack type is cleared.
+
+This state information is subsequently used by the labeling component.
+
+---
+
+## 9. Attack-to-Dataset Integration
+
+The attack framework is directly integrated with dataset generation.
+
+The overall flow is:
+
+AttackRunner
+→ AttackManager
+→ Attack Module
+→ Industrial/MQTT Environment
+→ MQTT Collector
+→ Dataset Manager
+→ Labeler
+→ Dataset Writer
+→ CSV Dataset
+
+During an active attack, sensor records received by the preprocessing pipeline are labeled as attack records.
+
+Normal traffic received outside an active attack period is labeled as normal traffic.
+
+---
+
+## 10. Dataset Generation Target
+
+The current dataset-generation configuration specifies a target of:
+
+`100,000 records`
+
+The `AttackRunner` continues executing normal and attack scenarios until the configured target number of records is reached.
+
+The runner checks the current record count before starting each attack and stops execution when the target is reached.
+
+---
+
+## 11. Attack Selection
+
+The configured attack weights are:
+
+- DoS: 25%
+- Replay: 25%
+- Injection: 25%
+- Spoofing: 25%
+
+The current `AttackRunner` implementation randomizes the attack order using shuffling.
+
+Therefore, the configured weights represent the intended attack-selection configuration, while the currently implemented runner primarily uses randomized ordering rather than weighted sampling.
+
+---
+
+## 12. Threaded Execution
+
+Attack execution is monitored through attack-manager threads.
+
+After an attack is started, the runner waits until the active attack threads have completed before beginning the cooldown period.
+
+This ensures that the dataset-generation process does not immediately transition to the next scenario while an earlier attack is still executing.
+
+---
+
+## 13. Dataset Labeling
+
+The attack framework provides the context required by the preprocessing pipeline to generate labels.
+
+Each final dataset record contains:
+
+- `attack_type`
+- `label`
+
+The binary label is:
+
+- `0` — Normal
+- `1` — Attack
+
+When an attack is active, the corresponding attack type is stored in the record.
+
+When no attack is active, the record is labeled as normal.
+
+---
+
+## 14. Modular Design
+
+Each attack is implemented as a separate module.
+
+This provides:
+
+- Independent attack implementation
+- Reusable attack components
+- Centralized execution management
+- Easy addition of new attack types
+- Randomized attack sequencing
+- Integration with automated dataset generation
+
+Additional attack modules can be added without redesigning the complete dataset-generation pipeline.
+
+---
+
+## 15. Current Implementation Status
+
+The following components are implemented:
+
+- DoS attack module
+- Replay attack module
+- Injection attack module
+- Spoofing attack module
+- Attack Manager
+- Dynamic Attack Runner
+- Randomized attack ordering
+- Configurable attack duration
+- Normal-traffic duration
+- Cooldown duration
+- Attack-state communication
+- Integration with dataset labeling
+- Integration with automatic dataset generation
+
+---
+
+## 16. Limitations
+
+The current attack framework operates against a simulated Industrial IoT environment.
+
+The exact behavior and realism of each attack depend on the corresponding attack-module implementation and the simulated MQTT environment.
+
+Further attack scenarios and more sophisticated attack parameterization can be added in future development.
+
+---
+
+## 17. Phase 2 Outcome
+
+Phase 2 establishes the cyber-attack simulation framework required for LightX-IDS dataset generation.
+
+The modular framework can execute multiple attack types, randomize their execution order, coordinate attack timing, communicate attack state to the preprocessing pipeline, and provide the context required for generating labeled attack traffic.
