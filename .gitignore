@@ -89,3 +89,9 @@ backend/ml/saved_models/
 
 *.tmp
 *.temp
+# ==========================================
+# Generated datasets
+# ==========================================
+
+datasets/raw/
+datasets/processed/
