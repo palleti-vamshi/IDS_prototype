@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import {
   MdFactory,
   MdWarning,
@@ -76,8 +76,61 @@ function SCADA() {
 
   const attack = scadaData.attack;
 
-  const attackActive =
-    attack?.state === "RUNNING";
+const [attackElapsedTime, setAttackElapsedTime] = useState(0);
+
+const attackStartTimeRef = useRef(null);
+const attackIdRef = useRef(null);
+
+useEffect(() => {
+  if (!attack) {
+    attackStartTimeRef.current = null;
+    attackIdRef.current = null;
+    setAttackElapsedTime(0);
+    return;
+  }
+
+  if (attack.state === "RUNNING") {
+
+    // Detect a new attack
+    if (attackIdRef.current !== attack.attack_id) {
+      attackIdRef.current = attack.attack_id;
+      attackStartTimeRef.current = Date.now();
+    }
+
+    const updateElapsedTime = () => {
+      if (!attackStartTimeRef.current) return;
+
+      const elapsed = Math.floor(
+        (Date.now() - attackStartTimeRef.current) / 1000
+      );
+
+      setAttackElapsedTime(
+        Math.min(
+          elapsed,
+          attack.duration || elapsed
+        )
+      );
+    };
+
+    updateElapsedTime();
+
+    const timer = setInterval(
+      updateElapsedTime,
+      1000
+    );
+
+    return () => clearInterval(timer);
+  }
+
+  // Attack stopped
+  setAttackElapsedTime(
+    attack.elapsed_time || 0
+  );
+
+}, [attack]);
+
+const attackActive =
+  attack?.state === "RUNNING";
 
   return (
     <div>
@@ -310,7 +363,7 @@ function SCADA() {
               </p>
 
               <p className="font-semibold mt-1">
-                {attack.elapsed_time}s /{" "}
+                {attackElapsedTime}s /{" "}
                 {attack.duration}s
               </p>
             </div>

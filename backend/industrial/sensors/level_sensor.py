@@ -38,8 +38,8 @@ class LevelSensor(BaseSensor):
 
         if (
             self.attached_machine is not None
-            and hasattr(self.attached_machine, "current_level")
+            and hasattr(self.attached_machine, "level_percentage")
         ):
-            return self.attached_machine.current_level
+            return self.attached_machine.level_percentage
 
         return random.uniform(20.0, 90.0)

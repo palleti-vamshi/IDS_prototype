@@ -35,6 +35,9 @@ class SCADADashboard:
 
         self.latest_data: dict[str, Any] = {}
 
+        # Track currently running attacks by attack ID.
+        self.active_attack_ids: set[str] = set()
+
         self.subscriber = MQTTSubscriber(
             client_id=SCADA_CLIENT,
             message_handler=self.process_message,
@@ -81,10 +84,34 @@ class SCADADashboard:
                 "topic": topic,
             }
 
+            attack_id = payload.get("attack_id")
+            event = payload.get("event")
+
+            if attack_id:
+
+                attack_id = str(attack_id)
+
+                if event == "start":
+
+                    self.active_attack_ids.add(
+                        attack_id
+                    )
+
+                elif event == "stop":
+
+                    self.active_attack_ids.discard(
+                        attack_id
+                    )
+
+            self.latest_data["active_attack_count"] = len(
+                self.active_attack_ids
+            )
+
             self.logger.warning(
-                "SCADA Attack | %s | %s",
-                payload.get("event"),
+                "SCADA Attack | %s | %s | Active Attacks: %d",
+                event,
                 payload.get("attack_name"),
+                len(self.active_attack_ids),
             )
 
             return
@@ -136,24 +163,20 @@ class SCADADashboard:
     def start(self) -> None:
         """Start receiving SCADA MQTT data."""
 
-        # Sensor topics
         for topic in MQTT_TOPICS:
 
             self.subscriber.subscribe(
                 topic
             )
 
-        # Alarm
         self.subscriber.subscribe(
             ALERT_TOPIC
         )
 
-        # Attack state
         self.subscriber.subscribe(
             ATTACK_STATE_TOPIC
         )
 
-        # Machine status
         self.subscriber.subscribe(
             MACHINE_STATUS_TOPIC
         )
