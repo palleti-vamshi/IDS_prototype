@@ -1,3 +1,4 @@
+import SCADA from "../pages/SCADA/SCADA";
 import NotFound from "../pages/NotFound/NotFound";
 import Login from "../pages/Login/Login";
 import Settings from "../pages/Settings/Settings";
@@ -28,6 +29,11 @@ path="/sensors"
 element={<Sensors/>}
 />
 
+
+<Route
+path="/scada"
+element={<SCADA />}
+/>
 
 <Route 
 path="/attacks" 

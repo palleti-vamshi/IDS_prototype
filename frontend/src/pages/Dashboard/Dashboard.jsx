@@ -1,228 +1,242 @@
 import { useEffect, useState } from "react";
 
 import ThreatPanel from "../../components/alerts/ThreatPanel";
-
 import PageAnimation from "../../components/common/PageAnimation";
-
 import TemperatureChart from "../../components/charts/TemperatureChart";
-
 import PressureChart from "../../components/charts/PressureChart";
-
 import StatCard from "../../components/cards/StatCard";
 
 import { getDashboardStats } from "../../services/dashboardService";
 
 
-
 const defaultStats = [
 
-{
-title:"Factory Status",
-value:"Online",
-status:"Operational",
-icon:"🏭"
-},
+    {
+        title: "Factory Status",
+        value: "Online",
+        status: "Operational",
+        icon: "🏭"
+    },
 
-{
-title:"MQTT Status",
-value:"Connected",
-status:"Communication Active",
-icon:"📡"
-},
+    {
+        title: "MQTT Status",
+        value: "Connected",
+        status: "Communication Active",
+        icon: "📡"
+    },
 
-{
-title:"IDS Status",
-value:"Running",
-status:"AI Monitoring Enabled",
-icon:"🛡️"
-},
+    {
+        title: "IDS Status",
+        value: "Running",
+        status: "AI Monitoring Enabled",
+        icon: "🛡️"
+    },
 
-{
-title:"Active Attacks",
-value:"03",
-status:"Requires Attention",
-icon:"⚠️"
-},
+    {
+        title: "Active Attacks",
+        value: "0",
+        status: "No Active Attacks",
+        icon: "⚠️"
+    },
 
-{
-title:"Sensors Online",
-value:"24",
-status:"All Connected",
-icon:"🌡️"
-},
+    {
+        title: "Sensors Online",
+        value: "0",
+        status: "Connecting...",
+        icon: "🌡️"
+    },
 
-{
-title:"System Uptime",
-value:"99.9%",
-status:"Stable",
-icon:"⏱️"
-},
+    {
+        title: "System Uptime",
+        value: "99.9%",
+        status: "Stable",
+        icon: "⏱️"
+    },
 
-{
-title:"Packets Processed",
-value:"1.2M",
-status:"Normal Traffic",
-icon:"📦"
-},
+    {
+        title: "Packets Processed",
+        value: "1.2M",
+        status: "Normal Traffic",
+        icon: "📦"
+    },
 
-{
-title:"Threat Level",
-value:"Low",
-status:"Secure",
-icon:"🔒"
-}
+    {
+        title: "Threat Level",
+        value: "Low",
+        status: "Secure",
+        icon: "🔒"
+    }
 
 ];
 
 
+function Dashboard() {
 
+    const [stats, setStats] = useState(defaultStats);
 
-function Dashboard(){
+    const [loading, setLoading] = useState(false);
 
 
-const [stats,setStats]=useState(defaultStats);
+    useEffect(() => {
 
-const [loading,setLoading]=useState(false);
+        const loadDashboard = async () => {
 
+            try {
 
+                setLoading(true);
 
-useEffect(()=>{
+                const data = await getDashboardStats();
 
 
-const loadDashboard = async()=>{
+                // ==========================================
+                // Count actual sensors received by SCADA
+                // ==========================================
 
+                const sensorTypes = [
+                    "temperature",
+                    "pressure",
+                    "current",
+                    "voltage",
+                    "flow",
+                    "rpm",
+                    "vibration",
+                    "humidity",
+                    "level",
+                    "proximity"
+                ];
 
-try{
 
+                const sensorCount = sensorTypes.filter(
+                    sensor => data?.[sensor]
+                ).length;
 
-setLoading(true);
 
+                // ==========================================
+                // Actual active attack count from SCADA
+                // ==========================================
 
-const data = await getDashboardStats();
+                const activeAttackCount =
+                    Number(data?.active_attack_count ?? 0);
 
 
+                setStats(prevStats =>
+                    prevStats.map(item => {
 
-if(data?.stats){
+                        if (item.title === "Sensors Online") {
 
-setStats(data.stats);
+                            return {
+                                ...item,
+                                value: String(sensorCount),
+                                status:
+                                    sensorCount > 0
+                                        ? `${sensorCount} Sensors Connected`
+                                        : "No Sensors Connected"
+                            };
 
-}
+                        }
 
 
-}
+                        if (item.title === "Active Attacks") {
 
-catch(error){
+                            return {
+                                ...item,
+                                value: String(activeAttackCount),
+                                status:
+                                    activeAttackCount > 0
+                                        ? "Requires Attention"
+                                        : "No Active Attacks"
+                            };
 
+                        }
 
-console.log(
-"Dashboard API unavailable, using demo data"
-);
 
+                        return item;
 
-}
+                    })
+                );
 
-finally{
 
+            }
 
-setLoading(false);
+            catch (error) {
 
+                console.log(
+                    "SCADA API unavailable, using default dashboard data"
+                );
 
-}
+            }
 
+            finally {
 
-};
+                setLoading(false);
 
+            }
 
+        };
 
-loadDashboard();
 
+        loadDashboard();
 
-},[]);
+    }, []);
 
 
+    return (
 
+        <PageAnimation>
 
+            <h1 className="text-3xl font-bold mb-8">
+                Industrial Security Dashboard
+            </h1>
 
-return(
 
-<PageAnimation>
+            {
+                loading &&
 
+                <p className="text-cyan-400 mb-4">
+                    Updating security status...
+                </p>
+            }
 
-<h1 className="text-3xl font-bold mb-8">
-Industrial Security Dashboard
-</h1>
 
+            <div className="grid grid-cols-4 gap-6">
 
+                {
+                    stats.map((item, index) => (
 
-{
-loading &&
+                        <StatCard
 
-<p className="text-cyan-400 mb-4">
-Updating security status...
-</p>
+                            key={index}
 
-}
+                            title={item.title}
 
+                            value={item.value}
 
+                            status={item.status}
 
+                            icon={item.icon}
 
+                        />
 
-<div className="grid grid-cols-4 gap-6">
+                    ))
+                }
 
+            </div>
 
-{
 
-stats.map((item,index)=>(
+            <div className="grid grid-cols-2 gap-6 mt-8">
 
+                <TemperatureChart />
 
-<StatCard
+                <PressureChart />
 
-key={index}
+            </div>
 
-title={item.title}
 
-value={item.value}
+            <ThreatPanel />
 
-status={item.status}
+        </PageAnimation>
 
-icon={item.icon}
-
-/>
-
-
-))
-
-
-}
-
-
-</div>
-
-
-
-
-
-<div className="grid grid-cols-2 gap-6 mt-8">
-
-
-<TemperatureChart/>
-
-
-<PressureChart/>
-
-
-</div>
-
-
-
-
-
-<ThreatPanel/>
-
-
-</PageAnimation>
-
-)
+    );
 
 }
 

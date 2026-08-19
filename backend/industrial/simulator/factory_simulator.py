@@ -9,6 +9,14 @@ from __future__ import annotations
 
 from backend.core.logger import setup_logger
 
+from backend.industrial.mqtt.publisher import (
+    MQTTPublisher,
+)
+
+from backend.industrial.config.mqtt_config import (
+    MACHINE_STATUS_TOPIC,
+)
+
 from backend.industrial.factory.factory_builder import (
     FactoryBuilder,
 )
@@ -118,6 +126,14 @@ class FactorySimulator:
         self.attack_initializer = AttackInitializer(
             self.attack_manager,
             self.scenario_manager,
+        )
+
+        # ==========================================
+        # SCADA Machine Status Publisher
+        # ==========================================
+
+        self.machine_status_publisher = MQTTPublisher(
+            "factory_machine_status"
         )
 
         # ==========================================
@@ -476,6 +492,31 @@ class FactorySimulator:
 
             sensor.publish()
 
+        self.publish_machine_status()
+
+    def publish_machine_status(self) -> None:
+        """
+        Publish the current status of all
+        industrial machines for SCADA monitoring.
+        """
+
+        machines = []
+
+        for machine in self.machines:
+
+            machines.append(
+                machine.get_status()
+            )
+
+        payload = {
+            "machines": machines
+        }
+
+        self.machine_status_publisher.publish(
+            MACHINE_STATUS_TOPIC,
+            payload,
+        )
+
     # ==========================================
     # Run
     # ==========================================
@@ -555,6 +596,12 @@ class FactorySimulator:
             sensor.stop()
 
         self.clock.stop()
+
+        # ==========================================
+        # SCADA Publisher Shutdown
+        # ==========================================
+
+        self.machine_status_publisher.disconnect()
 
         self.logger.info(
             "Factory Simulator Stopped."

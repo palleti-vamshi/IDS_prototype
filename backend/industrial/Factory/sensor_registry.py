@@ -66,6 +66,11 @@ class SensorRegistry:
                     sensor_code=f"{machine.machine_code}-VIB"
                 )
             )
+            machine.attach_sensor(
+                VoltageSensor(
+                sensor_code=f"{machine.machine_code}-VLT"
+               )
+            )
 
         # ==========================================
         # Pump
@@ -114,7 +119,12 @@ class SensorRegistry:
                     sensor_code=f"{machine.machine_code}-PRS"
                 )
             )
-
+            machine.attach_sensor(
+                HumiditySensor(
+                    sensor_code=f"{machine.machine_code}-HUM"
+        )
+    )
+    
         # ==========================================
         # Conveyor
         # ==========================================
