@@ -3,6 +3,20 @@ factory_simulator.py
 
 Central orchestrator of the LightX-IDS
 Industrial Digital Twin.
+
+IMPORTANT
+---------
+The Phase 3 Dataset AttackRunner controls
+attack execution.
+
+FactorySimulator ONLY:
+    - Runs the industrial simulation
+    - Updates AttackManager
+    - Publishes sensor data
+    - Evaluates alarms
+
+AttackScheduler is NOT executed here during
+Phase 3 dataset generation.
 """
 
 from __future__ import annotations
@@ -81,6 +95,13 @@ from backend.attacks.sensor.sensor_attack import (
 class FactorySimulator:
     """
     Central orchestrator of the Industrial Digital Twin.
+
+    During Phase 3 dataset generation, attack execution
+    is controlled by AttackRunner.
+
+    FactorySimulator is responsible for continuously
+    updating the AttackManager so that active attacks
+    actually affect the industrial environment.
     """
 
     def __init__(self) -> None:
@@ -119,6 +140,15 @@ class FactorySimulator:
 
         self.attack_manager = AttackManager()
 
+        # ------------------------------------------
+        # Kept for backward compatibility.
+        #
+        # IMPORTANT:
+        # Phase 3 AttackRunner controls attacks.
+        # The scheduler is NOT updated by the
+        # simulator during Phase 3 generation.
+        # ------------------------------------------
+
         self.attack_scheduler = AttackScheduler()
 
         self.scenario_manager = ScenarioManager()
@@ -154,6 +184,8 @@ class FactorySimulator:
 
         self.running = False
 
+        self.initialized = False
+
     # ==========================================
     # Initialization
     # ==========================================
@@ -172,18 +204,18 @@ class FactorySimulator:
 
         self.initialize_alarm_system()
 
+        # ==========================================
+        # Initialize Attack Framework
+        # ==========================================
+
         self.attack_initializer.initialize()
 
-        # ==========================================
-        # Automatic Attack Campaign
-        # ==========================================
-
-        self.attack_scheduler.start_campaign(
-            self.attack_initializer.get_campaign_attacks()
-        )
+        self.initialized = True
 
         self.logger.info(
-            "Initialization completed."
+            "Attack framework initialized. "
+            "Attack execution delegated to Phase 3 "
+            "AttackRunner."
         )
 
     # ==========================================
@@ -290,7 +322,8 @@ class FactorySimulator:
         )
 
         self.logger.info(
-            "%d sensors registered with SensorAttackEngine.",
+            "%d sensors registered with "
+            "SensorAttackEngine.",
             SensorAttack.attack_engine.total_registered,
         )
 
@@ -327,13 +360,6 @@ class FactorySimulator:
         """
         Convert a machine-specific sensor code into
         the canonical alarm-rule source.
-
-        Examples:
-
-            MTR-001-TMP -> TMP-001
-            PMP-001-PRS -> PRS-001
-            TNK-001-LVL -> LVL-001
-            CNV-001-RPM -> RPM-001
         """
 
         sensor_code = getattr(
@@ -344,10 +370,6 @@ class FactorySimulator:
 
         if not sensor_code:
             return None
-
-        # ==========================================
-        # Sensor suffix -> alarm source
-        # ==========================================
 
         suffix_map = {
 
@@ -409,10 +431,6 @@ class FactorySimulator:
             value,
         )
 
-        # ==========================================
-        # Print newly active alarms
-        # ==========================================
-
         for alarm in alarms:
 
             print(
@@ -433,7 +451,16 @@ class FactorySimulator:
         self.clock.step()
 
         # ==========================================
-        # Attack Execution
+        # ATTACK EXECUTION
+        # ==========================================
+        #
+        # AttackRunner starts/stops the attack.
+        #
+        # AttackManager.update() is responsible for
+        # actually executing the currently active
+        # attack and applying its effects.
+        #
+        # This MUST remain here.
         # ==========================================
 
         self.attack_manager.update(
@@ -441,14 +468,17 @@ class FactorySimulator:
         )
 
         # ==========================================
-        # Attack Scheduling
+        # IMPORTANT
         # ==========================================
-
-        self.attack_scheduler.update(
-            self.clock.tick_rate
-        )
-
-        self.attack_scheduler.print_progress()
+        #
+        # Do NOT call:
+        #
+        # self.attack_scheduler.update(...)
+        #
+        # during Phase 3.
+        #
+        # AttackRunner is the sole attack controller.
+        # ==========================================
 
         # ==========================================
         # Industrial Simulation
@@ -493,6 +523,10 @@ class FactorySimulator:
             sensor.publish()
 
         self.publish_machine_status()
+
+    # ==========================================
+    # Machine Status
+    # ==========================================
 
     def publish_machine_status(self) -> None:
         """
@@ -553,22 +587,6 @@ class FactorySimulator:
 
                 self.publish_cycle()
 
-                if (
-                    self.attack_scheduler.campaign_finished()
-                ):
-
-                    print()
-
-                    print("=" * 70)
-
-                    print(
-                        "🎉 ATTACK CAMPAIGN FINISHED"
-                    )
-
-                    print("=" * 70)
-
-                    self.stop()
-
         except KeyboardInterrupt:
 
             self.stop()
@@ -579,21 +597,53 @@ class FactorySimulator:
 
     def stop(self) -> None:
 
+        if not self.running:
+
+            return
+
         self.running = False
+
+        # ==========================================
+        # Stop Active Attacks
+        # ==========================================
 
         self.attack_manager.stop_all()
 
+        # ==========================================
+        # Reset Scheduler
+        # ==========================================
+        #
+        # Scheduler is retained for compatibility,
+        # but it does NOT control Phase 3 attacks.
+        # ==========================================
+
         self.attack_scheduler.reset()
 
+        # ==========================================
+        # Reset Alarms
+        # ==========================================
+
         self.alarm_manager.reset()
+
+        # ==========================================
+        # Stop Factory
+        # ==========================================
 
         if self.factory:
 
             self.factory.stop()
 
+        # ==========================================
+        # Stop Sensors
+        # ==========================================
+
         for sensor in self.sensors:
 
             sensor.stop()
+
+        # ==========================================
+        # Stop Clock
+        # ==========================================
 
         self.clock.stop()
 
@@ -620,6 +670,9 @@ class FactorySimulator:
 
             "running":
                 self.running,
+
+            "initialized":
+                self.initialized,
 
             "clock":
                 self.clock.get_status(),

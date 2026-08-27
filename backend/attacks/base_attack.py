@@ -64,7 +64,30 @@ class BaseAttack(ABC):
             attack_name
         )
 
-        self.event_publisher = AttackEventPublisher()
+        # ==========================================
+        # Unique MQTT Event Publisher
+        # ==========================================
+        #
+        # Every attack receives a unique MQTT
+        # client ID.
+        #
+        # This is important because multiple attack
+        # objects can exist simultaneously.
+        #
+        # Example:
+        #
+        # attack_event_DOS_001
+        # attack_event_REPLAY_001
+        # attack_event_SPOOF_001
+        #
+        # This prevents MQTT client-ID collisions.
+        #
+
+        self.event_publisher = AttackEventPublisher(
+            client_id=(
+                f"attack_event_{self.attack_id}"
+            )
+        )
 
     # ==================================================
     # Target Management
@@ -80,7 +103,9 @@ class BaseAttack(ABC):
 
         if target not in self.targets:
 
-            self.targets.append(target)
+            self.targets.append(
+                target
+            )
 
         if self.state == AttackState.CREATED:
 
@@ -93,9 +118,13 @@ class BaseAttack(ABC):
 
         if target in self.targets:
 
-            self.targets.remove(target)
+            self.targets.remove(
+                target
+            )
 
-    def clear_targets(self) -> None:
+    def clear_targets(
+        self,
+    ) -> None:
 
         self.targets.clear()
 
@@ -103,7 +132,9 @@ class BaseAttack(ABC):
     # Lifecycle
     # ==================================================
 
-    def start(self) -> None:
+    def start(
+        self,
+    ) -> None:
         """
         Start attack.
         """
@@ -112,9 +143,25 @@ class BaseAttack(ABC):
 
             return
 
+        # ------------------------------------------
+        # Prevent duplicate starts
+        # ------------------------------------------
+
+        if self.state == AttackState.RUNNING:
+
+            return
+
+        # ------------------------------------------
+        # Reset runtime state
+        # ------------------------------------------
+
         self.elapsed_time = 0.0
 
         self.state = AttackState.RUNNING
+
+        # ------------------------------------------
+        # Console / Logger
+        # ------------------------------------------
 
         self._print_start_banner()
 
@@ -123,22 +170,34 @@ class BaseAttack(ABC):
             self.attack_name,
         )
 
-        # Publish attack START event to MQTT
+        # ------------------------------------------
+        # Publish START event
+        # ------------------------------------------
+
         self.event_publisher.publish_start(
             self.get_status()
         )
 
-    def stop(self) -> None:
+    def stop(
+        self,
+    ) -> None:
         """
         Stop attack.
         """
 
+        # ------------------------------------------
         # Ignore repeated stop calls
+        # ------------------------------------------
+
         if self.state == AttackState.STOPPED:
 
             return
 
         self.state = AttackState.STOPPED
+
+        # ------------------------------------------
+        # Console / Logger
+        # ------------------------------------------
 
         self._print_stop_banner()
 
@@ -147,26 +206,35 @@ class BaseAttack(ABC):
             self.attack_name,
         )
 
-        # Publish attack STOP event to MQTT
+        # ------------------------------------------
+        # Publish STOP event
+        # ------------------------------------------
+
         self.event_publisher.publish_stop(
             self.get_status()
         )
 
-    def pause(self) -> None:
+    def pause(
+        self,
+    ) -> None:
 
         if self.state == AttackState.RUNNING:
 
             self.state = AttackState.PAUSED
 
-    def resume(self) -> None:
+    def resume(
+        self,
+    ) -> None:
 
         if self.state == AttackState.PAUSED:
 
             self.state = AttackState.RUNNING
 
-    def reset(self) -> None:
+    def reset(
+        self,
+    ) -> None:
         """
-        Reset attack.
+        Reset attack to READY state.
         """
 
         self.elapsed_time = 0.0
@@ -177,13 +245,17 @@ class BaseAttack(ABC):
     # Console Output
     # ==================================================
 
-    def _print_start_banner(self) -> None:
+    def _print_start_banner(
+        self,
+    ) -> None:
 
         print("\033[91m")
 
         print("=" * 72)
 
-        print("🚨  LIGHTX-IDS ATTACK STARTED")
+        print(
+            "🚨  LIGHTX-IDS ATTACK STARTED"
+        )
 
         print("=" * 72)
 
@@ -196,28 +268,35 @@ class BaseAttack(ABC):
         )
 
         print(
-            f"Attack Type    : {self.attack_type.value}"
+            f"Attack Type    : "
+            f"{self.attack_type.value}"
         )
 
         print(
-            f"Target Layer   : {self.attack_target.value}"
+            f"Target Layer   : "
+            f"{self.attack_target.value}"
         )
 
         print(
-            f"Duration       : {self.duration:.0f} sec"
+            f"Duration       : "
+            f"{self.duration:.0f} sec"
         )
 
         print("=" * 72)
 
         print("\033[0m")
 
-    def _print_stop_banner(self) -> None:
+    def _print_stop_banner(
+        self,
+    ) -> None:
 
         print("\033[92m")
 
         print("=" * 72)
 
-        print("✅  LIGHTX-IDS ATTACK COMPLETED")
+        print(
+            "✅  LIGHTX-IDS ATTACK COMPLETED"
+        )
 
         print("=" * 72)
 
@@ -230,7 +309,8 @@ class BaseAttack(ABC):
         )
 
         print(
-            f"Elapsed Time   : {self.elapsed_time:.1f} sec"
+            f"Elapsed Time   : "
+            f"{self.elapsed_time:.1f} sec"
         )
 
         print("=" * 72)
@@ -261,7 +341,15 @@ class BaseAttack(ABC):
             f"{self.duration:.1f}"
         )
 
+        # ------------------------------------------
+        # Apply attack behaviour
+        # ------------------------------------------
+
         self.apply(dt)
+
+        # ------------------------------------------
+        # Check completion
+        # ------------------------------------------
 
         if self.elapsed_time >= self.duration:
 
@@ -292,44 +380,90 @@ class BaseAttack(ABC):
     # ==================================================
 
     @property
-    def is_running(self) -> bool:
+    def is_running(
+        self,
+    ) -> bool:
 
-        return self.state == AttackState.RUNNING
+        return (
+            self.state == AttackState.RUNNING
+        )
 
     @property
-    def is_finished(self) -> bool:
+    def is_finished(
+        self,
+    ) -> bool:
 
-        return self.state == AttackState.COMPLETED
+        return (
+            self.state == AttackState.COMPLETED
+        )
 
-    def get_status(self) -> dict:
+    # ==================================================
+    # Status Information
+    # ==================================================
+
+    def get_status(
+        self,
+    ) -> dict:
 
         return {
 
-            "attack_id": self.attack_id,
+            "attack_id":
+                self.attack_id,
 
-            "attack_name": self.attack_name,
+            "attack_name":
+                self.attack_name,
 
-            "type": self.attack_type.value,
+            "type":
+                self.attack_type.value,
 
-            "target_layer": self.attack_target.value,
+            "target_layer":
+                self.attack_target.value,
 
-            "state": self.state.value,
+            "state":
+                self.state.value,
 
-            "duration": self.duration,
+            "duration":
+                self.duration,
 
-            "elapsed_time": round(
-                self.elapsed_time,
-                2,
-            ),
+            "elapsed_time":
+                round(
+                    self.elapsed_time,
+                    2,
+                ),
 
-            "targets": len(
-                self.targets
-            ),
+            "targets":
+                len(
+                    self.targets
+                ),
 
-            "enabled": self.enabled,
+            "enabled":
+                self.enabled,
         }
 
-    def __str__(self) -> str:
+    # ==================================================
+    # Cleanup
+    # ==================================================
+
+    def close(
+        self,
+    ) -> None:
+        """
+        Release resources owned by the attack.
+
+        This is intentionally separate from stop().
+        stop() represents the attack lifecycle, while
+        close() releases the MQTT publisher.
+        """
+
+        self.event_publisher.disconnect()
+
+    # ==================================================
+    # String
+    # ==================================================
+
+    def __str__(
+        self,
+    ) -> str:
 
         return (
             f"{self.attack_id} | "

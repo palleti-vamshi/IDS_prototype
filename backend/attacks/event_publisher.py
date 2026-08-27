@@ -12,10 +12,8 @@ from backend.industrial.config.mqtt_config import ATTACK_STATE_TOPIC
 class AttackEventPublisher:
     """Publishes attack start/stop events."""
 
-    def __init__(self):
-        self.publisher = MQTTPublisher(
-            "attack_event_publisher"
-        )
+    def __init__(self, client_id: str = "attack_event_publisher"):
+        self.publisher = MQTTPublisher(client_id)
 
     def publish_start(
         self,
@@ -25,6 +23,10 @@ class AttackEventPublisher:
         payload = {
             "event": "start",
             "timestamp": datetime.now().isoformat(),
+
+            # Explicit field used by DatasetManager
+            "attack": attack_status.get("attack_name"),
+
             **attack_status,
         }
 
@@ -41,6 +43,10 @@ class AttackEventPublisher:
         payload = {
             "event": "stop",
             "timestamp": datetime.now().isoformat(),
+
+            # Explicit field used by DatasetManager
+            "attack": attack_status.get("attack_name"),
+
             **attack_status,
         }
 
@@ -49,5 +55,5 @@ class AttackEventPublisher:
             payload,
         )
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         self.publisher.disconnect()

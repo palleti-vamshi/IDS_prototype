@@ -13,6 +13,12 @@ class AttackManager:
     """
     Central controller responsible for
     managing all cyber attacks.
+
+    AttackManager owns the registered attack objects
+    and is responsible for their runtime updates.
+
+    Phase 3 dataset generation uses this manager as
+    the single execution point for attacks.
     """
 
     def __init__(self) -> None:
@@ -31,6 +37,12 @@ class AttackManager:
         self,
         attack,
     ) -> None:
+        """
+        Register an attack with the manager.
+
+        Existing attack IDs are replaced so that
+        registration remains deterministic.
+        """
 
         self.attacks[
             attack.attack_id
@@ -49,11 +61,33 @@ class AttackManager:
         self,
         attack_id: str,
     ) -> None:
+        """
+        Remove an attack from the manager.
 
-        self.attacks.pop(
+        The attack is stopped first if it is currently
+        running, then its resources are released.
+        """
+
+        attack = self.attacks.pop(
             attack_id,
             None,
         )
+
+        if attack is None:
+            return
+
+        if attack.is_running:
+            attack.stop()
+
+        # Release resources owned by the attack.
+        close_method = getattr(
+            attack,
+            "close",
+            None,
+        )
+
+        if callable(close_method):
+            close_method()
 
     # ==================================================
     # Start
@@ -62,15 +96,48 @@ class AttackManager:
     def start_attack(
         self,
         attack_id: str,
-    ) -> None:
+    ) -> bool:
+        """
+        Start a registered attack.
+
+        Returns True when the attack exists and the
+        start request was accepted.
+        """
 
         attack = self.attacks.get(
             attack_id
         )
 
-        if attack:
+        if attack is None:
 
-            attack.start()
+            self.logger.warning(
+                "Attack not found: %s",
+                attack_id,
+            )
+
+            return False
+
+        if not attack.enabled:
+
+            self.logger.warning(
+                "Attack disabled: %s",
+                attack.attack_name,
+            )
+
+            return False
+
+        if attack.is_running:
+
+            self.logger.info(
+                "Attack already running: %s",
+                attack.attack_name,
+            )
+
+            return False
+
+        attack.start()
+
+        return True
 
     # ==================================================
     # Stop
@@ -79,15 +146,31 @@ class AttackManager:
     def stop_attack(
         self,
         attack_id: str,
-    ) -> None:
+    ) -> bool:
+        """
+        Stop a registered attack.
+
+        Returns True when the attack exists.
+        """
 
         attack = self.attacks.get(
             attack_id
         )
 
-        if attack:
+        if attack is None:
+
+            self.logger.warning(
+                "Attack not found: %s",
+                attack_id,
+            )
+
+            return False
+
+        if attack.is_running:
 
             attack.stop()
+
+        return True
 
     # ==================================================
     # Update
@@ -97,23 +180,39 @@ class AttackManager:
         self,
         dt: float,
     ) -> None:
+        """
+        Update all currently running attacks.
 
-        for attack in self.attacks.values():
+        This method is called once per simulation tick.
+        """
 
-            if attack.is_running:
+        for attack in list(
+            self.attacks.values()
+        ):
 
-                attack.update(dt)
+            if not attack.is_running:
+                continue
 
-                # Automatically stop completed attacks
-                if attack.is_finished:
+            attack.update(dt)
 
-                    attack.stop()
+            # ------------------------------------------
+            # Automatically stop completed attacks
+            # ------------------------------------------
+
+            if attack.is_finished:
+
+                attack.stop()
 
     # ==================================================
     # Bulk Operations
     # ==================================================
 
-    def stop_all(self) -> None:
+    def stop_all(
+        self,
+    ) -> None:
+        """
+        Stop all currently running attacks.
+        """
 
         for attack in self.attacks.values():
 
@@ -121,9 +220,27 @@ class AttackManager:
 
                 attack.stop()
 
-    def clear(self) -> None:
+    def clear(
+        self,
+    ) -> None:
+        """
+        Stop all attacks, release their resources,
+        and remove them from the manager.
+        """
 
         self.stop_all()
+
+        for attack in self.attacks.values():
+
+            close_method = getattr(
+                attack,
+                "close",
+                None,
+            )
+
+            if callable(close_method):
+
+                close_method()
 
         self.attacks.clear()
 
@@ -135,20 +252,40 @@ class AttackManager:
         self,
         attack_id: str,
     ):
+        """
+        Return a registered attack by ID.
+        """
 
         return self.attacks.get(
             attack_id
         )
 
+    def get_attacks(self) -> list:
+        """
+        Return all registered attacks.
+        """
+
+        return list(
+            self.attacks.values()
+        )
+
+    # ==================================================
+    # Properties
+    # ==================================================
+
     @property
-    def total_attacks(self) -> int:
+    def total_attacks(
+        self,
+    ) -> int:
 
         return len(
             self.attacks
         )
 
     @property
-    def active_attacks(self) -> int:
+    def active_attacks(
+        self,
+    ) -> int:
 
         return sum(
             attack.is_running
@@ -159,7 +296,12 @@ class AttackManager:
     # Information
     # ==================================================
 
-    def get_status(self) -> dict:
+    def get_status(
+        self,
+    ) -> dict:
+        """
+        Return attack manager status.
+        """
 
         return {
 
@@ -175,7 +317,13 @@ class AttackManager:
                 ),
         }
 
-    def __str__(self) -> str:
+    # ==================================================
+    # String
+    # ==================================================
+
+    def __str__(
+        self,
+    ) -> str:
 
         return (
             f"AttackManager("
