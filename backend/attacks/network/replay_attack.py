@@ -12,6 +12,10 @@ from backend.attacks.network.network_attack import (
     NetworkAttack,
 )
 
+from backend.attacks.network.network_state import (
+    NetworkState,
+)
+
 
 class ReplayAttack(NetworkAttack):
     """
@@ -87,8 +91,12 @@ class ReplayAttack(NetworkAttack):
         self,
         dt: float,
     ) -> None:
+        """
+        Enable replay mode while the attack
+        is actively running.
+        """
 
-        pass
+        NetworkState.replay_enabled = True
 
     # ==========================================
     # Status
@@ -101,12 +109,10 @@ class ReplayAttack(NetworkAttack):
         status = super().get_status()
 
         status.update(
-
             {
                 "replayed_packets":
                     self.replayed_packets
             }
-
         )
 
         return status
@@ -120,5 +126,7 @@ class ReplayAttack(NetworkAttack):
     ) -> None:
 
         self.replayed_packets = 0
+
+        NetworkState.replay_enabled = False
 
         super().stop()

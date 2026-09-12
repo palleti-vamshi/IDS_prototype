@@ -40,6 +40,15 @@ MACHINE_STATUS_TOPIC = "factory/line1/machines"
 
 
 # ==========================================================
+# Attack / Malicious Topics
+# ==========================================================
+
+# MQTT Topic Hijacking redirects legitimate telemetry
+# packets to this malicious destination during the attack.
+HIJACKED_TOPIC = "attacker/hijacked"
+
+
+# ==========================================================
 # Dataset Collection Topics
 # ==========================================================
 
@@ -58,6 +67,9 @@ MQTT_TOPICS = [
     ALERT_TOPIC,
     ATTACK_STATE_TOPIC,
     MACHINE_STATUS_TOPIC,
+
+    # Required for collecting MQTT Topic Hijacking traffic.
+    HIJACKED_TOPIC,
 ]
 
 

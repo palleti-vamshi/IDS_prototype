@@ -6,11 +6,17 @@ Phase 3
 Controls balanced dataset generation for LightX-IDS.
 
 Dataset classes:
-    1 Normal traffic
+    1 Normal
     17 attack types
 
-The generator uses per-class quotas instead of relying only
-on time-based attack durations.
+The generator supports scalable dataset targets:
+    1,000
+    10,000
+    100,000
+    1,000,000 records
+
+Records are distributed as evenly as mathematically possible
+across all classes.
 """
 
 # ============================================================
@@ -21,22 +27,29 @@ OUTPUT_DATASET = "dataset/lightx_ids_dataset.csv"
 
 
 # ============================================================
-# Dataset Generation Mode
+# Dataset Generation Target
 # ============================================================
 
-# Number of records required for EACH class.
+# Select the total number of records to generate.
 #
-# Initial validation:
-#     100 records per class
+# Supported validation / production targets:
 #
-# 18 classes × 100 = 1,800 records
+#     1,000
+#     10,000
+#     100,000
+#     1,000,000
 #
-# Later:
-#     100,000 / 18 ≈ 5,555 records per class
-#
-#     1,000,000 / 18 ≈ 55,555 records per class
+# Keep this at 1,000 initially.
 
-RECORDS_PER_CLASS = 10
+TARGET_DATASET_SIZE = 100_000
+
+
+SUPPORTED_DATASET_SIZES = (
+    1_000,
+    10_000,
+    100_000,
+    1_000_000,
+)
 
 
 # ============================================================
@@ -68,13 +81,100 @@ ATTACK_CLASSES = [
 
 
 # ============================================================
-# Total Dataset Size
+# Total Classes
 # ============================================================
 
 TOTAL_CLASSES = 1 + len(ATTACK_CLASSES)
 
-TARGET_RECORDS = (
-    RECORDS_PER_CLASS * TOTAL_CLASSES
+
+ALL_CLASSES = [
+    NORMAL_CLASS,
+    *ATTACK_CLASSES,
+]
+
+
+# ============================================================
+# Validation
+# ============================================================
+
+if len(ATTACK_CLASSES) != 17:
+    raise ValueError(
+        f"Expected 17 attack classes, "
+        f"found {len(ATTACK_CLASSES)}"
+    )
+
+
+if TARGET_DATASET_SIZE not in SUPPORTED_DATASET_SIZES:
+    raise ValueError(
+        f"Unsupported TARGET_DATASET_SIZE: "
+        f"{TARGET_DATASET_SIZE}. "
+        f"Supported sizes: {SUPPORTED_DATASET_SIZES}"
+    )
+
+
+if TARGET_DATASET_SIZE < TOTAL_CLASSES:
+    raise ValueError(
+        "TARGET_DATASET_SIZE must be at least "
+        f"{TOTAL_CLASSES} records."
+    )
+
+
+# ============================================================
+# Balanced Class Quotas
+# ============================================================
+
+def calculate_class_quotas(
+    total_records: int,
+) -> dict[str, int]:
+    """
+    Calculate balanced record quotas for all classes.
+
+    If the total cannot be divided equally among the
+    18 classes, the remainder is distributed one record
+    at a time to the first classes.
+
+    Example:
+        1,000 / 18
+
+        Base quota = 55
+        Remainder  = 10
+
+        Therefore:
+            first 10 classes -> 56 records
+            remaining 8       -> 55 records
+
+        Total = 1,000 records.
+    """
+
+    if total_records < TOTAL_CLASSES:
+        raise ValueError(
+            "Total records must be at least "
+            f"{TOTAL_CLASSES}."
+        )
+
+    base_quota, remainder = divmod(
+        total_records,
+        TOTAL_CLASSES,
+    )
+
+    quotas = {}
+
+    for index, class_name in enumerate(ALL_CLASSES):
+
+        quotas[class_name] = (
+            base_quota
+            + (1 if index < remainder else 0)
+        )
+
+    return quotas
+
+
+# ============================================================
+# Active Class Quotas
+# ============================================================
+
+CLASS_QUOTAS = calculate_class_quotas(
+    TARGET_DATASET_SIZE
 )
 
 
@@ -110,25 +210,17 @@ BALANCED_DATASET = True
 
 
 # ============================================================
-# Validation
+# Final Consistency Validation
 # ============================================================
 
-if len(ATTACK_CLASSES) != 17:
+if sum(CLASS_QUOTAS.values()) != TARGET_DATASET_SIZE:
     raise ValueError(
-        f"Expected 17 attack classes, "
-        f"found {len(ATTACK_CLASSES)}"
+        "Class quota calculation is inconsistent."
     )
 
 
-if RECORDS_PER_CLASS <= 0:
+if len(CLASS_QUOTAS) != TOTAL_CLASSES:
     raise ValueError(
-        "RECORDS_PER_CLASS must be greater than zero."
-    )
-
-
-if TARGET_RECORDS != (
-    RECORDS_PER_CLASS * TOTAL_CLASSES
-):
-    raise ValueError(
-        "TARGET_RECORDS calculation is inconsistent."
+        "Class quota count does not match "
+        "the total number of classes."
     )

@@ -9,9 +9,7 @@ import time
 from backend.preprocessing.pipeline import DatasetPipeline
 from backend.preprocessing.simulation_runner import SimulationRunner
 from backend.preprocessing.attack_runner import AttackRunner
-
-
-OUTPUT_FILE = "dataset/lightx_ids_dataset.csv"
+from backend.preprocessing.generation_config import OUTPUT_DATASET
 
 
 def main():
@@ -74,7 +72,7 @@ def main():
         )
 
         pipeline.manager.export_dataset(
-            OUTPUT_FILE
+            OUTPUT_DATASET
         )
 
         pipeline.stop()
@@ -87,7 +85,7 @@ def main():
 
         print(
             f"📄 Dataset saved to: "
-            f"{OUTPUT_FILE}"
+            f"{OUTPUT_DATASET}"
         )
 
         print("=" * 60)

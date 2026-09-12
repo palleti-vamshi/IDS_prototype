@@ -70,6 +70,8 @@ class CommunicationController:
 
         self.packet_queue = queue
 
+    
+
     def set_statistics(
         self,
         statistics,
@@ -80,6 +82,10 @@ class CommunicationController:
     # ==================================================
     # Reset
     # ==================================================
+
+    def set_freeze(self, enabled: bool) -> None:
+        """Enable or disable communication freeze."""
+        self.freeze = bool(enabled)
 
     def reset(self) -> None:
 

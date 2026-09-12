@@ -5,7 +5,7 @@ Verifies that machines can own sensors and that
 SensorRegistry correctly attaches the default sensors.
 """
 
-from backend.industrial.factory.sensor_registry import SensorRegistry
+from backend.industrial.Factory.sensor_registry import SensorRegistry
 
 from backend.industrial.machines import (
     Motor,

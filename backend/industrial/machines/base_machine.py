@@ -11,7 +11,7 @@ from abc import ABC
 from typing import Any
 from uuid import uuid4
 
-from backend.industrial.common import OperationalState
+from backend.industrial.Common import OperationalState
 
 logger = logging.getLogger(__name__)
 

@@ -129,6 +129,7 @@ class AttackInitializer:
     Responsibilities
     ----------------
     • Create attack objects
+    • Wire shared communication controller
     • Register attacks
     • Create scenarios
     • Register scenarios
@@ -138,6 +139,7 @@ class AttackInitializer:
         self,
         attack_manager,
         scenario_manager,
+        communication=None,
     ) -> None:
 
         self.logger = setup_logger(
@@ -148,6 +150,13 @@ class AttackInitializer:
 
         self.scenario_manager = scenario_manager
 
+        # Shared industrial communication controller.
+        #
+        # During Phase 3 this is supplied by
+        # FactorySimulator so network attacks
+        # operate on the same communication layer
+        # used by the industrial sensor publishers.
+        self.communication = communication
 
     # ==================================================
     # Initialization
@@ -197,21 +206,27 @@ class AttackInitializer:
 
             "packet_drop": PacketDropAttack(),
 
-            "mqtt_hijack": MQTTTopicHijackingAttack(),
+            "mqtt_hijack":
+                MQTTTopicHijackingAttack(),
 
             # ===========================
             # Sensor
             # ===========================
 
-            "spoof": SensorSpoofingAttack(),
+            "spoof":
+                SensorSpoofingAttack(),
 
-            "false_data": FalseDataInjectionAttack(),
+            "false_data":
+                FalseDataInjectionAttack(),
 
-            "drift": SensorDriftAttack(),
+            "drift":
+                SensorDriftAttack(),
 
-            "freeze": SensorFreezeAttack(),
+            "freeze":
+                SensorFreezeAttack(),
 
-            "noise": SensorNoiseInjectionAttack(),
+            "noise":
+                SensorNoiseInjectionAttack(),
 
             # ===========================
             # PLC
@@ -247,11 +262,41 @@ class AttackInitializer:
                 SlowDriftAttack(),
         }
 
+        # ==================================================
+        # Shared Communication Wiring
+        # ==================================================
+        #
+        # All network attacks must operate on the same
+        # CommunicationController used by the industrial
+        # sensor publishers.
+        #
+        # This preserves the existing attack architecture
+        # while making communication attacks observable
+        # on the real MQTT publication path.
+        #
+
+        if self.communication is not None:
+
+            network_attacks = (
+                "dos",
+                "replay",
+                "packet_delay",
+                "packet_drop",
+                "mqtt_hijack",
+            )
+
+            for attack_name in network_attacks:
+
+                self.attacks[
+                    attack_name
+                ].set_communication(
+                    self.communication
+                )
+
         self.logger.info(
             "%d attacks created.",
             len(self.attacks),
         )
-
 
     # ==================================================
     # Attack Registration
@@ -320,7 +365,6 @@ class AttackInitializer:
         self.logger.info(
             "All scenarios created."
         )
-
 
     # ==================================================
     # Scenario Registration

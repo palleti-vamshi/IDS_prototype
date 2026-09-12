@@ -23,6 +23,19 @@ from __future__ import annotations
 
 from backend.core.logger import setup_logger
 
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
+)
+from backend.industrial.communication.packet_buffer import (
+    PacketBuffer,
+)
+from backend.industrial.communication.packet_queue import (
+    PacketQueue,
+)
+from backend.industrial.communication.traffic_statistics import (
+    TrafficStatistics,
+)
+
 from backend.industrial.mqtt.publisher import (
     MQTTPublisher,
 )
@@ -31,7 +44,7 @@ from backend.industrial.config.mqtt_config import (
     MACHINE_STATUS_TOPIC,
 )
 
-from backend.industrial.factory.factory_builder import (
+from backend.industrial.Factory.factory_builder import (
     FactoryBuilder,
 )
 
@@ -116,7 +129,33 @@ class FactorySimulator:
 
         self.clock = SimulationClock()
 
-        self.builder = FactoryBuilder()
+        # ------------------------------------------
+        # Shared Industrial Communication Layer
+        # ------------------------------------------
+
+        self.communication = CommunicationController()
+
+        # Register the communication components with
+        # the shared controller.
+        #
+        # These components are intentionally created
+        # once and shared across the industrial
+        # communication layer.
+        self.communication.set_packet_buffer(
+            PacketBuffer()
+        )
+
+        self.communication.set_packet_queue(
+            PacketQueue()
+        )
+
+        self.communication.set_statistics(
+            TrafficStatistics()
+        )
+
+        self.builder = FactoryBuilder(
+            communication=self.communication
+        )
 
         self.behavior_engine = BehaviorEngine()
 
@@ -156,6 +195,7 @@ class FactorySimulator:
         self.attack_initializer = AttackInitializer(
             self.attack_manager,
             self.scenario_manager,
+            self.communication,
         )
 
         # ==========================================
@@ -611,10 +651,6 @@ class FactorySimulator:
 
         # ==========================================
         # Reset Scheduler
-        # ==========================================
-        #
-        # Scheduler is retained for compatibility,
-        # but it does NOT control Phase 3 attacks.
         # ==========================================
 
         self.attack_scheduler.reset()

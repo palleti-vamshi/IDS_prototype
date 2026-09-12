@@ -1,16 +1,19 @@
 """
+Dataset Manager
+
 Coordinates the preprocessing pipeline.
 
 Phase 3:
     • Tracks total records
     • Tracks normal records
     • Tracks per-attack records
-    • Enforces per-class quotas
-    • Enforces per-class sensor distribution
+    • Enforces dynamic per-class quotas
+    • Enforces balanced per-class sensor distribution
     • Provides class distribution statistics
 """
 
 import json
+import math
 
 from backend.industrial.config.mqtt_config import ATTACK_STATE_TOPIC
 
@@ -22,8 +25,11 @@ from backend.preprocessing.csv_export import CSVExporter
 from backend.preprocessing.schemas import RawMQTTMessage
 
 from backend.preprocessing.generation_config import (
-    RECORDS_PER_CLASS,
+    CLASS_QUOTAS,
+    ALL_CLASSES,
+    ATTACK_CLASSES,
     NORMAL_CLASS,
+    TARGET_DATASET_SIZE,
 )
 
 
@@ -55,22 +61,6 @@ class DatasetManager:
 
         # ==================================================
         # Class × Sensor Tracking
-        #
-        # Example:
-        #
-        # {
-        #     "Normal": {
-        #         "temperature": 1,
-        #         "pressure": 1,
-        #         ...
-        #     },
-        #
-        #     "DoS Attack": {
-        #         "temperature": 1,
-        #         "pressure": 1,
-        #         ...
-        #     }
-        # }
         # ==================================================
 
         self.class_sensor_counts = {}
@@ -82,6 +72,33 @@ class DatasetManager:
         self.quota_rejected_records = 0
 
         self.sensor_quota_rejected_records = 0
+
+    # ==================================================
+    # Sensor Types
+    # ==================================================
+
+    @staticmethod
+    def _sensor_types() -> tuple[str, ...]:
+        """
+        Sensor types currently produced by the
+        industrial simulator.
+
+        The order is fixed so remainder distribution
+        stays deterministic.
+        """
+
+        return (
+            "temperature",
+            "pressure",
+            "current",
+            "rpm",
+            "vibration",
+            "voltage",
+            "flow",
+            "level",
+            "humidity",
+            "proximity",
+        )
 
     # ==================================================
     # Process MQTT Message
@@ -174,6 +191,16 @@ class DatasetManager:
         sensor_type = labeled.sensor_type
 
         # ==================================================
+        # Unknown Class Protection
+        # ==================================================
+
+        if class_name not in ALL_CLASSES:
+
+            self.quota_rejected_records += 1
+
+            return
+
+        # ==================================================
         # Initialize Class
         # ==================================================
 
@@ -184,8 +211,29 @@ class DatasetManager:
             ] = {}
 
         # ==================================================
-        # Current Sensor Count
+        # HARD CLASS QUOTA
         # ==================================================
+
+        class_quota = self.class_quota(
+            class_name
+        )
+
+        if (
+            self.class_count(class_name)
+            >= class_quota
+        ):
+
+            self.quota_rejected_records += 1
+
+            return
+
+        # ==================================================
+        # SENSOR BALANCE
+        # ==================================================
+
+        sensor_quota = self._sensor_quota(
+            class_name
+        )
 
         current_sensor_count = (
             self.class_sensor_counts[
@@ -196,42 +244,18 @@ class DatasetManager:
             )
         )
 
-        # ==================================================
-        # SENSOR BALANCE
-        #
-        # For the initial 10-record validation:
-        #
-        # 10 sensor types
-        # 1 record per sensor type
-        #
-        # Therefore:
-        #
-        # temperature -> 1
-        # pressure    -> 1
-        # current     -> 1
-        # ...
-        #
-        # This prevents "current" from becoming 37
-        # while "humidity" becomes 1.
-        # ==================================================
+        # --------------------------------------------------
+        # If this sensor already reached its base quota,
+        # allow the remainder logic to decide whether it
+        # can receive one additional record.
+        # --------------------------------------------------
 
-        sensor_quota = self._sensor_quota()
-
-        if current_sensor_count >= sensor_quota:
+        if not self._sensor_can_accept_record(
+            class_name,
+            sensor_type,
+        ):
 
             self.sensor_quota_rejected_records += 1
-
-            return
-
-        # ==================================================
-        # HARD CLASS QUOTA
-        # ==================================================
-
-        if self.class_count(
-            class_name
-        ) >= RECORDS_PER_CLASS:
-
-            self.quota_rejected_records += 1
 
             return
 
@@ -297,59 +321,143 @@ class DatasetManager:
         )
 
     # ==================================================
-    # Calculate Sensor Quota
+    # Class Quota
+    # ==================================================
+
+    def class_quota(
+        self,
+        class_name: str,
+    ) -> int:
+        """
+        Return the configured quota for a class.
+        """
+
+        return CLASS_QUOTAS.get(
+            class_name,
+            0,
+        )
+
+    # ==================================================
+    # Sensor Quota
     # ==================================================
 
     def _sensor_quota(
         self,
+        class_name: str,
     ) -> int:
         """
-        Determine maximum number of records allowed
-        for one sensor type within a class.
+        Return the base number of records allowed
+        for each sensor type within a class.
 
-        For the current validation dataset:
+        Example for 55 records and 10 sensors:
 
-            RECORDS_PER_CLASS = 10
-            Sensor types = 10
+            55 // 10 = 5
 
-            10 / 10 = 1
+        Five records are guaranteed for every sensor.
+        The remaining five records are distributed
+        deterministically across the first five sensors.
 
-        For larger datasets this becomes scalable.
+        Therefore:
+
+            5, 5, 5, 5, 5, 6, 6, 6, 6, 6
+
+        Total = 55.
         """
 
-        # Sensor types currently produced by the
-        # industrial simulator.
-
-        sensor_types = {
-            "temperature",
-            "pressure",
-            "current",
-            "rpm",
-            "vibration",
-            "voltage",
-            "flow",
-            "level",
-            "humidity",
-            "proximity",
-        }
-
-        sensor_type_count = len(
-            sensor_types
+        class_quota = self.class_quota(
+            class_name
         )
 
-        if sensor_type_count == 0:
-
-            return RECORDS_PER_CLASS
-
-        quota = (
-            RECORDS_PER_CLASS
-            // sensor_type_count
+        sensor_count = len(
+            self._sensor_types()
         )
+
+        if sensor_count == 0:
+
+            return class_quota
 
         return max(
             1,
-            quota,
+            class_quota // sensor_count,
         )
+
+    # ==================================================
+    # Sensor Acceptance
+    # ==================================================
+
+    def _sensor_can_accept_record(
+        self,
+        class_name: str,
+        sensor_type: str,
+    ) -> bool:
+        """
+        Decide whether a sensor can accept another
+        record while keeping the class balanced.
+
+        The class quota is divided as evenly as possible
+        among all ten sensor types.
+
+        Example:
+
+            Class quota = 55
+            Sensors = 10
+
+            5 sensors receive 6 records
+            5 sensors receive 5 records
+        """
+
+        sensors = self._sensor_types()
+
+        if sensor_type not in sensors:
+
+            return False
+
+        class_quota = self.class_quota(
+            class_name
+        )
+
+        if class_quota <= 0:
+
+            return False
+
+        sensor_count = len(sensors)
+
+        base_quota = (
+            class_quota
+            // sensor_count
+        )
+
+        remainder = (
+            class_quota
+            % sensor_count
+        )
+
+        sensor_index = sensors.index(
+            sensor_type
+        )
+
+        # First `remainder` sensors receive
+        # one additional record.
+
+        allowed_quota = base_quota
+
+        if sensor_index < remainder:
+
+            allowed_quota += 1
+
+        current_count = (
+            self.class_sensor_counts
+            .get(
+                class_name,
+                {},
+            )
+            .get(
+                sensor_type,
+                0,
+            )
+        )
+
+        return current_count < allowed_quota
 
     # ==================================================
     # Record Count
@@ -461,7 +569,9 @@ class DatasetManager:
             self.class_count(
                 class_name
             )
-            >= RECORDS_PER_CLASS
+            >= self.class_quota(
+                class_name
+            )
         )
 
     # ==================================================
@@ -474,12 +584,9 @@ class DatasetManager:
         sensor_type: str,
     ) -> bool:
 
-        return (
-            self.class_sensor_count(
-                class_name,
-                sensor_type,
-            )
-            >= self._sensor_quota()
+        return not self._sensor_can_accept_record(
+            class_name,
+            sensor_type,
         )
 
     # ==================================================
@@ -536,6 +643,12 @@ class DatasetManager:
 
             "sensor_quota_rejected":
                 self.sensor_quota_rejected_records,
+
+            "target":
+                TARGET_DATASET_SIZE,
+
+            "class_quotas":
+                dict(CLASS_QUOTAS),
         }
 
     # ==================================================

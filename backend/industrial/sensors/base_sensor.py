@@ -14,8 +14,11 @@ from typing import Any
 from uuid import uuid4
 
 from backend.core.logger import setup_logger
-from backend.industrial.common import OperationalState
+from backend.industrial.Common import OperationalState
 from backend.industrial.mqtt.publisher import MQTTPublisher
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
+)
 from backend.attacks.sensor.sensor_state import (
     SensorState,
 )
@@ -44,6 +47,7 @@ class BaseSensor(ABC):
         topic: str,
         client_id: str,
         interval: int = 2,
+        communication: CommunicationController | None = None,
     ) -> None:
 
         # ==================================================
@@ -63,8 +67,10 @@ class BaseSensor(ABC):
         # ==================================================
 
         self.topic = topic
+
         self.publisher = MQTTPublisher(
-            client_id=f"{client_id}_{sensor_code}"
+            client_id=f"{client_id}_{sensor_code}",
+            communication=communication,
         )
 
         # ==================================================
@@ -187,6 +193,10 @@ class BaseSensor(ABC):
             min(100.0, health),
         )
 
+    # ==================================================
+    # Reading
+    # ==================================================
+
     def read(self) -> float:
         """
         Measure the current machine value.
@@ -236,13 +246,38 @@ class BaseSensor(ABC):
         # ==========================================
         # False Data Injection Attack
         # ==========================================
+        #
+        # Use the FDI parameters supplied by the
+        # FalseDataInjectionAttack through the
+        # shared SensorAttackEngine.
+        #
+        # Backward-compatible defaults are used
+        # when the parameters are not present.
+        # ==========================================
 
         elif (
             SensorState.false_data
             or state["false_data"]
         ):
 
-            value = value * 1.35
+            false_data_offset = state.get(
+                "false_data_offset",
+                0.0,
+            )
+
+            false_data_noise = state.get(
+                "false_data_noise",
+                0.5,
+            )
+
+            value = (
+                value
+                + false_data_offset
+                + random.uniform(
+                    -false_data_noise,
+                    false_data_noise,
+                )
+            )
 
         # ==========================================
         # Normal Sensor Processing
@@ -278,7 +313,10 @@ class BaseSensor(ABC):
 
             value *= 1.25
 
+        # ==========================================
         # Physical Noise
+        # ==========================================
+
         if self.noise_level > 0:
 
             value += random.uniform(
@@ -286,7 +324,10 @@ class BaseSensor(ABC):
                 self.noise_level,
             )
 
+        # ==========================================
         # Cyber Noise Injection
+        # ==========================================
+
         if (
             SensorState.noise > 0
             or state["noise"] > 0
@@ -302,6 +343,10 @@ class BaseSensor(ABC):
                 noise,
             )
 
+        # ==========================================
+        # Store Final Reading
+        # ==========================================
+
         self.current_value = round(
             value,
             2,
@@ -315,6 +360,7 @@ class BaseSensor(ABC):
         self.last_timestamp = datetime.now()
 
         return self.current_value
+
     # ==================================================
     # MQTT Packet
     # ==================================================
@@ -433,7 +479,8 @@ class BaseSensor(ABC):
 
             "drift": self.drift,
 
-            "calibration_offset": self.calibration_offset,
+            "calibration_offset":
+                self.calibration_offset,
 
             "attached_machine": (
                 self.attached_machine.machine_code

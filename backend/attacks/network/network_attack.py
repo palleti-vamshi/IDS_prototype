@@ -62,7 +62,6 @@ class NetworkAttack(BaseAttack, ABC):
         """
 
         if self.communication is not None:
-
             self.communication.reset()
 
     # ==================================================
@@ -70,7 +69,5 @@ class NetworkAttack(BaseAttack, ABC):
     # ==================================================
 
     def stop(self) -> None:
-
         self.reset_communication()
-
         super().stop()

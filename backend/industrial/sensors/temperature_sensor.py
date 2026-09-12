@@ -7,10 +7,13 @@ Purpose:
 
 import random
 
-from backend.industrial.common import SensorType
+from backend.industrial.Common import SensorType
 from backend.industrial.config.mqtt_config import (
     TEMPERATURE_TOPIC,
     TEMP_SENSOR_CLIENT,
+)
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
 )
 from backend.industrial.sensors.base_sensor import BaseSensor
 
@@ -22,16 +25,18 @@ class TemperatureSensor(BaseSensor):
         self,
         sensor_code: str = "TMP-001",
         device_id: str = "temperature_sensor_01",
+        communication: CommunicationController | None = None,
     ):
 
         super().__init__(
             sensor_code=sensor_code,
             device_id=device_id,
             sensor_type=SensorType.TEMPERATURE.value,
-            unit="°C",
+            unit="Â°C",
             topic=TEMPERATURE_TOPIC,
             client_id=TEMP_SENSOR_CLIENT,
             interval=2,
+            communication=communication,
         )
 
     def generate_value(self) -> float:

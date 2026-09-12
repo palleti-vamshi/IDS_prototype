@@ -9,7 +9,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 
 from backend.industrial.behavior.state_models import BehaviorState
-from backend.industrial.common import OperationalState
+from backend.industrial.Common import OperationalState
 
 
 class BaseBehavior(ABC):

@@ -15,6 +15,7 @@ class CSVExporter:
     """Exports labeled records to a clean CSV dataset."""
 
     FIELDNAMES = [
+        "record_id",
         "timestamp",
         "topic",
         "device_id",
@@ -71,9 +72,11 @@ class CSVExporter:
 
             writer.writeheader()
 
-            for record in records:
+            for record_id, record in enumerate(records, start=1):
+
 
                 data = asdict(record)
+                data["record_id"] = record_id
 
                 # Ensure every exported row follows
                 # the exact dataset schema.

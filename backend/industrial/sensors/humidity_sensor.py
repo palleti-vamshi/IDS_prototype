@@ -7,7 +7,10 @@ Purpose:
 
 import random
 
-from backend.industrial.common import SensorType
+from backend.industrial.Common import SensorType
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
+)
 from backend.industrial.config.mqtt_config import (
     HUMIDITY_TOPIC,
     HUMIDITY_SENSOR_CLIENT,
@@ -22,6 +25,7 @@ class HumiditySensor(BaseSensor):
         self,
         sensor_code: str = "HUM-001",
         device_id: str = "humidity_sensor_01",
+        communication: CommunicationController | None = None,
     ):
 
         super().__init__(
@@ -32,6 +36,7 @@ class HumiditySensor(BaseSensor):
             topic=HUMIDITY_TOPIC,
             client_id=HUMIDITY_SENSOR_CLIENT,
             interval=2,
+            communication=communication,
         )
 
     def generate_value(self) -> float:

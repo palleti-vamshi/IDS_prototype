@@ -5,6 +5,12 @@ Central registry for assigning default sensors
 to industrial machines.
 """
 
+from __future__ import annotations
+
+from backend.industrial.communication.communication_controller import (
+    CommunicationController,
+)
+
 from backend.industrial.machines import (
     Motor,
     Pump,
@@ -35,7 +41,10 @@ class SensorRegistry:
     """
 
     @staticmethod
-    def attach_default_sensors(machine) -> None:
+    def attach_default_sensors(
+        machine,
+        communication: CommunicationController | None = None,
+    ) -> None:
 
         # ==========================================
         # Motor
@@ -45,31 +54,37 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 TemperatureSensor(
-                    sensor_code=f"{machine.machine_code}-TMP"
+                    sensor_code=f"{machine.machine_code}-TMP",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 CurrentSensor(
-                    sensor_code=f"{machine.machine_code}-CUR"
+                    sensor_code=f"{machine.machine_code}-CUR",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 RPMSensor(
-                    sensor_code=f"{machine.machine_code}-RPM"
+                    sensor_code=f"{machine.machine_code}-RPM",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 VibrationSensor(
-                    sensor_code=f"{machine.machine_code}-VIB"
+                    sensor_code=f"{machine.machine_code}-VIB",
+                    communication=communication,
                 )
             )
+
             machine.attach_sensor(
                 VoltageSensor(
-                sensor_code=f"{machine.machine_code}-VLT"
-               )
+                    sensor_code=f"{machine.machine_code}-VLT",
+                    communication=communication,
+                )
             )
 
         # ==========================================
@@ -80,19 +95,22 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 PressureSensor(
-                    sensor_code=f"{machine.machine_code}-PRS"
+                    sensor_code=f"{machine.machine_code}-PRS",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 FlowSensor(
-                    sensor_code=f"{machine.machine_code}-FLW"
+                    sensor_code=f"{machine.machine_code}-FLW",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 CurrentSensor(
-                    sensor_code=f"{machine.machine_code}-CUR"
+                    sensor_code=f"{machine.machine_code}-CUR",
+                    communication=communication,
                 )
             )
 
@@ -104,27 +122,32 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 LevelSensor(
-                    sensor_code=f"{machine.machine_code}-LVL"
+                    sensor_code=f"{machine.machine_code}-LVL",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 TemperatureSensor(
-                    sensor_code=f"{machine.machine_code}-TMP"
+                    sensor_code=f"{machine.machine_code}-TMP",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 PressureSensor(
-                    sensor_code=f"{machine.machine_code}-PRS"
+                    sensor_code=f"{machine.machine_code}-PRS",
+                    communication=communication,
                 )
             )
+
             machine.attach_sensor(
                 HumiditySensor(
-                    sensor_code=f"{machine.machine_code}-HUM"
-        )
-    )
-    
+                    sensor_code=f"{machine.machine_code}-HUM",
+                    communication=communication,
+                )
+            )
+
         # ==========================================
         # Conveyor
         # ==========================================
@@ -133,19 +156,22 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 RPMSensor(
-                    sensor_code=f"{machine.machine_code}-RPM"
+                    sensor_code=f"{machine.machine_code}-RPM",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 CurrentSensor(
-                    sensor_code=f"{machine.machine_code}-CUR"
+                    sensor_code=f"{machine.machine_code}-CUR",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 ProximitySensor(
-                    sensor_code=f"{machine.machine_code}-PRX"
+                    sensor_code=f"{machine.machine_code}-PRX",
+                    communication=communication,
                 )
             )
 
@@ -157,7 +183,8 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 PressureSensor(
-                    sensor_code=f"{machine.machine_code}-PRS"
+                    sensor_code=f"{machine.machine_code}-PRS",
+                    communication=communication,
                 )
             )
 
@@ -169,18 +196,21 @@ class SensorRegistry:
 
             machine.attach_sensor(
                 TemperatureSensor(
-                    sensor_code=f"{machine.machine_code}-TMP"
+                    sensor_code=f"{machine.machine_code}-TMP",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 PressureSensor(
-                    sensor_code=f"{machine.machine_code}-PRS"
+                    sensor_code=f"{machine.machine_code}-PRS",
+                    communication=communication,
                 )
             )
 
             machine.attach_sensor(
                 CurrentSensor(
-                    sensor_code=f"{machine.machine_code}-CUR"
+                    sensor_code=f"{machine.machine_code}-CUR",
+                    communication=communication,
                 )
             )

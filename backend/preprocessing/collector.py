@@ -53,6 +53,7 @@ class MQTTCollector:
         self.client.disconnect()
 
     def _on_connect(self, client, userdata, flags, rc):
+        """Handle MQTT broker connection."""
         print(f"✅ Connected Callback Received | RC = {rc}")
 
         if rc == 0:
@@ -66,6 +67,7 @@ class MQTTCollector:
             print(f"❌ Connection Failed | RC={rc}")
 
     def _on_message(self, client, userdata, msg):
+        """Handle incoming MQTT message."""
         print(f"📩 Message Received -> {msg.topic}")
 
         raw_message = RawMQTTMessage(

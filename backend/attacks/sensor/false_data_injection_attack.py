@@ -108,6 +108,10 @@ class FalseDataInjectionAttack(SensorAttack):
                 sensor_code,
 
                 false_data=True,
+                
+                false_data_offset=self.current_offset,
+
+                false_data_noise=self.random_noise,
 
                 attack_name=self.attack_name,
 
