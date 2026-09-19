@@ -1,31 +1,48 @@
 """
 Evaluation Manager
 
-Coordinates all evaluation tasks for trained
-machine learning models.
+Coordinates the complete evaluation workflow for
+LightX-IDS machine-learning models.
+
+Evaluation protocol:
+
+1. Optimize threshold on validation data only.
+2. Freeze the selected threshold.
+3. Evaluate the frozen threshold on test data.
+4. Run feature-importance analysis.
+5. Run error analysis using the same threshold.
 """
 
 import logging
 
+from backend.ml.config import (
+    DEFAULT_THRESHOLD,
+    PRIMARY_THRESHOLD_METRIC,
+)
+
 from backend.ml.evaluation.evaluator import (
     ModelEvaluator,
 )
+
 from backend.ml.evaluation.error_analysis import (
     ErrorAnalyzer,
 )
+
 from backend.ml.evaluation.feature_importance import (
     FeatureImportanceAnalyzer,
 )
+
 from backend.ml.optimization.threshold_optimizer import (
     ThresholdOptimizer,
 )
+
 
 logger = logging.getLogger(__name__)
 
 
 class EvaluationManager:
     """
-    Runs the complete evaluation pipeline.
+    Runs the complete LightX-IDS evaluation pipeline.
     """
 
     def __init__(self):
@@ -42,6 +59,10 @@ class EvaluationManager:
             ThresholdOptimizer()
         )
 
+    # ========================================================
+    # COMPLETE EVALUATION
+    # ========================================================
+
     def evaluate(
         self,
         pipeline,
@@ -50,10 +71,21 @@ class EvaluationManager:
         X_test,
         y_test,
         model_name: str,
-    ):
-        
+    ) -> dict:
         """
-        Execute complete evaluation pipeline.
+        Execute the complete evaluation pipeline.
+
+        Validation data is used exclusively for threshold
+        selection.
+
+        The selected threshold is then frozen and used for:
+
+        - final test metrics
+        - confusion matrix
+        - classification report
+        - error analysis
+
+        The test set is never used to optimize the threshold.
         """
 
         logger.info(
@@ -61,11 +93,13 @@ class EvaluationManager:
             model_name,
         )
 
-        # -----------------------------------------
-        # Threshold Optimization
-        # -----------------------------------------
+        # ====================================================
+        # THRESHOLD OPTIMIZATION
+        # ====================================================
 
-        best_threshold = 0.50
+        best_threshold = DEFAULT_THRESHOLD
+
+        threshold_results = None
 
         try:
 
@@ -80,8 +114,10 @@ class EvaluationManager:
 
             if threshold_results is not None:
 
-                best_threshold = (
-                    threshold_results["best_threshold"]
+                best_threshold = float(
+                    threshold_results[
+                        "best_threshold"
+                    ]
                 )
 
         except Exception as error:
@@ -92,24 +128,94 @@ class EvaluationManager:
                 error,
             )
 
-        # -----------------------------------------
-        # Metrics
-        # -----------------------------------------
+            logger.warning(
+                "Falling back to default threshold %.2f",
+                DEFAULT_THRESHOLD,
+            )
+
+        # ----------------------------------------------------
+        # Validate threshold
+        # ----------------------------------------------------
+
+        if not (
+            0.0
+            <= best_threshold
+            <= 1.0
+        ):
+
+            logger.warning(
+                "Invalid threshold %.4f for %s. "
+                "Using default threshold %.2f.",
+                best_threshold,
+                model_name,
+                DEFAULT_THRESHOLD,
+            )
+
+            best_threshold = (
+                DEFAULT_THRESHOLD
+            )
+
+        logger.info(
+            "Selected threshold for %s: %.4f",
+            model_name,
+            best_threshold,
+        )
+
+        # ====================================================
+        # FINAL TEST EVALUATION
+        # ====================================================
+        #
+        # IMPORTANT:
+        #
+        # X_test/y_test are used only here for final
+        # evaluation. No threshold optimization occurs
+        # on test data.
+        #
+        # ====================================================
 
         metrics = self.evaluator.evaluate(
-            pipeline,
-            X_test,
-            y_test,
+            pipeline=pipeline,
+            X_test=X_test,
+            y_test=y_test,
             threshold=best_threshold,
         )
+
+        # ====================================================
+        # THRESHOLD METADATA
+        # ====================================================
 
         metrics["best_threshold"] = (
             best_threshold
         )
 
-        # -----------------------------------------
-        # Feature Importance
-        # -----------------------------------------
+        if threshold_results is not None:
+
+            metrics["threshold_metric"] = (
+                threshold_results.get(
+                    "metric",
+                    PRIMARY_THRESHOLD_METRIC,
+                )
+            )
+
+            metrics[
+                "validation_threshold_score"
+            ] = threshold_results.get(
+                "best_score"
+            )
+
+        else:
+
+            metrics[
+                "threshold_metric"
+            ] = PRIMARY_THRESHOLD_METRIC
+
+            metrics[
+                "validation_threshold_score"
+            ] = None
+
+        # ====================================================
+        # FEATURE IMPORTANCE
+        # ====================================================
 
         try:
 
@@ -126,9 +232,14 @@ class EvaluationManager:
                 error,
             )
 
-        # -----------------------------------------
-        # Error Analysis
-        # -----------------------------------------
+        # ====================================================
+        # ERROR ANALYSIS
+        # ====================================================
+        #
+        # Use exactly the same threshold as the final
+        # benchmark evaluation.
+        #
+        # ====================================================
 
         try:
 
@@ -137,6 +248,7 @@ class EvaluationManager:
                 X_test=X_test,
                 y_test=y_test,
                 model_name=model_name,
+                threshold=best_threshold,
             )
 
         except Exception as error:
@@ -146,6 +258,10 @@ class EvaluationManager:
                 model_name,
                 error,
             )
+
+        # ====================================================
+        # COMPLETE
+        # ====================================================
 
         logger.info(
             "Evaluation completed for %s.",
