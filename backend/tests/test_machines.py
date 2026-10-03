@@ -15,6 +15,10 @@ from backend.industrial.machines import (
 class MockSensor:
     def __init__(self, sensor_code: str):
         self.sensor_code = sensor_code
+        self.attached_machine = None
+
+    def attach_machine(self, machine):
+        self.attached_machine = machine
 
 
 def main():

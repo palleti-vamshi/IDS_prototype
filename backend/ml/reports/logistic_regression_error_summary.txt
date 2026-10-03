@@ -1,0 +1,38 @@
+Model: logistic_regression
+Threshold: 0.100000
+
+Confusion Matrix
+----------------
+TN: 7726
+FP: 514
+FN: 393
+TP: 1367
+
+IDS Error Metrics
+-----------------
+False Positive Rate: 0.062379
+False Negative Rate: 0.223295
+
+Per-Attack Performance:
+      attack_type  total_samples  detected  missed_fn   recall
+Slow Drift Attack           1760      1367        393 0.776705
+
+False Positives by Sensor:
+sensor_code  false_positives
+VLV-001-PRS              434
+MTR-001-VLT               50
+MTR-001-TMP                5
+TNK-001-PRS                2
+TNK-001-TMP                2
+CNV-001-CUR                2
+CNV-001-RPM                2
+CNV-001-PRX                2
+CMP-001-TMP                2
+CMP-001-PRS                2
+CMP-001-CUR                2
+MTR-001-CUR                2
+MTR-001-RPM                2
+MTR-001-VIB                2
+PMP-001-CUR                1
+TNK-001-LVL                1
+TNK-001-HUM                1

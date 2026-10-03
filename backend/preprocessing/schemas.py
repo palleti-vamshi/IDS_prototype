@@ -45,6 +45,8 @@ class ParsedSensorRecord:
 
     status: str
 
+    sensor_code: Optional[str] = None
+
 
 @dataclass(slots=True)
 class LabeledRecord:
@@ -67,3 +69,5 @@ class LabeledRecord:
     source: str
 
     sequence_number: int
+
+    sensor_code: Optional[str] = None

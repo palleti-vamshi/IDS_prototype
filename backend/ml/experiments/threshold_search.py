@@ -68,40 +68,62 @@ def main():
     # Dataset
     # ---------------------------------------------------------
 
+    from backend.ml.config import (
+        LIGHTX_REQUIRED_COLUMNS,
+        PRIMARY_THRESHOLD_METRIC,
+    )
+
     df = DatasetLoader().load(
         LIGHTX_100K,
+        required_columns=LIGHTX_REQUIRED_COLUMNS,
     )
 
     # ---------------------------------------------------------
-    # Feature Engineering
+    # Causal Stream Features & Dataset Split
     # ---------------------------------------------------------
 
-    df = FeatureGenerator().transform(
-        df,
+    generator = FeatureGenerator()
+    df_stream = generator.generate_causal_stream_features(df)
+
+    X_raw = df_stream.drop(columns=["label"])
+    y_raw = df_stream["label"]
+
+    (
+        X_train_raw,
+        X_val_raw,
+        X_test_raw,
+        y_train,
+        y_val,
+        y_test,
+    ) = DatasetSplitter().split(
+        X_raw,
+        y_raw,
     )
+
+    # ---------------------------------------------------------
+    # Feature Engineering (Fit on Train ONLY)
+    # ---------------------------------------------------------
+
+    generator.fit(X_train_raw)
+
+    X_train_features = generator.transform(X_train_raw)
+    X_val_features = generator.transform(X_val_raw)
+    X_test_features = generator.transform(X_test_raw)
 
     # ---------------------------------------------------------
     # Feature Selection
     # ---------------------------------------------------------
 
-    X, y = FeatureSelector().split(
-        df,
+    selector = FeatureSelector()
+
+    X_train, y_train = selector.split(
+        X_train_features.assign(label=y_train.values)
     )
-
-    # ---------------------------------------------------------
-    # Dataset Split
-    # ---------------------------------------------------------
-
-    (
-        X_train,
-        X_val,
-        X_test,
-        y_train,
-        y_val,
-        y_test,
-    ) = DatasetSplitter().split(
-        X,
-        y,
+    X_val, y_val = selector.split(
+        X_val_features.assign(label=y_val.values)
+    )
+    X_test, y_test = selector.split(
+        X_test_features.assign(label=y_test.values)
     )
 
     trainer = ModelTrainer()
@@ -146,7 +168,7 @@ def main():
         )
 
         # -----------------------------------------------------
-        # Threshold Optimization
+        # Threshold Optimization (Validation ONLY, metric=PRIMARY_THRESHOLD_METRIC)
         # -----------------------------------------------------
 
         optimization = optimizer.optimize(
@@ -154,7 +176,7 @@ def main():
             X_val=X_val,
             y_val=y_val,
             model_name=model_name,
-            metric="accuracy",
+            metric=PRIMARY_THRESHOLD_METRIC,
         )
 
         if optimization is None:

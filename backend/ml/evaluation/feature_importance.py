@@ -37,10 +37,17 @@ class FeatureImportanceAnalyzer:
         # Check Model Support
         # -------------------------------------------------
 
-        if not hasattr(
+        has_tree_importance = hasattr(
             classifier,
             "feature_importances_",
-        ):
+        )
+
+        has_linear_coef = hasattr(
+            classifier,
+            "coef_",
+        )
+
+        if not (has_tree_importance or has_linear_coef):
 
             logger.info(
                 "%s does not support feature importance.",
@@ -48,6 +55,17 @@ class FeatureImportanceAnalyzer:
             )
 
             return None
+
+        # -------------------------------------------------
+        # Extract Raw Importance / Coefficients
+        # -------------------------------------------------
+
+        if has_tree_importance:
+            importance = classifier.feature_importances_
+        else:
+            # Absolute coefficient magnitude for logistic regression
+            import numpy as np
+            importance = np.abs(classifier.coef_[0])
 
         # -------------------------------------------------
         # Get Feature Names
@@ -74,13 +92,9 @@ class FeatureImportanceAnalyzer:
                 feature_names = [
                     f"Feature_{i}"
                     for i in range(
-                        len(
-                            classifier.feature_importances_
-                        )
+                        len(importance)
                     )
                 ]
-
-        importance = classifier.feature_importances_
 
         # -------------------------------------------------
         # Safety Check

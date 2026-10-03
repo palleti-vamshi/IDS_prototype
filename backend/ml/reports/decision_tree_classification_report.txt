@@ -1,8 +1,11 @@
+Model: decision_tree
+Threshold: 0.350000
+
               precision    recall  f1-score   support
 
-           0     0.8872    0.9804    0.9315      1934
-           1     0.9952    0.9701    0.9825      8073
+           0     0.8370    0.9754    0.9009      8240
+           1     0.4899    0.1108    0.1807      1760
 
-    accuracy                         0.9721     10007
-   macro avg     0.9412    0.9752    0.9570     10007
-weighted avg     0.9743    0.9721    0.9726     10007
+    accuracy                         0.8232     10000
+   macro avg     0.6635    0.5431    0.5408     10000
+weighted avg     0.7759    0.8232    0.7742     10000

@@ -1,0 +1,15 @@
+attack_type,total_samples,detected,missed_fn,recall
+DoS Attack,388,388,0,100.0
+False Data Injection Attack,400,400,0,100.0
+Intermittent Attack,382,382,0,100.0
+MQTT Topic Hijacking,384,384,0,100.0
+Packet Delay Attack,377,377,0,100.0
+Packet Drop Attack,360,360,0,100.0
+Replay Attack,379,379,0,100.0
+Sensor Freeze Attack,389,389,0,100.0
+Sensor Noise Injection Attack,368,368,0,100.0
+Sensor Spoofing Attack,16,16,0,100.0
+Sensor Drift Attack,371,370,1,99.73
+Slow Drift Attack,381,379,2,99.48
+Motor Overload Attack,99,96,3,96.97
+Valve Stuck Attack,21,20,1,95.24

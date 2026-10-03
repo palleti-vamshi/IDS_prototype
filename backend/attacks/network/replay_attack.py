@@ -38,6 +38,40 @@ class ReplayAttack(NetworkAttack):
         self.replayed_packets = 0
 
     # ==========================================
+    # Standalone Packet Capture & Buffer Access
+    # ==========================================
+
+    def capture_packet(
+        self,
+        topic: str,
+        payload,
+    ) -> None:
+        """
+        Capture packet into communication buffer, or standalone buffer.
+        """
+        if (
+            self.communication is not None
+            and self.communication.packet_buffer is not None
+        ):
+            self.communication.packet_buffer.add_packet(topic, payload)
+        else:
+            if not hasattr(self, "_buffer"):
+                self._buffer = []
+            self._buffer.append({"topic": topic, "payload": payload})
+
+    @property
+    def packet_buffer(self) -> list:
+        """
+        Return the list of captured packets.
+        """
+        if (
+            self.communication is not None
+            and self.communication.packet_buffer is not None
+        ):
+            return self.communication.packet_buffer.get_all()
+        return getattr(self, "_buffer", [])
+
+    # ==========================================
     # Replay Packet
     # ==========================================
 
@@ -47,22 +81,19 @@ class ReplayAttack(NetworkAttack):
         payload,
     ):
 
-        if (
-            not self.is_running
-            or self.communication is None
-            or self.communication.packet_buffer is None
-        ):
-
+        if not self.is_running:
             return topic, payload
 
         packets = (
-            self.communication
-            .packet_buffer
-            .get_all()
+            self.communication.packet_buffer.get_all()
+            if (
+                self.communication is not None
+                and self.communication.packet_buffer is not None
+            )
+            else getattr(self, "_buffer", [])
         )
 
         if not packets:
-
             return topic, payload
 
         packet = random.choice(
@@ -72,10 +103,10 @@ class ReplayAttack(NetworkAttack):
         self.replayed_packets += 1
 
         if (
-            self.communication.statistics
+            self.communication is not None
+            and self.communication.statistics
             is not None
         ):
-
             self.communication.statistics.packet_replayed()
 
         return (

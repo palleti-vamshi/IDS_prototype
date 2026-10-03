@@ -1,0 +1,40 @@
+Model: random_forest
+Threshold: 0.100000
+
+Confusion Matrix
+----------------
+TN: 4012
+FP: 4228
+FN: 5
+TP: 1755
+
+IDS Error Metrics
+-----------------
+False Positive Rate: 0.513107
+False Negative Rate: 0.002841
+
+Per-Attack Performance:
+      attack_type  total_samples  detected  missed_fn   recall
+Slow Drift Attack           1760      1755          5 0.997159
+
+False Positives by Sensor:
+sensor_code  false_positives
+VLV-001-PRS              434
+MTR-001-VIB              428
+MTR-001-VLT              414
+MTR-001-TMP              274
+MTR-001-CUR              267
+PMP-001-PRS              246
+MTR-001-RPM              242
+CNV-001-RPM              237
+PMP-001-FLW              236
+PMP-001-CUR              236
+TNK-001-LVL              228
+CMP-001-CUR              207
+TNK-001-TMP              203
+CMP-001-PRS              175
+TNK-001-PRS              138
+TNK-001-HUM              110
+CNV-001-CUR               91
+CNV-001-PRX               44
+CMP-001-TMP               18

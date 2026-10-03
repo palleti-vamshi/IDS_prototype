@@ -58,7 +58,7 @@ LIGHTX_10K = (
 
 LIGHTX_100K = (
     DATASET_DIR
-    / "lightx_ids_dataset.csv"
+    / "lightx_ids_dataset_100k.csv"
 )
 
 
@@ -82,6 +82,7 @@ LIGHTX_REQUIRED_COLUMNS = [
     "timestamp",
     "topic",
     "device_id",
+    "sensor_code",
     "sensor_type",
     "value",
     "unit",
@@ -127,15 +128,33 @@ DROP_COLUMNS = [
 NUMERIC_COLUMNS = [
     "value",
     "value_change",
+    "abs_value_change",
+    "value_accel",
     "time_delta",
+    "rolling_time_delta_5",
+    "rolling_time_delta_std_5",
+    "is_negative_time_delta",
+    "global_time_delta",
+    "rolling_global_td_10",
+    "rolling_global_td_std_10",
+    "packet_rate_10",
     "is_duplicate_value",
-    "rolling_mean",
-    "rolling_std",
-    "rolling_max",
-    "rolling_min",
+    "device_seq_gap",
+    "seq_gap_dev",
+    "rolling_seq_std_5",
+    "rolling_mean_3",
+    "rolling_std_3",
+    "rolling_mean_5",
+    "rolling_std_5",
+    "rolling_mean_10",
+    "rolling_std_10",
+    "rolling_range_5",
+    "plant_duplicate_ratio_19",
     "percentage_change",
-    "z_score",
     "device_mean_deviation",
+    "z_score",
+    "rel_volatility",
+    "stability_anomaly",
 ]
 
 
@@ -146,6 +165,7 @@ NUMERIC_COLUMNS = [
 CATEGORICAL_COLUMNS = [
     "topic",
     "device_id",
+    "sensor_code",
     "sensor_type",
     "unit",
     "status",

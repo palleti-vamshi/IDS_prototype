@@ -29,11 +29,16 @@ class FeatureSelector:
 
         logger.info("Selecting features...")
 
-        X = df.drop(
-            columns=DROP_COLUMNS + [TARGET_COLUMN]
-        )
+        drop_cols = [col for col in DROP_COLUMNS if col in df.columns]
+        if TARGET_COLUMN in df.columns:
+            drop_cols.append(TARGET_COLUMN)
+            y = df[TARGET_COLUMN]
+        else:
+            y = None
 
-        y = df[TARGET_COLUMN]
+        X = df.drop(
+            columns=drop_cols
+        )
 
         logger.info(
             f"Features selected: {len(X.columns)}"

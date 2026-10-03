@@ -52,6 +52,10 @@ class MessageParser:
                 "device_id"
             )
 
+            sensor_code = payload.get(
+                "sensor_code"
+            )
+
             sensor_type = payload.get(
                 "sensor_type"
             )
@@ -111,6 +115,8 @@ class MessageParser:
                 status=payload.get(
                     "status"
                 ),
+
+                sensor_code=sensor_code,
             )
 
         except json.JSONDecodeError as e:

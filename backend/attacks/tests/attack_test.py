@@ -2,16 +2,16 @@
 Attack Framework Integration Test
 
 Purpose:
-    Tests all attack modules individually using the AttackManager.
+    Tests representative attack modules individually using the AttackManager.
 """
 
-import time
-
 from backend.attacks.attack_manager import AttackManager
-from backend.attacks.dos_attack import DoSAttack
-from backend.attacks.replay_attack import ReplayAttack
-from backend.attacks.spoofing_attack import SpoofingAttack
-from backend.attacks.injection_attack import InjectionAttack
+from backend.attacks.network.dos_attack import DoSAttack
+from backend.attacks.network.replay_attack import ReplayAttack
+from backend.attacks.sensor.sensor_spoofing_attack import SensorSpoofingAttack
+from backend.attacks.sensor.false_data_injection_attack import (
+    FalseDataInjectionAttack,
+)
 
 
 def run_attack(attack):
@@ -21,10 +21,15 @@ def run_attack(attack):
 
     manager.register_attack(attack)
 
-    manager.start()
+    started = manager.start_attack(attack.attack_id)
+    assert started, f"Failed to start {attack.attack_name}"
+    assert attack.is_running
 
-    while any(thread.is_alive() for thread in manager.threads):
-        time.sleep(1)
+    while attack.is_running:
+        manager.update(1.0)
+
+    manager.stop_all()
+    assert not attack.is_running
 
     print(f"\n✅ {attack.attack_name} Test Passed\n")
 
@@ -34,10 +39,10 @@ def main():
     print("LightX-IDS Attack Framework Integration Test")
     print("=" * 60)
 
-    run_attack(DoSAttack())
-    run_attack(ReplayAttack())
-    run_attack(SpoofingAttack())
-    run_attack(InjectionAttack())
+    run_attack(DoSAttack(duration=3.0))
+    run_attack(ReplayAttack(duration=3.0))
+    run_attack(SensorSpoofingAttack(duration=3.0))
+    run_attack(FalseDataInjectionAttack(duration=3.0))
 
     print("=" * 60)
     print("🎉 ALL ATTACK TESTS PASSED")

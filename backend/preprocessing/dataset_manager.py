@@ -36,7 +36,13 @@ from backend.preprocessing.generation_config import (
 class DatasetManager:
     """Coordinates dataset generation."""
 
-    def __init__(self):
+    def __init__(self, target_dataset_size: int | None = None):
+
+        self.target_dataset_size = (
+            target_dataset_size
+            if target_dataset_size is not None
+            else TARGET_DATASET_SIZE
+        )
 
         self.parser = MessageParser()
         self.labeler = Labeler()
@@ -49,6 +55,7 @@ class DatasetManager:
 
         self.attack_active = False
         self.attack_type = None
+        self.attack_targets = None
 
         # ==================================================
         # Phase 3 Statistics
@@ -71,6 +78,18 @@ class DatasetManager:
 
         self.quota_rejected_records = 0
 
+        self.sensor_quota_rejected_records = 0
+
+    def reset(self) -> None:
+        """
+        Reset collected records and statistics for a fresh campaign.
+        """
+        self.writer.clear()
+        self.normal_records = 0
+        self.attack_records = 0
+        self.attack_counts.clear()
+        self.class_sensor_counts.clear()
+        self.quota_rejected_records = 0
         self.sensor_quota_rejected_records = 0
 
     # ==================================================
@@ -131,6 +150,19 @@ class DatasetManager:
                         event.get("attack")
                     )
 
+                    raw_targets = (
+                        event.get("target_sensors")
+                        or event.get("target_sensor")
+                    )
+                    if raw_targets:
+                        self.attack_targets = (
+                            list(raw_targets)
+                            if isinstance(raw_targets, (list, tuple))
+                            else [raw_targets]
+                        )
+                    else:
+                        self.attack_targets = None
+
                     print(
                         f"\n🚨 Attack Started -> "
                         f"{self.attack_type}\n"
@@ -145,6 +177,7 @@ class DatasetManager:
 
                     self.attack_active = False
                     self.attack_type = None
+                    self.attack_targets = None
 
             except json.JSONDecodeError:
 
@@ -171,6 +204,7 @@ class DatasetManager:
             record=parsed,
             attack_active=self.attack_active,
             attack_type=self.attack_type,
+            target_sensors=self.attack_targets,
         )
 
         # ==================================================
@@ -200,63 +234,8 @@ class DatasetManager:
 
             return
 
-        # ==================================================
-        # Initialize Class
-        # ==================================================
-
-        if class_name not in self.class_sensor_counts:
-
-            self.class_sensor_counts[
-                class_name
-            ] = {}
-
-        # ==================================================
-        # HARD CLASS QUOTA
-        # ==================================================
-
-        class_quota = self.class_quota(
-            class_name
-        )
-
-        if (
-            self.class_count(class_name)
-            >= class_quota
-        ):
-
-            self.quota_rejected_records += 1
-
-            return
-
-        # ==================================================
-        # SENSOR BALANCE
-        # ==================================================
-
-        sensor_quota = self._sensor_quota(
-            class_name
-        )
-
-        current_sensor_count = (
-            self.class_sensor_counts[
-                class_name
-            ].get(
-                sensor_type,
-                0,
-            )
-        )
-
-        # --------------------------------------------------
-        # If this sensor already reached its base quota,
-        # allow the remainder logic to decide whether it
-        # can receive one additional record.
-        # --------------------------------------------------
-
-        if not self._sensor_can_accept_record(
-            class_name,
-            sensor_type,
-        ):
-
-            self.sensor_quota_rejected_records += 1
-
+        # Check if target dataset size has been reached
+        if self.is_target_reached():
             return
 
         # ==================================================
@@ -270,6 +249,13 @@ class DatasetManager:
         # ==================================================
         # Update Class × Sensor Statistics
         # ==================================================
+
+        if class_name not in self.class_sensor_counts:
+            self.class_sensor_counts[class_name] = {}
+
+        current_sensor_count = (
+            self.class_sensor_counts[class_name].get(sensor_type, 0)
+        )
 
         self.class_sensor_counts[
             class_name
@@ -310,15 +296,17 @@ class DatasetManager:
         # Pipeline Log
         # ==================================================
 
-        print(
-            f"[Pipeline] Record #"
-            f"{self.writer.record_count()} | "
-            f"Class={class_name} | "
-            f"Sensor={sensor_type} | "
-            f"Device={labeled.device_id} | "
-            f"Attack={labeled.attack_type} | "
-            f"Label={labeled.label}"
-        )
+        cnt = self.writer.record_count()
+        if cnt <= 5 or cnt % 100 == 0 or cnt == self.target_dataset_size:
+            print(
+                f"[Pipeline] Record #"
+                f"{cnt} | "
+                f"Class={class_name} | "
+                f"Sensor={sensor_type} | "
+                f"Device={labeled.device_id} | "
+                f"Attack={labeled.attack_type} | "
+                f"Label={labeled.label}"
+            )
 
     # ==================================================
     # Class Quota
@@ -381,6 +369,12 @@ class DatasetManager:
             class_quota // sensor_count,
         )
 
+    def is_target_reached(self) -> bool:
+        """
+        Return True if the target dataset size has been reached.
+        """
+        return self.writer.record_count() >= self.target_dataset_size
+
     # ==================================================
     # Sensor Acceptance
     # ==================================================
@@ -391,73 +385,10 @@ class DatasetManager:
         sensor_type: str,
     ) -> bool:
         """
-        Decide whether a sensor can accept another
-        record while keeping the class balanced.
-
-        The class quota is divided as evenly as possible
-        among all ten sensor types.
-
-        Example:
-
-            Class quota = 55
-            Sensors = 10
-
-            5 sensors receive 6 records
-            5 sensors receive 5 records
+        In realistic campaign mode, all genuine physical sensor records
+        are accepted without artificial quotas.
         """
-
-        sensors = self._sensor_types()
-
-        if sensor_type not in sensors:
-
-            return False
-
-        class_quota = self.class_quota(
-            class_name
-        )
-
-        if class_quota <= 0:
-
-            return False
-
-        sensor_count = len(sensors)
-
-        base_quota = (
-            class_quota
-            // sensor_count
-        )
-
-        remainder = (
-            class_quota
-            % sensor_count
-        )
-
-        sensor_index = sensors.index(
-            sensor_type
-        )
-
-        # First `remainder` sensors receive
-        # one additional record.
-
-        allowed_quota = base_quota
-
-        if sensor_index < remainder:
-
-            allowed_quota += 1
-
-        current_count = (
-            self.class_sensor_counts
-            .get(
-                class_name,
-                {},
-            )
-            .get(
-                sensor_type,
-                0,
-            )
-        )
-
-        return current_count < allowed_quota
+        return True
 
     # ==================================================
     # Record Count
@@ -645,7 +576,7 @@ class DatasetManager:
                 self.sensor_quota_rejected_records,
 
             "target":
-                TARGET_DATASET_SIZE,
+                self.target_dataset_size,
 
             "class_quotas":
                 dict(CLASS_QUOTAS),

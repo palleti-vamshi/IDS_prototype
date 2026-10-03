@@ -28,18 +28,44 @@ class DatasetTransformer:
     Builds preprocessing transformer.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        numeric_features=None,
+        categorical_features=None,
+    ):
 
-        self.numeric_features = NUMERIC_COLUMNS
-
-        self.categorical_features = (
-            CATEGORICAL_COLUMNS
+        self.numeric_features = (
+            list(numeric_features)
+            if numeric_features is not None
+            else NUMERIC_COLUMNS
         )
 
-    def build(self) -> ColumnTransformer:
+        self.categorical_features = (
+            list(categorical_features)
+            if categorical_features is not None
+            else CATEGORICAL_COLUMNS
+        )
+
+    def build(
+        self,
+        numeric_features=None,
+        categorical_features=None,
+    ) -> ColumnTransformer:
         """
         Build preprocessing transformer.
         """
+
+        num_cols = (
+            list(numeric_features)
+            if numeric_features is not None
+            else self.numeric_features
+        )
+
+        cat_cols = (
+            list(categorical_features)
+            if categorical_features is not None
+            else self.categorical_features
+        )
 
         logger.info(
             "Building preprocessing transformer..."
@@ -90,19 +116,26 @@ class DatasetTransformer:
         # Complete Transformer
         # -------------------------------------------------
 
-        transformer = ColumnTransformer(
-            transformers=[
+        transformers_list = []
+        if num_cols:
+            transformers_list.append(
                 (
                     "numeric",
                     numeric_pipeline,
-                    self.numeric_features,
-                ),
+                    num_cols,
+                )
+            )
+        if cat_cols:
+            transformers_list.append(
                 (
                     "categorical",
                     categorical_pipeline,
-                    self.categorical_features,
-                ),
-            ],
+                    cat_cols,
+                )
+            )
+
+        transformer = ColumnTransformer(
+            transformers=transformers_list,
             remainder="drop",
             verbose_feature_names_out=False,
         )

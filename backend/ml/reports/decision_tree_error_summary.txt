@@ -1,0 +1,27 @@
+Model: decision_tree
+Threshold: 0.350000
+
+Confusion Matrix
+----------------
+TN: 8037
+FP: 203
+FN: 1565
+TP: 195
+
+IDS Error Metrics
+-----------------
+False Positive Rate: 0.024636
+False Negative Rate: 0.889205
+
+Per-Attack Performance:
+      attack_type  total_samples  detected  missed_fn   recall
+Slow Drift Attack           1760       195       1565 0.110795
+
+False Positives by Sensor:
+sensor_code  false_positives
+MTR-001-VIB              183
+TNK-001-HUM                6
+MTR-001-VLT                5
+CNV-001-PRX                5
+VLV-001-PRS                3
+CNV-001-RPM                1

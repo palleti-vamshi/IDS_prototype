@@ -17,9 +17,11 @@ from backend.industrial.simulator.factory_simulator import (
 class SimulationRunner:
     """Runs the factory simulator."""
 
-    def __init__(self):
+    def __init__(self, tick_rate: float | None = None):
 
         self.simulator = FactorySimulator()
+        if tick_rate is not None:
+            self.simulator.clock.tick_rate = tick_rate
 
         self.thread = None
 

@@ -18,11 +18,12 @@ logger = logging.getLogger(__name__)
 class MLPipeline:
     """Creates complete ML pipelines."""
 
-    def __init__(self):
+    def __init__(self, transformer=None):
 
         self.transformer = (
-            DatasetTransformer()
-            .build()
+            transformer
+            if transformer is not None
+            else DatasetTransformer().build()
         )
 
     def build(self, model):

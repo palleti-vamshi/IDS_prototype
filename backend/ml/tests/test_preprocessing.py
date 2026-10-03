@@ -28,12 +28,23 @@ def main():
     print("\n✅ Dataset Loaded")
 
     # -----------------------------
+    # Feature Engineering
+    # -----------------------------
+
+    from backend.ml.feature_engineering.feature_generator import FeatureGenerator
+
+    generator = FeatureGenerator()
+    df_features = generator.fit_transform(df)
+
+    print("✅ Feature Generation Complete")
+
+    # -----------------------------
     # Feature Selection
     # -----------------------------
 
     selector = FeatureSelector()
 
-    X, y = selector.split(df)
+    X, y = selector.split(df_features)
 
     print("✅ Feature Selection Complete")
 
@@ -61,6 +72,17 @@ def main():
     ) = splitter.split(X, y)
 
     print("✅ Dataset Split Complete")
+
+    # -----------------------------
+    # Transform Verification
+    # -----------------------------
+
+    X_train_transformed = transformer.fit_transform(X_train)
+    X_test_transformed = transformer.transform(X_test)
+
+    print(f"Transformed train shape: {X_train_transformed.shape}")
+    print(f"Transformed test shape : {X_test_transformed.shape}")
+    print("✅ Preprocessing Transformation Complete")
 
     print("\n====================================")
 

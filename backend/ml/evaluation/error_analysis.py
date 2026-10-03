@@ -37,6 +37,7 @@ class ErrorAnalyzer:
         y_test,
         model_name: str,
         threshold: float = 0.50,
+        metadata=None,
     ):
         """
         Generate error-analysis reports.
@@ -58,6 +59,10 @@ class ErrorAnalyzer:
         threshold : float
             Frozen classification threshold selected using
             validation data.
+
+        metadata : pd.DataFrame, optional
+            Test metadata (attack_type, sensor_code, device_id, etc.)
+            used to perform granular error attribution.
         """
 
         logger.info(
@@ -202,6 +207,45 @@ class ErrorAnalyzer:
 
             false_negative_rate = 0.0
 
+        # Optional granular metadata analysis
+        attack_summary_str = ""
+        sensor_fp_str = ""
+        if metadata is not None:
+            import pandas as pd
+            meta = metadata.copy()
+            meta["actual"] = y_test.values if hasattr(y_test, "values") else y_test
+            meta["pred"] = y_pred
+
+            # Per-attack recall
+            if "attack_type" in meta.columns:
+                attack_records = meta[meta["actual"] == 1]
+                attack_perf = []
+                for at, g in attack_records.groupby("attack_type"):
+                    det = int((g["pred"] == 1).sum())
+                    tot = int(len(g))
+                    miss = tot - det
+                    rec = det / tot if tot > 0 else 0.0
+                    attack_perf.append({
+                        "attack_type": at,
+                        "total_samples": tot,
+                        "detected": det,
+                        "missed_fn": miss,
+                        "recall": rec,
+                    })
+                if attack_perf:
+                    df_perf = pd.DataFrame(attack_perf).sort_values(by="recall", ascending=False)
+                    df_perf.to_csv(REPORT_DIR / f"{model_name}_attack_performance.csv", index=False)
+                    attack_summary_str = "\nPer-Attack Performance:\n" + df_perf.to_string(index=False) + "\n"
+
+            # Per-sensor false alarms
+            if "sensor_code" in meta.columns:
+                fp_records = meta[(meta["actual"] == 0) & (meta["pred"] == 1)]
+                if not fp_records.empty:
+                    fp_counts = fp_records["sensor_code"].value_counts().reset_index()
+                    fp_counts.columns = ["sensor_code", "false_positives"]
+                    fp_counts.to_csv(REPORT_DIR / f"{model_name}_sensor_false_positives.csv", index=False)
+                    sensor_fp_str = "\nFalse Positives by Sensor:\n" + fp_counts.to_string(index=False) + "\n"
+
         error_report_path = (
             REPORT_DIR
             / f"{model_name}_error_summary.txt"
@@ -262,6 +306,12 @@ class ErrorAnalyzer:
                 f"False Negative Rate: "
                 f"{false_negative_rate:.6f}\n"
             )
+
+            if attack_summary_str:
+                file.write(attack_summary_str)
+
+            if sensor_fp_str:
+                file.write(sensor_fp_str)
 
         # ====================================================
         # ROC & PRECISION-RECALL CURVES

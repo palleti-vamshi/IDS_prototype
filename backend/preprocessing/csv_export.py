@@ -19,6 +19,7 @@ class CSVExporter:
         "timestamp",
         "topic",
         "device_id",
+        "sensor_code",
         "sensor_type",
         "value",
         "unit",
@@ -67,6 +68,7 @@ class CSVExporter:
             writer = csv.DictWriter(
                 csv_file,
                 fieldnames=self.FIELDNAMES,
+                lineterminator="\n",
                 extrasaction="ignore",
             )
 

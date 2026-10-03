@@ -22,9 +22,16 @@ from pathlib import Path
 
 from backend.ml.config import (
     LIGHTX_10K,
+    LIGHTX_100K,
     LIGHTX_REQUIRED_COLUMNS,
     BENCHMARK_10K,
+    BENCHMARK_100K,
+    NUMERIC_COLUMNS,
+    CATEGORICAL_COLUMNS,
     RANDOM_STATE,
+)
+from backend.ml.preprocessing.transformer import (
+    DatasetTransformer,
 )
 
 from backend.ml.evaluation.evaluation_manager import (
@@ -87,19 +94,21 @@ logger = logging.getLogger(__name__)
 def run_benchmark(
     dataset_path: Path,
     benchmark_name: str,
-) -> None:
+    split_protocol: str = "stratified",
+    ablation: str | None = None,
+) -> list[dict]:
     """
     Run the complete LightX-IDS ML benchmark.
 
-    The raw dataset is split BEFORE feature engineering so that
-    training-derived statistics cannot use validation/test data.
+    Causal features are computed along the continuous chronological stream.
+    Training-derived statistics and transformers are fit strictly on training data.
     """
 
     print("\n" + "=" * 110)
 
     print(
         f"LIGHTX-IDS BENCHMARK : "
-        f"{benchmark_name.upper()}"
+        f"{benchmark_name.upper()} (split={split_protocol}, ablation={ablation or 'none'})"
     )
 
     print("=" * 110)
@@ -152,28 +161,44 @@ def run_benchmark(
         )
 
     # ========================================================
-    # RAW DATASET SPLIT
+    # CAUSAL STREAM FEATURES & SPLIT
     # ========================================================
+
+    feature_generator = FeatureGenerator()
+    df_stream = feature_generator.generate_causal_stream_features(df)
 
     splitter = DatasetSplitter()
 
-    X_raw = df.drop(
+    X_raw = df_stream.drop(
         columns=["label"],
     )
 
-    y_raw = df["label"]
+    y_raw = df_stream["label"]
 
-    (
-        X_train_raw,
-        X_val_raw,
-        X_test_raw,
-        y_train,
-        y_val,
-        y_test,
-    ) = splitter.split(
-        X_raw,
-        y_raw,
-    )
+    if split_protocol == "temporal":
+        (
+            X_train_raw,
+            X_val_raw,
+            X_test_raw,
+            y_train,
+            y_val,
+            y_test,
+        ) = splitter.temporal_split(
+            X_raw,
+            y_raw,
+        )
+    else:
+        (
+            X_train_raw,
+            X_val_raw,
+            X_test_raw,
+            y_train,
+            y_val,
+            y_test,
+        ) = splitter.split(
+            X_raw,
+            y_raw,
+        )
 
     print("\nDataset Split")
     print("-" * 35)
@@ -191,23 +216,15 @@ def run_benchmark(
     )
 
     # ========================================================
-    # FEATURE ENGINEERING
+    # FEATURE ENGINEERING (FIT ON TRAIN ONLY)
     # ========================================================
 
-    feature_generator = FeatureGenerator()
-
-    # --------------------------------------------------------
     # Fit ONLY on training data
-    # --------------------------------------------------------
-
     feature_generator.fit(
         X_train_raw,
     )
 
-    # --------------------------------------------------------
     # Transform each split independently
-    # --------------------------------------------------------
-
     X_train_features = (
         feature_generator.transform(
             X_train_raw,
@@ -235,7 +252,7 @@ def run_benchmark(
     )
 
     # ========================================================
-    # FEATURE SELECTION
+    # FEATURE SELECTION & ABLATION
     # ========================================================
 
     selector = FeatureSelector()
@@ -258,10 +275,78 @@ def run_benchmark(
         )
     )
 
+    if ablation == "no_sensor_code":
+        drop_ablation = ["sensor_code"]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_identity":
+        drop_ablation = ["device_id", "sensor_code", "topic"]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "baseline_features":
+        keep_num = [
+            "value", "value_change", "time_delta", "is_duplicate_value",
+            "rolling_mean", "rolling_std", "rolling_max", "rolling_min",
+            "percentage_change", "z_score", "device_mean_deviation"
+        ]
+        drop_ablation = [c for c in X_train.columns if c in NUMERIC_COLUMNS and c not in keep_num]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_communication":
+        drop_ablation = [
+            "device_seq_gap", "seq_gap_dev", "rolling_seq_std_5",
+            "is_negative_time_delta", "global_time_delta", "rolling_global_td_10",
+            "rolling_time_delta_5", "rolling_time_delta_std_5",
+            "rolling_global_td_std_10", "packet_rate_10"
+        ]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_new_timing":
+        drop_ablation = [
+            "rolling_time_delta_5", "rolling_time_delta_std_5",
+            "rolling_global_td_std_10", "packet_rate_10"
+        ]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_multiwindow":
+        drop_ablation = [
+            "rolling_mean_3", "rolling_std_3", "rolling_mean_10", "rolling_std_10",
+            "rolling_range_5", "plant_duplicate_ratio_19", "value_accel", "abs_value_change"
+        ]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_sensor_baselines":
+        drop_ablation = ["rel_volatility", "stability_anomaly", "z_score", "device_mean_deviation"]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_physical_dynamics":
+        drop_ablation = [
+            "value_change", "abs_value_change", "value_accel",
+            "percentage_change", "rolling_range_5"
+        ]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+    elif ablation == "no_plant_wide":
+        drop_ablation = ["plant_duplicate_ratio_19", "rolling_global_td_10", "rolling_global_td_std_10", "packet_rate_10"]
+        X_train = X_train.drop(columns=[c for c in drop_ablation if c in X_train.columns])
+        X_val = X_val.drop(columns=[c for c in drop_ablation if c in X_val.columns])
+        X_test = X_test.drop(columns=[c for c in drop_ablation if c in X_test.columns])
+
     print(
         f"ML features        : "
         f"{len(X_train.columns)}"
     )
+
+    meta_cols = [c for c in ["record_id", "timestamp", "device_id", "sensor_code", "sensor_type", "attack_type", "label"] if c in df.columns]
+    test_metadata = df.loc[X_test_raw.index, meta_cols].copy()
 
     # --------------------------------------------------------
     # Verify feature alignment
@@ -293,6 +378,10 @@ def run_benchmark(
     # MODEL COMPONENTS
     # ========================================================
 
+    # ========================================================
+    # MODEL COMPONENTS
+    # ========================================================
+
     trainer = ModelTrainer()
 
     evaluation_manager = EvaluationManager()
@@ -304,6 +393,14 @@ def run_benchmark(
     results = ResultManager()
 
     leaderboard = []
+
+    # Build preprocessing transformer using active features
+    active_num = [c for c in NUMERIC_COLUMNS if c in X_train.columns]
+    active_cat = [c for c in CATEGORICAL_COLUMNS if c in X_train.columns]
+    custom_transformer = DatasetTransformer(
+        numeric_features=active_num,
+        categorical_features=active_cat,
+    ).build()
 
     # ========================================================
     # TRAIN EVERY MODEL
@@ -327,7 +424,9 @@ def run_benchmark(
         # Build preprocessing + model pipeline
         # ----------------------------------------------------
 
-        pipeline = MLPipeline().build(
+        pipeline = MLPipeline(
+            transformer=custom_transformer,
+        ).build(
             model,
         )
 
@@ -353,6 +452,7 @@ def run_benchmark(
             X_test=X_test,
             y_test=y_test,
             model_name=model_name,
+            metadata=test_metadata,
         )
 
         # ----------------------------------------------------
@@ -390,7 +490,9 @@ def run_benchmark(
             # Split configuration
             "random_state": RANDOM_STATE,
 
-            "split_protocol": "80/10/10 stratified",
+            "split_protocol": f"80/10/10 {split_protocol}",
+
+            "ablation": ablation or "none",
 
             # Threshold configuration
             "threshold_metric": evaluation[
@@ -618,6 +720,8 @@ def run_benchmark(
         "\n✅ Benchmark Completed Successfully"
     )
 
+    return leaderboard
+
 
 # ============================================================
 # MAIN
@@ -625,16 +729,13 @@ def run_benchmark(
 
 def main() -> None:
     """
-    Default Phase 4 experiment.
-
-    We intentionally run the finalized 10K dataset first.
-    The 100K experiment will be executed only after the 10K
-    pipeline has been validated.
+    Default Phase 4 authoritative benchmark on 100K dataset.
     """
 
     run_benchmark(
-        LIGHTX_10K,
-        BENCHMARK_10K,
+        LIGHTX_100K,
+        BENCHMARK_100K,
+        split_protocol="stratified",
     )
 
 

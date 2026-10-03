@@ -1,0 +1,1001 @@
+record_id,timestamp,topic,device_id,sensor_type,value,unit,status,attack_type,label,source,sequence_number
+1,2026-09-05T22:52:39.941863,factory/line1/temperature,temperature_sensor_01,temperature,26.95,°C,RUNNING,,0,simulator,1
+2,2026-09-05T22:52:39.941903,factory/line1/current,current_sensor_01,current,6.0,A,RUNNING,,0,simulator,2
+3,2026-09-05T22:52:39.941917,factory/line1/rpm,rpm_sensor_01,rpm,750.0,RPM,RUNNING,,0,simulator,3
+4,2026-09-05T22:52:39.942196,factory/line1/vibration,vibration_sensor_01,vibration,0.17,g,RUNNING,,0,simulator,4
+5,2026-09-05T22:52:39.942222,factory/line1/voltage,voltage_sensor_01,voltage,239.74,V,RUNNING,,0,simulator,5
+6,2026-09-05T22:52:39.942236,factory/line1/pressure,pressure_sensor_01,pressure,40.0,kPa,RUNNING,,0,simulator,6
+7,2026-09-05T22:52:39.942445,factory/line1/flow,flow_sensor_01,flow,40.0,L/min,RUNNING,,0,simulator,7
+8,2026-09-05T22:52:39.942465,factory/line1/current,current_sensor_01,current,6.0,A,RUNNING,,0,simulator,8
+9,2026-09-05T22:52:39.942480,factory/line1/level,level_sensor_01,level,49.98,%,RUNNING,,0,simulator,9
+10,2026-09-05T22:52:39.942495,factory/line1/temperature,temperature_sensor_01,temperature,25.6,°C,RUNNING,,0,simulator,10
+11,2026-09-05T22:52:39.942507,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,,0,simulator,11
+12,2026-09-05T22:52:39.942520,factory/line1/humidity,humidity_sensor_01,humidity,66.28,%,RUNNING,,0,simulator,12
+13,2026-09-05T22:52:39.942529,factory/line1/rpm,rpm_sensor_01,rpm,600.0,RPM,RUNNING,,0,simulator,13
+14,2026-09-05T22:52:39.942680,factory/line1/current,current_sensor_01,current,3.0,A,RUNNING,,0,simulator,14
+15,2026-09-05T22:52:39.942700,factory/line1/proximity,proximity_sensor_01,proximity,46.09,mm,RUNNING,,0,simulator,15
+16,2026-09-05T22:52:39.942713,factory/line1/pressure,pressure_sensor_01,pressure,86.64,kPa,RUNNING,,0,simulator,16
+17,2026-09-05T22:52:39.942723,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,,0,simulator,17
+18,2026-09-05T22:52:39.942733,factory/line1/pressure,pressure_sensor_01,pressure,113.3,kPa,RUNNING,,0,simulator,18
+19,2026-09-05T22:52:39.942742,factory/line1/current,current_sensor_01,current,6.0,A,RUNNING,,0,simulator,19
+20,2026-09-05T22:52:40.955244,factory/line1/temperature,temperature_sensor_01,temperature,27.6,°C,RUNNING,,0,simulator,20
+21,2026-09-05T22:52:40.955299,factory/line1/current,current_sensor_01,current,8.0,A,RUNNING,,0,simulator,21
+22,2026-09-05T22:52:40.955333,factory/line1/rpm,rpm_sensor_01,rpm,900.0,RPM,RUNNING,,0,simulator,22
+23,2026-09-05T22:52:40.955820,factory/line1/vibration,vibration_sensor_01,vibration,0.17,g,RUNNING,,0,simulator,23
+24,2026-09-05T22:52:40.955875,factory/line1/voltage,voltage_sensor_01,voltage,232.18,V,RUNNING,,0,simulator,24
+25,2026-09-05T22:52:40.955903,factory/line1/pressure,pressure_sensor_01,pressure,40.0,kPa,RUNNING,,0,simulator,25
+26,2026-09-05T22:52:40.956232,factory/line1/flow,flow_sensor_01,flow,40.0,L/min,RUNNING,,0,simulator,26
+27,2026-09-05T22:52:40.956266,factory/line1/current,current_sensor_01,current,6.0,A,RUNNING,,0,simulator,27
+28,2026-09-05T22:52:40.956290,factory/line1/level,level_sensor_01,level,50.2,%,RUNNING,,0,simulator,28
+29,2026-09-05T22:52:40.956310,factory/line1/temperature,temperature_sensor_01,temperature,25.8,°C,RUNNING,,0,simulator,29
+30,2026-09-05T22:52:40.956329,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,,0,simulator,30
+31,2026-09-05T22:52:40.956353,factory/line1/humidity,humidity_sensor_01,humidity,66.66,%,RUNNING,,0,simulator,31
+32,2026-09-05T22:52:40.956368,factory/line1/rpm,rpm_sensor_01,rpm,800.0,RPM,RUNNING,,0,simulator,32
+33,2026-09-05T22:52:40.956822,factory/line1/proximity,proximity_sensor_01,proximity,199.6,mm,RUNNING,,0,simulator,34
+34,2026-09-05T22:52:40.956913,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,,0,simulator,36
+35,2026-09-05T22:52:41.975983,factory/line1/temperature,temperature_sensor_01,temperature,28.25,°C,RUNNING,DoS Attack,1,simulator,39
+36,2026-09-05T22:52:41.976030,factory/line1/current,current_sensor_01,current,8.0,A,RUNNING,DoS Attack,1,simulator,40
+37,2026-09-05T22:52:41.976052,factory/line1/rpm,rpm_sensor_01,rpm,900.0,RPM,RUNNING,DoS Attack,1,simulator,41
+38,2026-09-05T22:52:41.976357,factory/line1/vibration,vibration_sensor_01,vibration,0.17,g,RUNNING,DoS Attack,1,simulator,42
+39,2026-09-05T22:52:41.976391,factory/line1/voltage,voltage_sensor_01,voltage,223.66,V,RUNNING,DoS Attack,1,simulator,43
+40,2026-09-05T22:52:41.976405,factory/line1/pressure,pressure_sensor_01,pressure,40.0,kPa,RUNNING,DoS Attack,1,simulator,44
+41,2026-09-05T22:52:41.976608,factory/line1/flow,flow_sensor_01,flow,40.0,L/min,RUNNING,DoS Attack,1,simulator,45
+42,2026-09-05T22:52:41.976634,factory/line1/current,current_sensor_01,current,6.0,A,RUNNING,DoS Attack,1,simulator,46
+43,2026-09-05T22:52:41.976652,factory/line1/level,level_sensor_01,level,50.48,%,RUNNING,DoS Attack,1,simulator,47
+44,2026-09-05T22:52:41.976664,factory/line1/temperature,temperature_sensor_01,temperature,26.0,°C,RUNNING,DoS Attack,1,simulator,48
+45,2026-09-05T22:52:41.976673,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,DoS Attack,1,simulator,49
+46,2026-09-05T22:52:41.976687,factory/line1/humidity,humidity_sensor_01,humidity,49.37,%,RUNNING,DoS Attack,1,simulator,50
+47,2026-09-05T22:52:41.976698,factory/line1/rpm,rpm_sensor_01,rpm,900.0,RPM,RUNNING,DoS Attack,1,simulator,51
+48,2026-09-05T22:52:41.976887,factory/line1/current,current_sensor_01,current,5.0,A,RUNNING,DoS Attack,1,simulator,52
+49,2026-09-05T22:52:41.976908,factory/line1/proximity,proximity_sensor_01,proximity,453.1,mm,RUNNING,DoS Attack,1,simulator,53
+50,2026-09-05T22:52:41.976920,factory/line1/pressure,pressure_sensor_01,pressure,90.64,kPa,RUNNING,DoS Attack,1,simulator,54
+51,2026-09-05T22:52:41.976932,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,DoS Attack,1,simulator,55
+52,2026-09-05T22:52:41.976943,factory/line1/pressure,pressure_sensor_01,pressure,121.3,kPa,RUNNING,DoS Attack,1,simulator,56
+53,2026-09-05T22:52:41.976957,factory/line1/current,current_sensor_01,current,8.0,A,RUNNING,DoS Attack,1,simulator,57
+54,2026-09-05T22:52:42.993132,factory/line1/temperature,temperature_sensor_01,temperature,28.8,°C,RUNNING,DoS Attack,1,simulator,58
+55,2026-09-05T22:52:42.993172,factory/line1/current,current_sensor_01,current,9.0,A,RUNNING,DoS Attack,1,simulator,59
+56,2026-09-05T22:52:42.993192,factory/line1/rpm,rpm_sensor_01,rpm,1020.0,RPM,RUNNING,DoS Attack,1,simulator,60
+57,2026-09-05T22:52:42.993210,factory/line1/vibration,vibration_sensor_01,vibration,0.21,g,RUNNING,DoS Attack,1,simulator,61
+58,2026-09-05T22:52:42.993226,factory/line1/voltage,voltage_sensor_01,voltage,224.4,V,RUNNING,DoS Attack,1,simulator,62
+59,2026-09-05T22:52:42.993236,factory/line1/pressure,pressure_sensor_01,pressure,45.0,kPa,RUNNING,DoS Attack,1,simulator,63
+60,2026-09-05T22:52:42.993462,factory/line1/flow,flow_sensor_01,flow,45.0,L/min,RUNNING,DoS Attack,1,simulator,64
+61,2026-09-05T22:52:42.993488,factory/line1/current,current_sensor_01,current,7.0,A,RUNNING,DoS Attack,1,simulator,65
+62,2026-09-05T22:52:42.993508,factory/line1/level,level_sensor_01,level,50.99,%,RUNNING,DoS Attack,1,simulator,66
+63,2026-09-05T22:52:42.993527,factory/line1/temperature,temperature_sensor_01,temperature,26.2,°C,RUNNING,DoS Attack,1,simulator,67
+64,2026-09-05T22:52:42.993543,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,DoS Attack,1,simulator,68
+65,2026-09-05T22:52:42.993564,factory/line1/humidity,humidity_sensor_01,humidity,50.61,%,RUNNING,DoS Attack,1,simulator,69
+66,2026-09-05T22:52:42.993574,factory/line1/rpm,rpm_sensor_01,rpm,980.0,RPM,RUNNING,DoS Attack,1,simulator,70
+67,2026-09-05T22:52:42.993763,factory/line1/proximity,proximity_sensor_01,proximity,253.84,mm,RUNNING,DoS Attack,1,simulator,72
+68,2026-09-05T22:52:42.993797,factory/line1/temperature,temperature_sensor_01,temperature,25.4,°C,RUNNING,DoS Attack,1,simulator,74
+69,2026-09-05T22:52:44.011656,factory/line1/rpm,rpm_sensor_01,rpm,1140.0,RPM,RUNNING,DoS Attack,1,simulator,79
+70,2026-09-05T22:52:44.011676,factory/line1/vibration,vibration_sensor_01,vibration,0.22,g,RUNNING,DoS Attack,1,simulator,80
+71,2026-09-05T22:52:44.011696,factory/line1/voltage,voltage_sensor_01,voltage,227.29,V,RUNNING,DoS Attack,1,simulator,81
+72,2026-09-05T22:52:44.011932,factory/line1/flow,flow_sensor_01,flow,50.0,L/min,RUNNING,DoS Attack,1,simulator,83
+73,2026-09-05T22:52:44.011974,factory/line1/level,level_sensor_01,level,51.74,%,RUNNING,DoS Attack,1,simulator,85
+74,2026-09-05T22:52:44.012096,factory/line1/rpm,rpm_sensor_01,rpm,1060.0,RPM,RUNNING,DoS Attack,1,simulator,87
+75,2026-09-05T22:52:45.027901,factory/line1/vibration,vibration_sensor_01,vibration,0.22,g,RUNNING,DoS Attack,1,simulator,94
+76,2026-09-05T22:52:45.027918,factory/line1/voltage,voltage_sensor_01,voltage,220.11,V,RUNNING,DoS Attack,1,simulator,95
+77,2026-09-05T22:52:45.027939,factory/line1/flow,flow_sensor_01,flow,55.0,L/min,RUNNING,DoS Attack,1,simulator,96
+78,2026-09-05T22:52:45.027961,factory/line1/level,level_sensor_01,level,52.58,%,RUNNING,DoS Attack,1,simulator,98
+79,2026-09-05T22:52:45.027992,factory/line1/humidity,humidity_sensor_01,humidity,65.38,%,RUNNING,DoS Attack,1,simulator,100
+80,2026-09-05T22:52:45.028024,factory/line1/proximity,proximity_sensor_01,proximity,15.58,mm,RUNNING,DoS Attack,1,simulator,103
+81,2026-09-05T22:52:46.039097,factory/line1/vibration,vibration_sensor_01,vibration,0.22,g,RUNNING,DoS Attack,1,simulator,110
+82,2026-09-05T22:52:46.039116,factory/line1/voltage,voltage_sensor_01,voltage,227.96,V,RUNNING,DoS Attack,1,simulator,111
+83,2026-09-05T22:52:46.039143,factory/line1/flow,flow_sensor_01,flow,60.0,L/min,RUNNING,DoS Attack,1,simulator,112
+84,2026-09-05T22:52:46.039167,factory/line1/level,level_sensor_01,level,53.52,%,RUNNING,DoS Attack,1,simulator,113
+85,2026-09-05T22:52:46.039203,factory/line1/humidity,humidity_sensor_01,humidity,68.81,%,RUNNING,DoS Attack,1,simulator,115
+86,2026-09-05T22:52:46.039236,factory/line1/proximity,proximity_sensor_01,proximity,60.6,mm,RUNNING,DoS Attack,1,simulator,117
+87,2026-09-05T22:52:47.072901,factory/line1/voltage,voltage_sensor_01,voltage,229.3,V,RUNNING,DoS Attack,1,simulator,124
+88,2026-09-05T22:52:47.074120,factory/line1/humidity,humidity_sensor_01,humidity,56.39,%,RUNNING,DoS Attack,1,simulator,131
+89,2026-09-05T22:52:47.074171,factory/line1/proximity,proximity_sensor_01,proximity,245.04,mm,RUNNING,DoS Attack,1,simulator,133
+90,2026-09-05T22:52:48.088785,factory/line1/vibration,vibration_sensor_01,vibration,0.22,g,RUNNING,DoS Attack,1,simulator,141
+91,2026-09-05T22:53:11.487040,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,,0,simulator,417
+92,2026-09-05T22:53:11.487056,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,,0,simulator,418
+93,2026-09-05T22:53:11.487077,factory/line1/voltage,voltage_sensor_01,voltage,239.89,V,RUNNING,,0,simulator,419
+94,2026-09-05T22:53:11.487099,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,,0,simulator,421
+95,2026-09-05T22:53:11.487118,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,,0,simulator,423
+96,2026-09-05T22:53:11.487520,factory/line1/humidity,humidity_sensor_01,humidity,54.91,%,RUNNING,,0,simulator,426
+97,2026-09-05T22:53:11.487534,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,,0,simulator,427
+98,2026-09-05T22:53:11.487558,factory/line1/proximity,proximity_sensor_01,proximity,461.13,mm,RUNNING,,0,simulator,429
+99,2026-09-05T22:53:12.504031,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,,0,simulator,437
+100,2026-09-05T22:53:12.504049,factory/line1/voltage,voltage_sensor_01,voltage,234.33,V,RUNNING,,0,simulator,438
+101,2026-09-05T22:53:12.504072,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,,0,simulator,440
+102,2026-09-05T22:53:12.504091,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,,0,simulator,442
+103,2026-09-05T22:53:12.504491,factory/line1/humidity,humidity_sensor_01,humidity,42.52,%,RUNNING,,0,simulator,445
+104,2026-09-05T22:53:12.504537,factory/line1/proximity,proximity_sensor_01,proximity,383.84,mm,RUNNING,,0,simulator,448
+105,2026-09-05T22:53:13.522637,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Replay Attack,1,simulator,453
+106,2026-09-05T22:53:13.522714,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Replay Attack,1,simulator,454
+107,2026-09-05T22:53:13.522748,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,455
+108,2026-09-05T22:53:13.522781,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,456
+109,2026-09-05T22:53:13.522818,factory/line1/voltage,voltage_sensor_01,voltage,222.25,V,RUNNING,Replay Attack,1,simulator,457
+110,2026-09-05T22:53:13.522849,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Replay Attack,1,simulator,458
+111,2026-09-05T22:53:13.522867,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Replay Attack,1,simulator,459
+112,2026-09-05T22:53:13.522883,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Replay Attack,1,simulator,460
+113,2026-09-05T22:53:13.522901,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Replay Attack,1,simulator,461
+114,2026-09-05T22:53:13.523295,factory/line1/temperature,temperature_sensor_01,temperature,28.5,°C,RUNNING,Replay Attack,1,simulator,462
+115,2026-09-05T22:53:13.523318,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Replay Attack,1,simulator,463
+116,2026-09-05T22:53:13.523336,factory/line1/humidity,humidity_sensor_01,humidity,52.72,%,RUNNING,Replay Attack,1,simulator,464
+117,2026-09-05T22:53:13.523351,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,465
+118,2026-09-05T22:53:13.523366,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Replay Attack,1,simulator,466
+119,2026-09-05T22:53:13.523378,factory/line1/proximity,proximity_sensor_01,proximity,322.82,mm,RUNNING,Replay Attack,1,simulator,467
+120,2026-09-05T22:53:13.523394,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Replay Attack,1,simulator,468
+121,2026-09-05T22:53:13.523405,factory/line1/temperature,temperature_sensor_01,temperature,37.4,°C,RUNNING,Replay Attack,1,simulator,469
+122,2026-09-05T22:53:13.523416,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Replay Attack,1,simulator,470
+123,2026-09-05T22:53:13.523426,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Replay Attack,1,simulator,471
+124,2026-09-05T22:53:14.541892,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Replay Attack,1,simulator,472
+125,2026-09-05T22:53:14.541947,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Replay Attack,1,simulator,473
+126,2026-09-05T22:53:14.541970,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,474
+127,2026-09-05T22:53:14.541989,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,475
+128,2026-09-05T22:53:14.542011,factory/line1/voltage,voltage_sensor_01,voltage,239.88,V,RUNNING,Replay Attack,1,simulator,476
+129,2026-09-05T22:53:14.542028,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Replay Attack,1,simulator,477
+130,2026-09-05T22:53:14.542044,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Replay Attack,1,simulator,478
+131,2026-09-05T22:53:14.542058,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Replay Attack,1,simulator,479
+132,2026-09-05T22:53:14.542074,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Replay Attack,1,simulator,480
+133,2026-09-05T22:53:14.542319,factory/line1/temperature,temperature_sensor_01,temperature,28.2,°C,RUNNING,Replay Attack,1,simulator,481
+134,2026-09-05T22:53:14.542346,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Replay Attack,1,simulator,482
+135,2026-09-05T22:53:14.542370,factory/line1/humidity,humidity_sensor_01,humidity,55.02,%,RUNNING,Replay Attack,1,simulator,483
+136,2026-09-05T22:53:14.542390,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,484
+137,2026-09-05T22:53:14.542429,factory/line1/proximity,proximity_sensor_01,proximity,421.92,mm,RUNNING,Replay Attack,1,simulator,486
+138,2026-09-05T22:53:14.542460,factory/line1/temperature,temperature_sensor_01,temperature,37.8,°C,RUNNING,Replay Attack,1,simulator,488
+139,2026-09-05T22:53:15.668001,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,493
+140,2026-09-05T22:53:15.668017,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,494
+141,2026-09-05T22:53:15.668037,factory/line1/voltage,voltage_sensor_01,voltage,221.84,V,RUNNING,Replay Attack,1,simulator,495
+142,2026-09-05T22:53:15.668066,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Replay Attack,1,simulator,497
+143,2026-09-05T22:53:15.668092,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Replay Attack,1,simulator,499
+144,2026-09-05T22:53:15.668427,factory/line1/humidity,humidity_sensor_01,humidity,49.18,%,RUNNING,Replay Attack,1,simulator,502
+145,2026-09-05T22:53:15.668442,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Replay Attack,1,simulator,503
+146,2026-09-05T22:53:15.668469,factory/line1/proximity,proximity_sensor_01,proximity,462.65,mm,RUNNING,Replay Attack,1,simulator,505
+147,2026-09-05T22:53:16.685712,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,513
+148,2026-09-05T22:53:16.685738,factory/line1/voltage,voltage_sensor_01,voltage,232.53,V,RUNNING,Replay Attack,1,simulator,514
+149,2026-09-05T22:53:16.685767,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Replay Attack,1,simulator,516
+150,2026-09-05T22:53:16.685791,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Replay Attack,1,simulator,518
+151,2026-09-05T22:53:16.686075,factory/line1/humidity,humidity_sensor_01,humidity,59.61,%,RUNNING,Replay Attack,1,simulator,521
+152,2026-09-05T22:53:16.686122,factory/line1/proximity,proximity_sensor_01,proximity,269.25,mm,RUNNING,Replay Attack,1,simulator,524
+153,2026-09-05T22:53:17.702682,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,532
+154,2026-09-05T22:53:17.702708,factory/line1/voltage,voltage_sensor_01,voltage,221.03,V,RUNNING,Replay Attack,1,simulator,533
+155,2026-09-05T22:53:17.702749,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Replay Attack,1,simulator,535
+156,2026-09-05T22:53:17.702801,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Replay Attack,1,simulator,537
+157,2026-09-05T22:53:17.703301,factory/line1/humidity,humidity_sensor_01,humidity,42.18,%,RUNNING,Replay Attack,1,simulator,540
+158,2026-09-05T22:53:17.703341,factory/line1/proximity,proximity_sensor_01,proximity,336.99,mm,RUNNING,Replay Attack,1,simulator,543
+159,2026-09-05T22:53:18.724339,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Replay Attack,1,simulator,551
+160,2026-09-05T22:53:18.724355,factory/line1/voltage,voltage_sensor_01,voltage,226.73,V,RUNNING,Replay Attack,1,simulator,552
+161,2026-09-05T22:53:33.057085,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,,0,simulator,817
+162,2026-09-05T22:53:33.057105,factory/line1/voltage,voltage_sensor_01,voltage,234.87,V,RUNNING,,0,simulator,818
+163,2026-09-05T22:53:33.057136,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,,0,simulator,820
+164,2026-09-05T22:53:33.057180,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,,0,simulator,822
+165,2026-09-05T22:53:33.057604,factory/line1/humidity,humidity_sensor_01,humidity,63.3,%,RUNNING,,0,simulator,825
+166,2026-09-05T22:53:33.057648,factory/line1/proximity,proximity_sensor_01,proximity,317.71,mm,RUNNING,,0,simulator,828
+167,2026-09-05T22:53:34.072181,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,,0,simulator,836
+168,2026-09-05T22:53:34.072204,factory/line1/voltage,voltage_sensor_01,voltage,236.24,V,RUNNING,,0,simulator,837
+169,2026-09-05T22:53:35.086781,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Packet Delay Attack,1,simulator,852
+170,2026-09-05T22:53:35.086850,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Packet Delay Attack,1,simulator,853
+171,2026-09-05T22:53:35.086872,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,854
+172,2026-09-05T22:53:35.086893,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,855
+173,2026-09-05T22:53:35.086916,factory/line1/voltage,voltage_sensor_01,voltage,229.8,V,RUNNING,Packet Delay Attack,1,simulator,856
+174,2026-09-05T22:53:35.086935,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Packet Delay Attack,1,simulator,857
+175,2026-09-05T22:53:35.086952,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Delay Attack,1,simulator,858
+176,2026-09-05T22:53:35.086965,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Packet Delay Attack,1,simulator,859
+177,2026-09-05T22:53:35.086976,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Delay Attack,1,simulator,860
+178,2026-09-05T22:53:35.087328,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Packet Delay Attack,1,simulator,861
+179,2026-09-05T22:53:35.087381,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Packet Delay Attack,1,simulator,862
+180,2026-09-05T22:53:35.087413,factory/line1/humidity,humidity_sensor_01,humidity,58.05,%,RUNNING,Packet Delay Attack,1,simulator,863
+181,2026-09-05T22:53:35.087435,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,864
+182,2026-09-05T22:53:35.087453,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Packet Delay Attack,1,simulator,865
+183,2026-09-05T22:53:35.087471,factory/line1/proximity,proximity_sensor_01,proximity,419.95,mm,RUNNING,Packet Delay Attack,1,simulator,866
+184,2026-09-05T22:53:35.087483,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Packet Delay Attack,1,simulator,867
+185,2026-09-05T22:53:35.087494,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Packet Delay Attack,1,simulator,868
+186,2026-09-05T22:53:35.087503,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Packet Delay Attack,1,simulator,869
+187,2026-09-05T22:53:35.087512,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Packet Delay Attack,1,simulator,870
+188,2026-09-05T22:53:36.104847,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Packet Delay Attack,1,simulator,871
+189,2026-09-05T22:53:36.104883,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Packet Delay Attack,1,simulator,872
+190,2026-09-05T22:53:36.104897,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,873
+191,2026-09-05T22:53:36.104909,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,874
+192,2026-09-05T22:53:36.104933,factory/line1/voltage,voltage_sensor_01,voltage,224.18,V,RUNNING,Packet Delay Attack,1,simulator,875
+193,2026-09-05T22:53:36.104945,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Packet Delay Attack,1,simulator,876
+194,2026-09-05T22:53:36.104955,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Delay Attack,1,simulator,877
+195,2026-09-05T22:53:36.104964,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Packet Delay Attack,1,simulator,878
+196,2026-09-05T22:53:36.104973,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Delay Attack,1,simulator,879
+197,2026-09-05T22:53:36.105288,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Packet Delay Attack,1,simulator,880
+198,2026-09-05T22:53:36.105320,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Packet Delay Attack,1,simulator,881
+199,2026-09-05T22:53:36.105342,factory/line1/humidity,humidity_sensor_01,humidity,55.69,%,RUNNING,Packet Delay Attack,1,simulator,882
+200,2026-09-05T22:53:36.105357,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,883
+201,2026-09-05T22:53:36.105382,factory/line1/proximity,proximity_sensor_01,proximity,35.75,mm,RUNNING,Packet Delay Attack,1,simulator,885
+202,2026-09-05T22:53:36.105403,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Packet Delay Attack,1,simulator,887
+203,2026-09-05T22:53:37.121791,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,892
+204,2026-09-05T22:53:37.121803,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,893
+205,2026-09-05T22:53:37.121818,factory/line1/voltage,voltage_sensor_01,voltage,221.64,V,RUNNING,Packet Delay Attack,1,simulator,894
+206,2026-09-05T22:53:37.121839,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Delay Attack,1,simulator,896
+207,2026-09-05T22:53:37.121857,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Delay Attack,1,simulator,898
+208,2026-09-05T22:53:37.122339,factory/line1/humidity,humidity_sensor_01,humidity,68.65,%,RUNNING,Packet Delay Attack,1,simulator,901
+209,2026-09-05T22:53:37.122349,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Delay Attack,1,simulator,902
+210,2026-09-05T22:53:37.122367,factory/line1/proximity,proximity_sensor_01,proximity,202.07,mm,RUNNING,Packet Delay Attack,1,simulator,904
+211,2026-09-05T22:53:38.134238,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,912
+212,2026-09-05T22:53:38.134255,factory/line1/voltage,voltage_sensor_01,voltage,225.14,V,RUNNING,Packet Delay Attack,1,simulator,913
+213,2026-09-05T22:53:38.134277,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Delay Attack,1,simulator,915
+214,2026-09-05T22:53:38.134296,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Delay Attack,1,simulator,917
+215,2026-09-05T22:53:38.134653,factory/line1/humidity,humidity_sensor_01,humidity,63.32,%,RUNNING,Packet Delay Attack,1,simulator,920
+216,2026-09-05T22:53:38.134710,factory/line1/proximity,proximity_sensor_01,proximity,345.98,mm,RUNNING,Packet Delay Attack,1,simulator,923
+217,2026-09-05T22:53:39.151890,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,931
+218,2026-09-05T22:53:39.151907,factory/line1/voltage,voltage_sensor_01,voltage,228.85,V,RUNNING,Packet Delay Attack,1,simulator,932
+219,2026-09-05T22:53:39.151931,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Delay Attack,1,simulator,934
+220,2026-09-05T22:53:39.151952,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Delay Attack,1,simulator,936
+221,2026-09-05T22:53:39.152214,factory/line1/humidity,humidity_sensor_01,humidity,43.82,%,RUNNING,Packet Delay Attack,1,simulator,939
+222,2026-09-05T22:53:39.152250,factory/line1/proximity,proximity_sensor_01,proximity,388.38,mm,RUNNING,Packet Delay Attack,1,simulator,942
+223,2026-09-05T22:53:40.164426,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Delay Attack,1,simulator,950
+224,2026-09-05T22:53:40.164448,factory/line1/voltage,voltage_sensor_01,voltage,230.68,V,RUNNING,Packet Delay Attack,1,simulator,951
+225,2026-09-05T22:53:56.456889,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Packet Drop Attack,1,simulator,1251
+226,2026-09-05T22:53:56.456942,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Packet Drop Attack,1,simulator,1252
+227,2026-09-05T22:53:56.456963,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1253
+228,2026-09-05T22:53:56.456983,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1254
+229,2026-09-05T22:53:56.457005,factory/line1/voltage,voltage_sensor_01,voltage,223.72,V,RUNNING,Packet Drop Attack,1,simulator,1255
+230,2026-09-05T22:53:56.457022,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Packet Drop Attack,1,simulator,1256
+231,2026-09-05T22:53:56.457033,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Drop Attack,1,simulator,1257
+232,2026-09-05T22:53:56.457042,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Packet Drop Attack,1,simulator,1258
+233,2026-09-05T22:53:56.457053,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Drop Attack,1,simulator,1259
+234,2026-09-05T22:53:56.457267,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Packet Drop Attack,1,simulator,1260
+235,2026-09-05T22:53:56.457294,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Packet Drop Attack,1,simulator,1261
+236,2026-09-05T22:53:56.457318,factory/line1/humidity,humidity_sensor_01,humidity,44.92,%,RUNNING,Packet Drop Attack,1,simulator,1262
+237,2026-09-05T22:53:56.457333,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1263
+238,2026-09-05T22:53:56.457343,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Packet Drop Attack,1,simulator,1264
+239,2026-09-05T22:53:56.457357,factory/line1/proximity,proximity_sensor_01,proximity,74.75,mm,RUNNING,Packet Drop Attack,1,simulator,1265
+240,2026-09-05T22:53:56.457371,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Packet Drop Attack,1,simulator,1266
+241,2026-09-05T22:53:56.457385,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Packet Drop Attack,1,simulator,1267
+242,2026-09-05T22:53:56.457394,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Packet Drop Attack,1,simulator,1268
+243,2026-09-05T22:53:56.457402,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Packet Drop Attack,1,simulator,1269
+244,2026-09-05T22:53:57.475130,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Packet Drop Attack,1,simulator,1270
+245,2026-09-05T22:53:57.475183,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Packet Drop Attack,1,simulator,1271
+246,2026-09-05T22:53:57.475202,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1272
+247,2026-09-05T22:53:57.475219,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1273
+248,2026-09-05T22:53:57.475241,factory/line1/voltage,voltage_sensor_01,voltage,220.11,V,RUNNING,Packet Drop Attack,1,simulator,1274
+249,2026-09-05T22:53:57.475260,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Packet Drop Attack,1,simulator,1275
+250,2026-09-05T22:53:57.475276,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Drop Attack,1,simulator,1276
+251,2026-09-05T22:53:57.475289,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Packet Drop Attack,1,simulator,1277
+252,2026-09-05T22:53:57.475301,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Drop Attack,1,simulator,1278
+253,2026-09-05T22:53:57.475518,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Packet Drop Attack,1,simulator,1279
+254,2026-09-05T22:53:57.475543,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Packet Drop Attack,1,simulator,1280
+255,2026-09-05T22:53:57.475575,factory/line1/humidity,humidity_sensor_01,humidity,44.39,%,RUNNING,Packet Drop Attack,1,simulator,1281
+256,2026-09-05T22:53:57.475593,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1282
+257,2026-09-05T22:53:57.475617,factory/line1/proximity,proximity_sensor_01,proximity,256.35,mm,RUNNING,Packet Drop Attack,1,simulator,1284
+258,2026-09-05T22:53:57.475636,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Packet Drop Attack,1,simulator,1286
+259,2026-09-05T22:53:58.495091,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1290
+260,2026-09-05T22:53:58.495111,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1291
+261,2026-09-05T22:53:58.495133,factory/line1/voltage,voltage_sensor_01,voltage,229.31,V,RUNNING,Packet Drop Attack,1,simulator,1292
+262,2026-09-05T22:53:58.495169,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Drop Attack,1,simulator,1294
+263,2026-09-05T22:53:58.495202,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Drop Attack,1,simulator,1296
+264,2026-09-05T22:53:58.495637,factory/line1/humidity,humidity_sensor_01,humidity,61.79,%,RUNNING,Packet Drop Attack,1,simulator,1299
+265,2026-09-05T22:53:58.495673,factory/line1/proximity,proximity_sensor_01,proximity,477.52,mm,RUNNING,Packet Drop Attack,1,simulator,1301
+266,2026-09-05T22:53:59.511671,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1305
+267,2026-09-05T22:53:59.511693,factory/line1/voltage,voltage_sensor_01,voltage,236.09,V,RUNNING,Packet Drop Attack,1,simulator,1306
+268,2026-09-05T22:53:59.511727,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Drop Attack,1,simulator,1308
+269,2026-09-05T22:53:59.511754,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Drop Attack,1,simulator,1309
+270,2026-09-05T22:53:59.512021,factory/line1/humidity,humidity_sensor_01,humidity,51.43,%,RUNNING,Packet Drop Attack,1,simulator,1312
+271,2026-09-05T22:53:59.512038,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Packet Drop Attack,1,simulator,1313
+272,2026-09-05T22:53:59.512066,factory/line1/proximity,proximity_sensor_01,proximity,185.55,mm,RUNNING,Packet Drop Attack,1,simulator,1315
+273,2026-09-05T22:54:00.528005,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1323
+274,2026-09-05T22:54:00.528030,factory/line1/voltage,voltage_sensor_01,voltage,226.43,V,RUNNING,Packet Drop Attack,1,simulator,1324
+275,2026-09-05T22:54:00.528067,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Packet Drop Attack,1,simulator,1326
+276,2026-09-05T22:54:00.528099,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Packet Drop Attack,1,simulator,1327
+277,2026-09-05T22:54:00.528529,factory/line1/humidity,humidity_sensor_01,humidity,51.01,%,RUNNING,Packet Drop Attack,1,simulator,1330
+278,2026-09-05T22:54:00.528572,factory/line1/proximity,proximity_sensor_01,proximity,340.11,mm,RUNNING,Packet Drop Attack,1,simulator,1331
+279,2026-09-05T22:54:01.542670,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Packet Drop Attack,1,simulator,1336
+280,2026-09-05T22:54:02.558660,factory/line1/voltage,voltage_sensor_01,voltage,224.94,V,RUNNING,Packet Drop Attack,1,simulator,1351
+281,2026-09-05T22:54:17.753384,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1473
+282,2026-09-05T22:54:17.753429,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,MQTT Topic Hijacking,1,simulator,1474
+283,2026-09-05T22:54:17.753445,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1475
+284,2026-09-05T22:54:17.753457,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1476
+285,2026-09-05T22:54:17.753473,factory/line1/voltage,voltage_sensor_01,voltage,232.38,V,RUNNING,MQTT Topic Hijacking,1,simulator,1477
+286,2026-09-05T22:54:17.753485,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1478
+287,2026-09-05T22:54:17.753506,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,MQTT Topic Hijacking,1,simulator,1479
+288,2026-09-05T22:54:17.753515,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,MQTT Topic Hijacking,1,simulator,1480
+289,2026-09-05T22:54:17.753525,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,MQTT Topic Hijacking,1,simulator,1481
+290,2026-09-05T22:54:17.753876,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1482
+291,2026-09-05T22:54:17.753900,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1483
+292,2026-09-05T22:54:17.753926,factory/line1/humidity,humidity_sensor_01,humidity,46.69,%,RUNNING,MQTT Topic Hijacking,1,simulator,1484
+293,2026-09-05T22:54:17.753939,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1485
+294,2026-09-05T22:54:17.753950,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,MQTT Topic Hijacking,1,simulator,1486
+295,2026-09-05T22:54:17.753963,factory/line1/proximity,proximity_sensor_01,proximity,40.08,mm,RUNNING,MQTT Topic Hijacking,1,simulator,1487
+296,2026-09-05T22:54:17.753972,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1488
+297,2026-09-05T22:54:17.753981,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1489
+298,2026-09-05T22:54:17.753991,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1490
+299,2026-09-05T22:54:17.754000,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,MQTT Topic Hijacking,1,simulator,1491
+300,2026-09-05T22:54:18.769950,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1492
+301,2026-09-05T22:54:18.770008,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,MQTT Topic Hijacking,1,simulator,1493
+302,2026-09-05T22:54:18.770033,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1494
+303,2026-09-05T22:54:18.770058,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1495
+304,2026-09-05T22:54:18.770084,factory/line1/voltage,voltage_sensor_01,voltage,233.23,V,RUNNING,MQTT Topic Hijacking,1,simulator,1496
+305,2026-09-05T22:54:18.770105,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1497
+306,2026-09-05T22:54:18.770126,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,MQTT Topic Hijacking,1,simulator,1498
+307,2026-09-05T22:54:18.770143,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,MQTT Topic Hijacking,1,simulator,1499
+308,2026-09-05T22:54:18.770163,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,MQTT Topic Hijacking,1,simulator,1500
+309,2026-09-05T22:54:18.770541,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1501
+310,2026-09-05T22:54:18.770582,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,MQTT Topic Hijacking,1,simulator,1502
+311,2026-09-05T22:54:18.770601,factory/line1/humidity,humidity_sensor_01,humidity,61.94,%,RUNNING,MQTT Topic Hijacking,1,simulator,1503
+312,2026-09-05T22:54:18.770613,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1504
+313,2026-09-05T22:54:18.770635,factory/line1/proximity,proximity_sensor_01,proximity,314.95,mm,RUNNING,MQTT Topic Hijacking,1,simulator,1506
+314,2026-09-05T22:54:18.770653,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,MQTT Topic Hijacking,1,simulator,1508
+315,2026-09-05T22:54:19.825308,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1513
+316,2026-09-05T22:54:19.825321,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1514
+317,2026-09-05T22:54:19.825338,factory/line1/voltage,voltage_sensor_01,voltage,237.55,V,RUNNING,MQTT Topic Hijacking,1,simulator,1515
+318,2026-09-05T22:54:19.825359,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,MQTT Topic Hijacking,1,simulator,1517
+319,2026-09-05T22:54:19.825378,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,MQTT Topic Hijacking,1,simulator,1519
+320,2026-09-05T22:54:19.825676,factory/line1/humidity,humidity_sensor_01,humidity,53.54,%,RUNNING,MQTT Topic Hijacking,1,simulator,1522
+321,2026-09-05T22:54:19.825692,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,MQTT Topic Hijacking,1,simulator,1523
+322,2026-09-05T22:54:19.825723,factory/line1/proximity,proximity_sensor_01,proximity,122.71,mm,RUNNING,MQTT Topic Hijacking,1,simulator,1525
+323,2026-09-05T22:54:20.842344,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1533
+324,2026-09-05T22:54:20.842369,factory/line1/voltage,voltage_sensor_01,voltage,225.12,V,RUNNING,MQTT Topic Hijacking,1,simulator,1534
+325,2026-09-05T22:54:20.842409,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,MQTT Topic Hijacking,1,simulator,1536
+326,2026-09-05T22:54:20.842444,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,MQTT Topic Hijacking,1,simulator,1538
+327,2026-09-05T22:54:20.842847,factory/line1/humidity,humidity_sensor_01,humidity,64.99,%,RUNNING,MQTT Topic Hijacking,1,simulator,1541
+328,2026-09-05T22:54:20.842889,factory/line1/proximity,proximity_sensor_01,proximity,406.31,mm,RUNNING,MQTT Topic Hijacking,1,simulator,1544
+329,2026-09-05T22:54:21.859839,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1552
+330,2026-09-05T22:54:21.859860,factory/line1/voltage,voltage_sensor_01,voltage,229.88,V,RUNNING,MQTT Topic Hijacking,1,simulator,1553
+331,2026-09-05T22:54:21.859893,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,MQTT Topic Hijacking,1,simulator,1555
+332,2026-09-05T22:54:21.859928,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,MQTT Topic Hijacking,1,simulator,1557
+333,2026-09-05T22:54:21.860218,factory/line1/humidity,humidity_sensor_01,humidity,54.28,%,RUNNING,MQTT Topic Hijacking,1,simulator,1560
+334,2026-09-05T22:54:21.860272,factory/line1/proximity,proximity_sensor_01,proximity,21.06,mm,RUNNING,MQTT Topic Hijacking,1,simulator,1563
+335,2026-09-05T22:54:22.876409,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,MQTT Topic Hijacking,1,simulator,1571
+336,2026-09-05T22:54:22.876424,factory/line1/voltage,voltage_sensor_01,voltage,236.42,V,RUNNING,MQTT Topic Hijacking,1,simulator,1572
+337,2026-09-05T22:54:38.168734,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1862
+338,2026-09-05T22:54:38.168752,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1863
+339,2026-09-05T22:54:38.168768,factory/line1/humidity,humidity_sensor_01,humidity,46.29,%,RUNNING,Sensor Spoofing Attack,1,simulator,1864
+340,2026-09-05T22:54:38.168778,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1865
+341,2026-09-05T22:54:38.168786,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Sensor Spoofing Attack,1,simulator,1866
+342,2026-09-05T22:54:38.168796,factory/line1/proximity,proximity_sensor_01,proximity,358.78,mm,RUNNING,Sensor Spoofing Attack,1,simulator,1867
+343,2026-09-05T22:54:38.168804,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1868
+344,2026-09-05T22:54:38.168812,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1869
+345,2026-09-05T22:54:38.168821,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1870
+346,2026-09-05T22:54:38.168834,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Sensor Spoofing Attack,1,simulator,1871
+347,2026-09-05T22:54:39.188962,factory/line1/temperature,temperature_sensor_01,temperature,43.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1872
+348,2026-09-05T22:54:39.189021,factory/line1/current,current_sensor_01,current,11.5,A,RUNNING,Sensor Spoofing Attack,1,simulator,1873
+349,2026-09-05T22:54:39.189043,factory/line1/rpm,rpm_sensor_01,rpm,1451.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1874
+350,2026-09-05T22:54:39.189061,factory/line1/vibration,vibration_sensor_01,vibration,1.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1875
+351,2026-09-05T22:54:39.189080,factory/line1/voltage,voltage_sensor_01,voltage,226.79,V,RUNNING,Sensor Spoofing Attack,1,simulator,1876
+352,2026-09-05T22:54:39.189097,factory/line1/pressure,pressure_sensor_01,pressure,76.0,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1877
+353,2026-09-05T22:54:39.189111,factory/line1/flow,flow_sensor_01,flow,76.0,L/min,RUNNING,Sensor Spoofing Attack,1,simulator,1878
+354,2026-09-05T22:54:39.189120,factory/line1/current,current_sensor_01,current,11.0,A,RUNNING,Sensor Spoofing Attack,1,simulator,1879
+355,2026-09-05T22:54:39.189131,factory/line1/level,level_sensor_01,level,101.0,%,RUNNING,Sensor Spoofing Attack,1,simulator,1880
+356,2026-09-05T22:54:39.189363,factory/line1/temperature,temperature_sensor_01,temperature,26.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1881
+357,2026-09-05T22:54:39.189389,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1882
+358,2026-09-05T22:54:39.189408,factory/line1/humidity,humidity_sensor_01,humidity,64.82,%,RUNNING,Sensor Spoofing Attack,1,simulator,1883
+359,2026-09-05T22:54:39.189418,factory/line1/rpm,rpm_sensor_01,rpm,1451.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1884
+360,2026-09-05T22:54:39.189427,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Sensor Spoofing Attack,1,simulator,1885
+361,2026-09-05T22:54:39.189438,factory/line1/proximity,proximity_sensor_01,proximity,489.91,mm,RUNNING,Sensor Spoofing Attack,1,simulator,1886
+362,2026-09-05T22:54:39.189446,factory/line1/pressure,pressure_sensor_01,pressure,141.0,kPa,RUNNING,Sensor Spoofing Attack,1,simulator,1887
+363,2026-09-05T22:54:39.189455,factory/line1/temperature,temperature_sensor_01,temperature,46.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1888
+364,2026-09-05T22:54:39.189488,factory/line1/current,current_sensor_01,current,13.0,A,RUNNING,Sensor Spoofing Attack,1,simulator,1890
+365,2026-09-05T22:54:40.206899,factory/line1/temperature,temperature_sensor_01,temperature,44.0,°C,RUNNING,Sensor Spoofing Attack,1,simulator,1891
+366,2026-09-05T22:54:40.206956,factory/line1/rpm,rpm_sensor_01,rpm,1452.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1893
+367,2026-09-05T22:54:40.206969,factory/line1/vibration,vibration_sensor_01,vibration,2.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1894
+368,2026-09-05T22:54:40.206987,factory/line1/voltage,voltage_sensor_01,voltage,239.65,V,RUNNING,Sensor Spoofing Attack,1,simulator,1895
+369,2026-09-05T22:54:40.207022,factory/line1/flow,flow_sensor_01,flow,77.0,L/min,RUNNING,Sensor Spoofing Attack,1,simulator,1897
+370,2026-09-05T22:54:40.207044,factory/line1/level,level_sensor_01,level,102.0,%,RUNNING,Sensor Spoofing Attack,1,simulator,1899
+371,2026-09-05T22:54:40.207329,factory/line1/humidity,humidity_sensor_01,humidity,50.58,%,RUNNING,Sensor Spoofing Attack,1,simulator,1902
+372,2026-09-05T22:54:40.207346,factory/line1/rpm,rpm_sensor_01,rpm,1452.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1903
+373,2026-09-05T22:54:40.207380,factory/line1/proximity,proximity_sensor_01,proximity,194.19,mm,RUNNING,Sensor Spoofing Attack,1,simulator,1905
+374,2026-09-05T22:54:41.222926,factory/line1/rpm,rpm_sensor_01,rpm,1453.0,RPM,RUNNING,Sensor Spoofing Attack,1,simulator,1912
+375,2026-09-05T22:54:41.222945,factory/line1/vibration,vibration_sensor_01,vibration,3.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1913
+376,2026-09-05T22:54:41.222963,factory/line1/voltage,voltage_sensor_01,voltage,232.78,V,RUNNING,Sensor Spoofing Attack,1,simulator,1914
+377,2026-09-05T22:54:41.222997,factory/line1/flow,flow_sensor_01,flow,78.0,L/min,RUNNING,Sensor Spoofing Attack,1,simulator,1916
+378,2026-09-05T22:54:41.223029,factory/line1/level,level_sensor_01,level,103.0,%,RUNNING,Sensor Spoofing Attack,1,simulator,1918
+379,2026-09-05T22:54:41.223441,factory/line1/humidity,humidity_sensor_01,humidity,47.25,%,RUNNING,Sensor Spoofing Attack,1,simulator,1921
+380,2026-09-05T22:54:41.223501,factory/line1/proximity,proximity_sensor_01,proximity,201.59,mm,RUNNING,Sensor Spoofing Attack,1,simulator,1924
+381,2026-09-05T22:54:42.238369,factory/line1/vibration,vibration_sensor_01,vibration,4.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1932
+382,2026-09-05T22:54:42.238385,factory/line1/voltage,voltage_sensor_01,voltage,224.19,V,RUNNING,Sensor Spoofing Attack,1,simulator,1933
+383,2026-09-05T22:54:42.238404,factory/line1/flow,flow_sensor_01,flow,79.0,L/min,RUNNING,Sensor Spoofing Attack,1,simulator,1935
+384,2026-09-05T22:54:42.238421,factory/line1/level,level_sensor_01,level,104.0,%,RUNNING,Sensor Spoofing Attack,1,simulator,1937
+385,2026-09-05T22:54:42.238695,factory/line1/humidity,humidity_sensor_01,humidity,66.76,%,RUNNING,Sensor Spoofing Attack,1,simulator,1940
+386,2026-09-05T22:54:42.238746,factory/line1/proximity,proximity_sensor_01,proximity,379.69,mm,RUNNING,Sensor Spoofing Attack,1,simulator,1943
+387,2026-09-05T22:54:43.256649,factory/line1/vibration,vibration_sensor_01,vibration,5.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1951
+388,2026-09-05T22:54:43.256887,factory/line1/voltage,voltage_sensor_01,voltage,231.34,V,RUNNING,Sensor Spoofing Attack,1,simulator,1952
+389,2026-09-05T22:54:43.256926,factory/line1/flow,flow_sensor_01,flow,80.0,L/min,RUNNING,Sensor Spoofing Attack,1,simulator,1954
+390,2026-09-05T22:54:43.256955,factory/line1/level,level_sensor_01,level,105.0,%,RUNNING,Sensor Spoofing Attack,1,simulator,1956
+391,2026-09-05T22:54:44.273666,factory/line1/vibration,vibration_sensor_01,vibration,6.25,g,RUNNING,Sensor Spoofing Attack,1,simulator,1970
+392,2026-09-05T22:54:44.273887,factory/line1/voltage,voltage_sensor_01,voltage,237.9,V,RUNNING,Sensor Spoofing Attack,1,simulator,1971
+393,2026-09-05T22:55:00.606774,factory/line1/temperature,temperature_sensor_01,temperature,56.7,°C,RUNNING,False Data Injection Attack,1,simulator,2271
+394,2026-09-05T22:55:00.606832,factory/line1/current,current_sensor_01,current,14.18,A,RUNNING,False Data Injection Attack,1,simulator,2272
+395,2026-09-05T22:55:00.606856,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2273
+396,2026-09-05T22:55:00.607086,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2274
+397,2026-09-05T22:55:00.607120,factory/line1/voltage,voltage_sensor_01,voltage,300.95,V,RUNNING,False Data Injection Attack,1,simulator,2275
+398,2026-09-05T22:55:00.607415,factory/line1/pressure,pressure_sensor_01,pressure,101.25,kPa,RUNNING,False Data Injection Attack,1,simulator,2276
+399,2026-09-05T22:55:00.607445,factory/line1/flow,flow_sensor_01,flow,101.25,L/min,RUNNING,False Data Injection Attack,1,simulator,2277
+400,2026-09-05T22:55:00.607471,factory/line1/current,current_sensor_01,current,13.5,A,RUNNING,False Data Injection Attack,1,simulator,2278
+401,2026-09-05T22:55:00.607490,factory/line1/level,level_sensor_01,level,135.0,%,RUNNING,False Data Injection Attack,1,simulator,2279
+402,2026-09-05T22:55:00.607690,factory/line1/temperature,temperature_sensor_01,temperature,33.75,°C,RUNNING,False Data Injection Attack,1,simulator,2280
+403,2026-09-05T22:55:00.607717,factory/line1/pressure,pressure_sensor_01,pressure,136.75,kPa,RUNNING,False Data Injection Attack,1,simulator,2281
+404,2026-09-05T22:55:00.607740,factory/line1/humidity,humidity_sensor_01,humidity,80.45,%,RUNNING,False Data Injection Attack,1,simulator,2282
+405,2026-09-05T22:55:00.607920,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2283
+406,2026-09-05T22:55:00.608099,factory/line1/current,current_sensor_01,current,12.83,A,RUNNING,False Data Injection Attack,1,simulator,2284
+407,2026-09-05T22:55:00.608129,factory/line1/proximity,proximity_sensor_01,proximity,564.3,mm,RUNNING,False Data Injection Attack,1,simulator,2285
+408,2026-09-05T22:55:00.608146,factory/line1/pressure,pressure_sensor_01,pressure,189.0,kPa,RUNNING,False Data Injection Attack,1,simulator,2286
+409,2026-09-05T22:55:00.608161,factory/line1/temperature,temperature_sensor_01,temperature,60.75,°C,RUNNING,False Data Injection Attack,1,simulator,2287
+410,2026-09-05T22:55:00.608169,factory/line1/pressure,pressure_sensor_01,pressure,229.5,kPa,RUNNING,False Data Injection Attack,1,simulator,2288
+411,2026-09-05T22:55:00.608314,factory/line1/current,current_sensor_01,current,16.2,A,RUNNING,False Data Injection Attack,1,simulator,2289
+412,2026-09-05T22:55:01.626729,factory/line1/temperature,temperature_sensor_01,temperature,56.7,°C,RUNNING,False Data Injection Attack,1,simulator,2290
+413,2026-09-05T22:55:01.626785,factory/line1/current,current_sensor_01,current,14.18,A,RUNNING,False Data Injection Attack,1,simulator,2291
+414,2026-09-05T22:55:01.626808,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2292
+415,2026-09-05T22:55:01.627053,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2293
+416,2026-09-05T22:55:01.627076,factory/line1/voltage,voltage_sensor_01,voltage,317.28,V,RUNNING,False Data Injection Attack,1,simulator,2294
+417,2026-09-05T22:55:01.627255,factory/line1/pressure,pressure_sensor_01,pressure,101.25,kPa,RUNNING,False Data Injection Attack,1,simulator,2295
+418,2026-09-05T22:55:01.627284,factory/line1/flow,flow_sensor_01,flow,101.25,L/min,RUNNING,False Data Injection Attack,1,simulator,2296
+419,2026-09-05T22:55:01.627295,factory/line1/current,current_sensor_01,current,13.5,A,RUNNING,False Data Injection Attack,1,simulator,2297
+420,2026-09-05T22:55:01.627315,factory/line1/level,level_sensor_01,level,135.0,%,RUNNING,False Data Injection Attack,1,simulator,2298
+421,2026-09-05T22:55:01.627506,factory/line1/temperature,temperature_sensor_01,temperature,33.75,°C,RUNNING,False Data Injection Attack,1,simulator,2299
+422,2026-09-05T22:55:01.627530,factory/line1/pressure,pressure_sensor_01,pressure,136.75,kPa,RUNNING,False Data Injection Attack,1,simulator,2300
+423,2026-09-05T22:55:01.627553,factory/line1/humidity,humidity_sensor_01,humidity,74.88,%,RUNNING,False Data Injection Attack,1,simulator,2301
+424,2026-09-05T22:55:01.627572,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2302
+425,2026-09-05T22:55:01.627778,factory/line1/proximity,proximity_sensor_01,proximity,59.36,mm,RUNNING,False Data Injection Attack,1,simulator,2304
+426,2026-09-05T22:55:01.627803,factory/line1/temperature,temperature_sensor_01,temperature,60.75,°C,RUNNING,False Data Injection Attack,1,simulator,2306
+427,2026-09-05T22:55:02.645709,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2311
+428,2026-09-05T22:55:02.646089,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2312
+429,2026-09-05T22:55:02.646119,factory/line1/voltage,voltage_sensor_01,voltage,303.87,V,RUNNING,False Data Injection Attack,1,simulator,2313
+430,2026-09-05T22:55:02.646349,factory/line1/flow,flow_sensor_01,flow,101.25,L/min,RUNNING,False Data Injection Attack,1,simulator,2315
+431,2026-09-05T22:55:02.646387,factory/line1/level,level_sensor_01,level,135.0,%,RUNNING,False Data Injection Attack,1,simulator,2317
+432,2026-09-05T22:55:02.646640,factory/line1/humidity,humidity_sensor_01,humidity,61.67,%,RUNNING,False Data Injection Attack,1,simulator,2320
+433,2026-09-05T22:55:02.646653,factory/line1/rpm,rpm_sensor_01,rpm,1957.5,RPM,RUNNING,False Data Injection Attack,1,simulator,2321
+434,2026-09-05T22:55:02.646851,factory/line1/proximity,proximity_sensor_01,proximity,653.84,mm,RUNNING,False Data Injection Attack,1,simulator,2323
+435,2026-09-05T22:55:03.664133,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2331
+436,2026-09-05T22:55:03.664155,factory/line1/voltage,voltage_sensor_01,voltage,302.74,V,RUNNING,False Data Injection Attack,1,simulator,2332
+437,2026-09-05T22:55:03.664366,factory/line1/flow,flow_sensor_01,flow,101.25,L/min,RUNNING,False Data Injection Attack,1,simulator,2334
+438,2026-09-05T22:55:03.664400,factory/line1/level,level_sensor_01,level,135.0,%,RUNNING,False Data Injection Attack,1,simulator,2336
+439,2026-09-05T22:55:03.664652,factory/line1/humidity,humidity_sensor_01,humidity,56.81,%,RUNNING,False Data Injection Attack,1,simulator,2339
+440,2026-09-05T22:55:03.664872,factory/line1/proximity,proximity_sensor_01,proximity,658.92,mm,RUNNING,False Data Injection Attack,1,simulator,2342
+441,2026-09-05T22:55:04.681085,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2350
+442,2026-09-05T22:55:04.681116,factory/line1/voltage,voltage_sensor_01,voltage,300.56,V,RUNNING,False Data Injection Attack,1,simulator,2351
+443,2026-09-05T22:55:04.681399,factory/line1/flow,flow_sensor_01,flow,101.25,L/min,RUNNING,False Data Injection Attack,1,simulator,2353
+444,2026-09-05T22:55:04.681441,factory/line1/level,level_sensor_01,level,135.0,%,RUNNING,False Data Injection Attack,1,simulator,2355
+445,2026-09-05T22:55:04.681737,factory/line1/humidity,humidity_sensor_01,humidity,73.78,%,RUNNING,False Data Injection Attack,1,simulator,2358
+446,2026-09-05T22:55:04.682013,factory/line1/proximity,proximity_sensor_01,proximity,634.37,mm,RUNNING,False Data Injection Attack,1,simulator,2361
+447,2026-09-05T22:55:05.709949,factory/line1/vibration,vibration_sensor_01,vibration,0.34,g,RUNNING,False Data Injection Attack,1,simulator,2369
+448,2026-09-05T22:55:05.709985,factory/line1/voltage,voltage_sensor_01,voltage,313.24,V,RUNNING,False Data Injection Attack,1,simulator,2370
+449,2026-09-05T22:55:21.005891,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2660
+450,2026-09-05T22:55:21.005914,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Sensor Drift Attack,1,simulator,2661
+451,2026-09-05T22:55:21.005935,factory/line1/humidity,humidity_sensor_01,humidity,59.2,%,RUNNING,Sensor Drift Attack,1,simulator,2662
+452,2026-09-05T22:55:21.005951,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2663
+453,2026-09-05T22:55:21.005963,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Sensor Drift Attack,1,simulator,2664
+454,2026-09-05T22:55:21.005980,factory/line1/proximity,proximity_sensor_01,proximity,251.11,mm,RUNNING,Sensor Drift Attack,1,simulator,2665
+455,2026-09-05T22:55:21.005992,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Sensor Drift Attack,1,simulator,2666
+456,2026-09-05T22:55:21.006005,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2667
+457,2026-09-05T22:55:21.006017,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Sensor Drift Attack,1,simulator,2668
+458,2026-09-05T22:55:21.006031,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Sensor Drift Attack,1,simulator,2669
+459,2026-09-05T22:55:22.024910,factory/line1/temperature,temperature_sensor_01,temperature,43.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2670
+460,2026-09-05T22:55:22.024966,factory/line1/current,current_sensor_01,current,11.5,A,RUNNING,Sensor Drift Attack,1,simulator,2671
+461,2026-09-05T22:55:22.024989,factory/line1/rpm,rpm_sensor_01,rpm,1451.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2672
+462,2026-09-05T22:55:22.025008,factory/line1/vibration,vibration_sensor_01,vibration,1.25,g,RUNNING,Sensor Drift Attack,1,simulator,2673
+463,2026-09-05T22:55:22.025030,factory/line1/voltage,voltage_sensor_01,voltage,221.74,V,RUNNING,Sensor Drift Attack,1,simulator,2674
+464,2026-09-05T22:55:22.025046,factory/line1/pressure,pressure_sensor_01,pressure,76.0,kPa,RUNNING,Sensor Drift Attack,1,simulator,2675
+465,2026-09-05T22:55:22.025061,factory/line1/flow,flow_sensor_01,flow,76.0,L/min,RUNNING,Sensor Drift Attack,1,simulator,2676
+466,2026-09-05T22:55:22.025123,factory/line1/current,current_sensor_01,current,11.0,A,RUNNING,Sensor Drift Attack,1,simulator,2677
+467,2026-09-05T22:55:22.025137,factory/line1/level,level_sensor_01,level,101.0,%,RUNNING,Sensor Drift Attack,1,simulator,2678
+468,2026-09-05T22:55:22.025535,factory/line1/temperature,temperature_sensor_01,temperature,26.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2679
+469,2026-09-05T22:55:22.025557,factory/line1/pressure,pressure_sensor_01,pressure,102.3,kPa,RUNNING,Sensor Drift Attack,1,simulator,2680
+470,2026-09-05T22:55:22.025572,factory/line1/humidity,humidity_sensor_01,humidity,60.72,%,RUNNING,Sensor Drift Attack,1,simulator,2681
+471,2026-09-05T22:55:22.025589,factory/line1/rpm,rpm_sensor_01,rpm,1451.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2682
+472,2026-09-05T22:55:22.025604,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Sensor Drift Attack,1,simulator,2683
+473,2026-09-05T22:55:22.025622,factory/line1/proximity,proximity_sensor_01,proximity,112.13,mm,RUNNING,Sensor Drift Attack,1,simulator,2684
+474,2026-09-05T22:55:22.025637,factory/line1/pressure,pressure_sensor_01,pressure,141.0,kPa,RUNNING,Sensor Drift Attack,1,simulator,2685
+475,2026-09-05T22:55:22.025648,factory/line1/temperature,temperature_sensor_01,temperature,46.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2686
+476,2026-09-05T22:55:22.025662,factory/line1/current,current_sensor_01,current,13.0,A,RUNNING,Sensor Drift Attack,1,simulator,2688
+477,2026-09-05T22:55:23.049871,factory/line1/temperature,temperature_sensor_01,temperature,44.0,°C,RUNNING,Sensor Drift Attack,1,simulator,2689
+478,2026-09-05T22:55:23.049942,factory/line1/rpm,rpm_sensor_01,rpm,1452.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2691
+479,2026-09-05T22:55:23.049960,factory/line1/vibration,vibration_sensor_01,vibration,2.25,g,RUNNING,Sensor Drift Attack,1,simulator,2692
+480,2026-09-05T22:55:23.049981,factory/line1/voltage,voltage_sensor_01,voltage,226.8,V,RUNNING,Sensor Drift Attack,1,simulator,2693
+481,2026-09-05T22:55:23.050006,factory/line1/flow,flow_sensor_01,flow,77.0,L/min,RUNNING,Sensor Drift Attack,1,simulator,2695
+482,2026-09-05T22:55:23.050026,factory/line1/level,level_sensor_01,level,102.0,%,RUNNING,Sensor Drift Attack,1,simulator,2697
+483,2026-09-05T22:55:23.050354,factory/line1/humidity,humidity_sensor_01,humidity,62.23,%,RUNNING,Sensor Drift Attack,1,simulator,2700
+484,2026-09-05T22:55:23.050367,factory/line1/rpm,rpm_sensor_01,rpm,1452.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2701
+485,2026-09-05T22:55:23.050401,factory/line1/proximity,proximity_sensor_01,proximity,424.25,mm,RUNNING,Sensor Drift Attack,1,simulator,2703
+486,2026-09-05T22:55:24.069373,factory/line1/rpm,rpm_sensor_01,rpm,1453.0,RPM,RUNNING,Sensor Drift Attack,1,simulator,2710
+487,2026-09-05T22:55:24.069383,factory/line1/vibration,vibration_sensor_01,vibration,3.25,g,RUNNING,Sensor Drift Attack,1,simulator,2711
+488,2026-09-05T22:55:24.069398,factory/line1/voltage,voltage_sensor_01,voltage,235.66,V,RUNNING,Sensor Drift Attack,1,simulator,2712
+489,2026-09-05T22:55:24.069417,factory/line1/flow,flow_sensor_01,flow,78.0,L/min,RUNNING,Sensor Drift Attack,1,simulator,2714
+490,2026-09-05T22:55:24.069436,factory/line1/level,level_sensor_01,level,103.0,%,RUNNING,Sensor Drift Attack,1,simulator,2716
+491,2026-09-05T22:55:24.069681,factory/line1/humidity,humidity_sensor_01,humidity,55.03,%,RUNNING,Sensor Drift Attack,1,simulator,2719
+492,2026-09-05T22:55:24.069723,factory/line1/proximity,proximity_sensor_01,proximity,250.07,mm,RUNNING,Sensor Drift Attack,1,simulator,2722
+493,2026-09-05T22:55:25.086381,factory/line1/vibration,vibration_sensor_01,vibration,4.25,g,RUNNING,Sensor Drift Attack,1,simulator,2730
+494,2026-09-05T22:55:25.086395,factory/line1/voltage,voltage_sensor_01,voltage,237.1,V,RUNNING,Sensor Drift Attack,1,simulator,2731
+495,2026-09-05T22:55:25.086416,factory/line1/flow,flow_sensor_01,flow,79.0,L/min,RUNNING,Sensor Drift Attack,1,simulator,2733
+496,2026-09-05T22:55:25.086443,factory/line1/level,level_sensor_01,level,104.0,%,RUNNING,Sensor Drift Attack,1,simulator,2735
+497,2026-09-05T22:55:25.086740,factory/line1/humidity,humidity_sensor_01,humidity,54.09,%,RUNNING,Sensor Drift Attack,1,simulator,2738
+498,2026-09-05T22:55:25.086773,factory/line1/proximity,proximity_sensor_01,proximity,282.63,mm,RUNNING,Sensor Drift Attack,1,simulator,2741
+499,2026-09-05T22:55:26.103386,factory/line1/vibration,vibration_sensor_01,vibration,5.25,g,RUNNING,Sensor Drift Attack,1,simulator,2749
+500,2026-09-05T22:55:26.103657,factory/line1/voltage,voltage_sensor_01,voltage,231.65,V,RUNNING,Sensor Drift Attack,1,simulator,2750
+501,2026-09-05T22:55:26.103704,factory/line1/flow,flow_sensor_01,flow,80.0,L/min,RUNNING,Sensor Drift Attack,1,simulator,2752
+502,2026-09-05T22:55:26.103731,factory/line1/level,level_sensor_01,level,105.0,%,RUNNING,Sensor Drift Attack,1,simulator,2754
+503,2026-09-05T22:55:27.119963,factory/line1/vibration,vibration_sensor_01,vibration,6.25,g,RUNNING,Sensor Drift Attack,1,simulator,2768
+504,2026-09-05T22:55:27.120225,factory/line1/voltage,voltage_sensor_01,voltage,237.95,V,RUNNING,Sensor Drift Attack,1,simulator,2769
+505,2026-09-05T22:55:52.707495,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Sensor Freeze Attack,1,simulator,3246
+506,2026-09-05T22:55:52.707507,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Sensor Freeze Attack,1,simulator,3247
+507,2026-09-05T22:55:52.707519,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Sensor Freeze Attack,1,simulator,3248
+508,2026-09-05T22:55:52.707859,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3249
+509,2026-09-05T22:55:52.707884,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3250
+510,2026-09-05T22:55:52.707909,factory/line1/humidity,humidity_sensor_01,humidity,43.18,%,RUNNING,Sensor Freeze Attack,1,simulator,3251
+511,2026-09-05T22:55:52.707936,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3252
+512,2026-09-05T22:55:52.707953,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Sensor Freeze Attack,1,simulator,3253
+513,2026-09-05T22:55:52.707971,factory/line1/proximity,proximity_sensor_01,proximity,208.38,mm,RUNNING,Sensor Freeze Attack,1,simulator,3254
+514,2026-09-05T22:55:52.707984,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3255
+515,2026-09-05T22:55:52.707997,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3256
+516,2026-09-05T22:55:52.708010,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3257
+517,2026-09-05T22:55:52.708022,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Sensor Freeze Attack,1,simulator,3258
+518,2026-09-05T22:55:53.727987,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3259
+519,2026-09-05T22:55:53.728036,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Sensor Freeze Attack,1,simulator,3260
+520,2026-09-05T22:55:53.728054,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3261
+521,2026-09-05T22:55:53.728071,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3262
+522,2026-09-05T22:55:53.728090,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3263
+523,2026-09-05T22:55:53.728105,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3264
+524,2026-09-05T22:55:53.728118,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Sensor Freeze Attack,1,simulator,3265
+525,2026-09-05T22:55:53.728130,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Sensor Freeze Attack,1,simulator,3266
+526,2026-09-05T22:55:53.728143,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Sensor Freeze Attack,1,simulator,3267
+527,2026-09-05T22:55:53.728370,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3268
+528,2026-09-05T22:55:53.728391,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3269
+529,2026-09-05T22:55:53.728409,factory/line1/humidity,humidity_sensor_01,humidity,43.18,%,RUNNING,Sensor Freeze Attack,1,simulator,3270
+530,2026-09-05T22:55:53.728422,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3271
+531,2026-09-05T22:55:53.728434,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Sensor Freeze Attack,1,simulator,3272
+532,2026-09-05T22:55:53.728447,factory/line1/proximity,proximity_sensor_01,proximity,208.38,mm,RUNNING,Sensor Freeze Attack,1,simulator,3273
+533,2026-09-05T22:55:53.728457,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Sensor Freeze Attack,1,simulator,3274
+534,2026-09-05T22:55:53.728468,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3275
+535,2026-09-05T22:55:54.747104,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Sensor Freeze Attack,1,simulator,3278
+536,2026-09-05T22:55:54.747185,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3280
+537,2026-09-05T22:55:54.747203,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3281
+538,2026-09-05T22:55:54.747222,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3282
+539,2026-09-05T22:55:54.747250,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Sensor Freeze Attack,1,simulator,3284
+540,2026-09-05T22:55:54.747277,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Sensor Freeze Attack,1,simulator,3286
+541,2026-09-05T22:55:54.747529,factory/line1/humidity,humidity_sensor_01,humidity,43.18,%,RUNNING,Sensor Freeze Attack,1,simulator,3289
+542,2026-09-05T22:55:54.747544,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3290
+543,2026-09-05T22:55:54.747604,factory/line1/proximity,proximity_sensor_01,proximity,208.38,mm,RUNNING,Sensor Freeze Attack,1,simulator,3292
+544,2026-09-05T22:55:55.764960,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Sensor Freeze Attack,1,simulator,3299
+545,2026-09-05T22:55:55.764971,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3300
+546,2026-09-05T22:55:55.764986,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3301
+547,2026-09-05T22:55:55.765007,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Sensor Freeze Attack,1,simulator,3303
+548,2026-09-05T22:55:55.765029,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Sensor Freeze Attack,1,simulator,3305
+549,2026-09-05T22:55:55.765433,factory/line1/humidity,humidity_sensor_01,humidity,43.18,%,RUNNING,Sensor Freeze Attack,1,simulator,3308
+550,2026-09-05T22:55:55.765492,factory/line1/proximity,proximity_sensor_01,proximity,208.38,mm,RUNNING,Sensor Freeze Attack,1,simulator,3311
+551,2026-09-05T22:55:56.779878,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3319
+552,2026-09-05T22:55:56.779911,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3320
+553,2026-09-05T22:55:56.779950,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Sensor Freeze Attack,1,simulator,3322
+554,2026-09-05T22:55:56.779984,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Sensor Freeze Attack,1,simulator,3324
+555,2026-09-05T22:55:56.780377,factory/line1/humidity,humidity_sensor_01,humidity,43.18,%,RUNNING,Sensor Freeze Attack,1,simulator,3327
+556,2026-09-05T22:55:56.780428,factory/line1/proximity,proximity_sensor_01,proximity,208.38,mm,RUNNING,Sensor Freeze Attack,1,simulator,3330
+557,2026-09-05T22:55:57.815149,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3338
+558,2026-09-05T22:55:57.815173,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3339
+559,2026-09-05T22:55:58.832918,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Freeze Attack,1,simulator,3357
+560,2026-09-05T22:55:58.832940,factory/line1/voltage,voltage_sensor_01,voltage,239.53,V,RUNNING,Sensor Freeze Attack,1,simulator,3358
+561,2026-09-05T22:56:15.134221,factory/line1/temperature,temperature_sensor_01,temperature,41.97,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3658
+562,2026-09-05T22:56:15.134261,factory/line1/current,current_sensor_01,current,10.51,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3659
+563,2026-09-05T22:56:15.134277,factory/line1/rpm,rpm_sensor_01,rpm,1450.03,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3660
+564,2026-09-05T22:56:15.134290,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3661
+565,2026-09-05T22:56:15.134302,factory/line1/voltage,voltage_sensor_01,voltage,237.55,V,RUNNING,Sensor Noise Injection Attack,1,simulator,3662
+566,2026-09-05T22:56:15.134313,factory/line1/pressure,pressure_sensor_01,pressure,75.02,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3663
+567,2026-09-05T22:56:15.134323,factory/line1/flow,flow_sensor_01,flow,75.02,L/min,RUNNING,Sensor Noise Injection Attack,1,simulator,3664
+568,2026-09-05T22:56:15.134332,factory/line1/current,current_sensor_01,current,10.01,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3665
+569,2026-09-05T22:56:15.134354,factory/line1/level,level_sensor_01,level,99.97,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3666
+570,2026-09-05T22:56:15.134573,factory/line1/temperature,temperature_sensor_01,temperature,24.96,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3667
+571,2026-09-05T22:56:15.134597,factory/line1/pressure,pressure_sensor_01,pressure,101.25,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3668
+572,2026-09-05T22:56:15.134615,factory/line1/humidity,humidity_sensor_01,humidity,41.89,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3669
+573,2026-09-05T22:56:15.134627,factory/line1/rpm,rpm_sensor_01,rpm,1450.01,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3670
+574,2026-09-05T22:56:15.134638,factory/line1/current,current_sensor_01,current,9.49,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3671
+575,2026-09-05T22:56:15.134651,factory/line1/proximity,proximity_sensor_01,proximity,99.51,mm,RUNNING,Sensor Noise Injection Attack,1,simulator,3672
+576,2026-09-05T22:56:15.134661,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3673
+577,2026-09-05T22:56:15.134671,factory/line1/temperature,temperature_sensor_01,temperature,45.03,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3674
+578,2026-09-05T22:56:15.134680,factory/line1/pressure,pressure_sensor_01,pressure,169.94,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3675
+579,2026-09-05T22:56:15.134688,factory/line1/current,current_sensor_01,current,12.01,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3676
+580,2026-09-05T22:56:16.157478,factory/line1/temperature,temperature_sensor_01,temperature,42.02,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3677
+581,2026-09-05T22:56:16.157534,factory/line1/current,current_sensor_01,current,10.49,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3678
+582,2026-09-05T22:56:16.157554,factory/line1/rpm,rpm_sensor_01,rpm,1450.2,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3679
+583,2026-09-05T22:56:16.157570,factory/line1/vibration,vibration_sensor_01,vibration,0.26,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3680
+584,2026-09-05T22:56:16.157585,factory/line1/voltage,voltage_sensor_01,voltage,221.84,V,RUNNING,Sensor Noise Injection Attack,1,simulator,3681
+585,2026-09-05T22:56:16.157600,factory/line1/pressure,pressure_sensor_01,pressure,75.03,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3682
+586,2026-09-05T22:56:16.157617,factory/line1/flow,flow_sensor_01,flow,75.08,L/min,RUNNING,Sensor Noise Injection Attack,1,simulator,3683
+587,2026-09-05T22:56:16.157633,factory/line1/current,current_sensor_01,current,9.97,A,RUNNING,Sensor Noise Injection Attack,1,simulator,3684
+588,2026-09-05T22:56:16.157651,factory/line1/level,level_sensor_01,level,100.01,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3685
+589,2026-09-05T22:56:16.157903,factory/line1/temperature,temperature_sensor_01,temperature,24.94,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3686
+590,2026-09-05T22:56:16.157925,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Sensor Noise Injection Attack,1,simulator,3687
+591,2026-09-05T22:56:16.157948,factory/line1/humidity,humidity_sensor_01,humidity,63.48,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3688
+592,2026-09-05T22:56:16.157965,factory/line1/rpm,rpm_sensor_01,rpm,1450.3,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3689
+593,2026-09-05T22:56:16.158001,factory/line1/proximity,proximity_sensor_01,proximity,385.35,mm,RUNNING,Sensor Noise Injection Attack,1,simulator,3691
+594,2026-09-05T22:56:16.158029,factory/line1/temperature,temperature_sensor_01,temperature,44.98,°C,RUNNING,Sensor Noise Injection Attack,1,simulator,3693
+595,2026-09-05T22:56:17.175676,factory/line1/rpm,rpm_sensor_01,rpm,1450.43,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3698
+596,2026-09-05T22:56:17.175688,factory/line1/vibration,vibration_sensor_01,vibration,0.24,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3699
+597,2026-09-05T22:56:17.175700,factory/line1/voltage,voltage_sensor_01,voltage,223.29,V,RUNNING,Sensor Noise Injection Attack,1,simulator,3700
+598,2026-09-05T22:56:17.175720,factory/line1/flow,flow_sensor_01,flow,74.94,L/min,RUNNING,Sensor Noise Injection Attack,1,simulator,3702
+599,2026-09-05T22:56:17.175739,factory/line1/level,level_sensor_01,level,100.09,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3704
+600,2026-09-05T22:56:17.176094,factory/line1/humidity,humidity_sensor_01,humidity,59.42,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3707
+601,2026-09-05T22:56:17.176106,factory/line1/rpm,rpm_sensor_01,rpm,1450.07,RPM,RUNNING,Sensor Noise Injection Attack,1,simulator,3708
+602,2026-09-05T22:56:17.176127,factory/line1/proximity,proximity_sensor_01,proximity,266.04,mm,RUNNING,Sensor Noise Injection Attack,1,simulator,3710
+603,2026-09-05T22:56:18.192817,factory/line1/vibration,vibration_sensor_01,vibration,0.27,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3718
+604,2026-09-05T22:56:18.192828,factory/line1/voltage,voltage_sensor_01,voltage,220.81,V,RUNNING,Sensor Noise Injection Attack,1,simulator,3719
+605,2026-09-05T22:56:18.192859,factory/line1/flow,flow_sensor_01,flow,74.89,L/min,RUNNING,Sensor Noise Injection Attack,1,simulator,3721
+606,2026-09-05T22:56:18.192876,factory/line1/level,level_sensor_01,level,100.1,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3723
+607,2026-09-05T22:56:18.193172,factory/line1/humidity,humidity_sensor_01,humidity,49.38,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3726
+608,2026-09-05T22:56:18.193224,factory/line1/proximity,proximity_sensor_01,proximity,212.24,mm,RUNNING,Sensor Noise Injection Attack,1,simulator,3729
+609,2026-09-05T22:56:19.209722,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3737
+610,2026-09-05T22:56:19.209742,factory/line1/voltage,voltage_sensor_01,voltage,227.4,V,RUNNING,Sensor Noise Injection Attack,1,simulator,3738
+611,2026-09-05T22:56:19.209795,factory/line1/flow,flow_sensor_01,flow,75.13,L/min,RUNNING,Sensor Noise Injection Attack,1,simulator,3740
+612,2026-09-05T22:56:19.209827,factory/line1/level,level_sensor_01,level,99.91,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3742
+613,2026-09-05T22:56:19.210122,factory/line1/humidity,humidity_sensor_01,humidity,63.59,%,RUNNING,Sensor Noise Injection Attack,1,simulator,3745
+614,2026-09-05T22:56:19.210177,factory/line1/proximity,proximity_sensor_01,proximity,20.39,mm,RUNNING,Sensor Noise Injection Attack,1,simulator,3748
+615,2026-09-05T22:56:20.226941,factory/line1/vibration,vibration_sensor_01,vibration,0.24,g,RUNNING,Sensor Noise Injection Attack,1,simulator,3756
+616,2026-09-05T22:56:35.546349,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,PLC Command Injection,1,simulator,4038
+617,2026-09-05T22:56:35.546404,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,PLC Command Injection,1,simulator,4039
+618,2026-09-05T22:56:35.546430,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4040
+619,2026-09-05T22:56:35.546446,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4041
+620,2026-09-05T22:56:35.546464,factory/line1/voltage,voltage_sensor_01,voltage,225.18,V,RUNNING,PLC Command Injection,1,simulator,4042
+621,2026-09-05T22:56:35.546476,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,PLC Command Injection,1,simulator,4043
+622,2026-09-05T22:56:35.546488,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,PLC Command Injection,1,simulator,4044
+623,2026-09-05T22:56:35.546497,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,PLC Command Injection,1,simulator,4045
+624,2026-09-05T22:56:35.546509,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,PLC Command Injection,1,simulator,4046
+625,2026-09-05T22:56:35.546715,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,PLC Command Injection,1,simulator,4047
+626,2026-09-05T22:56:35.546734,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,PLC Command Injection,1,simulator,4048
+627,2026-09-05T22:56:35.546749,factory/line1/humidity,humidity_sensor_01,humidity,59.25,%,RUNNING,PLC Command Injection,1,simulator,4049
+628,2026-09-05T22:56:35.546760,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4050
+629,2026-09-05T22:56:35.546773,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,PLC Command Injection,1,simulator,4051
+630,2026-09-05T22:56:35.546816,factory/line1/proximity,proximity_sensor_01,proximity,144.52,mm,RUNNING,PLC Command Injection,1,simulator,4052
+631,2026-09-05T22:56:35.546836,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,PLC Command Injection,1,simulator,4053
+632,2026-09-05T22:56:35.546853,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,PLC Command Injection,1,simulator,4054
+633,2026-09-05T22:56:35.546894,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,PLC Command Injection,1,simulator,4055
+634,2026-09-05T22:56:35.546912,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,PLC Command Injection,1,simulator,4056
+635,2026-09-05T22:56:36.568408,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,PLC Command Injection,1,simulator,4057
+636,2026-09-05T22:56:36.568455,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,PLC Command Injection,1,simulator,4058
+637,2026-09-05T22:56:36.568477,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4059
+638,2026-09-05T22:56:36.568494,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4060
+639,2026-09-05T22:56:36.568516,factory/line1/voltage,voltage_sensor_01,voltage,227.25,V,RUNNING,PLC Command Injection,1,simulator,4061
+640,2026-09-05T22:56:36.568531,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,PLC Command Injection,1,simulator,4062
+641,2026-09-05T22:56:36.568546,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,PLC Command Injection,1,simulator,4063
+642,2026-09-05T22:56:36.568560,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,PLC Command Injection,1,simulator,4064
+643,2026-09-05T22:56:36.568575,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,PLC Command Injection,1,simulator,4065
+644,2026-09-05T22:56:36.569035,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,PLC Command Injection,1,simulator,4066
+645,2026-09-05T22:56:36.569076,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,PLC Command Injection,1,simulator,4067
+646,2026-09-05T22:56:36.569100,factory/line1/humidity,humidity_sensor_01,humidity,45.69,%,RUNNING,PLC Command Injection,1,simulator,4068
+647,2026-09-05T22:56:36.569115,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4069
+648,2026-09-05T22:56:36.569147,factory/line1/proximity,proximity_sensor_01,proximity,231.91,mm,RUNNING,PLC Command Injection,1,simulator,4071
+649,2026-09-05T22:56:36.569174,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,PLC Command Injection,1,simulator,4073
+650,2026-09-05T22:56:37.589345,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4078
+651,2026-09-05T22:56:37.589361,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4079
+652,2026-09-05T22:56:37.589381,factory/line1/voltage,voltage_sensor_01,voltage,226.14,V,RUNNING,PLC Command Injection,1,simulator,4080
+653,2026-09-05T22:56:37.589412,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,PLC Command Injection,1,simulator,4082
+654,2026-09-05T22:56:37.589440,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,PLC Command Injection,1,simulator,4084
+655,2026-09-05T22:56:37.589842,factory/line1/humidity,humidity_sensor_01,humidity,65.84,%,RUNNING,PLC Command Injection,1,simulator,4087
+656,2026-09-05T22:56:37.589857,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,PLC Command Injection,1,simulator,4088
+657,2026-09-05T22:56:37.589883,factory/line1/proximity,proximity_sensor_01,proximity,333.8,mm,RUNNING,PLC Command Injection,1,simulator,4090
+658,2026-09-05T22:56:38.616750,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4098
+659,2026-09-05T22:56:38.616776,factory/line1/voltage,voltage_sensor_01,voltage,234.93,V,RUNNING,PLC Command Injection,1,simulator,4099
+660,2026-09-05T22:56:38.616815,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,PLC Command Injection,1,simulator,4101
+661,2026-09-05T22:56:38.616854,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,PLC Command Injection,1,simulator,4103
+662,2026-09-05T22:56:38.617198,factory/line1/humidity,humidity_sensor_01,humidity,43.52,%,RUNNING,PLC Command Injection,1,simulator,4106
+663,2026-09-05T22:56:38.617232,factory/line1/proximity,proximity_sensor_01,proximity,353.76,mm,RUNNING,PLC Command Injection,1,simulator,4109
+664,2026-09-05T22:56:39.631561,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4117
+665,2026-09-05T22:56:39.631580,factory/line1/voltage,voltage_sensor_01,voltage,228.24,V,RUNNING,PLC Command Injection,1,simulator,4118
+666,2026-09-05T22:56:39.631607,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,PLC Command Injection,1,simulator,4120
+667,2026-09-05T22:56:39.631632,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,PLC Command Injection,1,simulator,4122
+668,2026-09-05T22:56:39.631904,factory/line1/humidity,humidity_sensor_01,humidity,56.39,%,RUNNING,PLC Command Injection,1,simulator,4125
+669,2026-09-05T22:56:39.631950,factory/line1/proximity,proximity_sensor_01,proximity,334.78,mm,RUNNING,PLC Command Injection,1,simulator,4128
+670,2026-09-05T22:56:40.646860,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,PLC Command Injection,1,simulator,4136
+671,2026-09-05T22:56:56.850736,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4437
+672,2026-09-05T22:56:56.850771,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Unauthorized Command Attack,1,simulator,4438
+673,2026-09-05T22:56:56.850785,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4439
+674,2026-09-05T22:56:56.850800,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4440
+675,2026-09-05T22:56:56.850812,factory/line1/voltage,voltage_sensor_01,voltage,221.24,V,RUNNING,Unauthorized Command Attack,1,simulator,4441
+676,2026-09-05T22:56:56.850824,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4442
+677,2026-09-05T22:56:56.850831,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Unauthorized Command Attack,1,simulator,4443
+678,2026-09-05T22:56:56.850836,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Unauthorized Command Attack,1,simulator,4444
+679,2026-09-05T22:56:56.850847,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Unauthorized Command Attack,1,simulator,4445
+680,2026-09-05T22:56:56.851018,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4446
+681,2026-09-05T22:56:56.851045,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4447
+682,2026-09-05T22:56:56.851069,factory/line1/humidity,humidity_sensor_01,humidity,67.24,%,RUNNING,Unauthorized Command Attack,1,simulator,4448
+683,2026-09-05T22:56:56.851080,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4449
+684,2026-09-05T22:56:56.851088,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Unauthorized Command Attack,1,simulator,4450
+685,2026-09-05T22:56:56.851097,factory/line1/proximity,proximity_sensor_01,proximity,113.94,mm,RUNNING,Unauthorized Command Attack,1,simulator,4451
+686,2026-09-05T22:56:56.851105,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4452
+687,2026-09-05T22:56:56.851113,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4453
+688,2026-09-05T22:56:56.851121,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4454
+689,2026-09-05T22:56:56.851128,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Unauthorized Command Attack,1,simulator,4455
+690,2026-09-05T22:56:57.861020,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4456
+691,2026-09-05T22:56:57.861082,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Unauthorized Command Attack,1,simulator,4457
+692,2026-09-05T22:56:57.861118,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4458
+693,2026-09-05T22:56:57.861151,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4459
+694,2026-09-05T22:56:57.861182,factory/line1/voltage,voltage_sensor_01,voltage,235.07,V,RUNNING,Unauthorized Command Attack,1,simulator,4460
+695,2026-09-05T22:56:57.861216,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4461
+696,2026-09-05T22:56:57.861244,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Unauthorized Command Attack,1,simulator,4462
+697,2026-09-05T22:56:57.861273,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Unauthorized Command Attack,1,simulator,4463
+698,2026-09-05T22:56:57.861301,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Unauthorized Command Attack,1,simulator,4464
+699,2026-09-05T22:56:57.861744,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4465
+700,2026-09-05T22:56:57.861806,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Unauthorized Command Attack,1,simulator,4466
+701,2026-09-05T22:56:57.861854,factory/line1/humidity,humidity_sensor_01,humidity,62.01,%,RUNNING,Unauthorized Command Attack,1,simulator,4467
+702,2026-09-05T22:56:57.861889,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4468
+703,2026-09-05T22:56:57.861943,factory/line1/proximity,proximity_sensor_01,proximity,208.59,mm,RUNNING,Unauthorized Command Attack,1,simulator,4470
+704,2026-09-05T22:56:57.861992,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Unauthorized Command Attack,1,simulator,4472
+705,2026-09-05T22:56:58.874700,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4477
+706,2026-09-05T22:56:58.874732,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4478
+707,2026-09-05T22:56:58.874766,factory/line1/voltage,voltage_sensor_01,voltage,222.56,V,RUNNING,Unauthorized Command Attack,1,simulator,4479
+708,2026-09-05T22:56:58.874826,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Unauthorized Command Attack,1,simulator,4481
+709,2026-09-05T22:56:58.874877,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Unauthorized Command Attack,1,simulator,4483
+710,2026-09-05T22:56:58.875353,factory/line1/humidity,humidity_sensor_01,humidity,58.14,%,RUNNING,Unauthorized Command Attack,1,simulator,4486
+711,2026-09-05T22:56:58.875379,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Unauthorized Command Attack,1,simulator,4487
+712,2026-09-05T22:56:58.875420,factory/line1/proximity,proximity_sensor_01,proximity,131.87,mm,RUNNING,Unauthorized Command Attack,1,simulator,4489
+713,2026-09-05T22:56:59.887560,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4497
+714,2026-09-05T22:56:59.887579,factory/line1/voltage,voltage_sensor_01,voltage,226.42,V,RUNNING,Unauthorized Command Attack,1,simulator,4498
+715,2026-09-05T22:56:59.887613,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Unauthorized Command Attack,1,simulator,4500
+716,2026-09-05T22:56:59.887644,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Unauthorized Command Attack,1,simulator,4502
+717,2026-09-05T22:56:59.888213,factory/line1/humidity,humidity_sensor_01,humidity,58.47,%,RUNNING,Unauthorized Command Attack,1,simulator,4505
+718,2026-09-05T22:56:59.888296,factory/line1/proximity,proximity_sensor_01,proximity,221.45,mm,RUNNING,Unauthorized Command Attack,1,simulator,4508
+719,2026-09-05T22:57:00.900157,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4516
+720,2026-09-05T22:57:00.900168,factory/line1/voltage,voltage_sensor_01,voltage,233.76,V,RUNNING,Unauthorized Command Attack,1,simulator,4517
+721,2026-09-05T22:57:00.900186,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Unauthorized Command Attack,1,simulator,4519
+722,2026-09-05T22:57:00.900202,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Unauthorized Command Attack,1,simulator,4521
+723,2026-09-05T22:57:00.900369,factory/line1/humidity,humidity_sensor_01,humidity,65.42,%,RUNNING,Unauthorized Command Attack,1,simulator,4524
+724,2026-09-05T22:57:00.900395,factory/line1/proximity,proximity_sensor_01,proximity,234.7,mm,RUNNING,Unauthorized Command Attack,1,simulator,4527
+725,2026-09-05T22:57:01.923264,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Unauthorized Command Attack,1,simulator,4535
+726,2026-09-05T22:57:18.175392,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4836
+727,2026-09-05T22:57:18.175421,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4837
+728,2026-09-05T22:57:18.175433,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4838
+729,2026-09-05T22:57:18.175443,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4839
+730,2026-09-05T22:57:18.175493,factory/line1/voltage,voltage_sensor_01,voltage,233.29,V,RUNNING,Setpoint Manipulation Attack,1,simulator,4840
+731,2026-09-05T22:57:18.175511,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4841
+732,2026-09-05T22:57:18.175523,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Setpoint Manipulation Attack,1,simulator,4842
+733,2026-09-05T22:57:18.175535,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4843
+734,2026-09-05T22:57:18.175549,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4844
+735,2026-09-05T22:57:18.175751,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4845
+736,2026-09-05T22:57:18.175767,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4846
+737,2026-09-05T22:57:18.175781,factory/line1/humidity,humidity_sensor_01,humidity,59.44,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4847
+738,2026-09-05T22:57:18.175792,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4848
+739,2026-09-05T22:57:18.175801,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4849
+740,2026-09-05T22:57:18.175831,factory/line1/proximity,proximity_sensor_01,proximity,259.55,mm,RUNNING,Setpoint Manipulation Attack,1,simulator,4850
+741,2026-09-05T22:57:18.175856,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4851
+742,2026-09-05T22:57:18.175902,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4852
+743,2026-09-05T22:57:18.175922,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4853
+744,2026-09-05T22:57:18.175940,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4854
+745,2026-09-05T22:57:19.191752,factory/line1/temperature,temperature_sensor_01,temperature,42.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4855
+746,2026-09-05T22:57:19.191816,factory/line1/current,current_sensor_01,current,10.5,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4856
+747,2026-09-05T22:57:19.191840,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4857
+748,2026-09-05T22:57:19.191861,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4858
+749,2026-09-05T22:57:19.191883,factory/line1/voltage,voltage_sensor_01,voltage,234.68,V,RUNNING,Setpoint Manipulation Attack,1,simulator,4859
+750,2026-09-05T22:57:19.191901,factory/line1/pressure,pressure_sensor_01,pressure,75.0,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4860
+751,2026-09-05T22:57:19.191919,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Setpoint Manipulation Attack,1,simulator,4861
+752,2026-09-05T22:57:19.191935,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Setpoint Manipulation Attack,1,simulator,4862
+753,2026-09-05T22:57:19.191951,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4863
+754,2026-09-05T22:57:19.192281,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4864
+755,2026-09-05T22:57:19.192315,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Setpoint Manipulation Attack,1,simulator,4865
+756,2026-09-05T22:57:19.192342,factory/line1/humidity,humidity_sensor_01,humidity,46.39,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4866
+757,2026-09-05T22:57:19.192375,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4867
+758,2026-09-05T22:57:19.192434,factory/line1/proximity,proximity_sensor_01,proximity,185.17,mm,RUNNING,Setpoint Manipulation Attack,1,simulator,4869
+759,2026-09-05T22:57:19.192492,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Setpoint Manipulation Attack,1,simulator,4871
+760,2026-09-05T22:57:20.204288,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4876
+761,2026-09-05T22:57:20.204300,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4877
+762,2026-09-05T22:57:20.204314,factory/line1/voltage,voltage_sensor_01,voltage,224.61,V,RUNNING,Setpoint Manipulation Attack,1,simulator,4878
+763,2026-09-05T22:57:20.204337,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Setpoint Manipulation Attack,1,simulator,4880
+764,2026-09-05T22:57:20.204359,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4882
+765,2026-09-05T22:57:20.204553,factory/line1/humidity,humidity_sensor_01,humidity,67.33,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4885
+766,2026-09-05T22:57:20.204568,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Setpoint Manipulation Attack,1,simulator,4886
+767,2026-09-05T22:57:20.204596,factory/line1/proximity,proximity_sensor_01,proximity,49.2,mm,RUNNING,Setpoint Manipulation Attack,1,simulator,4888
+768,2026-09-05T22:57:21.230782,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4896
+769,2026-09-05T22:57:21.230803,factory/line1/voltage,voltage_sensor_01,voltage,234.62,V,RUNNING,Setpoint Manipulation Attack,1,simulator,4897
+770,2026-09-05T22:57:21.230836,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Setpoint Manipulation Attack,1,simulator,4899
+771,2026-09-05T22:57:21.230866,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4901
+772,2026-09-05T22:57:21.231359,factory/line1/humidity,humidity_sensor_01,humidity,48.03,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4904
+773,2026-09-05T22:57:21.231459,factory/line1/proximity,proximity_sensor_01,proximity,116.35,mm,RUNNING,Setpoint Manipulation Attack,1,simulator,4907
+774,2026-09-05T22:57:22.243238,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4914
+775,2026-09-05T22:57:22.243260,factory/line1/voltage,voltage_sensor_01,voltage,232.37,V,RUNNING,Setpoint Manipulation Attack,1,simulator,4916
+776,2026-09-05T22:57:22.243307,factory/line1/flow,flow_sensor_01,flow,75.0,L/min,RUNNING,Setpoint Manipulation Attack,1,simulator,4918
+777,2026-09-05T22:57:22.243353,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4920
+778,2026-09-05T22:57:22.243746,factory/line1/humidity,humidity_sensor_01,humidity,63.37,%,RUNNING,Setpoint Manipulation Attack,1,simulator,4923
+779,2026-09-05T22:57:22.243802,factory/line1/proximity,proximity_sensor_01,proximity,25.57,mm,RUNNING,Setpoint Manipulation Attack,1,simulator,4926
+780,2026-09-05T22:57:23.287062,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Setpoint Manipulation Attack,1,simulator,4934
+781,2026-09-05T22:57:48.697236,factory/line1/temperature,temperature_sensor_01,temperature,42.8,°C,RUNNING,Motor Overload Attack,1,simulator,5406
+782,2026-09-05T22:57:48.697266,factory/line1/current,current_sensor_01,current,12.5,A,RUNNING,Motor Overload Attack,1,simulator,5407
+783,2026-09-05T22:57:48.697276,factory/line1/rpm,rpm_sensor_01,rpm,1500.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5408
+784,2026-09-05T22:57:48.697284,factory/line1/vibration,vibration_sensor_01,vibration,0.3,g,RUNNING,Motor Overload Attack,1,simulator,5409
+785,2026-09-05T22:57:48.697293,factory/line1/voltage,voltage_sensor_01,voltage,229.51,V,RUNNING,Motor Overload Attack,1,simulator,5410
+786,2026-09-05T22:57:48.697300,factory/line1/pressure,pressure_sensor_01,pressure,74.94,kPa,RUNNING,Motor Overload Attack,1,simulator,5411
+787,2026-09-05T22:57:48.697314,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Motor Overload Attack,1,simulator,5412
+788,2026-09-05T22:57:48.697308,factory/line1/flow,flow_sensor_01,flow,74.94,L/min,RUNNING,Motor Overload Attack,1,simulator,5413
+789,2026-09-05T22:57:48.697320,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Motor Overload Attack,1,simulator,5414
+790,2026-09-05T22:57:48.697439,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Motor Overload Attack,1,simulator,5415
+791,2026-09-05T22:57:48.697452,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Motor Overload Attack,1,simulator,5416
+792,2026-09-05T22:57:48.697465,factory/line1/humidity,humidity_sensor_01,humidity,40.01,%,RUNNING,Motor Overload Attack,1,simulator,5417
+793,2026-09-05T22:57:48.697476,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5418
+794,2026-09-05T22:57:48.697486,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Motor Overload Attack,1,simulator,5419
+795,2026-09-05T22:57:48.697497,factory/line1/proximity,proximity_sensor_01,proximity,462.77,mm,RUNNING,Motor Overload Attack,1,simulator,5420
+796,2026-09-05T22:57:48.697507,factory/line1/pressure,pressure_sensor_01,pressure,140.0,kPa,RUNNING,Motor Overload Attack,1,simulator,5421
+797,2026-09-05T22:57:48.697516,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Motor Overload Attack,1,simulator,5422
+798,2026-09-05T22:57:48.697523,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Motor Overload Attack,1,simulator,5423
+799,2026-09-05T22:57:48.697531,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Motor Overload Attack,1,simulator,5424
+800,2026-09-05T22:57:49.710458,factory/line1/temperature,temperature_sensor_01,temperature,43.4,°C,RUNNING,Motor Overload Attack,1,simulator,5425
+801,2026-09-05T22:57:49.710502,factory/line1/current,current_sensor_01,current,14.0,A,RUNNING,Motor Overload Attack,1,simulator,5426
+802,2026-09-05T22:57:49.710518,factory/line1/rpm,rpm_sensor_01,rpm,1500.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5427
+803,2026-09-05T22:57:49.710530,factory/line1/vibration,vibration_sensor_01,vibration,0.33,g,RUNNING,Motor Overload Attack,1,simulator,5428
+804,2026-09-05T22:57:49.710546,factory/line1/voltage,voltage_sensor_01,voltage,238.33,V,RUNNING,Motor Overload Attack,1,simulator,5429
+805,2026-09-05T22:57:49.710557,factory/line1/pressure,pressure_sensor_01,pressure,74.89,kPa,RUNNING,Motor Overload Attack,1,simulator,5430
+806,2026-09-05T22:57:49.710568,factory/line1/flow,flow_sensor_01,flow,74.89,L/min,RUNNING,Motor Overload Attack,1,simulator,5431
+807,2026-09-05T22:57:49.710577,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Motor Overload Attack,1,simulator,5432
+808,2026-09-05T22:57:49.710589,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Motor Overload Attack,1,simulator,5433
+809,2026-09-05T22:57:49.710797,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Motor Overload Attack,1,simulator,5434
+810,2026-09-05T22:57:49.710815,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Motor Overload Attack,1,simulator,5435
+811,2026-09-05T22:57:49.710832,factory/line1/humidity,humidity_sensor_01,humidity,68.83,%,RUNNING,Motor Overload Attack,1,simulator,5436
+812,2026-09-05T22:57:49.710850,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5437
+813,2026-09-05T22:57:49.710904,factory/line1/proximity,proximity_sensor_01,proximity,418.33,mm,RUNNING,Motor Overload Attack,1,simulator,5439
+814,2026-09-05T22:57:49.710934,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Motor Overload Attack,1,simulator,5441
+815,2026-09-05T22:57:50.728246,factory/line1/rpm,rpm_sensor_01,rpm,1500.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5446
+816,2026-09-05T22:57:50.728265,factory/line1/vibration,vibration_sensor_01,vibration,0.36,g,RUNNING,Motor Overload Attack,1,simulator,5447
+817,2026-09-05T22:57:50.728287,factory/line1/voltage,voltage_sensor_01,voltage,235.85,V,RUNNING,Motor Overload Attack,1,simulator,5448
+818,2026-09-05T22:57:50.728322,factory/line1/flow,flow_sensor_01,flow,74.83,L/min,RUNNING,Motor Overload Attack,1,simulator,5450
+819,2026-09-05T22:57:50.728354,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Motor Overload Attack,1,simulator,5452
+820,2026-09-05T22:57:50.728907,factory/line1/humidity,humidity_sensor_01,humidity,41.52,%,RUNNING,Motor Overload Attack,1,simulator,5455
+821,2026-09-05T22:57:50.728936,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Motor Overload Attack,1,simulator,5456
+822,2026-09-05T22:57:50.728984,factory/line1/proximity,proximity_sensor_01,proximity,458.1,mm,RUNNING,Motor Overload Attack,1,simulator,5458
+823,2026-09-05T22:57:51.744838,factory/line1/vibration,vibration_sensor_01,vibration,0.39,g,RUNNING,Motor Overload Attack,1,simulator,5466
+824,2026-09-05T22:57:51.744861,factory/line1/voltage,voltage_sensor_01,voltage,227.63,V,RUNNING,Motor Overload Attack,1,simulator,5467
+825,2026-09-05T22:57:51.744904,factory/line1/flow,flow_sensor_01,flow,74.77,L/min,RUNNING,Motor Overload Attack,1,simulator,5469
+826,2026-09-05T22:57:51.744936,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Motor Overload Attack,1,simulator,5471
+827,2026-09-05T22:57:51.745307,factory/line1/humidity,humidity_sensor_01,humidity,60.13,%,RUNNING,Motor Overload Attack,1,simulator,5474
+828,2026-09-05T22:57:51.745354,factory/line1/proximity,proximity_sensor_01,proximity,378.48,mm,RUNNING,Motor Overload Attack,1,simulator,5477
+829,2026-09-05T22:57:52.775484,factory/line1/vibration,vibration_sensor_01,vibration,0.42,g,RUNNING,Motor Overload Attack,1,simulator,5485
+830,2026-09-05T22:57:52.775497,factory/line1/voltage,voltage_sensor_01,voltage,223.23,V,RUNNING,Motor Overload Attack,1,simulator,5486
+831,2026-09-05T22:57:52.775520,factory/line1/flow,flow_sensor_01,flow,74.72,L/min,RUNNING,Motor Overload Attack,1,simulator,5488
+832,2026-09-05T22:57:52.775555,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Motor Overload Attack,1,simulator,5490
+833,2026-09-05T22:57:52.775771,factory/line1/humidity,humidity_sensor_01,humidity,44.35,%,RUNNING,Motor Overload Attack,1,simulator,5493
+834,2026-09-05T22:57:52.775794,factory/line1/proximity,proximity_sensor_01,proximity,105.38,mm,RUNNING,Motor Overload Attack,1,simulator,5496
+835,2026-09-05T22:57:53.792478,factory/line1/vibration,vibration_sensor_01,vibration,0.45,g,RUNNING,Motor Overload Attack,1,simulator,5504
+836,2026-09-05T22:58:20.337526,factory/line1/temperature,temperature_sensor_01,temperature,58.25,°C,RUNNING,Valve Stuck Attack,1,simulator,5995
+837,2026-09-05T22:58:20.337582,factory/line1/current,current_sensor_01,current,31.5,A,RUNNING,Valve Stuck Attack,1,simulator,5996
+838,2026-09-05T22:58:20.337897,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,5997
+839,2026-09-05T22:58:20.337971,factory/line1/vibration,vibration_sensor_01,vibration,1.02,g,RUNNING,Valve Stuck Attack,1,simulator,5998
+840,2026-09-05T22:58:20.338015,factory/line1/voltage,voltage_sensor_01,voltage,220.43,V,RUNNING,Valve Stuck Attack,1,simulator,5999
+841,2026-09-05T22:58:20.338050,factory/line1/pressure,pressure_sensor_01,pressure,73.37,kPa,RUNNING,Valve Stuck Attack,1,simulator,6000
+842,2026-09-05T22:58:20.338070,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Valve Stuck Attack,1,simulator,6001
+843,2026-09-05T22:58:20.338089,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Valve Stuck Attack,1,simulator,6002
+844,2026-09-05T22:58:20.338117,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Valve Stuck Attack,1,simulator,6003
+845,2026-09-05T22:58:20.338353,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Valve Stuck Attack,1,simulator,6004
+846,2026-09-05T22:58:20.338385,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Valve Stuck Attack,1,simulator,6005
+847,2026-09-05T22:58:20.338410,factory/line1/humidity,humidity_sensor_01,humidity,48.51,%,RUNNING,Valve Stuck Attack,1,simulator,6006
+848,2026-09-05T22:58:20.338427,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,6007
+849,2026-09-05T22:58:20.338441,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Valve Stuck Attack,1,simulator,6008
+850,2026-09-05T22:58:20.338457,factory/line1/proximity,proximity_sensor_01,proximity,205.17,mm,RUNNING,Valve Stuck Attack,1,simulator,6009
+851,2026-09-05T22:58:20.338472,factory/line1/pressure,pressure_sensor_01,pressure,155.0,kPa,RUNNING,Valve Stuck Attack,1,simulator,6010
+852,2026-09-05T22:58:20.338488,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Valve Stuck Attack,1,simulator,6011
+853,2026-09-05T22:58:20.338503,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Valve Stuck Attack,1,simulator,6012
+854,2026-09-05T22:58:20.338520,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Valve Stuck Attack,1,simulator,6013
+855,2026-09-05T22:58:21.357195,factory/line1/temperature,temperature_sensor_01,temperature,57.8,°C,RUNNING,Valve Stuck Attack,1,simulator,6014
+856,2026-09-05T22:58:21.357234,factory/line1/current,current_sensor_01,current,31.0,A,RUNNING,Valve Stuck Attack,1,simulator,6015
+857,2026-09-05T22:58:21.357439,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,6016
+858,2026-09-05T22:58:21.357459,factory/line1/vibration,vibration_sensor_01,vibration,0.98,g,RUNNING,Valve Stuck Attack,1,simulator,6017
+859,2026-09-05T22:58:21.357483,factory/line1/voltage,voltage_sensor_01,voltage,230.76,V,RUNNING,Valve Stuck Attack,1,simulator,6018
+860,2026-09-05T22:58:21.357504,factory/line1/pressure,pressure_sensor_01,pressure,73.37,kPa,RUNNING,Valve Stuck Attack,1,simulator,6019
+861,2026-09-05T22:58:21.357516,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Valve Stuck Attack,1,simulator,6020
+862,2026-09-05T22:58:21.357526,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Valve Stuck Attack,1,simulator,6021
+863,2026-09-05T22:58:21.357539,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Valve Stuck Attack,1,simulator,6022
+864,2026-09-05T22:58:21.357660,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Valve Stuck Attack,1,simulator,6023
+865,2026-09-05T22:58:21.357677,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Valve Stuck Attack,1,simulator,6024
+866,2026-09-05T22:58:21.357700,factory/line1/humidity,humidity_sensor_01,humidity,54.51,%,RUNNING,Valve Stuck Attack,1,simulator,6025
+867,2026-09-05T22:58:21.357710,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,6026
+868,2026-09-05T22:58:21.357729,factory/line1/proximity,proximity_sensor_01,proximity,15.33,mm,RUNNING,Valve Stuck Attack,1,simulator,6028
+869,2026-09-05T22:58:21.357902,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Valve Stuck Attack,1,simulator,6030
+870,2026-09-05T22:58:22.372277,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,6035
+871,2026-09-05T22:58:22.372372,factory/line1/vibration,vibration_sensor_01,vibration,0.94,g,RUNNING,Valve Stuck Attack,1,simulator,6036
+872,2026-09-05T22:58:22.372405,factory/line1/voltage,voltage_sensor_01,voltage,222.08,V,RUNNING,Valve Stuck Attack,1,simulator,6037
+873,2026-09-05T22:58:22.372438,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Valve Stuck Attack,1,simulator,6039
+874,2026-09-05T22:58:22.372461,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Valve Stuck Attack,1,simulator,6041
+875,2026-09-05T22:58:22.372769,factory/line1/humidity,humidity_sensor_01,humidity,63.31,%,RUNNING,Valve Stuck Attack,1,simulator,6044
+876,2026-09-05T22:58:22.372780,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Valve Stuck Attack,1,simulator,6045
+877,2026-09-05T22:58:22.372800,factory/line1/proximity,proximity_sensor_01,proximity,73.01,mm,RUNNING,Valve Stuck Attack,1,simulator,6047
+878,2026-09-05T22:58:23.407645,factory/line1/vibration,vibration_sensor_01,vibration,0.9,g,RUNNING,Valve Stuck Attack,1,simulator,6055
+879,2026-09-05T22:58:23.407664,factory/line1/voltage,voltage_sensor_01,voltage,236.1,V,RUNNING,Valve Stuck Attack,1,simulator,6056
+880,2026-09-05T22:58:23.407694,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Valve Stuck Attack,1,simulator,6058
+881,2026-09-05T22:58:23.407729,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Valve Stuck Attack,1,simulator,6060
+882,2026-09-05T22:58:23.408052,factory/line1/humidity,humidity_sensor_01,humidity,45.34,%,RUNNING,Valve Stuck Attack,1,simulator,6063
+883,2026-09-05T22:58:23.408089,factory/line1/proximity,proximity_sensor_01,proximity,118.06,mm,RUNNING,Valve Stuck Attack,1,simulator,6066
+884,2026-09-05T22:58:24.424378,factory/line1/vibration,vibration_sensor_01,vibration,0.86,g,RUNNING,Valve Stuck Attack,1,simulator,6074
+885,2026-09-05T22:58:24.424401,factory/line1/voltage,voltage_sensor_01,voltage,222.09,V,RUNNING,Valve Stuck Attack,1,simulator,6075
+886,2026-09-05T22:58:24.424433,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Valve Stuck Attack,1,simulator,6077
+887,2026-09-05T22:58:24.424471,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Valve Stuck Attack,1,simulator,6079
+888,2026-09-05T22:58:24.424839,factory/line1/humidity,humidity_sensor_01,humidity,48.61,%,RUNNING,Valve Stuck Attack,1,simulator,6082
+889,2026-09-05T22:58:24.424889,factory/line1/proximity,proximity_sensor_01,proximity,416.38,mm,RUNNING,Valve Stuck Attack,1,simulator,6085
+890,2026-09-05T22:58:25.441771,factory/line1/vibration,vibration_sensor_01,vibration,0.82,g,RUNNING,Valve Stuck Attack,1,simulator,6093
+891,2026-09-05T22:58:50.954949,factory/line1/temperature,temperature_sensor_01,temperature,44.75,°C,RUNNING,Intermittent Attack,1,simulator,6565
+892,2026-09-05T22:58:50.954991,factory/line1/current,current_sensor_01,current,20.62,A,RUNNING,Intermittent Attack,1,simulator,6566
+893,2026-09-05T22:58:50.955010,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Intermittent Attack,1,simulator,6567
+894,2026-09-05T22:58:50.955024,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Intermittent Attack,1,simulator,6568
+895,2026-09-05T22:58:50.955040,factory/line1/voltage,voltage_sensor_01,voltage,237.94,V,RUNNING,Intermittent Attack,1,simulator,6569
+896,2026-09-05T22:58:50.955054,factory/line1/pressure,pressure_sensor_01,pressure,0.0,kPa,RUNNING,Intermittent Attack,1,simulator,6570
+897,2026-09-05T22:58:50.955245,factory/line1/flow,flow_sensor_01,flow,91.71,L/min,RUNNING,Intermittent Attack,1,simulator,6571
+898,2026-09-05T22:58:50.955269,factory/line1/current,current_sensor_01,current,12.5,A,RUNNING,Intermittent Attack,1,simulator,6572
+899,2026-09-05T22:58:50.955289,factory/line1/level,level_sensor_01,level,125.0,%,RUNNING,Intermittent Attack,1,simulator,6573
+900,2026-09-05T22:58:50.955482,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Intermittent Attack,1,simulator,6574
+901,2026-09-05T22:58:50.955513,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Intermittent Attack,1,simulator,6575
+902,2026-09-05T22:58:50.955540,factory/line1/humidity,humidity_sensor_01,humidity,66.0,%,RUNNING,Intermittent Attack,1,simulator,6576
+903,2026-09-05T22:58:50.955558,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Intermittent Attack,1,simulator,6577
+904,2026-09-05T22:58:50.955573,factory/line1/current,current_sensor_01,current,9.5,A,RUNNING,Intermittent Attack,1,simulator,6578
+905,2026-09-05T22:58:50.955591,factory/line1/proximity,proximity_sensor_01,proximity,346.33,mm,RUNNING,Intermittent Attack,1,simulator,6579
+906,2026-09-05T22:58:50.955607,factory/line1/pressure,pressure_sensor_01,pressure,250.0,kPa,RUNNING,Intermittent Attack,1,simulator,6580
+907,2026-09-05T22:58:50.955789,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Intermittent Attack,1,simulator,6581
+908,2026-09-05T22:58:50.955809,factory/line1/pressure,pressure_sensor_01,pressure,170.0,kPa,RUNNING,Intermittent Attack,1,simulator,6582
+909,2026-09-05T22:58:50.955823,factory/line1/current,current_sensor_01,current,12.0,A,RUNNING,Intermittent Attack,1,simulator,6583
+910,2026-09-05T22:58:51.977589,factory/line1/temperature,temperature_sensor_01,temperature,44.3,°C,RUNNING,Intermittent Attack,1,simulator,6584
+911,2026-09-05T22:58:51.977635,factory/line1/current,current_sensor_01,current,16.0,A,RUNNING,Intermittent Attack,1,simulator,6585
+912,2026-09-05T22:58:51.977654,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Intermittent Attack,1,simulator,6586
+913,2026-09-05T22:58:51.977671,factory/line1/vibration,vibration_sensor_01,vibration,0.31,g,RUNNING,Intermittent Attack,1,simulator,6587
+914,2026-09-05T22:58:51.977689,factory/line1/voltage,voltage_sensor_01,voltage,227.34,V,RUNNING,Intermittent Attack,1,simulator,6588
+915,2026-09-05T22:58:51.977703,factory/line1/pressure,pressure_sensor_01,pressure,0.0,kPa,RUNNING,Intermittent Attack,1,simulator,6589
+916,2026-09-05T22:58:51.977934,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Intermittent Attack,1,simulator,6590
+917,2026-09-05T22:58:51.977962,factory/line1/current,current_sensor_01,current,10.0,A,RUNNING,Intermittent Attack,1,simulator,6591
+918,2026-09-05T22:58:51.977987,factory/line1/level,level_sensor_01,level,125.0,%,RUNNING,Intermittent Attack,1,simulator,6592
+919,2026-09-05T22:58:51.978216,factory/line1/temperature,temperature_sensor_01,temperature,25.0,°C,RUNNING,Intermittent Attack,1,simulator,6593
+920,2026-09-05T22:58:51.978239,factory/line1/pressure,pressure_sensor_01,pressure,101.3,kPa,RUNNING,Intermittent Attack,1,simulator,6594
+921,2026-09-05T22:58:51.978259,factory/line1/humidity,humidity_sensor_01,humidity,59.11,%,RUNNING,Intermittent Attack,1,simulator,6595
+922,2026-09-05T22:58:51.978273,factory/line1/rpm,rpm_sensor_01,rpm,1812.5,RPM,RUNNING,Intermittent Attack,1,simulator,6596
+923,2026-09-05T22:58:51.978469,factory/line1/proximity,proximity_sensor_01,proximity,99.54,mm,RUNNING,Intermittent Attack,1,simulator,6598
+924,2026-09-05T22:58:51.978683,factory/line1/temperature,temperature_sensor_01,temperature,45.0,°C,RUNNING,Intermittent Attack,1,simulator,6600
+925,2026-09-05T22:58:52.996981,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Intermittent Attack,1,simulator,6605
+926,2026-09-05T22:58:52.997003,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Intermittent Attack,1,simulator,6606
+927,2026-09-05T22:58:52.997024,factory/line1/voltage,voltage_sensor_01,voltage,225.07,V,RUNNING,Intermittent Attack,1,simulator,6607
+928,2026-09-05T22:58:52.997243,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Intermittent Attack,1,simulator,6609
+929,2026-09-05T22:58:52.997289,factory/line1/level,level_sensor_01,level,125.0,%,RUNNING,Intermittent Attack,1,simulator,6611
+930,2026-09-05T22:58:52.997512,factory/line1/humidity,humidity_sensor_01,humidity,52.28,%,RUNNING,Intermittent Attack,1,simulator,6614
+931,2026-09-05T22:58:52.997530,factory/line1/rpm,rpm_sensor_01,rpm,1450.0,RPM,RUNNING,Intermittent Attack,1,simulator,6615
+932,2026-09-05T22:58:52.997560,factory/line1/proximity,proximity_sensor_01,proximity,108.3,mm,RUNNING,Intermittent Attack,1,simulator,6617
+933,2026-09-05T22:58:54.029972,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Intermittent Attack,1,simulator,6625
+934,2026-09-05T22:58:54.030009,factory/line1/voltage,voltage_sensor_01,voltage,231.26,V,RUNNING,Intermittent Attack,1,simulator,6626
+935,2026-09-05T22:58:54.030510,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Intermittent Attack,1,simulator,6628
+936,2026-09-05T22:58:54.030567,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Intermittent Attack,1,simulator,6630
+937,2026-09-05T22:58:54.030775,factory/line1/humidity,humidity_sensor_01,humidity,68.39,%,RUNNING,Intermittent Attack,1,simulator,6633
+938,2026-09-05T22:58:54.031038,factory/line1/proximity,proximity_sensor_01,proximity,159.0,mm,RUNNING,Intermittent Attack,1,simulator,6636
+939,2026-09-05T22:58:55.046286,factory/line1/vibration,vibration_sensor_01,vibration,0.25,g,RUNNING,Intermittent Attack,1,simulator,6644
+940,2026-09-05T22:58:55.046308,factory/line1/voltage,voltage_sensor_01,voltage,224.18,V,RUNNING,Intermittent Attack,1,simulator,6645
+941,2026-09-05T22:58:55.046631,factory/line1/flow,flow_sensor_01,flow,73.37,L/min,RUNNING,Intermittent Attack,1,simulator,6647
+942,2026-09-05T22:58:55.046686,factory/line1/level,level_sensor_01,level,100.0,%,RUNNING,Intermittent Attack,1,simulator,6649
+943,2026-09-05T22:58:55.047009,factory/line1/humidity,humidity_sensor_01,humidity,43.53,%,RUNNING,Intermittent Attack,1,simulator,6652
+944,2026-09-05T22:58:55.047289,factory/line1/proximity,proximity_sensor_01,proximity,470.2,mm,RUNNING,Intermittent Attack,1,simulator,6655
+945,2026-09-05T22:58:56.063287,factory/line1/vibration,vibration_sensor_01,vibration,0.31,g,RUNNING,Intermittent Attack,1,simulator,6663
+946,2026-09-05T22:59:52.270676,factory/line1/temperature,temperature_sensor_01,temperature,42.17,°C,RUNNING,Slow Drift Attack,1,simulator,7705
+947,2026-09-05T22:59:52.270714,factory/line1/current,current_sensor_01,current,10.67,A,RUNNING,Slow Drift Attack,1,simulator,7706
+948,2026-09-05T22:59:52.270727,factory/line1/rpm,rpm_sensor_01,rpm,1450.17,RPM,RUNNING,Slow Drift Attack,1,simulator,7707
+949,2026-09-05T22:59:52.270739,factory/line1/vibration,vibration_sensor_01,vibration,0.42,g,RUNNING,Slow Drift Attack,1,simulator,7708
+950,2026-09-05T22:59:52.270754,factory/line1/voltage,voltage_sensor_01,voltage,234.5,V,RUNNING,Slow Drift Attack,1,simulator,7709
+951,2026-09-05T22:59:52.270764,factory/line1/pressure,pressure_sensor_01,pressure,0.17,kPa,RUNNING,Slow Drift Attack,1,simulator,7710
+952,2026-09-05T22:59:52.271593,factory/line1/flow,flow_sensor_01,flow,73.54,L/min,RUNNING,Slow Drift Attack,1,simulator,7711
+953,2026-09-05T22:59:52.271620,factory/line1/current,current_sensor_01,current,10.17,A,RUNNING,Slow Drift Attack,1,simulator,7712
+954,2026-09-05T22:59:52.271644,factory/line1/level,level_sensor_01,level,100.17,%,RUNNING,Slow Drift Attack,1,simulator,7713
+955,2026-09-05T22:59:52.271978,factory/line1/temperature,temperature_sensor_01,temperature,25.17,°C,RUNNING,Slow Drift Attack,1,simulator,7714
+956,2026-09-05T22:59:52.272006,factory/line1/pressure,pressure_sensor_01,pressure,101.47,kPa,RUNNING,Slow Drift Attack,1,simulator,7715
+957,2026-09-05T22:59:52.272026,factory/line1/humidity,humidity_sensor_01,humidity,69.99,%,RUNNING,Slow Drift Attack,1,simulator,7716
+958,2026-09-05T22:59:52.272044,factory/line1/rpm,rpm_sensor_01,rpm,1450.17,RPM,RUNNING,Slow Drift Attack,1,simulator,7717
+959,2026-09-05T22:59:52.272055,factory/line1/current,current_sensor_01,current,9.67,A,RUNNING,Slow Drift Attack,1,simulator,7718
+960,2026-09-05T22:59:52.272074,factory/line1/proximity,proximity_sensor_01,proximity,414.7,mm,RUNNING,Slow Drift Attack,1,simulator,7719
+961,2026-09-05T22:59:52.272084,factory/line1/pressure,pressure_sensor_01,pressure,250.17,kPa,RUNNING,Slow Drift Attack,1,simulator,7720
+962,2026-09-05T22:59:52.272366,factory/line1/temperature,temperature_sensor_01,temperature,45.17,°C,RUNNING,Slow Drift Attack,1,simulator,7721
+963,2026-09-05T22:59:52.272389,factory/line1/pressure,pressure_sensor_01,pressure,170.17,kPa,RUNNING,Slow Drift Attack,1,simulator,7722
+964,2026-09-05T22:59:52.272404,factory/line1/current,current_sensor_01,current,12.17,A,RUNNING,Slow Drift Attack,1,simulator,7723
+965,2026-09-05T22:59:53.369449,factory/line1/temperature,temperature_sensor_01,temperature,42.33,°C,RUNNING,Slow Drift Attack,1,simulator,7724
+966,2026-09-05T22:59:53.369493,factory/line1/current,current_sensor_01,current,10.83,A,RUNNING,Slow Drift Attack,1,simulator,7725
+967,2026-09-05T22:59:53.369510,factory/line1/rpm,rpm_sensor_01,rpm,1450.33,RPM,RUNNING,Slow Drift Attack,1,simulator,7726
+968,2026-09-05T22:59:53.369529,factory/line1/vibration,vibration_sensor_01,vibration,0.58,g,RUNNING,Slow Drift Attack,1,simulator,7727
+969,2026-09-05T22:59:53.369553,factory/line1/voltage,voltage_sensor_01,voltage,240.31,V,RUNNING,Slow Drift Attack,1,simulator,7728
+970,2026-09-05T22:59:53.369572,factory/line1/pressure,pressure_sensor_01,pressure,0.33,kPa,RUNNING,Slow Drift Attack,1,simulator,7729
+971,2026-09-05T22:59:53.369831,factory/line1/flow,flow_sensor_01,flow,73.7,L/min,RUNNING,Slow Drift Attack,1,simulator,7730
+972,2026-09-05T22:59:53.369858,factory/line1/current,current_sensor_01,current,10.33,A,RUNNING,Slow Drift Attack,1,simulator,7731
+973,2026-09-05T22:59:53.369872,factory/line1/level,level_sensor_01,level,100.33,%,RUNNING,Slow Drift Attack,1,simulator,7732
+974,2026-09-05T22:59:53.370055,factory/line1/temperature,temperature_sensor_01,temperature,25.33,°C,RUNNING,Slow Drift Attack,1,simulator,7733
+975,2026-09-05T22:59:53.370073,factory/line1/pressure,pressure_sensor_01,pressure,101.63,kPa,RUNNING,Slow Drift Attack,1,simulator,7734
+976,2026-09-05T22:59:53.370088,factory/line1/humidity,humidity_sensor_01,humidity,52.82,%,RUNNING,Slow Drift Attack,1,simulator,7735
+977,2026-09-05T22:59:53.370102,factory/line1/rpm,rpm_sensor_01,rpm,1450.33,RPM,RUNNING,Slow Drift Attack,1,simulator,7736
+978,2026-09-05T22:59:53.370125,factory/line1/proximity,proximity_sensor_01,proximity,363.89,mm,RUNNING,Slow Drift Attack,1,simulator,7738
+979,2026-09-05T22:59:53.370316,factory/line1/temperature,temperature_sensor_01,temperature,45.33,°C,RUNNING,Slow Drift Attack,1,simulator,7740
+980,2026-09-05T22:59:54.389760,factory/line1/rpm,rpm_sensor_01,rpm,1450.5,RPM,RUNNING,Slow Drift Attack,1,simulator,7745
+981,2026-09-05T22:59:54.389791,factory/line1/vibration,vibration_sensor_01,vibration,0.75,g,RUNNING,Slow Drift Attack,1,simulator,7746
+982,2026-09-05T22:59:54.389823,factory/line1/voltage,voltage_sensor_01,voltage,222.16,V,RUNNING,Slow Drift Attack,1,simulator,7747
+983,2026-09-05T22:59:54.390239,factory/line1/flow,flow_sensor_01,flow,73.87,L/min,RUNNING,Slow Drift Attack,1,simulator,7749
+984,2026-09-05T22:59:54.390299,factory/line1/level,level_sensor_01,level,100.5,%,RUNNING,Slow Drift Attack,1,simulator,7751
+985,2026-09-05T22:59:54.390539,factory/line1/humidity,humidity_sensor_01,humidity,58.95,%,RUNNING,Slow Drift Attack,1,simulator,7754
+986,2026-09-05T22:59:54.390551,factory/line1/rpm,rpm_sensor_01,rpm,1450.5,RPM,RUNNING,Slow Drift Attack,1,simulator,7755
+987,2026-09-05T22:59:54.390574,factory/line1/proximity,proximity_sensor_01,proximity,448.73,mm,RUNNING,Slow Drift Attack,1,simulator,7757
+988,2026-09-05T22:59:55.405492,factory/line1/vibration,vibration_sensor_01,vibration,0.92,g,RUNNING,Slow Drift Attack,1,simulator,7765
+989,2026-09-05T22:59:55.405507,factory/line1/voltage,voltage_sensor_01,voltage,238.76,V,RUNNING,Slow Drift Attack,1,simulator,7766
+990,2026-09-05T22:59:55.405792,factory/line1/flow,flow_sensor_01,flow,74.04,L/min,RUNNING,Slow Drift Attack,1,simulator,7768
+991,2026-09-05T22:59:55.405850,factory/line1/level,level_sensor_01,level,100.67,%,RUNNING,Slow Drift Attack,1,simulator,7770
+992,2026-09-05T22:59:55.406196,factory/line1/humidity,humidity_sensor_01,humidity,67.32,%,RUNNING,Slow Drift Attack,1,simulator,7773
+993,2026-09-05T22:59:55.406228,factory/line1/proximity,proximity_sensor_01,proximity,420.67,mm,RUNNING,Slow Drift Attack,1,simulator,7776
+994,2026-09-05T22:59:56.442122,factory/line1/vibration,vibration_sensor_01,vibration,1.08,g,RUNNING,Slow Drift Attack,1,simulator,7784
+995,2026-09-05T22:59:56.442144,factory/line1/voltage,voltage_sensor_01,voltage,221.85,V,RUNNING,Slow Drift Attack,1,simulator,7785
+996,2026-09-05T22:59:56.442457,factory/line1/flow,flow_sensor_01,flow,74.2,L/min,RUNNING,Slow Drift Attack,1,simulator,7787
+997,2026-09-05T22:59:56.442501,factory/line1/level,level_sensor_01,level,100.83,%,RUNNING,Slow Drift Attack,1,simulator,7789
+998,2026-09-05T22:59:56.442763,factory/line1/humidity,humidity_sensor_01,humidity,52.44,%,RUNNING,Slow Drift Attack,1,simulator,7792
+999,2026-09-05T22:59:56.442806,factory/line1/proximity,proximity_sensor_01,proximity,223.63,mm,RUNNING,Slow Drift Attack,1,simulator,7795
+1000,2026-09-05T22:59:57.459936,factory/line1/vibration,vibration_sensor_01,vibration,1.25,g,RUNNING,Slow Drift Attack,1,simulator,7803

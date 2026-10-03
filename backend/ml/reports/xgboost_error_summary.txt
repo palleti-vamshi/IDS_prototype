@@ -1,0 +1,40 @@
+Model: xgboost
+Threshold: 0.100000
+
+Confusion Matrix
+----------------
+TN: 7705
+FP: 535
+FN: 935
+TP: 825
+
+IDS Error Metrics
+-----------------
+False Positive Rate: 0.064927
+False Negative Rate: 0.531250
+
+Per-Attack Performance:
+      attack_type  total_samples  detected  missed_fn  recall
+Slow Drift Attack           1760       825        935 0.46875
+
+False Positives by Sensor:
+sensor_code  false_positives
+VLV-001-PRS              434
+MTR-001-VIB               59
+MTR-001-VLT               24
+CNV-001-CUR                2
+CNV-001-RPM                2
+MTR-001-TMP                1
+MTR-001-CUR                1
+MTR-001-RPM                1
+PMP-001-FLW                1
+PMP-001-PRS                1
+PMP-001-CUR                1
+TNK-001-LVL                1
+TNK-001-HUM                1
+TNK-001-PRS                1
+TNK-001-TMP                1
+CNV-001-PRX                1
+CMP-001-TMP                1
+CMP-001-PRS                1
+CMP-001-CUR                1

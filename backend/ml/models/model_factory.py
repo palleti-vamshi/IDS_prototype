@@ -74,8 +74,8 @@ class ModelFactory:
                     random_state=RANDOM_STATE,
                     criterion="entropy",
                     class_weight="balanced",
-                    max_depth=10,
-                    min_samples_split=10,
+                    max_depth=12,
+                    min_samples_split=8,
                     min_samples_leaf=1,
                     max_features=None,
                 )
@@ -91,8 +91,8 @@ class ModelFactory:
                     random_state=RANDOM_STATE,
                     criterion="entropy",
                     class_weight="balanced",
-                    max_depth=None,
-                    min_samples_split=8,
+                    max_depth=20,
+                    min_samples_split=6,
                     min_samples_leaf=2,
                     max_features="sqrt",
                     bootstrap=False,
@@ -116,23 +116,23 @@ class ModelFactory:
 
                     eval_metric="logloss",
 
-                    n_estimators=300,
+                    n_estimators=500,
 
                     learning_rate=0.05,
 
-                    max_depth=8,
+                    max_depth=10,
 
-                    min_child_weight=3,
+                    min_child_weight=2,
 
-                    subsample=0.90,
+                    subsample=0.95,
 
-                    colsample_bytree=0.90,
+                    colsample_bytree=0.95,
 
                     gamma=0,
 
-                    reg_alpha=0.10,
+                    reg_alpha=0.05,
 
-                    reg_lambda=3,
+                    reg_lambda=2.0,
 
                     tree_method="hist",
 

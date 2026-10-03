@@ -11,8 +11,8 @@ from backend.preprocessing.dataset_manager import DatasetManager
 class DatasetPipeline:
     """Connects the collector with the dataset manager."""
 
-    def __init__(self):
-        self.manager = DatasetManager()
+    def __init__(self, manager: DatasetManager | None = None):
+        self.manager = manager if manager is not None else DatasetManager()
 
         self.collector = MQTTCollector(
             message_callback=self.manager.process_message

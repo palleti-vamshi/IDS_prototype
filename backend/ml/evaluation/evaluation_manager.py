@@ -71,6 +71,7 @@ class EvaluationManager:
         X_test,
         y_test,
         model_name: str,
+        metadata=None,
     ) -> dict:
         """
         Execute the complete evaluation pipeline.
@@ -249,6 +250,7 @@ class EvaluationManager:
                 y_test=y_test,
                 model_name=model_name,
                 threshold=best_threshold,
+                metadata=metadata,
             )
 
         except Exception as error:

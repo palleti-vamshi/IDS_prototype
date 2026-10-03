@@ -41,7 +41,7 @@ OUTPUT_DATASET = "dataset/lightx_ids_dataset.csv"
 #
 # Keep this at 1,000 initially.
 
-TARGET_DATASET_SIZE = 100_000
+TARGET_DATASET_SIZE = 10_000
 
 
 SUPPORTED_DATASET_SIZES = (
@@ -179,34 +179,35 @@ CLASS_QUOTAS = calculate_class_quotas(
 
 
 # ============================================================
-# Normal Traffic Timing
+# Campaign Timing Configuration
 # ============================================================
 
+DEFAULT_BASELINE_DURATION = 5.0     # Initial normal baseline duration (sec)
+DEFAULT_ATTACK_DURATION = 5.0       # Standard duration per attack run (sec)
+DEFAULT_COOLDOWN_DURATION = 5.0     # Normal traffic duration between attacks (sec)
+
+# High-speed simulation clock tick rate (seconds per tick).
+# 0.05 = 20 simulation ticks per wall-clock second (~380 records/sec)
+# 1.0 = standard real-time
+SIMULATION_TICK_RATE = 0.05
+
+# Deterministic random seed for reproducible campaigns
+CAMPAIGN_SEED = 42
+
+# Normal Traffic Timing
 MIN_NORMAL_DURATION = 15
 MAX_NORMAL_DURATION = 40
 
-
-# ============================================================
 # Attack Timing
-# ============================================================
-
 MIN_ATTACK_DURATION = 5
 MAX_ATTACK_DURATION = 12
 
-
-# ============================================================
 # Cooldown
-# ============================================================
-
 MIN_COOLDOWN = 10
 MAX_COOLDOWN = 25
 
-
-# ============================================================
-# Dataset Balance
-# ============================================================
-
-BALANCED_DATASET = True
+# Legacy indicator
+BALANCED_DATASET = False
 
 
 # ============================================================

@@ -84,6 +84,20 @@ class FeatureGenerator:
     # CAUSAL FEATURES
     # ==========================================================
 
+    def generate_causal_stream_features(
+        self,
+        df: pd.DataFrame,
+    ) -> pd.DataFrame:
+        """
+        Generate causal chronological features on the complete
+        industrial telemetry stream.
+
+        This method operates exclusively forward in time (using only
+        past and current observations). It uses no target information
+        and no future observations.
+        """
+        return self._generate_causal_features(df)
+
     def _generate_causal_features(
         self,
         df: pd.DataFrame,
@@ -96,26 +110,56 @@ class FeatureGenerator:
 
         No target information is used.
         """
+        causal_cols = {
+            "value_change",
+            "abs_value_change",
+            "value_accel",
+            "time_delta",
+            "rolling_time_delta_5",
+            "rolling_time_delta_std_5",
+            "is_negative_time_delta",
+            "global_time_delta",
+            "rolling_global_td_10",
+            "rolling_global_td_std_10",
+            "packet_rate_10",
+            "is_duplicate_value",
+            "device_seq_gap",
+            "seq_gap_dev",
+            "rolling_seq_std_5",
+            "rolling_mean_3",
+            "rolling_std_3",
+            "rolling_mean_5",
+            "rolling_std_5",
+            "rolling_mean_10",
+            "rolling_std_10",
+            "rolling_range_5",
+            "plant_duplicate_ratio_19",
+            "percentage_change",
+        }
+
+        if causal_cols.issubset(df.columns):
+            return df
 
         df = df.copy()
 
         # ------------------------------------------------------
-        # Timestamp
+        # Timestamp & Value Conversion
         # ------------------------------------------------------
-
         df["timestamp"] = pd.to_datetime(
             df["timestamp"],
             errors="raise",
         )
+        df["value"] = pd.to_numeric(
+            df["value"],
+            errors="raise",
+        )
 
-        # Stable chronological ordering.
-        #
-        # record_id is used as a deterministic tie-breaker when
-        # multiple observations have the same timestamp.
-        sort_columns = ["timestamp"]
-
+        # Stable chronological ordering along arrival order.
+        sort_columns = []
         if "record_id" in df.columns:
             sort_columns.append("record_id")
+        else:
+            sort_columns.append("timestamp")
 
         df.sort_values(
             sort_columns,
@@ -124,31 +168,148 @@ class FeatureGenerator:
         )
 
         # ------------------------------------------------------
-        # Value Difference
+        # Causal Sequence Features
         # ------------------------------------------------------
+        if "sequence_number" in df.columns:
+            df["device_seq_gap"] = (
+                df.groupby("device_id")["sequence_number"]
+                .diff()
+                .fillna(19.0)
+            )
+            df["seq_gap_dev"] = (df["device_seq_gap"] - 19.0).abs()
+            df["rolling_seq_std_5"] = (
+                df.groupby("device_id")["device_seq_gap"]
+                .rolling(window=self.rolling_window, min_periods=1)
+                .std()
+                .fillna(0)
+                .reset_index(level=0, drop=True)
+            )
+        else:
+            df["device_seq_gap"] = 19.0
+            df["seq_gap_dev"] = 0.0
+            df["rolling_seq_std_5"] = 0.0
 
+        # ------------------------------------------------------
+        # Causal Timing Features
+        # ------------------------------------------------------
+        df["time_delta"] = (
+            df.groupby("device_id")["timestamp"]
+            .diff()
+            .dt.total_seconds()
+            .fillna(0)
+        )
+        df["rolling_time_delta_5"] = (
+            df.groupby("device_id")["time_delta"]
+            .rolling(window=self.rolling_window, min_periods=1)
+            .mean()
+            .fillna(0)
+            .reset_index(level=0, drop=True)
+        )
+        df["rolling_time_delta_std_5"] = (
+            df.groupby("device_id")["time_delta"]
+            .rolling(window=self.rolling_window, min_periods=1)
+            .std()
+            .fillna(0)
+            .reset_index(level=0, drop=True)
+        )
+        df["is_negative_time_delta"] = (df["time_delta"] < 0).astype(int)
+
+        df["global_time_delta"] = (
+            df["timestamp"]
+            .diff()
+            .dt.total_seconds()
+            .fillna(0)
+        )
+        df["rolling_global_td_10"] = (
+            df["global_time_delta"]
+            .rolling(window=10, min_periods=1)
+            .mean()
+            .fillna(0)
+        )
+        df["rolling_global_td_std_10"] = (
+            df["global_time_delta"]
+            .rolling(window=10, min_periods=1)
+            .std()
+            .fillna(0)
+        )
+        df["packet_rate_10"] = 1.0 / (df["rolling_global_td_10"] + 1e-4)
+
+        # ------------------------------------------------------
+        # Causal Value Dynamics
+        # ------------------------------------------------------
         df["value_change"] = (
             df.groupby("device_id")["value"]
             .diff()
             .fillna(0)
         )
-
-        # ------------------------------------------------------
-        # Duplicate Value
-        # ------------------------------------------------------
-
-        df["is_duplicate_value"] = (
-            df.groupby("device_id")["value"]
+        df["abs_value_change"] = df["value_change"].abs()
+        df["value_accel"] = (
+            df.groupby("device_id")["value_change"]
             .diff()
-            .fillna(1)
-            .eq(0)
-            .astype(int)
+            .fillna(0)
+        )
+        df["is_duplicate_value"] = (
+            df["value_change"].eq(0).astype(int)
+        )
+
+        # Plant-wide duplicate ratio over 1 plant cycle (19 sensors)
+        df["plant_duplicate_ratio_19"] = (
+            df["is_duplicate_value"]
+            .rolling(window=19, min_periods=1)
+            .mean()
+            .fillna(0)
+        )
+
+        # ------------------------------------------------------
+        # Multi-Window Rolling Statistics
+        # ------------------------------------------------------
+        for w in [3, 5, 10]:
+            df[f"rolling_mean_{w}"] = (
+                df.groupby("device_id")["value"]
+                .rolling(window=w, min_periods=1)
+                .mean()
+                .reset_index(level=0, drop=True)
+            )
+            df[f"rolling_std_{w}"] = (
+                df.groupby("device_id")["value"]
+                .rolling(window=w, min_periods=1)
+                .std()
+                .fillna(0)
+                .reset_index(level=0, drop=True)
+            )
+
+        df["rolling_mean"] = df["rolling_mean_5"]
+        df["rolling_std"] = df["rolling_std_5"]
+        df["rolling_max"] = (
+            df.groupby("device_id")["value"]
+            .rolling(window=self.rolling_window, min_periods=1)
+            .max()
+            .reset_index(level=0, drop=True)
+        )
+        df["rolling_min"] = (
+            df.groupby("device_id")["value"]
+            .rolling(window=self.rolling_window, min_periods=1)
+            .min()
+            .reset_index(level=0, drop=True)
+        )
+        df["rolling_range_5"] = df["rolling_max"] - df["rolling_min"]
+
+        # ------------------------------------------------------
+        # Percentage Change
+        # ------------------------------------------------------
+        df["percentage_change"] = (
+            df.groupby("device_id")["value"]
+            .pct_change()
+            .replace(
+                [np.inf, -np.inf],
+                np.nan,
+            )
+            .fillna(0)
         )
 
         # ------------------------------------------------------
         # Device Message Count
         # ------------------------------------------------------
-
         df["device_message_count"] = (
             df.groupby("device_id")
             .cumcount()
@@ -158,105 +319,10 @@ class FeatureGenerator:
         # ------------------------------------------------------
         # Sensor Message Count
         # ------------------------------------------------------
-
         df["sensor_message_count"] = (
             df.groupby("sensor_type")
             .cumcount()
             + 1
-        )
-
-        # ------------------------------------------------------
-        # Seconds Since Previous Message
-        # ------------------------------------------------------
-
-        df["time_delta"] = (
-            df.groupby("device_id")["timestamp"]
-            .diff()
-            .dt.total_seconds()
-            .fillna(0)
-        )
-
-        # ------------------------------------------------------
-        # Rolling Mean
-        # ------------------------------------------------------
-
-        df["rolling_mean"] = (
-            df.groupby("device_id")["value"]
-            .rolling(
-                window=self.rolling_window,
-                min_periods=1,
-            )
-            .mean()
-            .reset_index(
-                level=0,
-                drop=True,
-            )
-        )
-
-        # ------------------------------------------------------
-        # Rolling Standard Deviation
-        # ------------------------------------------------------
-
-        df["rolling_std"] = (
-            df.groupby("device_id")["value"]
-            .rolling(
-                window=self.rolling_window,
-                min_periods=1,
-            )
-            .std()
-            .fillna(0)
-            .reset_index(
-                level=0,
-                drop=True,
-            )
-        )
-
-        # ------------------------------------------------------
-        # Rolling Maximum
-        # ------------------------------------------------------
-
-        df["rolling_max"] = (
-            df.groupby("device_id")["value"]
-            .rolling(
-                window=self.rolling_window,
-                min_periods=1,
-            )
-            .max()
-            .reset_index(
-                level=0,
-                drop=True,
-            )
-        )
-
-        # ------------------------------------------------------
-        # Rolling Minimum
-        # ------------------------------------------------------
-
-        df["rolling_min"] = (
-            df.groupby("device_id")["value"]
-            .rolling(
-                window=self.rolling_window,
-                min_periods=1,
-            )
-            .min()
-            .reset_index(
-                level=0,
-                drop=True,
-            )
-        )
-
-        # ------------------------------------------------------
-        # Percentage Change
-        # ------------------------------------------------------
-
-        df["percentage_change"] = (
-            df.groupby("device_id")["value"]
-            .pct_change()
-            .replace(
-                [np.inf, -np.inf],
-                np.nan,
-            )
-            .fillna(0)
         )
 
         return df
@@ -282,7 +348,6 @@ class FeatureGenerator:
         FeatureGenerator
             Fitted generator.
         """
-
         self._validate_input(df)
 
         training_df = df.copy()
@@ -292,29 +357,28 @@ class FeatureGenerator:
             errors="raise",
         )
 
-        grouped = (
-            training_df
-            .groupby("device_id")["value"]
-            .agg(
-                mean="mean",
-                std="std",
-            )
-        )
+        grouped = training_df.groupby("device_id")
+        means = grouped["value"].mean()
+        stds = grouped["value"].std().fillna(1.0).replace(0, 1.0)
+
+        # Historical duplicate rate in training set
+        if "is_duplicate_value" in training_df.columns:
+            dup_rates = grouped["is_duplicate_value"].mean().fillna(0.5)
+        else:
+            val_diffs = grouped["value"].diff().fillna(1)
+            dup_rates = (val_diffs == 0).groupby(training_df["device_id"]).mean().fillna(0.5)
 
         self.device_statistics = {}
 
-        for device_id, row in grouped.iterrows():
-
-            mean = float(row["mean"])
-
-            std = row["std"]
-
-            if pd.isna(std) or std == 0:
-                std = 1.0
+        for device_id in means.index:
+            std_val = float(stds[device_id])
+            if not np.isfinite(std_val) or std_val == 0:
+                std_val = 1.0
 
             self.device_statistics[device_id] = {
-                "mean": mean,
-                "std": float(std),
+                "mean": float(means[device_id]),
+                "std": std_val,
+                "dup_rate": float(dup_rates.get(device_id, 0.5)),
             }
 
         self.is_fitted = True
@@ -349,7 +413,6 @@ class FeatureGenerator:
         -------
         pandas.DataFrame
         """
-
         self._validate_input(df)
 
         logger.info(
@@ -361,129 +424,94 @@ class FeatureGenerator:
         # ------------------------------------------------------
         # Causal / chronological features
         # ------------------------------------------------------
-
         df = self._generate_causal_features(df)
 
         # ------------------------------------------------------
         # Device-level statistical features
         # ------------------------------------------------------
-
         if not self.is_fitted:
-
             raise RuntimeError(
                 "FeatureGenerator must be fitted on training "
                 "data before transform() is called."
             )
 
-        device_mean = (
-            df["device_id"]
-            .map(
-                {
-                    device_id: statistics["mean"]
-                    for device_id, statistics
-                    in self.device_statistics.items()
-                }
-            )
-        )
-
-        device_std = (
-            df["device_id"]
-            .map(
-                {
-                    device_id: statistics["std"]
-                    for device_id, statistics
-                    in self.device_statistics.items()
-                }
-            )
-        )
-
-        # ------------------------------------------------------
-        # Unknown devices
-        # ------------------------------------------------------
-        #
-        # If a device appears in validation/test but wasn't
-        # present in training, fall back to global training
-        # statistics.
-        #
-
         if self.device_statistics:
-
             global_mean = float(
-                np.mean(
-                    [
-                        statistics["mean"]
-                        for statistics
-                        in self.device_statistics.values()
-                    ]
-                )
+                np.mean([s["mean"] for s in self.device_statistics.values()])
             )
-
             global_std = float(
-                np.mean(
-                    [
-                        statistics["std"]
-                        for statistics
-                        in self.device_statistics.values()
-                    ]
-                )
+                np.mean([s["std"] for s in self.device_statistics.values()])
             )
-
             if not np.isfinite(global_std) or global_std == 0:
                 global_std = 1.0
-
         else:
-
             global_mean = 0.0
             global_std = 1.0
 
-        device_mean = device_mean.fillna(
-            global_mean
+        device_mean = (
+            df["device_id"]
+            .map({d: s["mean"] for d, s in self.device_statistics.items()})
+            .fillna(global_mean)
         )
 
         device_std = (
-            device_std
-            .replace(
-                [np.inf, -np.inf],
-                np.nan,
-            )
+            df["device_id"]
+            .map({d: s["std"] for d, s in self.device_statistics.items()})
+            .replace([np.inf, -np.inf], np.nan)
             .fillna(global_std)
             .replace(0, 1.0)
         )
 
-        # ------------------------------------------------------
-        # Device Mean Deviation
-        # ------------------------------------------------------
-
-        df["device_mean_deviation"] = (
-            df["value"] - device_mean
+        device_dup_rate = (
+            df["device_id"]
+            .map({d: s.get("dup_rate", 0.5) for d, s in self.device_statistics.items()})
+            .fillna(0.5)
         )
 
         # ------------------------------------------------------
-        # Device Z-Score
+        # Device Deviations & Baselines
         # ------------------------------------------------------
-
-        df["z_score"] = (
-            (df["value"] - device_mean)
-            / device_std
-        )
+        df["device_mean_deviation"] = df["value"] - device_mean
+        df["z_score"] = (df["value"] - device_mean) / device_std
+        df["rel_volatility"] = df["rolling_std_5"] / device_std
+        df["stability_anomaly"] = df["is_duplicate_value"] * (1.0 - device_dup_rate)
 
         # ------------------------------------------------------
         # Numerical safety
         # ------------------------------------------------------
-
         engineered_numeric_columns = [
             "value_change",
-            "is_duplicate_value",
-            "device_message_count",
-            "sensor_message_count",
+            "abs_value_change",
+            "value_accel",
             "time_delta",
+            "rolling_time_delta_5",
+            "rolling_time_delta_std_5",
+            "is_negative_time_delta",
+            "global_time_delta",
+            "rolling_global_td_10",
+            "rolling_global_td_std_10",
+            "packet_rate_10",
+            "is_duplicate_value",
+            "device_seq_gap",
+            "seq_gap_dev",
+            "rolling_seq_std_5",
+            "rolling_mean_3",
+            "rolling_std_3",
+            "rolling_mean_5",
+            "rolling_std_5",
+            "rolling_mean_10",
+            "rolling_std_10",
             "rolling_mean",
             "rolling_std",
             "rolling_max",
             "rolling_min",
+            "rolling_range_5",
+            "plant_duplicate_ratio_19",
             "percentage_change",
             "device_mean_deviation",
             "z_score",
+            "rel_volatility",
+            "stability_anomaly",
         ]
 
         df[engineered_numeric_columns] = (
@@ -492,7 +520,14 @@ class FeatureGenerator:
                 [np.inf, -np.inf],
                 np.nan,
             )
+            .fillna(0)
         )
+
+        logger.info(
+            "Feature generation completed."
+        )
+
+        return df
 
         logger.info(
             "Feature generation completed."

@@ -1,32 +1,18 @@
 """
 Phase 3 Attack Runner
 
-Controls balanced attack execution for dataset generation.
+Controls realistic industrial campaign execution for dataset generation.
 
 Responsibilities
 ----------------
 • Execute the REAL attack objects owned by the simulator.
 • Execute attacks through the REAL AttackManager.
-• Generate records according to CLASS_QUOTAS.
-• Repeat an attack when a single run does not produce
-  enough accepted records.
-• Stop an active attack immediately when its class
-  quota is reached.
+• Coordinate an authentic industrial campaign:
+    Normal Baseline -> Attack -> Cooldown -> Attack -> ... -> Final Normal
+• Retain genuine telemetry without artificial class or sensor quotas.
+• Natural attack exposure determined by duration, sensor scope, and physical locality.
 • Track live dataset progress.
 • Preserve the existing LightX-IDS attack architecture.
-
-Important
----------
-This class does NOT create another AttackManager and does
-NOT create duplicate attack objects.
-
-When used with SimulationRunner:
-    SimulationRunner.get_attack_manager()
-    SimulationRunner.get_attacks()
-
-When used directly with FactorySimulator:
-    FactorySimulator.attack_manager
-    FactorySimulator.attack_initializer.get_campaign_attacks()
 """
 
 from __future__ import annotations
@@ -39,17 +25,18 @@ from backend.preprocessing.generation_config import (
     CLASS_QUOTAS,
     NORMAL_CLASS,
     TARGET_DATASET_SIZE,
+    DEFAULT_BASELINE_DURATION,
+    DEFAULT_ATTACK_DURATION,
+    DEFAULT_COOLDOWN_DURATION,
 )
 
 
 class AttackRunner:
     """
-    Controls balanced Phase 3 dataset generation.
+    Controls realistic industrial campaign execution for LightX-IDS dataset generation.
 
-    The existing FactorySimulator owns the industrial
-    simulation and the real AttackManager.
-
-    AttackRunner only coordinates the dataset campaign.
+    The existing FactorySimulator owns the industrial simulation and the real AttackManager.
+    AttackRunner coordinates the campaign timeline across all 17 registered attack types.
     """
 
     def __init__(
@@ -59,1069 +46,315 @@ class AttackRunner:
     ) -> None:
 
         self.dataset_manager = dataset_manager
-
         self.simulation_runner = simulation_runner
+
+        # Target dataset size from dataset_manager
+        self.target_dataset_size = getattr(
+            dataset_manager,
+            "target_dataset_size",
+            TARGET_DATASET_SIZE,
+        )
 
         # ==================================================
         # REAL AttackManager
         # ==================================================
-        #
-        # Normal Phase 3 execution uses SimulationRunner,
-        # which exposes get_attack_manager().
-        #
-        # The fallback supports direct FactorySimulator
-        # testing without modifying FactorySimulator.
-        # ==================================================
-
-        if hasattr(
-            simulation_runner,
-            "get_attack_manager",
-        ):
-
-            self.attack_manager = (
-                simulation_runner
-                .get_attack_manager()
-            )
-
+        if hasattr(simulation_runner, "get_attack_manager"):
+            self.attack_manager = simulation_runner.get_attack_manager()
         else:
-
-            self.attack_manager = (
-                simulation_runner.attack_manager
-            )
+            self.attack_manager = simulation_runner.attack_manager
 
         # ==================================================
         # REAL Attack Objects
         # ==================================================
-        #
-        # SimulationRunner exposes get_attacks().
-        #
-        # FactorySimulator exposes the same registered
-        # campaign attacks through AttackInitializer.
-        # ==================================================
-
-        if hasattr(
-            simulation_runner,
-            "get_attacks",
-        ):
-
-            self.attacks = list(
-                simulation_runner.get_attacks()
-            )
-
+        if hasattr(simulation_runner, "get_attacks"):
+            self.attacks = list(simulation_runner.get_attacks())
         else:
-
-            attack_initializer = (
-                simulation_runner.attack_initializer
-            )
-
-            if hasattr(
-                attack_initializer,
-                "get_campaign_attacks",
-            ):
-
-                self.attacks = list(
-                    attack_initializer
-                    .get_campaign_attacks()
-                )
-
+            attack_initializer = simulation_runner.attack_initializer
+            if hasattr(attack_initializer, "get_campaign_attacks"):
+                self.attacks = list(attack_initializer.get_campaign_attacks())
             else:
+                self.attacks = list(attack_initializer.attacks.values())
 
-                self.attacks = list(
-                    attack_initializer
-                    .attacks
-                    .values()
-                )
-
-        self.total_attacks = len(
-            self.attacks
-        )
-
-        self.completed_attacks = 0
-
+        self.total_attacks = len(self.attacks)
         self.total_attack_runs = 0
 
         # ==================================================
-        # Validation
+        # Campaign Timing Configuration
         # ==================================================
+        # 19 physical sensors publish every simulation tick.
+        # Tick allocations are planned to allow all 17 attacks
+        # and cooldowns to execute before reaching the target size.
+        if self.target_dataset_size <= 1_500:
+            self.baseline_ticks = 1
+            self.attack_ticks = 2
+            self.cooldown_ticks = 1
+        elif self.target_dataset_size <= 15_000:
+            self.baseline_ticks = 15
+            self.attack_ticks = 20
+            self.cooldown_ticks = 8
+        elif self.target_dataset_size <= 150_000:
+            self.baseline_ticks = 150
+            self.attack_ticks = 200
+            self.cooldown_ticks = 80
+        else:
+            total_ticks = self.target_dataset_size // 19
+            self.attack_ticks = max(1, int(total_ticks * 0.65 // self.total_attacks))
+            self.cooldown_ticks = max(1, int(total_ticks * 0.25 // self.total_attacks))
+            self.baseline_ticks = max(1, int(total_ticks * 0.05))
 
+        sim = getattr(self.simulation_runner, "simulator", None)
+        clock = getattr(sim, "clock", None) if sim else None
+        self.tick_rate = getattr(clock, "tick_rate", 0.05)
+
+        self.baseline_duration = self.baseline_ticks * self.tick_rate
+        self.attack_duration = self.attack_ticks * self.tick_rate
+        self.cooldown_duration = self.cooldown_ticks * self.tick_rate
+
+        # Validation
         self._validate_attack_configuration()
 
     # ==================================================
     # Validation
     # ==================================================
 
-    def _validate_attack_configuration(
-        self,
-    ) -> None:
+    def _validate_attack_configuration(self) -> None:
         """
         Validate that the real attack framework contains
         exactly the configured Phase 3 attack classes.
         """
-
-        framework_names = {
-            attack.attack_name
-            for attack in self.attacks
-        }
-
-        configured_names = set(
-            ATTACK_CLASSES
-        )
+        framework_names = {attack.attack_name for attack in self.attacks}
+        configured_names = set(ATTACK_CLASSES)
 
         if framework_names != configured_names:
-
-            missing = (
-                configured_names
-                - framework_names
-            )
-
-            unexpected = (
-                framework_names
-                - configured_names
-            )
-
+            missing = configured_names - framework_names
+            unexpected = framework_names - configured_names
             raise ValueError(
                 "Attack configuration mismatch.\n"
-                f"Missing attacks: "
-                f"{sorted(missing)}\n"
-                f"Unexpected attacks: "
-                f"{sorted(unexpected)}"
+                f"Missing attacks: {sorted(missing)}\n"
+                f"Unexpected attacks: {sorted(unexpected)}"
             )
 
     # ==================================================
     # Dataset Helpers
     # ==================================================
 
-    def _records(
-        self,
-    ) -> int:
-        """
-        Return total accepted dataset records.
-        """
+    def _records(self) -> int:
+        return self.dataset_manager.record_count()
 
-        return (
-            self.dataset_manager.record_count()
-        )
+    def _normal_records(self) -> int:
+        return self.dataset_manager.normal_count()
 
-    # --------------------------------------------------
+    def _attack_records(self, class_name: str) -> int:
+        return self.dataset_manager.attack_count(class_name)
 
-    def _normal_records(
-        self,
-    ) -> int:
-        """
-        Return accepted Normal records.
-        """
+    def _target_reached(self) -> bool:
+        if hasattr(self.dataset_manager, "is_target_reached"):
+            return self.dataset_manager.is_target_reached()
+        return self._records() >= self.target_dataset_size
 
-        return (
-            self.dataset_manager.normal_count()
-        )
-
-    # --------------------------------------------------
-
-    def _attack_records(
-        self,
-        attack_name: str,
-    ) -> int:
-        """
-        Return accepted records for one attack class.
-        """
-
-        return (
-            self.dataset_manager.attack_count(
-                attack_name
-            )
-        )
-
-    # --------------------------------------------------
-
-    def _target_reached(
-        self,
-    ) -> bool:
-        """
-        Return True when the complete dataset target
-        has been reached.
-        """
-
-        return (
-            self._records()
-            >= TARGET_DATASET_SIZE
-        )
-
-    # --------------------------------------------------
-
-    def _all_attack_quotas_reached(
-        self,
-    ) -> bool:
-        """
-        Return True when every attack class has reached
-        its configured quota.
-        """
-
-        for attack_name in ATTACK_CLASSES:
-
-            target = CLASS_QUOTAS.get(
-                attack_name,
-                0,
-            )
-
-            current = (
-                self._attack_records(
-                    attack_name
-                )
-            )
-
-            if current < target:
-
-                return False
-
-        return True
-
-    # --------------------------------------------------
-
-    def _all_quotas_reached(
-        self,
-    ) -> bool:
-        """
-        Return True when Normal and every attack class
-        have reached their quotas.
-        """
-
-        normal_target = CLASS_QUOTAS[
-            NORMAL_CLASS
-        ]
-
-        if (
-            self._normal_records()
-            < normal_target
-        ):
-
-            return False
-
-        return (
-            self._all_attack_quotas_reached()
-        )
-
-    # ==================================================
-    # Dataset Percentage
-    # ==================================================
-
-    def _dataset_percentage(
-        self,
-    ) -> float:
-        """
-        Calculate overall dataset completion percentage.
-        """
-
-        if TARGET_DATASET_SIZE <= 0:
-
+    def _dataset_percentage(self) -> float:
+        if self.target_dataset_size <= 0:
             return 0.0
+        return min((self._records() / self.target_dataset_size) * 100.0, 100.0)
 
-        percentage = (
-            self._records()
-            / TARGET_DATASET_SIZE
-            * 100
-        )
+    def _sim_elapsed_time(self) -> float:
+        """Return simulation clock elapsed time if available, else wall-clock."""
+        sim = getattr(self.simulation_runner, "simulator", None)
+        if sim and hasattr(sim, "clock") and hasattr(sim.clock, "elapsed_time"):
+            return sim.clock.elapsed_time
+        return time.time()
 
-        return min(
-            percentage,
-            100.0,
-        )
+    def _wait_ticks(self, target_ticks: int, check_target: bool = True) -> None:
+        """Wait for the specified number of simulation ticks."""
+        sim = getattr(self.simulation_runner, "simulator", None)
+        clock = getattr(sim, "clock", None) if sim else None
+
+        if clock and hasattr(clock, "tick") and getattr(clock, "running", False):
+            start_tick = clock.tick
+            while (clock.tick - start_tick) < target_ticks:
+                if check_target and self._target_reached():
+                    break
+                time.sleep(0.005)
+        else:
+            duration = target_ticks * self.tick_rate
+            start_time = time.time()
+            while (time.time() - start_time) < duration:
+                if check_target and self._target_reached():
+                    break
+                time.sleep(0.005)
 
     # ==================================================
-    # Main Campaign
+    # Main Campaign Execution
     # ==================================================
 
-    def run(
-        self,
-    ) -> None:
+    def run(self) -> None:
         """
-        Execute the complete balanced dataset campaign.
-
-        Normal traffic is collected first.
-
-        Every attack class is then executed sequentially
-        until its accepted record quota is reached.
+        Execute the realistic industrial campaign:
+          1. Reset DatasetManager to clear warmup messages
+          2. Normal Baseline Period
+          3. Sequential Attack Cycles with Cooldowns
+          4. Final Normal Baseline (to reach exact target size)
         """
-
         print()
         print("=" * 72)
-        print(
-            "🚀 PHASE 3 ATTACK DATASET GENERATION"
-        )
+        print("🚀 PHASE 3 REALISTIC INDUSTRIAL DATASET CAMPAIGN")
         print("=" * 72)
-
-        print(
-            f"Attack Classes : "
-            f"{self.total_attacks}"
-        )
-
-        print(
-            f"Total Classes  : "
-            f"{len(ALL_CLASSES)}"
-        )
-
-        print(
-            f"Target Records : "
-            f"{TARGET_DATASET_SIZE}"
-        )
-
-        print()
-        print("📊 CLASS QUOTAS")
-        print("-" * 72)
-
-        for class_name in ALL_CLASSES:
-
-            print(
-                f"{class_name:35}"
-                f"{CLASS_QUOTAS[class_name]:>10}"
-            )
-
+        print(f"Attack Classes       : {self.total_attacks}")
+        print(f"Target Records       : {self.target_dataset_size}")
+        print(f"Baseline Ticks       : {self.baseline_ticks} ({self.baseline_duration:.2f} s)")
+        print(f"Attack Ticks         : {self.attack_ticks} ({self.attack_duration:.2f} s)")
+        print(f"Cooldown Ticks       : {self.cooldown_ticks} ({self.cooldown_duration:.2f} s)")
         print("=" * 72)
         print()
 
-        # ==================================================
-        # Campaign
-        # ==================================================
+        # Reset dataset manager so any warmup records before campaign start are cleared
+        if hasattr(self.dataset_manager, "reset"):
+            self.dataset_manager.reset()
 
-        while not self._all_quotas_reached():
+        # Phase 1: Normal Baseline
+        if not self._target_reached():
+            self._run_baseline_phase(self.baseline_ticks)
 
-            # ----------------------------------------------
-            # Normal traffic first
-            # ----------------------------------------------
-
-            if (
-                self._normal_records()
-                < CLASS_QUOTAS[NORMAL_CLASS]
-            ):
-
-                self._run_normal_phase()
-
-            # ----------------------------------------------
-            # Complete dataset safety
-            # ----------------------------------------------
-
-            if self._target_reached():
-
-                break
-
-            progress_made = False
-
-            # ----------------------------------------------
-            # Run attack classes sequentially
-            # ----------------------------------------------
-
+        # Phase 2: Attack Cycles
+        cycle = 0
+        while not self._target_reached():
+            cycle += 1
+            print(f"\n--- Starting Campaign Cycle {cycle} ---")
             for attack in self.attacks:
-
                 if self._target_reached():
-
                     break
 
-                class_name = (
-                    attack.attack_name
-                )
+                self._run_attack_period(attack, self.attack_ticks)
 
-                target_records = (
-                    CLASS_QUOTAS.get(
-                        class_name,
-                        0,
-                    )
-                )
+                if self._target_reached():
+                    break
 
-                current_records = (
-                    self._attack_records(
-                        class_name
-                    )
-                )
+                self._run_cooldown_phase(self.cooldown_ticks)
 
-                # ------------------------------------------
-                # Already complete
-                # ------------------------------------------
-
-                if (
-                    current_records
-                    >= target_records
-                ):
-
-                    continue
-
-                progress_made = True
-
-                self._run_attack_until_quota(
-                    attack
-                )
-
-                # ------------------------------------------
-                # Cooldown
-                # ------------------------------------------
-
-                if not self._target_reached():
-
-                    time.sleep(1)
-
-            # ----------------------------------------------
-            # Safety guard
-            # ----------------------------------------------
-
-            if not progress_made:
-
-                print()
-                print(
-                    "⚠️ No attack campaign progress "
-                    "was made in this cycle."
-                )
-
-                print(
-                    "Stopping to prevent an infinite loop."
-                )
-
+            # After cycle 1, break to final baseline to reach exact target size
+            if not self._target_reached():
                 break
+
+        # Phase 3: Final Baseline to reach exact target size
+        if not self._target_reached():
+            self._run_final_baseline()
 
         self._print_final_summary()
 
     # ==================================================
-    # Normal Phase
+    # Baseline Phase
     # ==================================================
 
-    def _run_normal_phase(
+    def _run_baseline_phase(
         self,
+        ticks: int,
+        label: str = "NORMAL BASELINE",
     ) -> None:
-        """
-        Collect Normal traffic until its quota is reached.
-
-        The FactorySimulator continues running in the
-        background while this method observes the dataset.
-        """
-
-        target = CLASS_QUOTAS[
-            NORMAL_CLASS
-        ]
-
-        current = (
-            self._normal_records()
-        )
-
-        if current >= target:
-
-            return
-
-        print()
-        print("=" * 72)
+        """Collect normal baseline traffic for the specified simulation ticks."""
+        print(f"\n🟢 [{label}] Collecting normal background telemetry (ticks={ticks})...")
+        self._wait_ticks(ticks, check_target=True)
         print(
-            "🟢 NORMAL TRAFFIC COLLECTION"
-        )
-        print("=" * 72)
-
-        print(
-            f"Target : {target} records"
-        )
-
-        print(
-            f"Current: {current} records"
-        )
-
-        print("=" * 72)
-
-        last_display = None
-
-        while (
-            self._normal_records()
-            < target
-        ):
-
-            if self._target_reached():
-
-                break
-
-            normal_records = (
-                self._normal_records()
-            )
-
-            total_records = (
-                self._records()
-            )
-
-            display_state = (
-                normal_records,
-                total_records,
-            )
-
-            if display_state != last_display:
-
-                print(
-                    "\r"
-                    f"🟢 Normal: "
-                    f"{normal_records}/"
-                    f"{target} | "
-                    f"📊 Dataset: "
-                    f"{total_records}/"
-                    f"{TARGET_DATASET_SIZE} | "
-                    f"📈 "
-                    f"{self._dataset_percentage():.1f}%",
-                    end="",
-                    flush=True,
-                )
-
-                last_display = display_state
-
-            time.sleep(0.1)
-
-        print()
-
-        print(
-            f"✅ Normal quota reached: "
-            f"{self._normal_records()}/"
-            f"{target}"
+            f"✅ [{label}] Completed | Records: {self._records()}/{self.target_dataset_size} "
+            f"({self._dataset_percentage():.1f}%)"
         )
 
     # ==================================================
-    # Attack Execution
+    # Final Baseline Phase
     # ==================================================
 
-    def _run_attack_until_quota(
+    def _run_final_baseline(self) -> None:
+        """Collect remaining normal baseline traffic until exact target size is reached."""
+        print(f"\n🟢 [FINAL NORMAL BASELINE] Collecting remaining normal telemetry...")
+        while not self._target_reached():
+            time.sleep(0.005)
+        print(
+            f"✅ [FINAL NORMAL BASELINE] Completed | Records: {self._records()}/{self.target_dataset_size} "
+            f"({self._dataset_percentage():.1f}%)"
+        )
+
+    # ==================================================
+    # Attack Period
+    # ==================================================
+
+    def _run_attack_period(
         self,
         attack,
+        ticks: int,
     ) -> None:
-        """
-        Run the SAME registered attack object repeatedly
-        until its accepted class quota is reached.
-        """
+        """Execute one attack for the configured simulation ticks."""
+        class_name = attack.attack_name
+        self.total_attack_runs += 1
 
-        class_name = (
-            attack.attack_name
+        print(f"\n🚨 [ATTACK] {class_name} started (ticks={ticks})...")
+
+        # Reset attack object to READY if needed
+        if hasattr(attack, "reset") and getattr(attack, "is_running", False) is False:
+            attack.reset()
+
+        # Start via REAL AttackManager
+        self.attack_manager.start_attack(attack.attack_id)
+        time.sleep(0.01)  # Brief pause for MQTT start event propagation
+
+        # Wait for configured attack ticks
+        self._wait_ticks(ticks, check_target=True)
+
+        # Stop via REAL AttackManager
+        if attack.is_running:
+            self.attack_manager.stop_attack(attack.attack_id)
+            time.sleep(0.01)  # Brief pause for MQTT stop event propagation
+
+        print(
+            f"📦 [ATTACK] {class_name} completed | "
+            f"Class Records: {self._attack_records(class_name)} | "
+            f"Total: {self._records()}/{self.target_dataset_size} "
+            f"({self._dataset_percentage():.1f}%)"
         )
-
-        target_records = (
-            CLASS_QUOTAS.get(
-                class_name,
-                0,
-            )
-        )
-
-        current_records = (
-            self._attack_records(
-                class_name
-            )
-        )
-
-        run_number = 0
-
-        while (
-            current_records
-            < target_records
-        ):
-
-            if self._target_reached():
-
-                break
-
-            run_number += 1
-
-            self.total_attack_runs += 1
-
-            current_records = (
-                self._attack_records(
-                    class_name
-                )
-            )
-
-            print()
-            print("=" * 72)
-
-            print(
-                f"🚨 ATTACK: "
-                f"{class_name}"
-            )
-
-            print(
-                f"Run       : "
-                f"{run_number}"
-            )
-
-            print(
-                f"Current   : "
-                f"{current_records}/"
-                f"{target_records}"
-            )
-
-            print("=" * 72)
-
-            # ----------------------------------------------
-            # Return reusable attack object to READY
-            # ----------------------------------------------
-
-            if not attack.is_running:
-
-                if hasattr(
-                    attack,
-                    "reset",
-                ):
-
-                    attack.reset()
-
-            # ----------------------------------------------
-            # Start through REAL AttackManager
-            # ----------------------------------------------
-
-            self.attack_manager.start_attack(
-                attack.attack_id
-            )
-
-            # ----------------------------------------------
-            # Observe active attack
-            # ----------------------------------------------
-
-            self._wait_for_attack(
-                attack,
-                target_records,
-            )
-
-            # ----------------------------------------------
-            # Recalculate accepted records
-            # ----------------------------------------------
-
-            current_records = (
-                self._attack_records(
-                    class_name
-                )
-            )
-
-            print()
-            print(
-                f"📦 {class_name}: "
-                f"{current_records}/"
-                f"{target_records}"
-            )
-
-            if (
-                current_records
-                < target_records
-            ):
-
-                print(
-                    f"🔁 {class_name} "
-                    f"requires another run."
-                )
-
-            else:
-
-                print(
-                    f"✅ {class_name} quota reached."
-                )
-
-            if (
-                current_records
-                < target_records
-            ):
-
-                time.sleep(1)
 
     # ==================================================
-    # Wait for Attack
+    # Cooldown Phase
     # ==================================================
 
-    def _wait_for_attack(
+    def _run_cooldown_phase(
         self,
-        attack,
-        target_records: int,
+        ticks: int,
     ) -> None:
-        """
-        Observe one active attack run.
-
-        The FactorySimulator owns the simulation loop.
-
-        AttackRunner does NOT call attack.update()
-        directly.
-
-        When the accepted records for this attack reach
-        target_records, the REAL AttackManager stops the
-        attack immediately.
-        """
-
-        last_display = None
-
-        while True:
-
-            elapsed = (
-                attack.elapsed_time
-            )
-
-            duration = (
-                attack.duration
-            )
-
-            attack_records = (
-                self._attack_records(
-                    attack.attack_name
-                )
-            )
-
-            total_records = (
-                self._records()
-            )
-
-            normal_records = (
-                self._normal_records()
-            )
-
-            dataset_percentage = (
-                self._dataset_percentage()
-            )
-
-            display_state = (
-                int(elapsed * 10),
-                attack_records,
-                total_records,
-                normal_records,
-            )
-
-            if display_state != last_display:
-
-                print(
-                    "\r"
-                    f"🚨 {attack.attack_name} | "
-                    f"⏱️ {elapsed:.1f}/"
-                    f"{duration:.1f}s | "
-                    f"📦 Attack: "
-                    f"{attack_records}/"
-                    f"{target_records} | "
-                    f"📊 Dataset: "
-                    f"{total_records}/"
-                    f"{TARGET_DATASET_SIZE} | "
-                    f"📈 "
-                    f"{dataset_percentage:.1f}%",
-                    end="",
-                    flush=True,
-                )
-
-                last_display = display_state
-
-            # ------------------------------------------
-            # CRITICAL: class quota reached
-            # ------------------------------------------
-
-            if (
-                attack_records
-                >= target_records
-            ):
-
-                print()
-
-                print(
-                    f"🛑 {attack.attack_name} "
-                    f"quota reached — "
-                    f"stopping attack immediately."
-                )
-
-                self.attack_manager.stop_attack(
-                    attack.attack_id
-                )
-
-                break
-
-            # ------------------------------------------
-            # Complete dataset reached
-            # ------------------------------------------
-
-            if self._target_reached():
-
-                print()
-
-                if attack.is_running:
-
-                    self.attack_manager.stop_attack(
-                        attack.attack_id
-                    )
-
-                break
-
-            # ------------------------------------------
-            # Natural attack completion
-            # ------------------------------------------
-
-            if attack.is_finished:
-
-                print()
-
-                break
-
-            # ------------------------------------------
-            # Attack stopped
-            # ------------------------------------------
-
-            if not attack.is_running:
-
-                print()
-
-                print(
-                    f"⚠️ Attack stopped before "
-                    f"quota completion: "
-                    f"{attack.attack_name}"
-                )
-
-                break
-
-            time.sleep(0.1)
-
-    # ==================================================
-    # Attack Records
-    # ==================================================
-
-    def _print_attack_records(
-        self,
-        attack_name: str,
-    ) -> None:
-        """
-        Display records collected for one attack class.
-        """
-
-        records = (
-            self._attack_records(
-                attack_name
-            )
-        )
-
-        target = CLASS_QUOTAS.get(
-            attack_name,
-            0,
-        )
-
-        print(
-            f"📦 {attack_name} Records: "
-            f"{records}/"
-            f"{target}"
-        )
-
-        if records < target:
-
-            print(
-                f"⚠️ WARNING: "
-                f"{attack_name} produced only "
-                f"{records}/"
-                f"{target} records."
-            )
-
-        elif records == target:
-
-            print(
-                f"✅ {attack_name} quota reached."
-            )
-
-        else:
-
-            print(
-                f"⚠️ {attack_name} exceeded "
-                f"its configured quota."
-            )
-
-    # ==================================================
-    # Overall Progress
-    # ==================================================
-
-    def _print_progress(
-        self,
-    ) -> None:
-        """
-        Display overall dataset generation progress.
-        """
-
-        total_records = (
-            self._records()
-        )
-
-        normal_records = (
-            self._normal_records()
-        )
-
-        attack_records = (
-            self.dataset_manager.attack_records
-        )
-
-        normal_target = CLASS_QUOTAS.get(
-            NORMAL_CLASS,
-            0,
-        )
-
-        attack_target = (
-            TARGET_DATASET_SIZE
-            - normal_target
-        )
-
-        print()
-        print("-" * 72)
-
-        print(
-            f"📊 ATTACK PROGRESS     : "
-            f"{self.completed_attacks}/"
-            f"{self.total_attacks}"
-        )
-
-        print(
-            f"📦 DATASET RECORDS    : "
-            f"{total_records}/"
-            f"{TARGET_DATASET_SIZE}"
-        )
-
-        print(
-            f"🟢 NORMAL RECORDS      : "
-            f"{normal_records}/"
-            f"{normal_target}"
-        )
-
-        print(
-            f"🔴 ATTACK RECORDS     : "
-            f"{attack_records}/"
-            f"{attack_target}"
-        )
-
-        print(
-            f"📈 DATASET PROGRESS   : "
-            f"{self._dataset_percentage():.1f}%"
-        )
-
-        print("-" * 72)
+        """Run normal cooldown traffic between attacks."""
+        self._wait_ticks(ticks, check_target=True)
 
     # ==================================================
     # Final Summary
     # ==================================================
 
-    def _print_final_summary(
-        self,
-    ) -> None:
-        """
-        Display final dataset generation statistics.
-        """
+    def _print_final_summary(self) -> None:
+        """Display final dataset generation statistics and observed distribution."""
+        distribution = self.dataset_manager.get_distribution()
 
-        distribution = (
-            self.dataset_manager
-            .get_distribution()
-        )
+        total = distribution["total"]
+        normal = distribution["normal"]
+        attack = distribution["attack"]
+        normal_pct = (normal / total * 100.0) if total > 0 else 0.0
+        attack_pct = (attack / total * 100.0) if total > 0 else 0.0
 
-        print()
         print()
         print("=" * 72)
-        print(
-            "🎉 DATASET GENERATION COMPLETED"
-        )
+        print("🎉 DATASET GENERATION CAMPAIGN COMPLETED")
         print("=" * 72)
-
-        print(
-            f"Attack Runs       : "
-            f"{self.total_attack_runs}"
-        )
-
-        print(
-            f"Total Records     : "
-            f"{distribution['total']}/"
-            f"{TARGET_DATASET_SIZE}"
-        )
-
-        print(
-            f"Normal Records    : "
-            f"{distribution['normal']}/"
-            f"{CLASS_QUOTAS[NORMAL_CLASS]}"
-        )
-
-        print(
-            f"Attack Records    : "
-            f"{distribution['attack']}/"
-            f"{TARGET_DATASET_SIZE - CLASS_QUOTAS[NORMAL_CLASS]}"
-        )
-
-        print(
-            f"Quota Rejected    : "
-            f"{distribution['quota_rejected']}"
-        )
-
-        print(
-            f"Sensor Quota "
-            f"Rejected         : "
-            f"{distribution.get('sensor_quota_rejected', 0)}"
-        )
-
+        print(f"Total Records Generated : {total} / {self.target_dataset_size}")
+        print(f"Normal Records          : {normal} ({normal_pct:.2f}%)")
+        print(f"Attack Records          : {attack} ({attack_pct:.2f}%)")
+        print(f"Total Attack Runs       : {self.total_attack_runs}")
+        print(f"Quota Rejections        : {distribution.get('quota_rejected', 0)}")
         print()
-        print("📊 CLASS DISTRIBUTION")
+        print("📊 OBSERVED CLASS DISTRIBUTION")
         print("-" * 72)
-
-        print(
-            f"{'Class':35}"
-            f"{'Records':>10}"
-            f"{'Target':>10}"
-        )
-
+        print(f"{'Class':35}{'Records':>10}{'Share %':>12}")
         print("-" * 72)
-
-        # ----------------------------------------------
-        # Normal
-        # ----------------------------------------------
-
-        print(
-            f"{NORMAL_CLASS:35}"
-            f"{distribution['normal']:>10}"
-            f"{CLASS_QUOTAS[NORMAL_CLASS]:>10}"
-        )
-
-        # ----------------------------------------------
-        # Attacks
-        # ----------------------------------------------
+        print(f"{NORMAL_CLASS:35}{normal:>10}{normal_pct:>11.2f}%")
 
         for attack_name in ATTACK_CLASSES:
-
-            count = (
-                distribution[
-                    "attacks"
-                ].get(
-                    attack_name,
-                    0,
-                )
-            )
-
-            target = CLASS_QUOTAS.get(
-                attack_name,
-                0,
-            )
-
-            print(
-                f"{attack_name:35}"
-                f"{count:>10}"
-                f"{target:>10}"
-            )
+            count = distribution["attacks"].get(attack_name, 0)
+            share_pct = (count / total * 100.0) if total > 0 else 0.0
+            print(f"{attack_name:35}{count:>10}{share_pct:>11.2f}%")
 
         print("-" * 72)
-
-        # ----------------------------------------------
-        # Final validation
-        # ----------------------------------------------
-
-        all_complete = (
-            distribution["normal"]
-            >= CLASS_QUOTAS[NORMAL_CLASS]
-            and all(
-                distribution[
-                    "attacks"
-                ].get(
-                    attack_name,
-                    0,
-                )
-                >= CLASS_QUOTAS.get(
-                    attack_name,
-                    0,
-                )
-                for attack_name
-                in ATTACK_CLASSES
-            )
-        )
-
-        if all_complete:
-
-            print(
-                "✅ ALL CLASSES REACHED "
-                "THEIR TARGET."
-            )
-
-        else:
-
-            print(
-                "⚠️ SOME CLASSES HAVE NOT "
-                "REACHED THEIR TARGET."
-            )
-
         print("=" * 72)
