@@ -1,0 +1,118 @@
+{
+  "audit_1": {
+    "status": "PASS",
+    "h3_sha256": "3ba36c9dd2192d36182077f5f191708c279ac6020f17dd5d524429e5b63e6a58",
+    "h3_size_bytes": 2600231,
+    "base_sha256": "376af82ad3120a7a428453fef0616983ad3ee654d3826c96b1da5ec73384ea34",
+    "models_distinct": true
+  },
+  "audit_2": {
+    "status": "PASS",
+    "step_keys": [
+      "preprocessor",
+      "classifier"
+    ],
+    "classifier_class": "XGBClassifier",
+    "num_transformed_features": 95,
+    "num_original_features": 32,
+    "order_matches": true
+  },
+  "audit_3": {
+    "status": "PASS",
+    "total_records": 100000,
+    "train_records": 80000,
+    "val_records": 9999,
+    "test_records": 10001,
+    "splits_disjoint": true,
+    "representatives_in_test": {
+      "3203": true,
+      "10977": true,
+      "48510": true,
+      "75660": true,
+      "88360": true,
+      "93364": true
+    }
+  },
+  "audit_4": {
+    "status": "PASS",
+    "leakage_detected": false
+  },
+  "audit_5": {
+    "status": "PASS",
+    "future_data_found": false
+  },
+  "audit_6": {
+    "status": "PASS",
+    "samples_checked": 120,
+    "mean_absolute_error": 2.3886561848485144e-06,
+    "median_absolute_error": 1.9073486328125e-06,
+    "max_absolute_error": 8.58306884765625e-06,
+    "p95_absolute_error": 5.7458878472971264e-06,
+    "samples_above_1e4": 0
+  },
+  "audit_7": {
+    "status": "FAIL",
+    "num_transformed": 95,
+    "num_original": 32,
+    "max_aggregation_mismatch": 2.018183295149356e-06,
+    "categorical_dummy_counts": {
+      "topic": 11,
+      "device_id": 19,
+      "sensor_code": 19,
+      "sensor_type": 10,
+      "unit": 9,
+      "status": 1,
+      "source": 1
+    }
+  },
+  "audit_8": {
+    "status": "PASS",
+    "analyzed_count": 14,
+    "excluded_control_plane_count": 3,
+    "no_fake_control_plane_samples": true
+  },
+  "audit_9": {
+    "status": "PASS",
+    "samples_checked": 20,
+    "mismatches": 0
+  },
+  "audit_10": {
+    "status": "PASS",
+    "causal_violations": 0,
+    "unsafe_command_violations": 0
+  },
+  "audit_11": {
+    "status": "PASS",
+    "differences_detected": 0,
+    "model_unchanged": true
+  },
+  "audit_12": {
+    "status": "PASS",
+    "num_representatives": 6,
+    "consistency_pass": true,
+    "mismatches": []
+  },
+  "audit_14": {
+    "status": "PASS",
+    "missing_files": [],
+    "total_required": 17,
+    "present_count": 17
+  },
+  "audit_15": {
+    "status": "PASS",
+    "environment": {
+      "python_version": "3.14.6",
+      "shap_version": "0.52.0",
+      "xgboost_version": "3.3.0",
+      "sklearn_version": "1.9.0",
+      "pandas_version": "3.0.3",
+      "numpy_version": "2.5.0",
+      "joblib_version": "1.5.3"
+    }
+  },
+  "audit_16": {
+    "status": "PASS",
+    "h3_features_clean": true,
+    "phase4_report_preserved": true
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "DoS Attack": {
+    "record_id": 3203,
+    "attack_type": "DoS Attack",
+    "actual_label": 1,
+    "predicted_label": "ATTACK",
+    "attack_probability": 0.9936058348493347,
+    "raw_margin": 5.045954704284668,
+    "base_value": -0.27190327644348145,
+    "fidelity_error": 4.0531158447265625e-06,
+    "top_positive_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "shap_value": 3.326418399810791,
+        "feature_type": "Numeric",
+        "raw_value": 0.3157894736842105
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "shap_value": 0.833365797996521,
+        "feature_type": "Numeric",
+        "raw_value": 0.0630332
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "shap_value": 0.7326145172119141,
+        "feature_type": "Numeric",
+        "raw_value": 0.0024977112923635332
+      },
+      {
+        "feature": "time_delta",
+        "shap_value": 0.6391294002532959,
+        "feature_type": "Numeric",
+        "raw_value": 0.065724
+      },
+      {
+        "feature": "rolling_global_td_10",
+        "shap_value": 0.27651694416999817,
+        "feature_type": "Numeric",
+        "raw_value": 3.6999999999999997e-06
+      }
+    ],
+    "top_negative_contributors": [
+      {
+        "feature": "topic",
+        "shap_value": -0.11098286509513855,
+        "feature_type": "Categorical",
+        "raw_value": "factory/line1/pressure"
+      },
+      {
+        "feature": "device_mean_deviation",
+        "shap_value": -0.10009661316871643,
+        "feature_type": "Numeric",
+        "raw_value": -0.8271265189421086
+      },
+      {
+        "feature": "rel_volatility",
+        "shap_value": -0.08650032430887222,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "packet_rate_10",
+        "shap_value": -0.08313275128602982,
+        "feature_type": "Numeric",
+        "raw_value": 9643.201542912248
+      },
+      {
+        "feature": "rolling_seq_std_5",
+        "shap_value": -0.06462734937667847,
+        "feature_type": "Numeric",
+        "raw_value": 1.0954451150103344
+      }
+    ],
+    "waterfall_plot": "local_shap_dos_attack_3203.png"
+  },
+  "Replay Attack": {
+    "record_id": 10977,
+    "attack_type": "Replay Attack",
+    "actual_label": 1,
+    "predicted_label": "ATTACK",
+    "attack_probability": 0.9998960050665849,
+    "raw_margin": 9.171064376831055,
+    "base_value": -0.27190327644348145,
+    "fidelity_error": 3.0994415283203125e-06,
+    "top_positive_contributors": [
+      {
+        "feature": "rolling_global_td_std_10",
+        "shap_value": 4.404789447784424,
+        "feature_type": "Numeric",
+        "raw_value": 2.347476522645402
+      },
+      {
+        "feature": "packet_rate_10",
+        "shap_value": 1.8355318307876587,
+        "feature_type": "Numeric",
+        "raw_value": -6.593448617584587
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "shap_value": 1.5540602207183838,
+        "feature_type": "Numeric",
+        "raw_value": 1.5694158065191648
+      },
+      {
+        "feature": "rolling_global_td_10",
+        "shap_value": 0.4236537218093872,
+        "feature_type": "Numeric",
+        "raw_value": -0.1517657000000002
+      },
+      {
+        "feature": "rolling_seq_std_5",
+        "shap_value": 0.4221384823322296,
+        "feature_type": "Numeric",
+        "raw_value": 25.839891640639685
+      }
+    ],
+    "top_negative_contributors": [
+      {
+        "feature": "rolling_mean_3",
+        "shap_value": -0.05312223732471466,
+        "feature_type": "Numeric",
+        "raw_value": 0.1
+      },
+      {
+        "feature": "topic",
+        "shap_value": -0.05054621770977974,
+        "feature_type": "Categorical",
+        "raw_value": "factory/line1/vibration"
+      },
+      {
+        "feature": "rolling_std_5",
+        "shap_value": -0.031318362802267075,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "rel_volatility",
+        "shap_value": -0.0284134354442358,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "percentage_change",
+        "shap_value": -0.0037850458174943924,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      }
+    ],
+    "waterfall_plot": "local_shap_replay_attack_10977.png"
+  },
+  "Sensor Freeze Attack": {
+    "record_id": 48510,
+    "attack_type": "Sensor Freeze Attack",
+    "actual_label": 1,
+    "predicted_label": "ATTACK",
+    "attack_probability": 0.99939539463797,
+    "raw_margin": 7.410329818725586,
+    "base_value": -0.27190327644348145,
+    "fidelity_error": 3.0994415283203125e-06,
+    "top_positive_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "shap_value": 5.550992488861084,
+        "feature_type": "Numeric",
+        "raw_value": 1.0
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "shap_value": 1.4362601041793823,
+        "feature_type": "Numeric",
+        "raw_value": 0.16879899999999973
+      },
+      {
+        "feature": "time_delta",
+        "shap_value": 0.7334822416305542,
+        "feature_type": "Numeric",
+        "raw_value": 0.170567
+      },
+      {
+        "feature": "value",
+        "shap_value": 0.07419513911008835,
+        "feature_type": "Numeric",
+        "raw_value": 0.1
+      },
+      {
+        "feature": "device_mean_deviation",
+        "shap_value": 0.05557495728135109,
+        "feature_type": "Numeric",
+        "raw_value": -0.4935867262885385
+      }
+    ],
+    "top_negative_contributors": [
+      {
+        "feature": "seq_gap_dev",
+        "shap_value": -0.08322957903146744,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "topic",
+        "shap_value": -0.0788140818476677,
+        "feature_type": "Categorical",
+        "raw_value": "factory/line1/vibration"
+      },
+      {
+        "feature": "z_score",
+        "shap_value": -0.06779845803976059,
+        "feature_type": "Numeric",
+        "raw_value": -0.25428710870750076
+      },
+      {
+        "feature": "rolling_std_5",
+        "shap_value": -0.05481497570872307,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "percentage_change",
+        "shap_value": -0.029920578002929688,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      }
+    ],
+    "waterfall_plot": "local_shap_sensor_freeze_attack_48510.png"
+  },
+  "Motor Overload Attack": {
+    "record_id": 75660,
+    "attack_type": "Motor Overload Attack",
+    "actual_label": 1,
+    "predicted_label": "ATTACK",
+    "attack_probability": 0.9965710560629595,
+    "raw_margin": 5.672068119049072,
+    "base_value": -0.27190327644348145,
+    "fidelity_error": 3.0994415283203125e-06,
+    "top_positive_contributors": [
+      {
+        "feature": "percentage_change",
+        "shap_value": 1.7843836545944214,
+        "feature_type": "Numeric",
+        "raw_value": 0.0006280092108015278
+      },
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "shap_value": 1.1052181720733643,
+        "feature_type": "Numeric",
+        "raw_value": 0.631578947368421
+      },
+      {
+        "feature": "rel_volatility",
+        "shap_value": 0.6407697796821594,
+        "feature_type": "Numeric",
+        "raw_value": 0.010855473213873694
+      },
+      {
+        "feature": "packet_rate_10",
+        "shap_value": 0.4972204566001892,
+        "feature_type": "Numeric",
+        "raw_value": 41.87166335182725
+      },
+      {
+        "feature": "rolling_std_10",
+        "shap_value": 0.4485115706920624,
+        "feature_type": "Numeric",
+        "raw_value": 0.09082951062163509
+      }
+    ],
+    "top_negative_contributors": [
+      {
+        "feature": "rolling_time_delta_5",
+        "shap_value": -1.1035526990890503,
+        "feature_type": "Numeric",
+        "raw_value": 0.25769739999999997
+      },
+      {
+        "feature": "time_delta",
+        "shap_value": -0.23852799832820892,
+        "feature_type": "Numeric",
+        "raw_value": 0.237901
+      },
+      {
+        "feature": "topic",
+        "shap_value": -0.042186468839645386,
+        "feature_type": "Categorical",
+        "raw_value": "factory/line1/temperature"
+      },
+      {
+        "feature": "seq_gap_dev",
+        "shap_value": -0.009361833333969116,
+        "feature_type": "Numeric",
+        "raw_value": 0.0
+      },
+      {
+        "feature": "is_negative_time_delta",
+        "shap_value": -0.00011271936091361567,
+        "feature_type": "Numeric",
+        "raw_value": 0
+      }
+    ],
+    "waterfall_plot": "local_shap_motor_overload_attack_75660.png"
+  },
+  "Slow Drift Attack": {
+    "record_id": 88360,
+    "attack_type": "Slow Drift Attack",
+    "actual_label": 1,
+    "predicted_label": "ATTACK",
+    "attack_probability": 0.9998766831752279,
+    "raw_margin": 9.000630378723145,
+    "base_value": -0.27190327644348145,
+    "fidelity_error": 3.0994415283203125e-06,
+    "top_positive_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "shap_value": 5.141018390655518,
+        "feature_type": "Numeric",
+        "raw_value": 0.15789473684210525
+      },
+      {
+        "feature": "time_delta",
+        "shap_value": 0.879608154296875,
+        "feature_type": "Numeric",
+        "raw_value": 0.317805
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "shap_value": 0.8566338419914246,
+        "feature_type": "Numeric",
+        "raw_value": 0.31165460000000034
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "shap_value": 0.7122064828872681,
+        "feature_type": "Numeric",
+        "raw_value": 0.019743005705974283
+      },
+      {
+        "feature": "rolling_global_td_std_10",
+        "shap_value": 0.4984355866909027,
+        "feature_type": "Numeric",
+        "raw_value": 0.10045407261923159
+      }
+    ],
+    "top_negative_contributors": [
+      {
+        "feature": "rolling_seq_std_5",
+        "shap_value": -0.09931720048189163,
+        "feature_type": "Numeric",
+        "raw_value": 1.8165902124587041
+      },
+      {
+        "feature": "topic",
+        "shap_value": -0.06711266189813614,
+        "feature_type": "Categorical",
+        "raw_value": "factory/line1/flow"
+      },
+      {
+        "feature": "value",
+        "shap_value": -0.05658085644245148,
+        "feature_type": "Numeric",
+        "raw_value": 33.92
+      },
+      {
+        "feature": "seq_gap_dev",
+        "shap_value": -0.05328543484210968,
+        "feature_type": "Numeric",
+        "raw_value": 3.0
+      },
+      {
+        "feature": "rolling_mean_3",
+        "shap_value": -0.014418359845876694,
+        "feature_type": "Numeric",
+        "raw_value": 33.91
+      }
+    ],
+    "waterfall_plot": "local_shap_slow_drift_attack_88360.png"
+  }
+}

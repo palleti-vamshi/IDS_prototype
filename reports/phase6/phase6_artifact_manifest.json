@@ -1,0 +1,90 @@
+{
+  "manifest_version": "1.0",
+  "project": "LightX-IDS: Lightweight Explainable Real-Time Intrusion Detection System for Industrial IoT Networks",
+  "phase": "6.8 — Final Packaging & Integration Architecture",
+  "generated_at": "2026-10-04T17:27:00Z",
+  "git_branch": "antigravity-development",
+  "authoritative_model": {
+    "model_identifier": "xgboost_h3_32",
+    "relative_path": "backend/ml/saved_models/xgboost_h3_32.pkl",
+    "sha256": "3ba36c9dd2192d36182077f5f191708c279ac6020f17dd5d524429e5b63e6a58",
+    "file_size_bytes": 2600231,
+    "architecture": "scikit-learn Pipeline(preprocessor=ColumnTransformer, classifier=XGBClassifier)",
+    "decision_threshold": 0.35,
+    "is_immutable": true
+  },
+  "baseline_model": {
+    "model_identifier": "xgboost_phase4_baseline",
+    "relative_path": "backend/ml/saved_models/xgboost.pkl",
+    "sha256": "376af82ad3120a7a428453fef0616983ad3ee654d3826c96b1da5ec73384ea34",
+    "file_size_bytes": 2513323,
+    "is_untouched": true
+  },
+  "feature_schema": {
+    "version": "H3-32",
+    "total_original_features": 32,
+    "numeric_features_count": 25,
+    "categorical_features_count": 7,
+    "transformed_features_count": 95,
+    "ablated_features_excluded": [
+      "value_change",
+      "abs_value_change",
+      "rolling_range_5",
+      "rolling_mean_10"
+    ]
+  },
+  "dataset_splits": {
+    "authoritative_file": "dataset/lightx_ids_dataset_100k.csv",
+    "total_records": 100000,
+    "random_seed": 42,
+    "split_strategy": "stratified_by_label",
+    "training_records": 80000,
+    "validation_records": 9999,
+    "test_records": 10001,
+    "disjointness_verified": true
+  },
+  "runtime_environment": {
+    "python_version": "3.14.6",
+    "shap_version": "0.52.0",
+    "xgboost_version": "3.3.0",
+    "scikit_learn_version": "1.9.0",
+    "pandas_version": "3.0.3",
+    "numpy_version": "2.5.0",
+    "joblib_version": "1.5.3",
+    "matplotlib_version": "3.11.0"
+  },
+  "explainability_subsystem": {
+    "facade_service": "backend/ml/explainability/service.py",
+    "local_explainer": "backend/ml/explainability/shap_local_explainer.py",
+    "attack_explainer": "backend/ml/explainability/attack_explainer.py",
+    "human_explainer": "backend/ml/explainability/human_explainer.py",
+    "service_class": "ExplainabilityService"
+  },
+  "test_suites": [
+    "backend/ml/tests/test_local_shap_explainer.py",
+    "backend/ml/tests/test_attack_specific_shap.py",
+    "backend/ml/tests/test_human_explainer.py",
+    "backend/ml/tests/test_explainability_service.py",
+    "backend/ml/tests/test_ml_pipeline.py",
+    "backend/tests/test_locality_labeling.py",
+    "backend/tests/test_parser_sensor_identity.py"
+  ],
+  "reports": [
+    "reports/phase6/PHASE_6_1_ARCHITECTURE_AUDIT.md",
+    "reports/phase6/PHASE_6_2_SHAP_FOUNDATION_REPORT.md",
+    "reports/phase6/PHASE_6_3_GLOBAL_SHAP_REPORT.md",
+    "reports/phase6/PHASE_6_4_LOCAL_SHAP_REPORT.md",
+    "reports/phase6/PHASE_6_5_ATTACK_SPECIFIC_SHAP_REPORT.md",
+    "reports/phase6/PHASE_6_6_HUMAN_READABLE_EXPLANATIONS_REPORT.md",
+    "reports/phase6/PHASE_6_7_EXPLAINABILITY_VALIDATION_AUDIT_REPORT.md",
+    "reports/phase6/PHASE_6_8_FINAL_PACKAGING_REPORT.md"
+  ],
+  "representative_cases": {
+    "dos_attack": 3203,
+    "replay_attack": 10977,
+    "sensor_freeze_attack": 48510,
+    "motor_overload_attack": 75660,
+    "slow_drift_attack": 88360,
+    "nominal_normal": 93364
+  }
+}

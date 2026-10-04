@@ -1,0 +1,692 @@
+[
+  {
+    "record_id": 3203,
+    "prediction": "ATTACK",
+    "attack_probability": 0.9936058348493347,
+    "normal_probability": 0.006394165150665265,
+    "confidence_category": "high model confidence",
+    "is_borderline": false,
+    "attack_type": "DoS Attack",
+    "ground_truth_context": "The dataset records this sample as DoS Attack.",
+    "raw_margin": 5.045954704284668,
+    "base_value": -0.27190327644348145,
+    "summary": "Attack detected with a 99.36% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. These features contributed strongly toward the Attack prediction, while MQTT topic identity contributed toward the Normal side.",
+    "top_attack_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "description": "plant-wide duplicate-value ratio",
+        "shap_value": 3.326418399810791,
+        "strength": "very strong",
+        "direction": "attack",
+        "raw_value": 0.3157894736842105,
+        "sentence": "The plant-wide duplicate-value ratio contributed very strongly toward the Attack prediction (SHAP: +3.3264)."
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "description": "recent inter-arrival timing pattern",
+        "shap_value": 0.833365797996521,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.0630332,
+        "sentence": "The recent inter-arrival timing pattern contributed moderately toward the Attack prediction (SHAP: +0.8334)."
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "description": "recent timing variability",
+        "shap_value": 0.7326145172119141,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.0024977112923635332,
+        "sentence": "The recent timing variability contributed moderately toward the Attack prediction (SHAP: +0.7326)."
+      },
+      {
+        "feature": "time_delta",
+        "description": "current inter-arrival time",
+        "shap_value": 0.6391294002532959,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.065724,
+        "sentence": "The current inter-arrival time contributed moderately toward the Attack prediction (SHAP: +0.6391)."
+      },
+      {
+        "feature": "rolling_global_td_10",
+        "description": "recent network-wide inter-arrival pattern",
+        "shap_value": 0.27651694416999817,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 3.6999999999999997e-06,
+        "sentence": "The recent network-wide inter-arrival pattern contributed slightly toward the Attack prediction (SHAP: +0.2765)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.11098286509513855,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/pressure",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.1110)."
+      },
+      {
+        "feature": "device_mean_deviation",
+        "description": "deviation from device historical mean",
+        "shap_value": -0.10009661316871643,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": -0.8271265189421086,
+        "sentence": "The deviation from device historical mean contributed slightly toward the Normal prediction (SHAP: -0.1001)."
+      },
+      {
+        "feature": "rel_volatility",
+        "description": "relative value volatility",
+        "shap_value": -0.08650032430887222,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The relative value volatility contributed slightly toward the Normal prediction (SHAP: -0.0865)."
+      },
+      {
+        "feature": "packet_rate_10",
+        "description": "recent packet rate",
+        "shap_value": -0.08313275128602982,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 9643.201542912248,
+        "sentence": "The recent packet rate contributed slightly toward the Normal prediction (SHAP: -0.0831)."
+      },
+      {
+        "feature": "rolling_seq_std_5",
+        "description": "sequence number jitter",
+        "shap_value": -0.06462734937667847,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 1.0954451150103344,
+        "sentence": "The sequence number jitter contributed slightly toward the Normal prediction (SHAP: -0.0646)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #3203 | PREDICTION: ATTACK\n==============================================================================\nAssigned Attack Probability : 99.36% (high model confidence)\nModel Margin (Base Value)   : +5.0460 (Base: -0.2719)\nRecorded Context            : The dataset records this sample as DoS Attack.\n\nSUMMARY:\n  Attack detected with a 99.36% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. These features contributed strongly toward the Attack prediction, while MQTT topic identity contributed toward the Normal side.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. plant-wide duplicate-value ratio (plant_duplicate_ratio_19) [Raw: 0.3157894736842105]\n     SHAP Impact: +3.3264 (very strong)\n  2. recent inter-arrival timing pattern (rolling_time_delta_5) [Raw: 0.0630332]\n     SHAP Impact: +0.8334 (moderate)\n  3. recent timing variability (rolling_time_delta_std_5) [Raw: 0.0024977112923635332]\n     SHAP Impact: +0.7326 (moderate)\n  4. current inter-arrival time (time_delta) [Raw: 0.065724]\n     SHAP Impact: +0.6391 (moderate)\n  5. recent network-wide inter-arrival pattern (rolling_global_td_10) [Raw: 3.6999999999999997e-06]\n     SHAP Impact: +0.2765 (weak)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. MQTT topic identity (topic) [Raw: factory/line1/pressure]\n     SHAP Impact: -0.1110 (weak)\n  2. deviation from device historical mean (device_mean_deviation) [Raw: -0.8271265189421086]\n     SHAP Impact: -0.1001 (weak)\n  3. relative value volatility (rel_volatility) [Raw: 0.0]\n     SHAP Impact: -0.0865 (weak)\n  4. recent packet rate (packet_rate_10) [Raw: 9643.201542912248]\n     SHAP Impact: -0.0831 (weak)\n  5. sequence number jitter (rolling_seq_std_5) [Raw: 1.0954451150103344]\n     SHAP Impact: -0.0646 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  },
+  {
+    "record_id": 10977,
+    "prediction": "ATTACK",
+    "attack_probability": 0.9998960050665849,
+    "normal_probability": 0.0001039949334150636,
+    "confidence_category": "high model confidence",
+    "is_borderline": false,
+    "attack_type": "Replay Attack",
+    "ground_truth_context": "The dataset records this sample as Replay Attack.",
+    "raw_margin": 9.171064376831055,
+    "base_value": -0.27190327644348145,
+    "summary": "Attack detected with a 99.99% model-assigned attack probability (high model confidence). The prediction was driven primarily by recent network-wide timing variability and recent packet rate. These features contributed strongly toward the Attack prediction, while short-term rolling mean contributed toward the Normal side.",
+    "top_attack_contributors": [
+      {
+        "feature": "rolling_global_td_std_10",
+        "description": "recent network-wide timing variability",
+        "shap_value": 4.404789447784424,
+        "strength": "very strong",
+        "direction": "attack",
+        "raw_value": 2.347476522645402,
+        "sentence": "The recent network-wide timing variability contributed very strongly toward the Attack prediction (SHAP: +4.4048)."
+      },
+      {
+        "feature": "packet_rate_10",
+        "description": "recent packet rate",
+        "shap_value": 1.8355318307876587,
+        "strength": "strong",
+        "direction": "attack",
+        "raw_value": -6.593448617584587,
+        "sentence": "The recent packet rate contributed strongly toward the Attack prediction (SHAP: +1.8355)."
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "description": "recent timing variability",
+        "shap_value": 1.5540602207183838,
+        "strength": "strong",
+        "direction": "attack",
+        "raw_value": 1.5694158065191648,
+        "sentence": "The recent timing variability contributed strongly toward the Attack prediction (SHAP: +1.5541)."
+      },
+      {
+        "feature": "rolling_global_td_10",
+        "description": "recent network-wide inter-arrival pattern",
+        "shap_value": 0.4236537218093872,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": -0.1517657000000002,
+        "sentence": "The recent network-wide inter-arrival pattern contributed moderately toward the Attack prediction (SHAP: +0.4237)."
+      },
+      {
+        "feature": "rolling_seq_std_5",
+        "description": "sequence number jitter",
+        "shap_value": 0.4221384823322296,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 25.839891640639685,
+        "sentence": "The sequence number jitter contributed moderately toward the Attack prediction (SHAP: +0.4221)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "rolling_mean_3",
+        "description": "short-term rolling mean",
+        "shap_value": -0.05312223732471466,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.1,
+        "sentence": "The short-term rolling mean contributed slightly toward the Normal prediction (SHAP: -0.0531)."
+      },
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.05054621770977974,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/vibration",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.0505)."
+      },
+      {
+        "feature": "rolling_std_5",
+        "description": "medium-term value variability",
+        "shap_value": -0.031318362802267075,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The medium-term value variability contributed slightly toward the Normal prediction (SHAP: -0.0313)."
+      },
+      {
+        "feature": "rel_volatility",
+        "description": "relative value volatility",
+        "shap_value": -0.0284134354442358,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The relative value volatility contributed slightly toward the Normal prediction (SHAP: -0.0284)."
+      },
+      {
+        "feature": "percentage_change",
+        "description": "recent percentage change in sensor value",
+        "shap_value": -0.0037850458174943924,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The recent percentage change in sensor value contributed slightly toward the Normal prediction (SHAP: -0.0038)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: The model detected an abnormal telemetry pattern characterized by recent network-wide timing variability and recent packet rate. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #10977 | PREDICTION: ATTACK\n==============================================================================\nAssigned Attack Probability : 99.99% (high model confidence)\nModel Margin (Base Value)   : +9.1711 (Base: -0.2719)\nRecorded Context            : The dataset records this sample as Replay Attack.\n\nSUMMARY:\n  Attack detected with a 99.99% model-assigned attack probability (high model confidence). The prediction was driven primarily by recent network-wide timing variability and recent packet rate. These features contributed strongly toward the Attack prediction, while short-term rolling mean contributed toward the Normal side.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. recent network-wide timing variability (rolling_global_td_std_10) [Raw: 2.347476522645402]\n     SHAP Impact: +4.4048 (very strong)\n  2. recent packet rate (packet_rate_10) [Raw: -6.593448617584587]\n     SHAP Impact: +1.8355 (strong)\n  3. recent timing variability (rolling_time_delta_std_5) [Raw: 1.5694158065191648]\n     SHAP Impact: +1.5541 (strong)\n  4. recent network-wide inter-arrival pattern (rolling_global_td_10) [Raw: -0.1517657000000002]\n     SHAP Impact: +0.4237 (moderate)\n  5. sequence number jitter (rolling_seq_std_5) [Raw: 25.839891640639685]\n     SHAP Impact: +0.4221 (moderate)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. short-term rolling mean (rolling_mean_3) [Raw: 0.1]\n     SHAP Impact: -0.0531 (weak)\n  2. MQTT topic identity (topic) [Raw: factory/line1/vibration]\n     SHAP Impact: -0.0505 (weak)\n  3. medium-term value variability (rolling_std_5) [Raw: 0.0]\n     SHAP Impact: -0.0313 (weak)\n  4. relative value volatility (rel_volatility) [Raw: 0.0]\n     SHAP Impact: -0.0284 (weak)\n  5. recent percentage change in sensor value (percentage_change) [Raw: 0.0]\n     SHAP Impact: -0.0038 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: The model detected an abnormal telemetry pattern characterized by recent network-wide timing variability and recent packet rate. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  },
+  {
+    "record_id": 48510,
+    "prediction": "ATTACK",
+    "attack_probability": 0.99939539463797,
+    "normal_probability": 0.0006046053620299974,
+    "confidence_category": "high model confidence",
+    "is_borderline": false,
+    "attack_type": "Sensor Freeze Attack",
+    "ground_truth_context": "The dataset records this sample as Sensor Freeze Attack.",
+    "raw_margin": 7.410329818725586,
+    "base_value": -0.27190327644348145,
+    "summary": "Attack detected with a 99.94% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. These features contributed strongly toward the Attack prediction, while sequence gap deviation contributed toward the Normal side.",
+    "top_attack_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "description": "plant-wide duplicate-value ratio",
+        "shap_value": 5.550992488861084,
+        "strength": "very strong",
+        "direction": "attack",
+        "raw_value": 1.0,
+        "sentence": "The plant-wide duplicate-value ratio contributed very strongly toward the Attack prediction (SHAP: +5.5510)."
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "description": "recent inter-arrival timing pattern",
+        "shap_value": 1.4362601041793823,
+        "strength": "strong",
+        "direction": "attack",
+        "raw_value": 0.16879899999999973,
+        "sentence": "The recent inter-arrival timing pattern contributed strongly toward the Attack prediction (SHAP: +1.4363)."
+      },
+      {
+        "feature": "time_delta",
+        "description": "current inter-arrival time",
+        "shap_value": 0.7334822416305542,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.170567,
+        "sentence": "The current inter-arrival time contributed moderately toward the Attack prediction (SHAP: +0.7335)."
+      },
+      {
+        "feature": "value",
+        "description": "current sensor value",
+        "shap_value": 0.07419513911008835,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 0.1,
+        "sentence": "The current sensor value contributed slightly toward the Attack prediction (SHAP: +0.0742)."
+      },
+      {
+        "feature": "device_mean_deviation",
+        "description": "deviation from device historical mean",
+        "shap_value": 0.05557495728135109,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": -0.4935867262885385,
+        "sentence": "The deviation from device historical mean contributed slightly toward the Attack prediction (SHAP: +0.0556)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "seq_gap_dev",
+        "description": "sequence gap deviation",
+        "shap_value": -0.08322957903146744,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The sequence gap deviation contributed slightly toward the Normal prediction (SHAP: -0.0832)."
+      },
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.0788140818476677,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/vibration",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.0788)."
+      },
+      {
+        "feature": "z_score",
+        "description": "statistical z-score relative to baseline",
+        "shap_value": -0.06779845803976059,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": -0.25428710870750076,
+        "sentence": "The statistical z-score relative to baseline contributed slightly toward the Normal prediction (SHAP: -0.0678)."
+      },
+      {
+        "feature": "rolling_std_5",
+        "description": "medium-term value variability",
+        "shap_value": -0.05481497570872307,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The medium-term value variability contributed slightly toward the Normal prediction (SHAP: -0.0548)."
+      },
+      {
+        "feature": "percentage_change",
+        "description": "recent percentage change in sensor value",
+        "shap_value": -0.029920578002929688,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The recent percentage change in sensor value contributed slightly toward the Normal prediction (SHAP: -0.0299)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #48510 | PREDICTION: ATTACK\n==============================================================================\nAssigned Attack Probability : 99.94% (high model confidence)\nModel Margin (Base Value)   : +7.4103 (Base: -0.2719)\nRecorded Context            : The dataset records this sample as Sensor Freeze Attack.\n\nSUMMARY:\n  Attack detected with a 99.94% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. These features contributed strongly toward the Attack prediction, while sequence gap deviation contributed toward the Normal side.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. plant-wide duplicate-value ratio (plant_duplicate_ratio_19) [Raw: 1.0]\n     SHAP Impact: +5.5510 (very strong)\n  2. recent inter-arrival timing pattern (rolling_time_delta_5) [Raw: 0.16879899999999973]\n     SHAP Impact: +1.4363 (strong)\n  3. current inter-arrival time (time_delta) [Raw: 0.170567]\n     SHAP Impact: +0.7335 (moderate)\n  4. current sensor value (value) [Raw: 0.1]\n     SHAP Impact: +0.0742 (weak)\n  5. deviation from device historical mean (device_mean_deviation) [Raw: -0.4935867262885385]\n     SHAP Impact: +0.0556 (weak)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. sequence gap deviation (seq_gap_dev) [Raw: 0.0]\n     SHAP Impact: -0.0832 (weak)\n  2. MQTT topic identity (topic) [Raw: factory/line1/vibration]\n     SHAP Impact: -0.0788 (weak)\n  3. statistical z-score relative to baseline (z_score) [Raw: -0.25428710870750076]\n     SHAP Impact: -0.0678 (weak)\n  4. medium-term value variability (rolling_std_5) [Raw: 0.0]\n     SHAP Impact: -0.0548 (weak)\n  5. recent percentage change in sensor value (percentage_change) [Raw: 0.0]\n     SHAP Impact: -0.0299 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  },
+  {
+    "record_id": 75660,
+    "prediction": "ATTACK",
+    "attack_probability": 0.9965710560629595,
+    "normal_probability": 0.0034289439370405184,
+    "confidence_category": "high model confidence",
+    "is_borderline": false,
+    "attack_type": "Motor Overload Attack",
+    "ground_truth_context": "The dataset records this sample as Motor Overload Attack.",
+    "raw_margin": 5.672068119049072,
+    "base_value": -0.27190327644348145,
+    "summary": "Attack detected with a 99.66% model-assigned attack probability (high model confidence). The prediction was driven primarily by recent percentage change in sensor value and plant-wide duplicate-value ratio. These features contributed strongly toward the Attack prediction, while recent inter-arrival timing pattern contributed toward the Normal side.",
+    "top_attack_contributors": [
+      {
+        "feature": "percentage_change",
+        "description": "recent percentage change in sensor value",
+        "shap_value": 1.7843836545944214,
+        "strength": "strong",
+        "direction": "attack",
+        "raw_value": 0.0006280092108015278,
+        "sentence": "The recent percentage change in sensor value contributed strongly toward the Attack prediction (SHAP: +1.7844)."
+      },
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "description": "plant-wide duplicate-value ratio",
+        "shap_value": 1.1052181720733643,
+        "strength": "strong",
+        "direction": "attack",
+        "raw_value": 0.631578947368421,
+        "sentence": "The plant-wide duplicate-value ratio contributed strongly toward the Attack prediction (SHAP: +1.1052)."
+      },
+      {
+        "feature": "rel_volatility",
+        "description": "relative value volatility",
+        "shap_value": 0.6407697796821594,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.010855473213873694,
+        "sentence": "The relative value volatility contributed moderately toward the Attack prediction (SHAP: +0.6408)."
+      },
+      {
+        "feature": "packet_rate_10",
+        "description": "recent packet rate",
+        "shap_value": 0.4972204566001892,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 41.87166335182725,
+        "sentence": "The recent packet rate contributed moderately toward the Attack prediction (SHAP: +0.4972)."
+      },
+      {
+        "feature": "rolling_std_10",
+        "description": "recent value variability",
+        "shap_value": 0.4485115706920624,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.09082951062163509,
+        "sentence": "The recent value variability contributed moderately toward the Attack prediction (SHAP: +0.4485)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "rolling_time_delta_5",
+        "description": "recent inter-arrival timing pattern",
+        "shap_value": -1.1035526990890503,
+        "strength": "strong",
+        "direction": "normal",
+        "raw_value": 0.25769739999999997,
+        "sentence": "The recent inter-arrival timing pattern contributed strongly toward the Normal prediction (SHAP: -1.1036)."
+      },
+      {
+        "feature": "time_delta",
+        "description": "current inter-arrival time",
+        "shap_value": -0.23852799832820892,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.237901,
+        "sentence": "The current inter-arrival time contributed slightly toward the Normal prediction (SHAP: -0.2385)."
+      },
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.042186468839645386,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/temperature",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.0422)."
+      },
+      {
+        "feature": "seq_gap_dev",
+        "description": "sequence gap deviation",
+        "shap_value": -0.009361833333969116,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0.0,
+        "sentence": "The sequence gap deviation contributed slightly toward the Normal prediction (SHAP: -0.0094)."
+      },
+      {
+        "feature": "is_negative_time_delta",
+        "description": "negative timestamp anomaly indicator",
+        "shap_value": -0.00011271936091361567,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 0,
+        "sentence": "The negative timestamp anomaly indicator contributed slightly toward the Normal prediction (SHAP: -0.0001)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: The model detected an abnormal telemetry pattern characterized by recent percentage change in sensor value and plant-wide duplicate-value ratio. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #75660 | PREDICTION: ATTACK\n==============================================================================\nAssigned Attack Probability : 99.66% (high model confidence)\nModel Margin (Base Value)   : +5.6721 (Base: -0.2719)\nRecorded Context            : The dataset records this sample as Motor Overload Attack.\n\nSUMMARY:\n  Attack detected with a 99.66% model-assigned attack probability (high model confidence). The prediction was driven primarily by recent percentage change in sensor value and plant-wide duplicate-value ratio. These features contributed strongly toward the Attack prediction, while recent inter-arrival timing pattern contributed toward the Normal side.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. recent percentage change in sensor value (percentage_change) [Raw: 0.0006280092108015278]\n     SHAP Impact: +1.7844 (strong)\n  2. plant-wide duplicate-value ratio (plant_duplicate_ratio_19) [Raw: 0.631578947368421]\n     SHAP Impact: +1.1052 (strong)\n  3. relative value volatility (rel_volatility) [Raw: 0.010855473213873694]\n     SHAP Impact: +0.6408 (moderate)\n  4. recent packet rate (packet_rate_10) [Raw: 41.87166335182725]\n     SHAP Impact: +0.4972 (moderate)\n  5. recent value variability (rolling_std_10) [Raw: 0.09082951062163509]\n     SHAP Impact: +0.4485 (moderate)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. recent inter-arrival timing pattern (rolling_time_delta_5) [Raw: 0.25769739999999997]\n     SHAP Impact: -1.1036 (strong)\n  2. current inter-arrival time (time_delta) [Raw: 0.237901]\n     SHAP Impact: -0.2385 (weak)\n  3. MQTT topic identity (topic) [Raw: factory/line1/temperature]\n     SHAP Impact: -0.0422 (weak)\n  4. sequence gap deviation (seq_gap_dev) [Raw: 0.0]\n     SHAP Impact: -0.0094 (weak)\n  5. negative timestamp anomaly indicator (is_negative_time_delta) [Raw: 0]\n     SHAP Impact: -0.0001 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: The model detected an abnormal telemetry pattern characterized by recent percentage change in sensor value and plant-wide duplicate-value ratio. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  },
+  {
+    "record_id": 88360,
+    "prediction": "ATTACK",
+    "attack_probability": 0.9998766831752279,
+    "normal_probability": 0.0001233168247720684,
+    "confidence_category": "high model confidence",
+    "is_borderline": false,
+    "attack_type": "Slow Drift Attack",
+    "ground_truth_context": "The dataset records this sample as Slow Drift Attack.",
+    "raw_margin": 9.000630378723145,
+    "base_value": -0.27190327644348145,
+    "summary": "Attack detected with a 99.99% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and current inter-arrival time. These features contributed strongly toward the Attack prediction, while sequence number jitter contributed toward the Normal side.",
+    "top_attack_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "description": "plant-wide duplicate-value ratio",
+        "shap_value": 5.141018390655518,
+        "strength": "very strong",
+        "direction": "attack",
+        "raw_value": 0.15789473684210525,
+        "sentence": "The plant-wide duplicate-value ratio contributed very strongly toward the Attack prediction (SHAP: +5.1410)."
+      },
+      {
+        "feature": "time_delta",
+        "description": "current inter-arrival time",
+        "shap_value": 0.879608154296875,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.317805,
+        "sentence": "The current inter-arrival time contributed moderately toward the Attack prediction (SHAP: +0.8796)."
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "description": "recent inter-arrival timing pattern",
+        "shap_value": 0.8566338419914246,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.31165460000000034,
+        "sentence": "The recent inter-arrival timing pattern contributed moderately toward the Attack prediction (SHAP: +0.8566)."
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "description": "recent timing variability",
+        "shap_value": 0.7122064828872681,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.019743005705974283,
+        "sentence": "The recent timing variability contributed moderately toward the Attack prediction (SHAP: +0.7122)."
+      },
+      {
+        "feature": "rolling_global_td_std_10",
+        "description": "recent network-wide timing variability",
+        "shap_value": 0.4984355866909027,
+        "strength": "moderate",
+        "direction": "attack",
+        "raw_value": 0.10045407261923159,
+        "sentence": "The recent network-wide timing variability contributed moderately toward the Attack prediction (SHAP: +0.4984)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "rolling_seq_std_5",
+        "description": "sequence number jitter",
+        "shap_value": -0.09931720048189163,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 1.8165902124587041,
+        "sentence": "The sequence number jitter contributed slightly toward the Normal prediction (SHAP: -0.0993)."
+      },
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.06711266189813614,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/flow",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.0671)."
+      },
+      {
+        "feature": "value",
+        "description": "current sensor value",
+        "shap_value": -0.05658085644245148,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 33.92,
+        "sentence": "The current sensor value contributed slightly toward the Normal prediction (SHAP: -0.0566)."
+      },
+      {
+        "feature": "seq_gap_dev",
+        "description": "sequence gap deviation",
+        "shap_value": -0.05328543484210968,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 3.0,
+        "sentence": "The sequence gap deviation contributed slightly toward the Normal prediction (SHAP: -0.0533)."
+      },
+      {
+        "feature": "rolling_mean_3",
+        "description": "short-term rolling mean",
+        "shap_value": -0.014418359845876694,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 33.91,
+        "sentence": "The short-term rolling mean contributed slightly toward the Normal prediction (SHAP: -0.0144)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and current inter-arrival time. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #88360 | PREDICTION: ATTACK\n==============================================================================\nAssigned Attack Probability : 99.99% (high model confidence)\nModel Margin (Base Value)   : +9.0006 (Base: -0.2719)\nRecorded Context            : The dataset records this sample as Slow Drift Attack.\n\nSUMMARY:\n  Attack detected with a 99.99% model-assigned attack probability (high model confidence). The prediction was driven primarily by plant-wide duplicate-value ratio and current inter-arrival time. These features contributed strongly toward the Attack prediction, while sequence number jitter contributed toward the Normal side.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. plant-wide duplicate-value ratio (plant_duplicate_ratio_19) [Raw: 0.15789473684210525]\n     SHAP Impact: +5.1410 (very strong)\n  2. current inter-arrival time (time_delta) [Raw: 0.317805]\n     SHAP Impact: +0.8796 (moderate)\n  3. recent inter-arrival timing pattern (rolling_time_delta_5) [Raw: 0.31165460000000034]\n     SHAP Impact: +0.8566 (moderate)\n  4. recent timing variability (rolling_time_delta_std_5) [Raw: 0.019743005705974283]\n     SHAP Impact: +0.7122 (moderate)\n  5. recent network-wide timing variability (rolling_global_td_std_10) [Raw: 0.10045407261923159]\n     SHAP Impact: +0.4984 (moderate)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. sequence number jitter (rolling_seq_std_5) [Raw: 1.8165902124587041]\n     SHAP Impact: -0.0993 (weak)\n  2. MQTT topic identity (topic) [Raw: factory/line1/flow]\n     SHAP Impact: -0.0671 (weak)\n  3. current sensor value (value) [Raw: 33.92]\n     SHAP Impact: -0.0566 (weak)\n  4. sequence gap deviation (seq_gap_dev) [Raw: 3.0]\n     SHAP Impact: -0.0533 (weak)\n  5. short-term rolling mean (rolling_mean_3) [Raw: 33.91]\n     SHAP Impact: -0.0144 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: The model detected an abnormal telemetry pattern characterized by plant-wide duplicate-value ratio and current inter-arrival time. Review the affected telemetry stream and recent communication behavior; verify physical sensor readings and correlate with plant logs.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  },
+  {
+    "record_id": 93364,
+    "prediction": "NORMAL",
+    "attack_probability": 9.764396238012522e-05,
+    "normal_probability": 0.9999023560376199,
+    "confidence_category": "low attack probability",
+    "is_borderline": false,
+    "attack_type": "not provided",
+    "ground_truth_context": "Recorded attack type: not provided.",
+    "raw_margin": -9.234085083007812,
+    "base_value": -0.27190327644348145,
+    "summary": "The model assigned a 0.01% attack probability (low attack probability) and predicted Normal. The strongest contributions pushed toward the Normal class, particularly plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Minor evidence toward Attack came from recent network-wide inter-arrival pattern, but was outweighed by normal indications.",
+    "top_attack_contributors": [
+      {
+        "feature": "rolling_global_td_10",
+        "description": "recent network-wide inter-arrival pattern",
+        "shap_value": 0.09740757942199707,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 5.199999999661383e-06,
+        "sentence": "The recent network-wide inter-arrival pattern contributed slightly toward the Attack prediction (SHAP: +0.0974)."
+      },
+      {
+        "feature": "z_score",
+        "description": "statistical z-score relative to baseline",
+        "shap_value": 0.09694825857877731,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 0.2809518191867778,
+        "sentence": "The statistical z-score relative to baseline contributed slightly toward the Attack prediction (SHAP: +0.0969)."
+      },
+      {
+        "feature": "rolling_std_3",
+        "description": "short-term value variability",
+        "shap_value": 0.04324892535805702,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 0.0,
+        "sentence": "The short-term value variability contributed slightly toward the Attack prediction (SHAP: +0.0432)."
+      },
+      {
+        "feature": "time_delta",
+        "description": "current inter-arrival time",
+        "shap_value": 0.03554932028055191,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 0.338291,
+        "sentence": "The current inter-arrival time contributed slightly toward the Attack prediction (SHAP: +0.0355)."
+      },
+      {
+        "feature": "device_mean_deviation",
+        "description": "deviation from device historical mean",
+        "shap_value": 0.02772805653512478,
+        "strength": "weak",
+        "direction": "attack",
+        "raw_value": 1.66437204910293,
+        "sentence": "The deviation from device historical mean contributed slightly toward the Attack prediction (SHAP: +0.0277)."
+      }
+    ],
+    "top_normal_contributors": [
+      {
+        "feature": "plant_duplicate_ratio_19",
+        "description": "plant-wide duplicate-value ratio",
+        "shap_value": -4.189804553985596,
+        "strength": "very strong",
+        "direction": "normal",
+        "raw_value": 0.8421052631578947,
+        "sentence": "The plant-wide duplicate-value ratio contributed very strongly toward the Normal prediction (SHAP: -4.1898)."
+      },
+      {
+        "feature": "rolling_time_delta_5",
+        "description": "recent inter-arrival timing pattern",
+        "shap_value": -3.130871534347534,
+        "strength": "very strong",
+        "direction": "normal",
+        "raw_value": 0.3245533999999999,
+        "sentence": "The recent inter-arrival timing pattern contributed very strongly toward the Normal prediction (SHAP: -3.1309)."
+      },
+      {
+        "feature": "rolling_time_delta_std_5",
+        "description": "recent timing variability",
+        "shap_value": -0.7790220975875854,
+        "strength": "moderate",
+        "direction": "normal",
+        "raw_value": 0.02496783879901418,
+        "sentence": "The recent timing variability contributed moderately toward the Normal prediction (SHAP: -0.7790)."
+      },
+      {
+        "feature": "rolling_global_td_std_10",
+        "description": "recent network-wide timing variability",
+        "shap_value": -0.16065597534179688,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": 3.0180216635834792e-05,
+        "sentence": "The recent network-wide timing variability contributed slightly toward the Normal prediction (SHAP: -0.1607)."
+      },
+      {
+        "feature": "topic",
+        "description": "MQTT topic identity",
+        "shap_value": -0.15402477979660034,
+        "strength": "weak",
+        "direction": "normal",
+        "raw_value": "factory/line1/temperature",
+        "sentence": "The MQTT topic identity contributed slightly toward the Normal prediction (SHAP: -0.1540)."
+      }
+    ],
+    "operator_interpretation": "Operator interpretation: Telemetry patterns fall within nominal operating boundaries. The model did not detect an anomalous pattern in this sample. Standard monitoring continues.",
+    "limitations": [
+      "SHAP explains model decision behavior and feature attribution, not physical causality.",
+      "Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.",
+      "The model's explanation does not independently infer or verify the ground-truth attack category.",
+      "Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols."
+    ],
+    "text": "==============================================================================\nLIGHTX-IDS EXPLANATION | RECORD #93364 | PREDICTION: NORMAL\n==============================================================================\nAssigned Attack Probability : 0.01% (low attack probability)\nModel Margin (Base Value)   : -9.2341 (Base: -0.2719)\nRecorded Context            : Recorded attack type: not provided.\n\nSUMMARY:\n  The model assigned a 0.01% attack probability (low attack probability) and predicted Normal. The strongest contributions pushed toward the Normal class, particularly plant-wide duplicate-value ratio and recent inter-arrival timing pattern. Minor evidence toward Attack came from recent network-wide inter-arrival pattern, but was outweighed by normal indications.\n\nKEY ATTACK-DIRECTED CONTRIBUTORS (+):\n  1. recent network-wide inter-arrival pattern (rolling_global_td_10) [Raw: 5.199999999661383e-06]\n     SHAP Impact: +0.0974 (weak)\n  2. statistical z-score relative to baseline (z_score) [Raw: 0.2809518191867778]\n     SHAP Impact: +0.0969 (weak)\n  3. short-term value variability (rolling_std_3) [Raw: 0.0]\n     SHAP Impact: +0.0432 (weak)\n  4. current inter-arrival time (time_delta) [Raw: 0.338291]\n     SHAP Impact: +0.0355 (weak)\n  5. deviation from device historical mean (device_mean_deviation) [Raw: 1.66437204910293]\n     SHAP Impact: +0.0277 (weak)\n\nKEY NORMAL-DIRECTED CONTRIBUTORS (-):\n  1. plant-wide duplicate-value ratio (plant_duplicate_ratio_19) [Raw: 0.8421052631578947]\n     SHAP Impact: -4.1898 (very strong)\n  2. recent inter-arrival timing pattern (rolling_time_delta_5) [Raw: 0.3245533999999999]\n     SHAP Impact: -3.1309 (very strong)\n  3. recent timing variability (rolling_time_delta_std_5) [Raw: 0.02496783879901418]\n     SHAP Impact: -0.7790 (moderate)\n  4. recent network-wide timing variability (rolling_global_td_std_10) [Raw: 3.0180216635834792e-05]\n     SHAP Impact: -0.1607 (weak)\n  5. MQTT topic identity (topic) [Raw: factory/line1/temperature]\n     SHAP Impact: -0.1540 (weak)\n\nOPERATOR GUIDANCE:\n  Operator interpretation: Telemetry patterns fall within nominal operating boundaries. The model did not detect an anomalous pattern in this sample. Standard monitoring continues.\n\nSCIENTIFIC & OPERATIONAL LIMITATIONS:\n  \u2022 SHAP explains model decision behavior and feature attribution, not physical causality.\n  \u2022 Confidence categories are qualitative communication labels, not calibrated statistical probability guarantees.\n  \u2022 The model's explanation does not independently infer or verify the ground-truth attack category.\n  \u2022 Operator recommendations are advisory; all operational actions must be verified against physical systems and plant safety protocols.\n=============================================================================="
+  }
+]

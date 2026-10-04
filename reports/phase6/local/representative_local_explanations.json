@@ -1,0 +1,197 @@
+[
+    {
+        "record_id": 93364,
+        "ground_truth_class": "Normal",
+        "prediction": "NORMAL",
+        "attack_probability": 9.8e-05,
+        "normal_probability": 0.999902,
+        "raw_margin": -9.234085,
+        "base_value": -0.271903,
+        "reconstructed_margin": -9.234089,
+        "fidelity_error": 4.0531e-06,
+        "top_positive_contributors": [
+            {
+                "feature": "rolling_global_td_10",
+                "shap_value": 0.097408,
+                "raw_value": "5.199999999661383e-06"
+            },
+            {
+                "feature": "z_score",
+                "shap_value": 0.096948,
+                "raw_value": "0.2809518191867778"
+            },
+            {
+                "feature": "rolling_std_3",
+                "shap_value": 0.043249,
+                "raw_value": "0.0"
+            },
+            {
+                "feature": "time_delta",
+                "shap_value": 0.035549,
+                "raw_value": "0.338291"
+            },
+            {
+                "feature": "device_mean_deviation",
+                "shap_value": 0.027728,
+                "raw_value": "1.66437204910293"
+            }
+        ],
+        "top_negative_contributors": [
+            {
+                "feature": "plant_duplicate_ratio_19",
+                "shap_value": -4.189805,
+                "raw_value": "0.8421052631578947"
+            },
+            {
+                "feature": "rolling_time_delta_5",
+                "shap_value": -3.130872,
+                "raw_value": "0.3245533999999999"
+            },
+            {
+                "feature": "rolling_time_delta_std_5",
+                "shap_value": -0.779022,
+                "raw_value": "0.02496783879901418"
+            },
+            {
+                "feature": "rolling_global_td_std_10",
+                "shap_value": -0.160656,
+                "raw_value": "3.0180216635834792e-05"
+            },
+            {
+                "feature": "topic",
+                "shap_value": -0.154025,
+                "raw_value": "factory/line1/temperature"
+            }
+        ]
+    },
+    {
+        "record_id": 3203,
+        "ground_truth_class": "DoS Attack",
+        "prediction": "ATTACK",
+        "attack_probability": 0.993606,
+        "normal_probability": 0.006394,
+        "raw_margin": 5.045955,
+        "base_value": -0.271903,
+        "reconstructed_margin": 5.045959,
+        "fidelity_error": 4.0531e-06,
+        "top_positive_contributors": [
+            {
+                "feature": "plant_duplicate_ratio_19",
+                "shap_value": 3.326418,
+                "raw_value": "0.3157894736842105"
+            },
+            {
+                "feature": "rolling_time_delta_5",
+                "shap_value": 0.833366,
+                "raw_value": "0.0630332"
+            },
+            {
+                "feature": "rolling_time_delta_std_5",
+                "shap_value": 0.732615,
+                "raw_value": "0.0024977112923635332"
+            },
+            {
+                "feature": "time_delta",
+                "shap_value": 0.639129,
+                "raw_value": "0.065724"
+            },
+            {
+                "feature": "rolling_global_td_10",
+                "shap_value": 0.276517,
+                "raw_value": "3.6999999999999997e-06"
+            }
+        ],
+        "top_negative_contributors": [
+            {
+                "feature": "topic",
+                "shap_value": -0.110983,
+                "raw_value": "factory/line1/pressure"
+            },
+            {
+                "feature": "device_mean_deviation",
+                "shap_value": -0.100097,
+                "raw_value": "-0.8271265189421086"
+            },
+            {
+                "feature": "rel_volatility",
+                "shap_value": -0.0865,
+                "raw_value": "0.0"
+            },
+            {
+                "feature": "packet_rate_10",
+                "shap_value": -0.083133,
+                "raw_value": "9643.201542912248"
+            },
+            {
+                "feature": "rolling_seq_std_5",
+                "shap_value": -0.064627,
+                "raw_value": "1.0954451150103344"
+            }
+        ]
+    },
+    {
+        "record_id": 75660,
+        "ground_truth_class": "Motor Overload Attack",
+        "prediction": "ATTACK",
+        "attack_probability": 0.996571,
+        "normal_probability": 0.003429,
+        "raw_margin": 5.672068,
+        "base_value": -0.271903,
+        "reconstructed_margin": 5.672065,
+        "fidelity_error": 3.0994e-06,
+        "top_positive_contributors": [
+            {
+                "feature": "percentage_change",
+                "shap_value": 1.784384,
+                "raw_value": "0.0006280092108015278"
+            },
+            {
+                "feature": "plant_duplicate_ratio_19",
+                "shap_value": 1.105218,
+                "raw_value": "0.631578947368421"
+            },
+            {
+                "feature": "rel_volatility",
+                "shap_value": 0.64077,
+                "raw_value": "0.010855473213873694"
+            },
+            {
+                "feature": "packet_rate_10",
+                "shap_value": 0.49722,
+                "raw_value": "41.87166335182725"
+            },
+            {
+                "feature": "rolling_std_10",
+                "shap_value": 0.448512,
+                "raw_value": "0.09082951062163509"
+            }
+        ],
+        "top_negative_contributors": [
+            {
+                "feature": "rolling_time_delta_5",
+                "shap_value": -1.103553,
+                "raw_value": "0.25769739999999997"
+            },
+            {
+                "feature": "time_delta",
+                "shap_value": -0.238528,
+                "raw_value": "0.237901"
+            },
+            {
+                "feature": "topic",
+                "shap_value": -0.042186,
+                "raw_value": "factory/line1/temperature"
+            },
+            {
+                "feature": "seq_gap_dev",
+                "shap_value": -0.009362,
+                "raw_value": "0.0"
+            },
+            {
+                "feature": "is_negative_time_delta",
+                "shap_value": -0.000113,
+                "raw_value": "0"
+            }
+        ]
+    }
+]
